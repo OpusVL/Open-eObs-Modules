@@ -12,3 +12,10 @@ lxml==3.8.0
 pylint-odoo==1.8.0
 pylint-plugin-utils==0.2.4
 Sphinx==1.6.4
+Python-Chart==1.39
+setuptools==2.2
+invoke==0.11.1
+faker==0.7.17
+BeautifulSoup
+ERPPeek==1.6.1
+coverage==4.4.1
