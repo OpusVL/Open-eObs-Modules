@@ -1,0 +1,3061 @@
+
+        <openerp>
+            <data>
+        
+
+        <!-- Croydon Triage (Female) Ward Location -->
+        <record id="nh_eobs_bethlem_royal_location_croydon_triage_female" model="nh.clinical.location">
+            <field name="name">Croydon Triage (Female)</field>
+            <field name="code">1175</field>
+            <field name="parent_id" ref="nhc_bethlem_royal_location_lh"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">ward</field>
+        </record>
+
+        <!-- Croydon Triage (Female) Bed Locations -->
+        
+        <record id="nh_eobs_bethlem_royal_location_croydon_triage_female_bed_01" model="nh.clinical.location">
+            <field name="name">Croydon Triage (Female) Bed 01</field>
+            <field name="code">croydon_triage_female01</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_croydon_triage_female"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_croydon_triage_female_bed_02" model="nh.clinical.location">
+            <field name="name">Croydon Triage (Female) Bed 02</field>
+            <field name="code">croydon_triage_female02</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_croydon_triage_female"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_croydon_triage_female_bed_03" model="nh.clinical.location">
+            <field name="name">Croydon Triage (Female) Bed 03</field>
+            <field name="code">croydon_triage_female03</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_croydon_triage_female"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_croydon_triage_female_bed_04" model="nh.clinical.location">
+            <field name="name">Croydon Triage (Female) Bed 04</field>
+            <field name="code">croydon_triage_female04</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_croydon_triage_female"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+
+        <!-- Croydon Triage (Male) Ward Location -->
+        <record id="nh_eobs_bethlem_royal_location_croydon_triage_male" model="nh.clinical.location">
+            <field name="name">Croydon Triage (Male)</field>
+            <field name="code">1174</field>
+            <field name="parent_id" ref="nhc_bethlem_royal_location_lh"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">ward</field>
+        </record>
+
+        <!-- Croydon Triage (Male) Bed Locations -->
+        
+        <record id="nh_eobs_bethlem_royal_location_croydon_triage_male_bed_01" model="nh.clinical.location">
+            <field name="name">Croydon Triage (Male) Bed 01</field>
+            <field name="code">croydon_triage_male01</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_croydon_triage_male"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_croydon_triage_male_bed_02" model="nh.clinical.location">
+            <field name="name">Croydon Triage (Male) Bed 02</field>
+            <field name="code">croydon_triage_male02</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_croydon_triage_male"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_croydon_triage_male_bed_03" model="nh.clinical.location">
+            <field name="name">Croydon Triage (Male) Bed 03</field>
+            <field name="code">croydon_triage_male03</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_croydon_triage_male"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_croydon_triage_male_bed_04" model="nh.clinical.location">
+            <field name="name">Croydon Triage (Male) Bed 04</field>
+            <field name="code">croydon_triage_male04</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_croydon_triage_male"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_croydon_triage_male_bed_05" model="nh.clinical.location">
+            <field name="name">Croydon Triage (Male) Bed 05</field>
+            <field name="code">croydon_triage_male05</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_croydon_triage_male"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_croydon_triage_male_bed_06" model="nh.clinical.location">
+            <field name="name">Croydon Triage (Male) Bed 06</field>
+            <field name="code">croydon_triage_male06</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_croydon_triage_male"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_croydon_triage_male_bed_07" model="nh.clinical.location">
+            <field name="name">Croydon Triage (Male) Bed 07</field>
+            <field name="code">croydon_triage_male07</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_croydon_triage_male"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_croydon_triage_male_bed_08" model="nh.clinical.location">
+            <field name="name">Croydon Triage (Male) Bed 08</field>
+            <field name="code">croydon_triage_male08</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_croydon_triage_male"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_croydon_triage_male_bed_09" model="nh.clinical.location">
+            <field name="name">Croydon Triage (Male) Bed 09</field>
+            <field name="code">croydon_triage_male09</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_croydon_triage_male"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_croydon_triage_male_bed_10" model="nh.clinical.location">
+            <field name="name">Croydon Triage (Male) Bed 10</field>
+            <field name="code">croydon_triage_male10</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_croydon_triage_male"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_croydon_triage_male_bed_11" model="nh.clinical.location">
+            <field name="name">Croydon Triage (Male) Bed 11</field>
+            <field name="code">croydon_triage_male11</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_croydon_triage_male"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_croydon_triage_male_bed_12" model="nh.clinical.location">
+            <field name="name">Croydon Triage (Male) Bed 12</field>
+            <field name="code">croydon_triage_male12</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_croydon_triage_male"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+
+        <!-- Gresham 1 (Female) Ward Location -->
+        <record id="nh_eobs_bethlem_royal_location_gresham_1_female" model="nh.clinical.location">
+            <field name="name">Gresham 1 (Female)</field>
+            <field name="code">374</field>
+            <field name="parent_id" ref="nhc_bethlem_royal_location_lh"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">ward</field>
+        </record>
+
+        <!-- Gresham 1 (Female) Bed Locations -->
+        
+        <record id="nh_eobs_bethlem_royal_location_gresham_1_female_bed_01" model="nh.clinical.location">
+            <field name="name">Gresham 1 (Female) Bed 01</field>
+            <field name="code">gresham_1_female01</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_gresham_1_female"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_gresham_1_female_bed_02" model="nh.clinical.location">
+            <field name="name">Gresham 1 (Female) Bed 02</field>
+            <field name="code">gresham_1_female02</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_gresham_1_female"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_gresham_1_female_bed_03" model="nh.clinical.location">
+            <field name="name">Gresham 1 (Female) Bed 03</field>
+            <field name="code">gresham_1_female03</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_gresham_1_female"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_gresham_1_female_bed_04" model="nh.clinical.location">
+            <field name="name">Gresham 1 (Female) Bed 04</field>
+            <field name="code">gresham_1_female04</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_gresham_1_female"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_gresham_1_female_bed_05" model="nh.clinical.location">
+            <field name="name">Gresham 1 (Female) Bed 05</field>
+            <field name="code">gresham_1_female05</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_gresham_1_female"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_gresham_1_female_bed_06" model="nh.clinical.location">
+            <field name="name">Gresham 1 (Female) Bed 06</field>
+            <field name="code">gresham_1_female06</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_gresham_1_female"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_gresham_1_female_bed_07" model="nh.clinical.location">
+            <field name="name">Gresham 1 (Female) Bed 07</field>
+            <field name="code">gresham_1_female07</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_gresham_1_female"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_gresham_1_female_bed_08" model="nh.clinical.location">
+            <field name="name">Gresham 1 (Female) Bed 08</field>
+            <field name="code">gresham_1_female08</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_gresham_1_female"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_gresham_1_female_bed_09" model="nh.clinical.location">
+            <field name="name">Gresham 1 (Female) Bed 09</field>
+            <field name="code">gresham_1_female09</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_gresham_1_female"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_gresham_1_female_bed_10" model="nh.clinical.location">
+            <field name="name">Gresham 1 (Female) Bed 10</field>
+            <field name="code">gresham_1_female10</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_gresham_1_female"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_gresham_1_female_bed_11" model="nh.clinical.location">
+            <field name="name">Gresham 1 (Female) Bed 11</field>
+            <field name="code">gresham_1_female11</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_gresham_1_female"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_gresham_1_female_bed_12" model="nh.clinical.location">
+            <field name="name">Gresham 1 (Female) Bed 12</field>
+            <field name="code">gresham_1_female12</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_gresham_1_female"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_gresham_1_female_bed_13" model="nh.clinical.location">
+            <field name="name">Gresham 1 (Female) Bed 13</field>
+            <field name="code">gresham_1_female13</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_gresham_1_female"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_gresham_1_female_bed_14" model="nh.clinical.location">
+            <field name="name">Gresham 1 (Female) Bed 14</field>
+            <field name="code">gresham_1_female14</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_gresham_1_female"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_gresham_1_female_bed_15" model="nh.clinical.location">
+            <field name="name">Gresham 1 (Female) Bed 15</field>
+            <field name="code">gresham_1_female15</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_gresham_1_female"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_gresham_1_female_bed_16" model="nh.clinical.location">
+            <field name="name">Gresham 1 (Female) Bed 16</field>
+            <field name="code">gresham_1_female16</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_gresham_1_female"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_gresham_1_female_bed_17" model="nh.clinical.location">
+            <field name="name">Gresham 1 (Female) Bed 17</field>
+            <field name="code">gresham_1_female17</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_gresham_1_female"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_gresham_1_female_bed_18" model="nh.clinical.location">
+            <field name="name">Gresham 1 (Female) Bed 18</field>
+            <field name="code">gresham_1_female18</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_gresham_1_female"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+
+        <!-- Gresham 2 (Male) Ward Location -->
+        <record id="nh_eobs_bethlem_royal_location_gresham_2_male" model="nh.clinical.location">
+            <field name="name">Gresham 2 (Male)</field>
+            <field name="code">376</field>
+            <field name="parent_id" ref="nhc_bethlem_royal_location_lh"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">ward</field>
+        </record>
+
+        <!-- Gresham 2 (Male) Bed Locations -->
+        
+        <record id="nh_eobs_bethlem_royal_location_gresham_2_male_bed_01" model="nh.clinical.location">
+            <field name="name">Gresham 2 (Male) Bed 01</field>
+            <field name="code">gresham_2_male01</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_gresham_2_male"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_gresham_2_male_bed_02" model="nh.clinical.location">
+            <field name="name">Gresham 2 (Male) Bed 02</field>
+            <field name="code">gresham_2_male02</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_gresham_2_male"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_gresham_2_male_bed_03" model="nh.clinical.location">
+            <field name="name">Gresham 2 (Male) Bed 03</field>
+            <field name="code">gresham_2_male03</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_gresham_2_male"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_gresham_2_male_bed_04" model="nh.clinical.location">
+            <field name="name">Gresham 2 (Male) Bed 04</field>
+            <field name="code">gresham_2_male04</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_gresham_2_male"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_gresham_2_male_bed_05" model="nh.clinical.location">
+            <field name="name">Gresham 2 (Male) Bed 05</field>
+            <field name="code">gresham_2_male05</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_gresham_2_male"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_gresham_2_male_bed_06" model="nh.clinical.location">
+            <field name="name">Gresham 2 (Male) Bed 06</field>
+            <field name="code">gresham_2_male06</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_gresham_2_male"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_gresham_2_male_bed_07" model="nh.clinical.location">
+            <field name="name">Gresham 2 (Male) Bed 07</field>
+            <field name="code">gresham_2_male07</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_gresham_2_male"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_gresham_2_male_bed_08" model="nh.clinical.location">
+            <field name="name">Gresham 2 (Male) Bed 08</field>
+            <field name="code">gresham_2_male08</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_gresham_2_male"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_gresham_2_male_bed_09" model="nh.clinical.location">
+            <field name="name">Gresham 2 (Male) Bed 09</field>
+            <field name="code">gresham_2_male09</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_gresham_2_male"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_gresham_2_male_bed_10" model="nh.clinical.location">
+            <field name="name">Gresham 2 (Male) Bed 10</field>
+            <field name="code">gresham_2_male10</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_gresham_2_male"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_gresham_2_male_bed_11" model="nh.clinical.location">
+            <field name="name">Gresham 2 (Male) Bed 11</field>
+            <field name="code">gresham_2_male11</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_gresham_2_male"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_gresham_2_male_bed_12" model="nh.clinical.location">
+            <field name="name">Gresham 2 (Male) Bed 12</field>
+            <field name="code">gresham_2_male12</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_gresham_2_male"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_gresham_2_male_bed_13" model="nh.clinical.location">
+            <field name="name">Gresham 2 (Male) Bed 13</field>
+            <field name="code">gresham_2_male13</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_gresham_2_male"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_gresham_2_male_bed_14" model="nh.clinical.location">
+            <field name="name">Gresham 2 (Male) Bed 14</field>
+            <field name="code">gresham_2_male14</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_gresham_2_male"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_gresham_2_male_bed_15" model="nh.clinical.location">
+            <field name="name">Gresham 2 (Male) Bed 15</field>
+            <field name="code">gresham_2_male15</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_gresham_2_male"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_gresham_2_male_bed_16" model="nh.clinical.location">
+            <field name="name">Gresham 2 (Male) Bed 16</field>
+            <field name="code">gresham_2_male16</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_gresham_2_male"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_gresham_2_male_bed_17" model="nh.clinical.location">
+            <field name="name">Gresham 2 (Male) Bed 17</field>
+            <field name="code">gresham_2_male17</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_gresham_2_male"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_gresham_2_male_bed_18" model="nh.clinical.location">
+            <field name="name">Gresham 2 (Male) Bed 18</field>
+            <field name="code">gresham_2_male18</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_gresham_2_male"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_gresham_2_male_bed_19" model="nh.clinical.location">
+            <field name="name">Gresham 2 (Male) Bed 19</field>
+            <field name="code">gresham_2_male19</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_gresham_2_male"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_gresham_2_male_bed_20" model="nh.clinical.location">
+            <field name="name">Gresham 2 (Male) Bed 20</field>
+            <field name="code">gresham_2_male20</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_gresham_2_male"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+
+        <!-- Croydon PICU Ward Location -->
+        <record id="nh_eobs_bethlem_royal_location_croydon_picu" model="nh.clinical.location">
+            <field name="name">Croydon PICU</field>
+            <field name="code">1280</field>
+            <field name="parent_id" ref="nhc_bethlem_royal_location_lh"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">ward</field>
+        </record>
+
+        <!-- Croydon PICU Bed Locations -->
+        
+        <record id="nh_eobs_bethlem_royal_location_croydon_picu_bed_01" model="nh.clinical.location">
+            <field name="name">Croydon PICU Bed 01</field>
+            <field name="code">croydon_picu01</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_croydon_picu"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_croydon_picu_bed_02" model="nh.clinical.location">
+            <field name="name">Croydon PICU Bed 02</field>
+            <field name="code">croydon_picu02</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_croydon_picu"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_croydon_picu_bed_03" model="nh.clinical.location">
+            <field name="name">Croydon PICU Bed 03</field>
+            <field name="code">croydon_picu03</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_croydon_picu"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_croydon_picu_bed_04" model="nh.clinical.location">
+            <field name="name">Croydon PICU Bed 04</field>
+            <field name="code">croydon_picu04</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_croydon_picu"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_croydon_picu_bed_05" model="nh.clinical.location">
+            <field name="name">Croydon PICU Bed 05</field>
+            <field name="code">croydon_picu05</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_croydon_picu"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_croydon_picu_bed_06" model="nh.clinical.location">
+            <field name="name">Croydon PICU Bed 06</field>
+            <field name="code">croydon_picu06</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_croydon_picu"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_croydon_picu_bed_07" model="nh.clinical.location">
+            <field name="name">Croydon PICU Bed 07</field>
+            <field name="code">croydon_picu07</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_croydon_picu"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_croydon_picu_bed_08" model="nh.clinical.location">
+            <field name="name">Croydon PICU Bed 08</field>
+            <field name="code">croydon_picu08</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_croydon_picu"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+
+        <!-- Chelsham House Ward Location -->
+        <record id="nh_eobs_bethlem_royal_location_chelsham_house" model="nh.clinical.location">
+            <field name="name">Chelsham House</field>
+            <field name="code">187</field>
+            <field name="parent_id" ref="nhc_bethlem_royal_location_lh"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">ward</field>
+        </record>
+
+        <!-- Chelsham House Bed Locations -->
+        
+        <record id="nh_eobs_bethlem_royal_location_chelsham_house_bed_01" model="nh.clinical.location">
+            <field name="name">Chelsham House Bed 01</field>
+            <field name="code">chelsham_house01</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_chelsham_house"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_chelsham_house_bed_02" model="nh.clinical.location">
+            <field name="name">Chelsham House Bed 02</field>
+            <field name="code">chelsham_house02</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_chelsham_house"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_chelsham_house_bed_03" model="nh.clinical.location">
+            <field name="name">Chelsham House Bed 03</field>
+            <field name="code">chelsham_house03</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_chelsham_house"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_chelsham_house_bed_04" model="nh.clinical.location">
+            <field name="name">Chelsham House Bed 04</field>
+            <field name="code">chelsham_house04</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_chelsham_house"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_chelsham_house_bed_05" model="nh.clinical.location">
+            <field name="name">Chelsham House Bed 05</field>
+            <field name="code">chelsham_house05</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_chelsham_house"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_chelsham_house_bed_06" model="nh.clinical.location">
+            <field name="name">Chelsham House Bed 06</field>
+            <field name="code">chelsham_house06</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_chelsham_house"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_chelsham_house_bed_07" model="nh.clinical.location">
+            <field name="name">Chelsham House Bed 07</field>
+            <field name="code">chelsham_house07</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_chelsham_house"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_chelsham_house_bed_08" model="nh.clinical.location">
+            <field name="name">Chelsham House Bed 08</field>
+            <field name="code">chelsham_house08</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_chelsham_house"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_chelsham_house_bed_09" model="nh.clinical.location">
+            <field name="name">Chelsham House Bed 09</field>
+            <field name="code">chelsham_house09</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_chelsham_house"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_chelsham_house_bed_10" model="nh.clinical.location">
+            <field name="name">Chelsham House Bed 10</field>
+            <field name="code">chelsham_house10</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_chelsham_house"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_chelsham_house_bed_11" model="nh.clinical.location">
+            <field name="name">Chelsham House Bed 11</field>
+            <field name="code">chelsham_house11</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_chelsham_house"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_chelsham_house_bed_12" model="nh.clinical.location">
+            <field name="name">Chelsham House Bed 12</field>
+            <field name="code">chelsham_house12</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_chelsham_house"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_chelsham_house_bed_13" model="nh.clinical.location">
+            <field name="name">Chelsham House Bed 13</field>
+            <field name="code">chelsham_house13</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_chelsham_house"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_chelsham_house_bed_14" model="nh.clinical.location">
+            <field name="name">Chelsham House Bed 14</field>
+            <field name="code">chelsham_house14</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_chelsham_house"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_chelsham_house_bed_15" model="nh.clinical.location">
+            <field name="name">Chelsham House Bed 15</field>
+            <field name="code">chelsham_house15</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_chelsham_house"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_chelsham_house_bed_16" model="nh.clinical.location">
+            <field name="name">Chelsham House Bed 16</field>
+            <field name="code">chelsham_house16</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_chelsham_house"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_chelsham_house_bed_17" model="nh.clinical.location">
+            <field name="name">Chelsham House Bed 17</field>
+            <field name="code">chelsham_house17</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_chelsham_house"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_chelsham_house_bed_18" model="nh.clinical.location">
+            <field name="name">Chelsham House Bed 18</field>
+            <field name="code">chelsham_house18</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_chelsham_house"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_chelsham_house_bed_19" model="nh.clinical.location">
+            <field name="name">Chelsham House Bed 19</field>
+            <field name="code">chelsham_house19</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_chelsham_house"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_chelsham_house_bed_20" model="nh.clinical.location">
+            <field name="name">Chelsham House Bed 20</field>
+            <field name="code">chelsham_house20</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_chelsham_house"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+
+        <!-- Brook Ward Ward Location -->
+        <record id="nh_eobs_bethlem_royal_location_brook_ward" model="nh.clinical.location">
+            <field name="name">Brook Ward</field>
+            <field name="code">162</field>
+            <field name="parent_id" ref="nhc_bethlem_royal_location_lh"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">ward</field>
+        </record>
+
+        <!-- Brook Ward Bed Locations -->
+        
+        <record id="nh_eobs_bethlem_royal_location_brook_ward_bed_01" model="nh.clinical.location">
+            <field name="name">Brook Ward Bed 01</field>
+            <field name="code">brook_ward01</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_brook_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_brook_ward_bed_02" model="nh.clinical.location">
+            <field name="name">Brook Ward Bed 02</field>
+            <field name="code">brook_ward02</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_brook_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_brook_ward_bed_03" model="nh.clinical.location">
+            <field name="name">Brook Ward Bed 03</field>
+            <field name="code">brook_ward03</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_brook_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_brook_ward_bed_04" model="nh.clinical.location">
+            <field name="name">Brook Ward Bed 04</field>
+            <field name="code">brook_ward04</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_brook_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_brook_ward_bed_05" model="nh.clinical.location">
+            <field name="name">Brook Ward Bed 05</field>
+            <field name="code">brook_ward05</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_brook_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_brook_ward_bed_06" model="nh.clinical.location">
+            <field name="name">Brook Ward Bed 06</field>
+            <field name="code">brook_ward06</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_brook_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_brook_ward_bed_07" model="nh.clinical.location">
+            <field name="name">Brook Ward Bed 07</field>
+            <field name="code">brook_ward07</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_brook_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_brook_ward_bed_08" model="nh.clinical.location">
+            <field name="name">Brook Ward Bed 08</field>
+            <field name="code">brook_ward08</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_brook_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_brook_ward_bed_09" model="nh.clinical.location">
+            <field name="name">Brook Ward Bed 09</field>
+            <field name="code">brook_ward09</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_brook_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_brook_ward_bed_10" model="nh.clinical.location">
+            <field name="name">Brook Ward Bed 10</field>
+            <field name="code">brook_ward10</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_brook_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_brook_ward_bed_11" model="nh.clinical.location">
+            <field name="name">Brook Ward Bed 11</field>
+            <field name="code">brook_ward11</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_brook_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_brook_ward_bed_12" model="nh.clinical.location">
+            <field name="name">Brook Ward Bed 12</field>
+            <field name="code">brook_ward12</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_brook_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_brook_ward_bed_13" model="nh.clinical.location">
+            <field name="name">Brook Ward Bed 13</field>
+            <field name="code">brook_ward13</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_brook_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_brook_ward_bed_14" model="nh.clinical.location">
+            <field name="name">Brook Ward Bed 14</field>
+            <field name="code">brook_ward14</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_brook_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_brook_ward_bed_15" model="nh.clinical.location">
+            <field name="name">Brook Ward Bed 15</field>
+            <field name="code">brook_ward15</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_brook_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_brook_ward_bed_16" model="nh.clinical.location">
+            <field name="name">Brook Ward Bed 16</field>
+            <field name="code">brook_ward16</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_brook_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+
+        <!-- Chaffinch Ward Ward Location -->
+        <record id="nh_eobs_bethlem_royal_location_chaffinch_ward" model="nh.clinical.location">
+            <field name="name">Chaffinch Ward</field>
+            <field name="code">184</field>
+            <field name="parent_id" ref="nhc_bethlem_royal_location_lh"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">ward</field>
+        </record>
+
+        <!-- Chaffinch Ward Bed Locations -->
+        
+        <record id="nh_eobs_bethlem_royal_location_chaffinch_ward_bed_01" model="nh.clinical.location">
+            <field name="name">Chaffinch Ward Bed 01</field>
+            <field name="code">chaffinch_ward01</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_chaffinch_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_chaffinch_ward_bed_02" model="nh.clinical.location">
+            <field name="name">Chaffinch Ward Bed 02</field>
+            <field name="code">chaffinch_ward02</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_chaffinch_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_chaffinch_ward_bed_03" model="nh.clinical.location">
+            <field name="name">Chaffinch Ward Bed 03</field>
+            <field name="code">chaffinch_ward03</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_chaffinch_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_chaffinch_ward_bed_04" model="nh.clinical.location">
+            <field name="name">Chaffinch Ward Bed 04</field>
+            <field name="code">chaffinch_ward04</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_chaffinch_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_chaffinch_ward_bed_05" model="nh.clinical.location">
+            <field name="name">Chaffinch Ward Bed 05</field>
+            <field name="code">chaffinch_ward05</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_chaffinch_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_chaffinch_ward_bed_06" model="nh.clinical.location">
+            <field name="name">Chaffinch Ward Bed 06</field>
+            <field name="code">chaffinch_ward06</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_chaffinch_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_chaffinch_ward_bed_07" model="nh.clinical.location">
+            <field name="name">Chaffinch Ward Bed 07</field>
+            <field name="code">chaffinch_ward07</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_chaffinch_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_chaffinch_ward_bed_08" model="nh.clinical.location">
+            <field name="name">Chaffinch Ward Bed 08</field>
+            <field name="code">chaffinch_ward08</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_chaffinch_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_chaffinch_ward_bed_09" model="nh.clinical.location">
+            <field name="name">Chaffinch Ward Bed 09</field>
+            <field name="code">chaffinch_ward09</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_chaffinch_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_chaffinch_ward_bed_10" model="nh.clinical.location">
+            <field name="name">Chaffinch Ward Bed 10</field>
+            <field name="code">chaffinch_ward10</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_chaffinch_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_chaffinch_ward_bed_11" model="nh.clinical.location">
+            <field name="name">Chaffinch Ward Bed 11</field>
+            <field name="code">chaffinch_ward11</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_chaffinch_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_chaffinch_ward_bed_12" model="nh.clinical.location">
+            <field name="name">Chaffinch Ward Bed 12</field>
+            <field name="code">chaffinch_ward12</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_chaffinch_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_chaffinch_ward_bed_13" model="nh.clinical.location">
+            <field name="name">Chaffinch Ward Bed 13</field>
+            <field name="code">chaffinch_ward13</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_chaffinch_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_chaffinch_ward_bed_14" model="nh.clinical.location">
+            <field name="name">Chaffinch Ward Bed 14</field>
+            <field name="code">chaffinch_ward14</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_chaffinch_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_chaffinch_ward_bed_15" model="nh.clinical.location">
+            <field name="name">Chaffinch Ward Bed 15</field>
+            <field name="code">chaffinch_ward15</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_chaffinch_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_chaffinch_ward_bed_16" model="nh.clinical.location">
+            <field name="name">Chaffinch Ward Bed 16</field>
+            <field name="code">chaffinch_ward16</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_chaffinch_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_chaffinch_ward_bed_17" model="nh.clinical.location">
+            <field name="name">Chaffinch Ward Bed 17</field>
+            <field name="code">chaffinch_ward17</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_chaffinch_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_chaffinch_ward_bed_18" model="nh.clinical.location">
+            <field name="name">Chaffinch Ward Bed 18</field>
+            <field name="code">chaffinch_ward18</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_chaffinch_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_chaffinch_ward_bed_19" model="nh.clinical.location">
+            <field name="name">Chaffinch Ward Bed 19</field>
+            <field name="code">chaffinch_ward19</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_chaffinch_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+
+        <!-- Effra Ward Ward Location -->
+        <record id="nh_eobs_bethlem_royal_location_effra_ward" model="nh.clinical.location">
+            <field name="name">Effra Ward</field>
+            <field name="code">1193</field>
+            <field name="parent_id" ref="nhc_bethlem_royal_location_lh"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">ward</field>
+        </record>
+
+        <!-- Effra Ward Bed Locations -->
+        
+        <record id="nh_eobs_bethlem_royal_location_effra_ward_bed_01" model="nh.clinical.location">
+            <field name="name">Effra Ward Bed 01</field>
+            <field name="code">effra_ward01</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_effra_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_effra_ward_bed_02" model="nh.clinical.location">
+            <field name="name">Effra Ward Bed 02</field>
+            <field name="code">effra_ward02</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_effra_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_effra_ward_bed_03" model="nh.clinical.location">
+            <field name="name">Effra Ward Bed 03</field>
+            <field name="code">effra_ward03</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_effra_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_effra_ward_bed_04" model="nh.clinical.location">
+            <field name="name">Effra Ward Bed 04</field>
+            <field name="code">effra_ward04</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_effra_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_effra_ward_bed_05" model="nh.clinical.location">
+            <field name="name">Effra Ward Bed 05</field>
+            <field name="code">effra_ward05</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_effra_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_effra_ward_bed_06" model="nh.clinical.location">
+            <field name="name">Effra Ward Bed 06</field>
+            <field name="code">effra_ward06</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_effra_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_effra_ward_bed_07" model="nh.clinical.location">
+            <field name="name">Effra Ward Bed 07</field>
+            <field name="code">effra_ward07</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_effra_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_effra_ward_bed_08" model="nh.clinical.location">
+            <field name="name">Effra Ward Bed 08</field>
+            <field name="code">effra_ward08</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_effra_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_effra_ward_bed_09" model="nh.clinical.location">
+            <field name="name">Effra Ward Bed 09</field>
+            <field name="code">effra_ward09</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_effra_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_effra_ward_bed_10" model="nh.clinical.location">
+            <field name="name">Effra Ward Bed 10</field>
+            <field name="code">effra_ward10</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_effra_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_effra_ward_bed_11" model="nh.clinical.location">
+            <field name="name">Effra Ward Bed 11</field>
+            <field name="code">effra_ward11</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_effra_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_effra_ward_bed_12" model="nh.clinical.location">
+            <field name="name">Effra Ward Bed 12</field>
+            <field name="code">effra_ward12</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_effra_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_effra_ward_bed_13" model="nh.clinical.location">
+            <field name="name">Effra Ward Bed 13</field>
+            <field name="code">effra_ward13</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_effra_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_effra_ward_bed_14" model="nh.clinical.location">
+            <field name="name">Effra Ward Bed 14</field>
+            <field name="code">effra_ward14</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_effra_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+
+        <!-- Norbury Ward Ward Location -->
+        <record id="nh_eobs_bethlem_royal_location_norbury_ward" model="nh.clinical.location">
+            <field name="name">Norbury Ward</field>
+            <field name="code">562</field>
+            <field name="parent_id" ref="nhc_bethlem_royal_location_lh"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">ward</field>
+        </record>
+
+        <!-- Norbury Ward Bed Locations -->
+        
+        <record id="nh_eobs_bethlem_royal_location_norbury_ward_bed_01" model="nh.clinical.location">
+            <field name="name">Norbury Ward Bed 01</field>
+            <field name="code">norbury_ward01</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_norbury_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_norbury_ward_bed_02" model="nh.clinical.location">
+            <field name="name">Norbury Ward Bed 02</field>
+            <field name="code">norbury_ward02</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_norbury_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_norbury_ward_bed_03" model="nh.clinical.location">
+            <field name="name">Norbury Ward Bed 03</field>
+            <field name="code">norbury_ward03</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_norbury_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_norbury_ward_bed_04" model="nh.clinical.location">
+            <field name="name">Norbury Ward Bed 04</field>
+            <field name="code">norbury_ward04</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_norbury_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_norbury_ward_bed_05" model="nh.clinical.location">
+            <field name="name">Norbury Ward Bed 05</field>
+            <field name="code">norbury_ward05</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_norbury_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_norbury_ward_bed_06" model="nh.clinical.location">
+            <field name="name">Norbury Ward Bed 06</field>
+            <field name="code">norbury_ward06</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_norbury_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_norbury_ward_bed_07" model="nh.clinical.location">
+            <field name="name">Norbury Ward Bed 07</field>
+            <field name="code">norbury_ward07</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_norbury_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_norbury_ward_bed_08" model="nh.clinical.location">
+            <field name="name">Norbury Ward Bed 08</field>
+            <field name="code">norbury_ward08</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_norbury_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_norbury_ward_bed_09" model="nh.clinical.location">
+            <field name="name">Norbury Ward Bed 09</field>
+            <field name="code">norbury_ward09</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_norbury_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_norbury_ward_bed_10" model="nh.clinical.location">
+            <field name="name">Norbury Ward Bed 10</field>
+            <field name="code">norbury_ward10</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_norbury_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_norbury_ward_bed_11" model="nh.clinical.location">
+            <field name="name">Norbury Ward Bed 11</field>
+            <field name="code">norbury_ward11</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_norbury_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_norbury_ward_bed_12" model="nh.clinical.location">
+            <field name="name">Norbury Ward Bed 12</field>
+            <field name="code">norbury_ward12</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_norbury_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+
+        <!-- Spring Ward Ward Location -->
+        <record id="nh_eobs_bethlem_royal_location_spring_ward" model="nh.clinical.location">
+            <field name="name">Spring Ward</field>
+            <field name="code">807</field>
+            <field name="parent_id" ref="nhc_bethlem_royal_location_lh"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">ward</field>
+        </record>
+
+        <!-- Spring Ward Bed Locations -->
+        
+        <record id="nh_eobs_bethlem_royal_location_spring_ward_bed_01" model="nh.clinical.location">
+            <field name="name">Spring Ward Bed 01</field>
+            <field name="code">spring_ward01</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_spring_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_spring_ward_bed_02" model="nh.clinical.location">
+            <field name="name">Spring Ward Bed 02</field>
+            <field name="code">spring_ward02</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_spring_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_spring_ward_bed_03" model="nh.clinical.location">
+            <field name="name">Spring Ward Bed 03</field>
+            <field name="code">spring_ward03</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_spring_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_spring_ward_bed_04" model="nh.clinical.location">
+            <field name="name">Spring Ward Bed 04</field>
+            <field name="code">spring_ward04</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_spring_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_spring_ward_bed_05" model="nh.clinical.location">
+            <field name="name">Spring Ward Bed 05</field>
+            <field name="code">spring_ward05</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_spring_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_spring_ward_bed_06" model="nh.clinical.location">
+            <field name="name">Spring Ward Bed 06</field>
+            <field name="code">spring_ward06</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_spring_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_spring_ward_bed_07" model="nh.clinical.location">
+            <field name="name">Spring Ward Bed 07</field>
+            <field name="code">spring_ward07</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_spring_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_spring_ward_bed_08" model="nh.clinical.location">
+            <field name="name">Spring Ward Bed 08</field>
+            <field name="code">spring_ward08</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_spring_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_spring_ward_bed_09" model="nh.clinical.location">
+            <field name="name">Spring Ward Bed 09</field>
+            <field name="code">spring_ward09</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_spring_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_spring_ward_bed_10" model="nh.clinical.location">
+            <field name="name">Spring Ward Bed 10</field>
+            <field name="code">spring_ward10</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_spring_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_spring_ward_bed_11" model="nh.clinical.location">
+            <field name="name">Spring Ward Bed 11</field>
+            <field name="code">spring_ward11</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_spring_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_spring_ward_bed_12" model="nh.clinical.location">
+            <field name="name">Spring Ward Bed 12</field>
+            <field name="code">spring_ward12</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_spring_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_spring_ward_bed_13" model="nh.clinical.location">
+            <field name="name">Spring Ward Bed 13</field>
+            <field name="code">spring_ward13</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_spring_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_spring_ward_bed_14" model="nh.clinical.location">
+            <field name="name">Spring Ward Bed 14</field>
+            <field name="code">spring_ward14</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_spring_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_spring_ward_bed_15" model="nh.clinical.location">
+            <field name="name">Spring Ward Bed 15</field>
+            <field name="code">spring_ward15</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_spring_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+
+        <!-- Thames Ward Ward Location -->
+        <record id="nh_eobs_bethlem_royal_location_thames_ward" model="nh.clinical.location">
+            <field name="name">Thames Ward</field>
+            <field name="code">845</field>
+            <field name="parent_id" ref="nhc_bethlem_royal_location_lh"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">ward</field>
+        </record>
+
+        <!-- Thames Ward Bed Locations -->
+        
+        <record id="nh_eobs_bethlem_royal_location_thames_ward_bed_01" model="nh.clinical.location">
+            <field name="name">Thames Ward Bed 01</field>
+            <field name="code">thames_ward01</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_thames_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_thames_ward_bed_02" model="nh.clinical.location">
+            <field name="name">Thames Ward Bed 02</field>
+            <field name="code">thames_ward02</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_thames_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_thames_ward_bed_03" model="nh.clinical.location">
+            <field name="name">Thames Ward Bed 03</field>
+            <field name="code">thames_ward03</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_thames_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_thames_ward_bed_04" model="nh.clinical.location">
+            <field name="name">Thames Ward Bed 04</field>
+            <field name="code">thames_ward04</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_thames_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_thames_ward_bed_05" model="nh.clinical.location">
+            <field name="name">Thames Ward Bed 05</field>
+            <field name="code">thames_ward05</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_thames_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_thames_ward_bed_06" model="nh.clinical.location">
+            <field name="name">Thames Ward Bed 06</field>
+            <field name="code">thames_ward06</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_thames_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_thames_ward_bed_07" model="nh.clinical.location">
+            <field name="name">Thames Ward Bed 07</field>
+            <field name="code">thames_ward07</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_thames_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_thames_ward_bed_08" model="nh.clinical.location">
+            <field name="name">Thames Ward Bed 08</field>
+            <field name="code">thames_ward08</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_thames_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_thames_ward_bed_09" model="nh.clinical.location">
+            <field name="name">Thames Ward Bed 09</field>
+            <field name="code">thames_ward09</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_thames_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_thames_ward_bed_10" model="nh.clinical.location">
+            <field name="name">Thames Ward Bed 10</field>
+            <field name="code">thames_ward10</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_thames_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_thames_ward_bed_11" model="nh.clinical.location">
+            <field name="name">Thames Ward Bed 11</field>
+            <field name="code">thames_ward11</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_thames_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_thames_ward_bed_12" model="nh.clinical.location">
+            <field name="name">Thames Ward Bed 12</field>
+            <field name="code">thames_ward12</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_thames_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_thames_ward_bed_13" model="nh.clinical.location">
+            <field name="name">Thames Ward Bed 13</field>
+            <field name="code">thames_ward13</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_thames_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_thames_ward_bed_14" model="nh.clinical.location">
+            <field name="name">Thames Ward Bed 14</field>
+            <field name="code">thames_ward14</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_thames_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_thames_ward_bed_15" model="nh.clinical.location">
+            <field name="name">Thames Ward Bed 15</field>
+            <field name="code">thames_ward15</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_thames_ward"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+
+        <!-- Rehabilitation Ward - Westways Ward Location -->
+        <record id="nh_eobs_bethlem_royal_location_rehabilitation_ward_westways" model="nh.clinical.location">
+            <field name="name">Rehabilitation Ward - Westways</field>
+            <field name="code">712</field>
+            <field name="parent_id" ref="nhc_bethlem_royal_location_lh"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">ward</field>
+        </record>
+
+        <!-- Rehabilitation Ward - Westways Bed Locations -->
+        
+        <record id="nh_eobs_bethlem_royal_location_rehabilitation_ward_westways_bed_01" model="nh.clinical.location">
+            <field name="name">Rehabilitation Ward - Westways Bed 01</field>
+            <field name="code">rehabilitation_ward_westways01</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_rehabilitation_ward_westways"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_rehabilitation_ward_westways_bed_02" model="nh.clinical.location">
+            <field name="name">Rehabilitation Ward - Westways Bed 02</field>
+            <field name="code">rehabilitation_ward_westways02</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_rehabilitation_ward_westways"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_rehabilitation_ward_westways_bed_03" model="nh.clinical.location">
+            <field name="name">Rehabilitation Ward - Westways Bed 03</field>
+            <field name="code">rehabilitation_ward_westways03</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_rehabilitation_ward_westways"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_rehabilitation_ward_westways_bed_04" model="nh.clinical.location">
+            <field name="name">Rehabilitation Ward - Westways Bed 04</field>
+            <field name="code">rehabilitation_ward_westways04</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_rehabilitation_ward_westways"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_rehabilitation_ward_westways_bed_05" model="nh.clinical.location">
+            <field name="name">Rehabilitation Ward - Westways Bed 05</field>
+            <field name="code">rehabilitation_ward_westways05</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_rehabilitation_ward_westways"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_rehabilitation_ward_westways_bed_06" model="nh.clinical.location">
+            <field name="name">Rehabilitation Ward - Westways Bed 06</field>
+            <field name="code">rehabilitation_ward_westways06</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_rehabilitation_ward_westways"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_rehabilitation_ward_westways_bed_07" model="nh.clinical.location">
+            <field name="name">Rehabilitation Ward - Westways Bed 07</field>
+            <field name="code">rehabilitation_ward_westways07</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_rehabilitation_ward_westways"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_rehabilitation_ward_westways_bed_08" model="nh.clinical.location">
+            <field name="name">Rehabilitation Ward - Westways Bed 08</field>
+            <field name="code">rehabilitation_ward_westways08</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_rehabilitation_ward_westways"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_rehabilitation_ward_westways_bed_09" model="nh.clinical.location">
+            <field name="name">Rehabilitation Ward - Westways Bed 09</field>
+            <field name="code">rehabilitation_ward_westways09</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_rehabilitation_ward_westways"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_rehabilitation_ward_westways_bed_10" model="nh.clinical.location">
+            <field name="name">Rehabilitation Ward - Westways Bed 10</field>
+            <field name="code">rehabilitation_ward_westways10</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_rehabilitation_ward_westways"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_rehabilitation_ward_westways_bed_11" model="nh.clinical.location">
+            <field name="name">Rehabilitation Ward - Westways Bed 11</field>
+            <field name="code">rehabilitation_ward_westways11</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_rehabilitation_ward_westways"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_rehabilitation_ward_westways_bed_12" model="nh.clinical.location">
+            <field name="name">Rehabilitation Ward - Westways Bed 12</field>
+            <field name="code">rehabilitation_ward_westways12</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_rehabilitation_ward_westways"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_rehabilitation_ward_westways_bed_13" model="nh.clinical.location">
+            <field name="name">Rehabilitation Ward - Westways Bed 13</field>
+            <field name="code">rehabilitation_ward_westways13</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_rehabilitation_ward_westways"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_rehabilitation_ward_westways_bed_14" model="nh.clinical.location">
+            <field name="name">Rehabilitation Ward - Westways Bed 14</field>
+            <field name="code">rehabilitation_ward_westways14</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_rehabilitation_ward_westways"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_rehabilitation_ward_westways_bed_15" model="nh.clinical.location">
+            <field name="name">Rehabilitation Ward - Westways Bed 15</field>
+            <field name="code">rehabilitation_ward_westways15</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_rehabilitation_ward_westways"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_rehabilitation_ward_westways_bed_16" model="nh.clinical.location">
+            <field name="name">Rehabilitation Ward - Westways Bed 16</field>
+            <field name="code">rehabilitation_ward_westways16</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_rehabilitation_ward_westways"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_rehabilitation_ward_westways_bed_17" model="nh.clinical.location">
+            <field name="name">Rehabilitation Ward - Westways Bed 17</field>
+            <field name="code">rehabilitation_ward_westways17</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_rehabilitation_ward_westways"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_rehabilitation_ward_westways_bed_18" model="nh.clinical.location">
+            <field name="name">Rehabilitation Ward - Westways Bed 18</field>
+            <field name="code">rehabilitation_ward_westways18</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_rehabilitation_ward_westways"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+
+        <!-- Anxiety Disorders Residential Ward Location -->
+        <record id="nh_eobs_bethlem_royal_location_anxiety_disorders_residential" model="nh.clinical.location">
+            <field name="name">Anxiety Disorders Residential</field>
+            <field name="code">108</field>
+            <field name="parent_id" ref="nhc_bethlem_royal_location_lh"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">ward</field>
+        </record>
+
+        <!-- Anxiety Disorders Residential Bed Locations -->
+        
+        <record id="nh_eobs_bethlem_royal_location_anxiety_disorders_residential_bed_01" model="nh.clinical.location">
+            <field name="name">Anxiety Disorders Residential Bed 01</field>
+            <field name="code">anxiety_disorders_residential01</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_anxiety_disorders_residential"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_anxiety_disorders_residential_bed_02" model="nh.clinical.location">
+            <field name="name">Anxiety Disorders Residential Bed 02</field>
+            <field name="code">anxiety_disorders_residential02</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_anxiety_disorders_residential"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_anxiety_disorders_residential_bed_03" model="nh.clinical.location">
+            <field name="name">Anxiety Disorders Residential Bed 03</field>
+            <field name="code">anxiety_disorders_residential03</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_anxiety_disorders_residential"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_anxiety_disorders_residential_bed_04" model="nh.clinical.location">
+            <field name="name">Anxiety Disorders Residential Bed 04</field>
+            <field name="code">anxiety_disorders_residential04</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_anxiety_disorders_residential"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_anxiety_disorders_residential_bed_05" model="nh.clinical.location">
+            <field name="name">Anxiety Disorders Residential Bed 05</field>
+            <field name="code">anxiety_disorders_residential05</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_anxiety_disorders_residential"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_anxiety_disorders_residential_bed_06" model="nh.clinical.location">
+            <field name="name">Anxiety Disorders Residential Bed 06</field>
+            <field name="code">anxiety_disorders_residential06</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_anxiety_disorders_residential"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_anxiety_disorders_residential_bed_07" model="nh.clinical.location">
+            <field name="name">Anxiety Disorders Residential Bed 07</field>
+            <field name="code">anxiety_disorders_residential07</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_anxiety_disorders_residential"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_anxiety_disorders_residential_bed_08" model="nh.clinical.location">
+            <field name="name">Anxiety Disorders Residential Bed 08</field>
+            <field name="code">anxiety_disorders_residential08</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_anxiety_disorders_residential"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_anxiety_disorders_residential_bed_09" model="nh.clinical.location">
+            <field name="name">Anxiety Disorders Residential Bed 09</field>
+            <field name="code">anxiety_disorders_residential09</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_anxiety_disorders_residential"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_anxiety_disorders_residential_bed_10" model="nh.clinical.location">
+            <field name="name">Anxiety Disorders Residential Bed 10</field>
+            <field name="code">anxiety_disorders_residential10</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_anxiety_disorders_residential"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_anxiety_disorders_residential_bed_11" model="nh.clinical.location">
+            <field name="name">Anxiety Disorders Residential Bed 11</field>
+            <field name="code">anxiety_disorders_residential11</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_anxiety_disorders_residential"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_anxiety_disorders_residential_bed_12" model="nh.clinical.location">
+            <field name="name">Anxiety Disorders Residential Bed 12</field>
+            <field name="code">anxiety_disorders_residential12</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_anxiety_disorders_residential"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_anxiety_disorders_residential_bed_13" model="nh.clinical.location">
+            <field name="name">Anxiety Disorders Residential Bed 13</field>
+            <field name="code">anxiety_disorders_residential13</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_anxiety_disorders_residential"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_anxiety_disorders_residential_bed_14" model="nh.clinical.location">
+            <field name="name">Anxiety Disorders Residential Bed 14</field>
+            <field name="code">anxiety_disorders_residential14</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_anxiety_disorders_residential"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_anxiety_disorders_residential_bed_15" model="nh.clinical.location">
+            <field name="name">Anxiety Disorders Residential Bed 15</field>
+            <field name="code">anxiety_disorders_residential15</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_anxiety_disorders_residential"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_anxiety_disorders_residential_bed_16" model="nh.clinical.location">
+            <field name="name">Anxiety Disorders Residential Bed 16</field>
+            <field name="code">anxiety_disorders_residential16</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_anxiety_disorders_residential"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_anxiety_disorders_residential_bed_17" model="nh.clinical.location">
+            <field name="name">Anxiety Disorders Residential Bed 17</field>
+            <field name="code">anxiety_disorders_residential17</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_anxiety_disorders_residential"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_anxiety_disorders_residential_bed_18" model="nh.clinical.location">
+            <field name="name">Anxiety Disorders Residential Bed 18</field>
+            <field name="code">anxiety_disorders_residential18</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_anxiety_disorders_residential"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+
+        <!-- Eating Disorders Ward Location -->
+        <record id="nh_eobs_bethlem_royal_location_eating_disorders" model="nh.clinical.location">
+            <field name="name">Eating Disorders</field>
+            <field name="code">315</field>
+            <field name="parent_id" ref="nhc_bethlem_royal_location_lh"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">ward</field>
+        </record>
+
+        <!-- Eating Disorders Bed Locations -->
+        
+        <record id="nh_eobs_bethlem_royal_location_eating_disorders_bed_01" model="nh.clinical.location">
+            <field name="name">Eating Disorders Bed 01</field>
+            <field name="code">eating_disorders01</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_eating_disorders"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_eating_disorders_bed_02" model="nh.clinical.location">
+            <field name="name">Eating Disorders Bed 02</field>
+            <field name="code">eating_disorders02</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_eating_disorders"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_eating_disorders_bed_03" model="nh.clinical.location">
+            <field name="name">Eating Disorders Bed 03</field>
+            <field name="code">eating_disorders03</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_eating_disorders"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_eating_disorders_bed_04" model="nh.clinical.location">
+            <field name="name">Eating Disorders Bed 04</field>
+            <field name="code">eating_disorders04</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_eating_disorders"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_eating_disorders_bed_05" model="nh.clinical.location">
+            <field name="name">Eating Disorders Bed 05</field>
+            <field name="code">eating_disorders05</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_eating_disorders"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_eating_disorders_bed_06" model="nh.clinical.location">
+            <field name="name">Eating Disorders Bed 06</field>
+            <field name="code">eating_disorders06</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_eating_disorders"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_eating_disorders_bed_07" model="nh.clinical.location">
+            <field name="name">Eating Disorders Bed 07</field>
+            <field name="code">eating_disorders07</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_eating_disorders"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_eating_disorders_bed_08" model="nh.clinical.location">
+            <field name="name">Eating Disorders Bed 08</field>
+            <field name="code">eating_disorders08</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_eating_disorders"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_eating_disorders_bed_09" model="nh.clinical.location">
+            <field name="name">Eating Disorders Bed 09</field>
+            <field name="code">eating_disorders09</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_eating_disorders"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_eating_disorders_bed_10" model="nh.clinical.location">
+            <field name="name">Eating Disorders Bed 10</field>
+            <field name="code">eating_disorders10</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_eating_disorders"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_eating_disorders_bed_11" model="nh.clinical.location">
+            <field name="name">Eating Disorders Bed 11</field>
+            <field name="code">eating_disorders11</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_eating_disorders"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_eating_disorders_bed_12" model="nh.clinical.location">
+            <field name="name">Eating Disorders Bed 12</field>
+            <field name="code">eating_disorders12</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_eating_disorders"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_eating_disorders_bed_13" model="nh.clinical.location">
+            <field name="name">Eating Disorders Bed 13</field>
+            <field name="code">eating_disorders13</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_eating_disorders"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_eating_disorders_bed_14" model="nh.clinical.location">
+            <field name="name">Eating Disorders Bed 14</field>
+            <field name="code">eating_disorders14</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_eating_disorders"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_eating_disorders_bed_15" model="nh.clinical.location">
+            <field name="name">Eating Disorders Bed 15</field>
+            <field name="code">eating_disorders15</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_eating_disorders"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_eating_disorders_bed_16" model="nh.clinical.location">
+            <field name="name">Eating Disorders Bed 16</field>
+            <field name="code">eating_disorders16</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_eating_disorders"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_eating_disorders_bed_17" model="nh.clinical.location">
+            <field name="name">Eating Disorders Bed 17</field>
+            <field name="code">eating_disorders17</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_eating_disorders"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_eating_disorders_bed_18" model="nh.clinical.location">
+            <field name="name">Eating Disorders Bed 18</field>
+            <field name="code">eating_disorders18</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_eating_disorders"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+
+        <!-- Lishman - Neuropsych &amp; Brain Injury Ward Location -->
+        <record id="nh_eobs_bethlem_royal_location_lishman_neuropsych_brain_injury" model="nh.clinical.location">
+            <field name="name">Lishman - Neuropsych &amp; Brain Injury</field>
+            <field name="code">488</field>
+            <field name="parent_id" ref="nhc_bethlem_royal_location_lh"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">ward</field>
+        </record>
+
+        <!-- Lishman - Neuropsych &amp; Brain Injury Bed Locations -->
+        
+        <record id="nh_eobs_bethlem_royal_location_lishman_neuropsych_brain_injury_bed_01" model="nh.clinical.location">
+            <field name="name">Lishman - Neuropsych &amp; Brain Injury Bed 01</field>
+            <field name="code">lishman_neuropsych_brain_injury01</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_lishman_neuropsych_brain_injury"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_lishman_neuropsych_brain_injury_bed_02" model="nh.clinical.location">
+            <field name="name">Lishman - Neuropsych &amp; Brain Injury Bed 02</field>
+            <field name="code">lishman_neuropsych_brain_injury02</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_lishman_neuropsych_brain_injury"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_lishman_neuropsych_brain_injury_bed_03" model="nh.clinical.location">
+            <field name="name">Lishman - Neuropsych &amp; Brain Injury Bed 03</field>
+            <field name="code">lishman_neuropsych_brain_injury03</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_lishman_neuropsych_brain_injury"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_lishman_neuropsych_brain_injury_bed_04" model="nh.clinical.location">
+            <field name="name">Lishman - Neuropsych &amp; Brain Injury Bed 04</field>
+            <field name="code">lishman_neuropsych_brain_injury04</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_lishman_neuropsych_brain_injury"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_lishman_neuropsych_brain_injury_bed_05" model="nh.clinical.location">
+            <field name="name">Lishman - Neuropsych &amp; Brain Injury Bed 05</field>
+            <field name="code">lishman_neuropsych_brain_injury05</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_lishman_neuropsych_brain_injury"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_lishman_neuropsych_brain_injury_bed_06" model="nh.clinical.location">
+            <field name="name">Lishman - Neuropsych &amp; Brain Injury Bed 06</field>
+            <field name="code">lishman_neuropsych_brain_injury06</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_lishman_neuropsych_brain_injury"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_lishman_neuropsych_brain_injury_bed_07" model="nh.clinical.location">
+            <field name="name">Lishman - Neuropsych &amp; Brain Injury Bed 07</field>
+            <field name="code">lishman_neuropsych_brain_injury07</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_lishman_neuropsych_brain_injury"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_lishman_neuropsych_brain_injury_bed_08" model="nh.clinical.location">
+            <field name="name">Lishman - Neuropsych &amp; Brain Injury Bed 08</field>
+            <field name="code">lishman_neuropsych_brain_injury08</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_lishman_neuropsych_brain_injury"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_lishman_neuropsych_brain_injury_bed_09" model="nh.clinical.location">
+            <field name="name">Lishman - Neuropsych &amp; Brain Injury Bed 09</field>
+            <field name="code">lishman_neuropsych_brain_injury09</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_lishman_neuropsych_brain_injury"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_lishman_neuropsych_brain_injury_bed_10" model="nh.clinical.location">
+            <field name="name">Lishman - Neuropsych &amp; Brain Injury Bed 10</field>
+            <field name="code">lishman_neuropsych_brain_injury10</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_lishman_neuropsych_brain_injury"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_lishman_neuropsych_brain_injury_bed_11" model="nh.clinical.location">
+            <field name="name">Lishman - Neuropsych &amp; Brain Injury Bed 11</field>
+            <field name="code">lishman_neuropsych_brain_injury11</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_lishman_neuropsych_brain_injury"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_lishman_neuropsych_brain_injury_bed_12" model="nh.clinical.location">
+            <field name="name">Lishman - Neuropsych &amp; Brain Injury Bed 12</field>
+            <field name="code">lishman_neuropsych_brain_injury12</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_lishman_neuropsych_brain_injury"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_lishman_neuropsych_brain_injury_bed_13" model="nh.clinical.location">
+            <field name="name">Lishman - Neuropsych &amp; Brain Injury Bed 13</field>
+            <field name="code">lishman_neuropsych_brain_injury13</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_lishman_neuropsych_brain_injury"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_lishman_neuropsych_brain_injury_bed_14" model="nh.clinical.location">
+            <field name="name">Lishman - Neuropsych &amp; Brain Injury Bed 14</field>
+            <field name="code">lishman_neuropsych_brain_injury14</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_lishman_neuropsych_brain_injury"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_lishman_neuropsych_brain_injury_bed_15" model="nh.clinical.location">
+            <field name="name">Lishman - Neuropsych &amp; Brain Injury Bed 15</field>
+            <field name="code">lishman_neuropsych_brain_injury15</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_lishman_neuropsych_brain_injury"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_lishman_neuropsych_brain_injury_bed_16" model="nh.clinical.location">
+            <field name="name">Lishman - Neuropsych &amp; Brain Injury Bed 16</field>
+            <field name="code">lishman_neuropsych_brain_injury16</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_lishman_neuropsych_brain_injury"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_lishman_neuropsych_brain_injury_bed_17" model="nh.clinical.location">
+            <field name="name">Lishman - Neuropsych &amp; Brain Injury Bed 17</field>
+            <field name="code">lishman_neuropsych_brain_injury17</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_lishman_neuropsych_brain_injury"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+
+        <!-- National Autism Unit (NAU) Ward Location -->
+        <record id="nh_eobs_bethlem_royal_location_national_autism_unit_nau" model="nh.clinical.location">
+            <field name="name">National Autism Unit (NAU)</field>
+            <field name="code">138</field>
+            <field name="parent_id" ref="nhc_bethlem_royal_location_lh"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">ward</field>
+        </record>
+
+        <!-- National Autism Unit (NAU) Bed Locations -->
+        
+        <record id="nh_eobs_bethlem_royal_location_national_autism_unit_nau_bed_01" model="nh.clinical.location">
+            <field name="name">National Autism Unit (NAU) Bed 01</field>
+            <field name="code">national_autism_unit_nau01</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_national_autism_unit_nau"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_national_autism_unit_nau_bed_02" model="nh.clinical.location">
+            <field name="name">National Autism Unit (NAU) Bed 02</field>
+            <field name="code">national_autism_unit_nau02</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_national_autism_unit_nau"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_national_autism_unit_nau_bed_03" model="nh.clinical.location">
+            <field name="name">National Autism Unit (NAU) Bed 03</field>
+            <field name="code">national_autism_unit_nau03</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_national_autism_unit_nau"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_national_autism_unit_nau_bed_04" model="nh.clinical.location">
+            <field name="name">National Autism Unit (NAU) Bed 04</field>
+            <field name="code">national_autism_unit_nau04</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_national_autism_unit_nau"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_national_autism_unit_nau_bed_05" model="nh.clinical.location">
+            <field name="name">National Autism Unit (NAU) Bed 05</field>
+            <field name="code">national_autism_unit_nau05</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_national_autism_unit_nau"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_national_autism_unit_nau_bed_06" model="nh.clinical.location">
+            <field name="name">National Autism Unit (NAU) Bed 06</field>
+            <field name="code">national_autism_unit_nau06</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_national_autism_unit_nau"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_national_autism_unit_nau_bed_07" model="nh.clinical.location">
+            <field name="name">National Autism Unit (NAU) Bed 07</field>
+            <field name="code">national_autism_unit_nau07</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_national_autism_unit_nau"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_national_autism_unit_nau_bed_08" model="nh.clinical.location">
+            <field name="name">National Autism Unit (NAU) Bed 08</field>
+            <field name="code">national_autism_unit_nau08</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_national_autism_unit_nau"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_national_autism_unit_nau_bed_09" model="nh.clinical.location">
+            <field name="name">National Autism Unit (NAU) Bed 09</field>
+            <field name="code">national_autism_unit_nau09</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_national_autism_unit_nau"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_national_autism_unit_nau_bed_10" model="nh.clinical.location">
+            <field name="name">National Autism Unit (NAU) Bed 10</field>
+            <field name="code">national_autism_unit_nau10</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_national_autism_unit_nau"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_national_autism_unit_nau_bed_11" model="nh.clinical.location">
+            <field name="name">National Autism Unit (NAU) Bed 11</field>
+            <field name="code">national_autism_unit_nau11</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_national_autism_unit_nau"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_national_autism_unit_nau_bed_12" model="nh.clinical.location">
+            <field name="name">National Autism Unit (NAU) Bed 12</field>
+            <field name="code">national_autism_unit_nau12</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_national_autism_unit_nau"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_national_autism_unit_nau_bed_13" model="nh.clinical.location">
+            <field name="name">National Autism Unit (NAU) Bed 13</field>
+            <field name="code">national_autism_unit_nau13</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_national_autism_unit_nau"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_national_autism_unit_nau_bed_14" model="nh.clinical.location">
+            <field name="name">National Autism Unit (NAU) Bed 14</field>
+            <field name="code">national_autism_unit_nau14</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_national_autism_unit_nau"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_national_autism_unit_nau_bed_15" model="nh.clinical.location">
+            <field name="name">National Autism Unit (NAU) Bed 15</field>
+            <field name="code">national_autism_unit_nau15</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_national_autism_unit_nau"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+
+        <!-- Psychosis Inpatient Ward Location -->
+        <record id="nh_eobs_bethlem_royal_location_psychosis_inpatient" model="nh.clinical.location">
+            <field name="name">Psychosis Inpatient</field>
+            <field name="code">679</field>
+            <field name="parent_id" ref="nhc_bethlem_royal_location_lh"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">ward</field>
+        </record>
+
+        <!-- Psychosis Inpatient Bed Locations -->
+        
+        <record id="nh_eobs_bethlem_royal_location_psychosis_inpatient_bed_01" model="nh.clinical.location">
+            <field name="name">Psychosis Inpatient Bed 01</field>
+            <field name="code">psychosis_inpatient01</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_psychosis_inpatient"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_psychosis_inpatient_bed_02" model="nh.clinical.location">
+            <field name="name">Psychosis Inpatient Bed 02</field>
+            <field name="code">psychosis_inpatient02</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_psychosis_inpatient"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_psychosis_inpatient_bed_03" model="nh.clinical.location">
+            <field name="name">Psychosis Inpatient Bed 03</field>
+            <field name="code">psychosis_inpatient03</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_psychosis_inpatient"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_psychosis_inpatient_bed_04" model="nh.clinical.location">
+            <field name="name">Psychosis Inpatient Bed 04</field>
+            <field name="code">psychosis_inpatient04</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_psychosis_inpatient"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_psychosis_inpatient_bed_05" model="nh.clinical.location">
+            <field name="name">Psychosis Inpatient Bed 05</field>
+            <field name="code">psychosis_inpatient05</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_psychosis_inpatient"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_psychosis_inpatient_bed_06" model="nh.clinical.location">
+            <field name="name">Psychosis Inpatient Bed 06</field>
+            <field name="code">psychosis_inpatient06</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_psychosis_inpatient"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_psychosis_inpatient_bed_07" model="nh.clinical.location">
+            <field name="name">Psychosis Inpatient Bed 07</field>
+            <field name="code">psychosis_inpatient07</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_psychosis_inpatient"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_psychosis_inpatient_bed_08" model="nh.clinical.location">
+            <field name="name">Psychosis Inpatient Bed 08</field>
+            <field name="code">psychosis_inpatient08</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_psychosis_inpatient"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_psychosis_inpatient_bed_09" model="nh.clinical.location">
+            <field name="name">Psychosis Inpatient Bed 09</field>
+            <field name="code">psychosis_inpatient09</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_psychosis_inpatient"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_psychosis_inpatient_bed_10" model="nh.clinical.location">
+            <field name="name">Psychosis Inpatient Bed 10</field>
+            <field name="code">psychosis_inpatient10</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_psychosis_inpatient"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_psychosis_inpatient_bed_11" model="nh.clinical.location">
+            <field name="name">Psychosis Inpatient Bed 11</field>
+            <field name="code">psychosis_inpatient11</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_psychosis_inpatient"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_psychosis_inpatient_bed_12" model="nh.clinical.location">
+            <field name="name">Psychosis Inpatient Bed 12</field>
+            <field name="code">psychosis_inpatient12</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_psychosis_inpatient"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_psychosis_inpatient_bed_13" model="nh.clinical.location">
+            <field name="name">Psychosis Inpatient Bed 13</field>
+            <field name="code">psychosis_inpatient13</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_psychosis_inpatient"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_psychosis_inpatient_bed_14" model="nh.clinical.location">
+            <field name="name">Psychosis Inpatient Bed 14</field>
+            <field name="code">psychosis_inpatient14</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_psychosis_inpatient"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_psychosis_inpatient_bed_15" model="nh.clinical.location">
+            <field name="name">Psychosis Inpatient Bed 15</field>
+            <field name="code">psychosis_inpatient15</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_psychosis_inpatient"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_psychosis_inpatient_bed_16" model="nh.clinical.location">
+            <field name="name">Psychosis Inpatient Bed 16</field>
+            <field name="code">psychosis_inpatient16</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_psychosis_inpatient"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_psychosis_inpatient_bed_17" model="nh.clinical.location">
+            <field name="name">Psychosis Inpatient Bed 17</field>
+            <field name="code">psychosis_inpatient17</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_psychosis_inpatient"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_psychosis_inpatient_bed_18" model="nh.clinical.location">
+            <field name="name">Psychosis Inpatient Bed 18</field>
+            <field name="code">psychosis_inpatient18</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_psychosis_inpatient"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_psychosis_inpatient_bed_19" model="nh.clinical.location">
+            <field name="name">Psychosis Inpatient Bed 19</field>
+            <field name="code">psychosis_inpatient19</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_psychosis_inpatient"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_psychosis_inpatient_bed_20" model="nh.clinical.location">
+            <field name="name">Psychosis Inpatient Bed 20</field>
+            <field name="code">psychosis_inpatient20</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_psychosis_inpatient"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_psychosis_inpatient_bed_21" model="nh.clinical.location">
+            <field name="name">Psychosis Inpatient Bed 21</field>
+            <field name="code">psychosis_inpatient21</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_psychosis_inpatient"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_psychosis_inpatient_bed_22" model="nh.clinical.location">
+            <field name="name">Psychosis Inpatient Bed 22</field>
+            <field name="code">psychosis_inpatient22</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_psychosis_inpatient"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_bethlem_royal_location_psychosis_inpatient_bed_23" model="nh.clinical.location">
+            <field name="name">Psychosis Inpatient Bed 23</field>
+            <field name="code">psychosis_inpatient23</field>
+            <field name="parent_id" ref="nh_eobs_bethlem_royal_location_psychosis_inpatient"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+            </data>
+        </openerp>
+        

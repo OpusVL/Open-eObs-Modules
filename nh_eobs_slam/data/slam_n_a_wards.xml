@@ -1,0 +1,33 @@
+
+        <openerp>
+            <data>
+        
+
+        <!-- PJS Development Ward Ward Location -->
+        <record id="nh_eobs_n_a_location_pjs_development_ward" model="nh.clinical.location">
+            <field name="name">PJS Development Ward</field>
+            <field name="code">1064</field>
+            <field name="parent_id" ref="nhc_n_a_location_lh"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">ward</field>
+        </record>
+
+        <!-- PJS Development Ward Bed Locations -->
+        
+
+        <!-- Test Ward Ward Location -->
+        <record id="nh_eobs_n_a_location_test_ward" model="nh.clinical.location">
+            <field name="name">Test Ward</field>
+            <field name="code">843</field>
+            <field name="parent_id" ref="nhc_n_a_location_lh"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">ward</field>
+        </record>
+
+        <!-- Test Ward Bed Locations -->
+        
+            </data>
+        </openerp>
+        

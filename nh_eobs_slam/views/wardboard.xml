@@ -1,0 +1,14 @@
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="view_slam_wardboard_form">
+            <field name="name">Slam Wardboard Form View</field>
+            <field name="model">nh.clinical.wardboard</field>
+            <field name="inherit_id" ref="nh_eobs.view_wardboard_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@string='Special Circumstances']" position="replace"></xpath>
+            </field>
+        </record>
+
+    </data>
+</openerp>

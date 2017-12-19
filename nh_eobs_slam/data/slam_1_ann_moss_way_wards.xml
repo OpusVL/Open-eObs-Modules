@@ -1,0 +1,180 @@
+
+        <openerp>
+            <data>
+        
+
+        <!-- Ann Moss Domus Ward Location -->
+        <record id="nh_eobs_1_ann_moss_way_location_ann_moss_domus" model="nh.clinical.location">
+            <field name="name">Ann Moss Domus</field>
+            <field name="code">130</field>
+            <field name="parent_id" ref="nhc_1_ann_moss_way_location_lh"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">ward</field>
+        </record>
+
+        <!-- Ann Moss Domus Bed Locations -->
+        
+        <record id="nh_eobs_1_ann_moss_way_location_ann_moss_domus_bed_01" model="nh.clinical.location">
+            <field name="name">Ann Moss Domus Bed 01</field>
+            <field name="code">ann_moss_domus01</field>
+            <field name="parent_id" ref="nh_eobs_1_ann_moss_way_location_ann_moss_domus"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_1_ann_moss_way_location_ann_moss_domus_bed_02" model="nh.clinical.location">
+            <field name="name">Ann Moss Domus Bed 02</field>
+            <field name="code">ann_moss_domus02</field>
+            <field name="parent_id" ref="nh_eobs_1_ann_moss_way_location_ann_moss_domus"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_1_ann_moss_way_location_ann_moss_domus_bed_03" model="nh.clinical.location">
+            <field name="name">Ann Moss Domus Bed 03</field>
+            <field name="code">ann_moss_domus03</field>
+            <field name="parent_id" ref="nh_eobs_1_ann_moss_way_location_ann_moss_domus"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_1_ann_moss_way_location_ann_moss_domus_bed_04" model="nh.clinical.location">
+            <field name="name">Ann Moss Domus Bed 04</field>
+            <field name="code">ann_moss_domus04</field>
+            <field name="parent_id" ref="nh_eobs_1_ann_moss_way_location_ann_moss_domus"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_1_ann_moss_way_location_ann_moss_domus_bed_05" model="nh.clinical.location">
+            <field name="name">Ann Moss Domus Bed 05</field>
+            <field name="code">ann_moss_domus05</field>
+            <field name="parent_id" ref="nh_eobs_1_ann_moss_way_location_ann_moss_domus"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_1_ann_moss_way_location_ann_moss_domus_bed_06" model="nh.clinical.location">
+            <field name="name">Ann Moss Domus Bed 06</field>
+            <field name="code">ann_moss_domus06</field>
+            <field name="parent_id" ref="nh_eobs_1_ann_moss_way_location_ann_moss_domus"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_1_ann_moss_way_location_ann_moss_domus_bed_07" model="nh.clinical.location">
+            <field name="name">Ann Moss Domus Bed 07</field>
+            <field name="code">ann_moss_domus07</field>
+            <field name="parent_id" ref="nh_eobs_1_ann_moss_way_location_ann_moss_domus"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_1_ann_moss_way_location_ann_moss_domus_bed_08" model="nh.clinical.location">
+            <field name="name">Ann Moss Domus Bed 08</field>
+            <field name="code">ann_moss_domus08</field>
+            <field name="parent_id" ref="nh_eobs_1_ann_moss_way_location_ann_moss_domus"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_1_ann_moss_way_location_ann_moss_domus_bed_09" model="nh.clinical.location">
+            <field name="name">Ann Moss Domus Bed 09</field>
+            <field name="code">ann_moss_domus09</field>
+            <field name="parent_id" ref="nh_eobs_1_ann_moss_way_location_ann_moss_domus"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_1_ann_moss_way_location_ann_moss_domus_bed_10" model="nh.clinical.location">
+            <field name="name">Ann Moss Domus Bed 10</field>
+            <field name="code">ann_moss_domus10</field>
+            <field name="parent_id" ref="nh_eobs_1_ann_moss_way_location_ann_moss_domus"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_1_ann_moss_way_location_ann_moss_domus_bed_11" model="nh.clinical.location">
+            <field name="name">Ann Moss Domus Bed 11</field>
+            <field name="code">ann_moss_domus11</field>
+            <field name="parent_id" ref="nh_eobs_1_ann_moss_way_location_ann_moss_domus"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_1_ann_moss_way_location_ann_moss_domus_bed_12" model="nh.clinical.location">
+            <field name="name">Ann Moss Domus Bed 12</field>
+            <field name="code">ann_moss_domus12</field>
+            <field name="parent_id" ref="nh_eobs_1_ann_moss_way_location_ann_moss_domus"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_1_ann_moss_way_location_ann_moss_domus_bed_13" model="nh.clinical.location">
+            <field name="name">Ann Moss Domus Bed 13</field>
+            <field name="code">ann_moss_domus13</field>
+            <field name="parent_id" ref="nh_eobs_1_ann_moss_way_location_ann_moss_domus"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_1_ann_moss_way_location_ann_moss_domus_bed_14" model="nh.clinical.location">
+            <field name="name">Ann Moss Domus Bed 14</field>
+            <field name="code">ann_moss_domus14</field>
+            <field name="parent_id" ref="nh_eobs_1_ann_moss_way_location_ann_moss_domus"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_1_ann_moss_way_location_ann_moss_domus_bed_15" model="nh.clinical.location">
+            <field name="name">Ann Moss Domus Bed 15</field>
+            <field name="code">ann_moss_domus15</field>
+            <field name="parent_id" ref="nh_eobs_1_ann_moss_way_location_ann_moss_domus"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_1_ann_moss_way_location_ann_moss_domus_bed_16" model="nh.clinical.location">
+            <field name="name">Ann Moss Domus Bed 16</field>
+            <field name="code">ann_moss_domus16</field>
+            <field name="parent_id" ref="nh_eobs_1_ann_moss_way_location_ann_moss_domus"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+            </data>
+        </openerp>
+        

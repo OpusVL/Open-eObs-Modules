@@ -1,0 +1,140 @@
+
+        <openerp>
+            <data>
+        
+
+        <!-- Forensic Inpatient in Community Ward Location -->
+        <record id="nh_eobs_landor_road_location_forensic_inpatient_in_community" model="nh.clinical.location">
+            <field name="name">Forensic Inpatient in Community</field>
+            <field name="code">355</field>
+            <field name="parent_id" ref="nhc_landor_road_location_lh"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">ward</field>
+        </record>
+
+        <!-- Forensic Inpatient in Community Bed Locations -->
+        
+        <record id="nh_eobs_landor_road_location_forensic_inpatient_in_community_bed_01" model="nh.clinical.location">
+            <field name="name">Forensic Inpatient in Community Bed 01</field>
+            <field name="code">forensic_inpatient_in_community01</field>
+            <field name="parent_id" ref="nh_eobs_landor_road_location_forensic_inpatient_in_community"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_landor_road_location_forensic_inpatient_in_community_bed_02" model="nh.clinical.location">
+            <field name="name">Forensic Inpatient in Community Bed 02</field>
+            <field name="code">forensic_inpatient_in_community02</field>
+            <field name="parent_id" ref="nh_eobs_landor_road_location_forensic_inpatient_in_community"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_landor_road_location_forensic_inpatient_in_community_bed_03" model="nh.clinical.location">
+            <field name="name">Forensic Inpatient in Community Bed 03</field>
+            <field name="code">forensic_inpatient_in_community03</field>
+            <field name="parent_id" ref="nh_eobs_landor_road_location_forensic_inpatient_in_community"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_landor_road_location_forensic_inpatient_in_community_bed_04" model="nh.clinical.location">
+            <field name="name">Forensic Inpatient in Community Bed 04</field>
+            <field name="code">forensic_inpatient_in_community04</field>
+            <field name="parent_id" ref="nh_eobs_landor_road_location_forensic_inpatient_in_community"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_landor_road_location_forensic_inpatient_in_community_bed_05" model="nh.clinical.location">
+            <field name="name">Forensic Inpatient in Community Bed 05</field>
+            <field name="code">forensic_inpatient_in_community05</field>
+            <field name="parent_id" ref="nh_eobs_landor_road_location_forensic_inpatient_in_community"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_landor_road_location_forensic_inpatient_in_community_bed_06" model="nh.clinical.location">
+            <field name="name">Forensic Inpatient in Community Bed 06</field>
+            <field name="code">forensic_inpatient_in_community06</field>
+            <field name="parent_id" ref="nh_eobs_landor_road_location_forensic_inpatient_in_community"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_landor_road_location_forensic_inpatient_in_community_bed_07" model="nh.clinical.location">
+            <field name="name">Forensic Inpatient in Community Bed 07</field>
+            <field name="code">forensic_inpatient_in_community07</field>
+            <field name="parent_id" ref="nh_eobs_landor_road_location_forensic_inpatient_in_community"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_landor_road_location_forensic_inpatient_in_community_bed_08" model="nh.clinical.location">
+            <field name="name">Forensic Inpatient in Community Bed 08</field>
+            <field name="code">forensic_inpatient_in_community08</field>
+            <field name="parent_id" ref="nh_eobs_landor_road_location_forensic_inpatient_in_community"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_landor_road_location_forensic_inpatient_in_community_bed_09" model="nh.clinical.location">
+            <field name="name">Forensic Inpatient in Community Bed 09</field>
+            <field name="code">forensic_inpatient_in_community09</field>
+            <field name="parent_id" ref="nh_eobs_landor_road_location_forensic_inpatient_in_community"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_landor_road_location_forensic_inpatient_in_community_bed_10" model="nh.clinical.location">
+            <field name="name">Forensic Inpatient in Community Bed 10</field>
+            <field name="code">forensic_inpatient_in_community10</field>
+            <field name="parent_id" ref="nh_eobs_landor_road_location_forensic_inpatient_in_community"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_landor_road_location_forensic_inpatient_in_community_bed_11" model="nh.clinical.location">
+            <field name="name">Forensic Inpatient in Community Bed 11</field>
+            <field name="code">forensic_inpatient_in_community11</field>
+            <field name="parent_id" ref="nh_eobs_landor_road_location_forensic_inpatient_in_community"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+        <record id="nh_eobs_landor_road_location_forensic_inpatient_in_community_bed_12" model="nh.clinical.location">
+            <field name="name">Forensic Inpatient in Community Bed 12</field>
+            <field name="code">forensic_inpatient_in_community12</field>
+            <field name="parent_id" ref="nh_eobs_landor_road_location_forensic_inpatient_in_community"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+            
+            </data>
+        </openerp>
+        
