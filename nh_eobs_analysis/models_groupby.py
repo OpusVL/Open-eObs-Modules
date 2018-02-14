@@ -17,7 +17,7 @@ def read_group_process_groupby_override(self, gb, query, context):
     temporal = field_type in ('date', 'datetime')
     tz_convert = field_type == 'datetime' and \
         context.get('tz') in pytz.all_timezones
-    qualified_field = self._inherits_join_calc(split[0], query)
+    qualified_field = self._inherits_join_calc(self._table, split[0], query)
     if temporal:
         display_formats = {
             # Careful with week/year formats:
