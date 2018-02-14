@@ -1,10 +1,8 @@
-Location
+``Location``
 ============
 .. automodule:: location
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Classes
-   :glob:
-
-   location/*
+``Location``
+------------
+.. autoclass:: nh_clinical_location
+    :members:

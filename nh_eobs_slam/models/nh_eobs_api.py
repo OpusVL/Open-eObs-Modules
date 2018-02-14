@@ -126,10 +126,10 @@ class NhEobsApi(orm.AbstractModel):
                     'type': 'blood_product',
                     'name': 'Blood Product'
                 },
-                {
-                    'type': 'food_fluid',
-                    'name': 'Daily Food and Fluid'
-                },
+                # {
+                #     'type': 'food_fluid',
+                #     'name': 'Daily Food and Fluid'
+                # },
                 {
                     'type': 'height',
                     'name': 'Height'

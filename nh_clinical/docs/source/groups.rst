@@ -1,10 +1,15 @@
-Groups
-======
+``Groups``
+==========
 .. automodule:: groups
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Classes
-   :glob:
+``Groups``
+--------------
+.. autoclass:: res_groups
+    :members:
 
-   groups/*
+``ir_model_access``
+-------------------
+.. autoclass:: ir_model_access
+    :members:
+
+

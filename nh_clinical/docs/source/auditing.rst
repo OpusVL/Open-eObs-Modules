@@ -1,10 +1,18 @@
-Auditing
+``Auditing``
 ============
 .. automodule:: auditing
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Classes
-   :glob:
+``Activate Location``
+---------------------
+.. autoclass:: nh_clinical_location_activate
+    :members:
 
-   auditing/*
+``Deactivate Location``
+-----------------------
+.. autoclass:: nh_clinical_location_deactivate
+    :members:
+
+``User Responsibility Allocation``
+----------------------------------
+.. autoclass:: nh_clinical_user_responsibility_allocation
+    :members:

@@ -1,0 +1,248 @@
+<openerp>
+    <data>
+        <!-- Location - Wards -->
+        <record id="nhc_ldh_location_eau" model="nh.clinical.location">
+            <field name="name">Ward EAU</field>
+            <field name="code">WEAU</field>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_etake_list.nh_etake_list_context')]]]"/>
+            <field name="usage">ward</field>
+          <field name="parent_id" ref="nhc_ldh_location_ldh"/>
+        </record>
+        <record id="nhc_ldh_location_ae" model="nh.clinical.location">
+            <field name="name">Ward A+E</field>
+            <field name="code">AE</field>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_etake_list.nh_etake_list_context')]]]"/>
+            <field name="usage">ward</field>
+            <field name="parent_id" ref="nhc_ldh_location_ldh"/>
+        </record>
+        <record id="nhc_ldh_location_ucc" model="nh.clinical.location">
+            <field name="name">Ward UCC</field>
+            <field name="code">UCC</field>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_etake_list.nh_etake_list_context')]]]"/>
+            <field name="usage">ward</field>
+            <field name="parent_id" ref="nhc_ldh_location_ldh"/>
+        </record>
+
+        <!-- Point of Care - Beds -->
+
+        <!-- BEDS EAU Ward -->
+        <record id="nhc_ldh_location_b1" model="nh.clinical.location">
+            <field name="name">Bed 1</field>
+            <field name="code">EAU1</field>
+            <field name="type">poc</field>
+            <field name="usage">bed</field>
+            <field name="parent_id" ref="nhc_ldh_location_eau"/>
+        </record>
+        <record id="nhc_ldh_location_b2" model="nh.clinical.location">
+            <field name="name">Bed 2</field>
+            <field name="code">EAU2</field>
+            <field name="type">poc</field>
+            <field name="usage">bed</field>
+            <field name="parent_id" ref="nhc_ldh_location_eau"/>
+        </record>
+        <record id="nhc_ldh_location_b3" model="nh.clinical.location">
+            <field name="name">Bed 3</field>
+            <field name="code">EAU3</field>
+            <field name="type">poc</field>
+            <field name="usage">bed</field>
+            <field name="parent_id" ref="nhc_ldh_location_eau"/>
+        </record>
+        <record id="nhc_ldh_location_b4" model="nh.clinical.location">
+            <field name="name">Bed 4</field>
+            <field name="code">EAU4</field>
+            <field name="type">poc</field>
+            <field name="usage">bed</field>
+            <field name="parent_id" ref="nhc_ldh_location_eau"/>
+        </record>
+        <record id="nhc_ldh_location_b5" model="nh.clinical.location">
+            <field name="name">Bed 5</field>
+            <field name="code">EAU5</field>
+            <field name="type">poc</field>
+            <field name="usage">bed</field>
+            <field name="parent_id" ref="nhc_ldh_location_eau"/>
+        </record>
+        <record id="nhc_ldh_location_b6" model="nh.clinical.location">
+            <field name="name">Bed 6</field>
+            <field name="code">EAU6</field>
+            <field name="type">poc</field>
+            <field name="usage">bed</field>
+            <field name="parent_id" ref="nhc_ldh_location_eau"/>
+        </record>
+        <record id="nhc_ldh_location_b7" model="nh.clinical.location">
+            <field name="name">Bed 7</field>
+            <field name="code">EAU7</field>
+            <field name="type">poc</field>
+            <field name="usage">bed</field>
+            <field name="parent_id" ref="nhc_ldh_location_eau"/>
+        </record>
+        <record id="nhc_ldh_location_b8" model="nh.clinical.location">
+            <field name="name">Bed 8</field>
+            <field name="code">EAU8</field>
+            <field name="type">poc</field>
+            <field name="usage">bed</field>
+            <field name="parent_id" ref="nhc_ldh_location_eau"/>
+        </record>
+        <record id="nhc_ldh_location_b9" model="nh.clinical.location">
+            <field name="name">Bed 9</field>
+            <field name="code">EAU9</field>
+            <field name="type">poc</field>
+            <field name="usage">bed</field>
+            <field name="parent_id" ref="nhc_ldh_location_eau"/>
+        </record>
+        <record id="nhc_ldh_location_b10" model="nh.clinical.location">
+            <field name="name">Bed 10</field>
+            <field name="code">EAU10</field>
+            <field name="type">poc</field>
+            <field name="usage">bed</field>
+            <field name="parent_id" ref="nhc_ldh_location_eau"/>
+        </record>
+
+
+        <!-- BEDS A+E Ward -->
+        <record id="nhc_ldh_location_b11" model="nh.clinical.location">
+            <field name="name">Bed 11</field>
+            <field name="code">AE11</field>
+            <field name="type">poc</field>
+            <field name="usage">bed</field>
+            <field name="parent_id" ref="nhc_ldh_location_ae"/>
+        </record>
+        <record id="nhc_ldh_location_b12" model="nh.clinical.location">
+            <field name="name">Bed 12</field>
+            <field name="code">AE12</field>
+            <field name="type">poc</field>
+            <field name="usage">bed</field>
+            <field name="parent_id" ref="nhc_ldh_location_ae"/>
+        </record>
+        <record id="nhc_ldh_location_b13" model="nh.clinical.location">
+            <field name="name">Bed 13</field>
+            <field name="code">AE13</field>
+            <field name="type">poc</field>
+            <field name="usage">bed</field>
+            <field name="parent_id" ref="nhc_ldh_location_ae"/>
+        </record>
+        <record id="nhc_ldh_location_b14" model="nh.clinical.location">
+            <field name="name">Bed 14</field>
+            <field name="code">AE14</field>
+            <field name="type">poc</field>
+            <field name="usage">bed</field>
+            <field name="parent_id" ref="nhc_ldh_location_ae"/>
+        </record>
+        <record id="nhc_ldh_location_b15" model="nh.clinical.location">
+            <field name="name">Bed 15</field>
+            <field name="code">AE15</field>
+            <field name="type">poc</field>
+            <field name="usage">bed</field>
+            <field name="parent_id" ref="nhc_ldh_location_ae"/>
+        </record>
+        <record id="nhc_ldh_location_b16" model="nh.clinical.location">
+            <field name="name">Bed 16</field>
+            <field name="code">AE16</field>
+            <field name="type">poc</field>
+            <field name="usage">bed</field>
+            <field name="parent_id" ref="nhc_ldh_location_ae"/>
+        </record>
+        <record id="nhc_ldh_location_b17" model="nh.clinical.location">
+            <field name="name">Bed 17</field>
+            <field name="code">AE17</field>
+            <field name="type">poc</field>
+            <field name="usage">bed</field>
+            <field name="parent_id" ref="nhc_ldh_location_ae"/>
+        </record>
+        <record id="nhc_ldh_location_b18" model="nh.clinical.location">
+            <field name="name">Bed 18</field>
+            <field name="code">AE18</field>
+            <field name="type">poc</field>
+            <field name="usage">bed</field>
+            <field name="parent_id" ref="nhc_ldh_location_ae"/>
+        </record>
+        <record id="nhc_ldh_location_b19" model="nh.clinical.location">
+            <field name="name">Bed 19</field>
+            <field name="code">AE19</field>
+            <field name="type">poc</field>
+            <field name="usage">bed</field>
+            <field name="parent_id" ref="nhc_ldh_location_ae"/>
+        </record>
+        <record id="nhc_ldh_location_b20" model="nh.clinical.location">
+            <field name="name">Bed 20</field>
+            <field name="code">AE20</field>
+            <field name="type">poc</field>
+            <field name="usage">bed</field>
+            <field name="parent_id" ref="nhc_ldh_location_ae"/>
+        </record>
+
+        <!-- BEDS UCC Ward -->
+        <record id="nhc_ldh_location_b21" model="nh.clinical.location">
+            <field name="name">Bed 21</field>
+            <field name="code">UCC21</field>
+            <field name="type">poc</field>
+            <field name="usage">bed</field>
+            <field name="parent_id" ref="nhc_ldh_location_ucc"/>
+        </record>
+        <record id="nhc_ldh_location_b22" model="nh.clinical.location">
+            <field name="name">Bed 22</field>
+            <field name="code">UCC22</field>
+            <field name="type">poc</field>
+            <field name="usage">bed</field>
+            <field name="parent_id" ref="nhc_ldh_location_ucc"/>
+        </record>
+        <record id="nhc_ldh_location_b23" model="nh.clinical.location">
+            <field name="name">Bed 23</field>
+            <field name="code">UCC23</field>
+            <field name="type">poc</field>
+            <field name="usage">bed</field>
+            <field name="parent_id" ref="nhc_ldh_location_ucc"/>
+        </record>
+        <record id="nhc_ldh_location_b24" model="nh.clinical.location">
+            <field name="name">Bed 24</field>
+            <field name="code">UCC24</field>
+            <field name="type">poc</field>
+            <field name="usage">bed</field>
+            <field name="parent_id" ref="nhc_ldh_location_ucc"/>
+        </record>
+        <record id="nhc_ldh_location_b25" model="nh.clinical.location">
+            <field name="name">Bed 25</field>
+            <field name="code">UCC25</field>
+            <field name="type">poc</field>
+            <field name="usage">bed</field>
+            <field name="parent_id" ref="nhc_ldh_location_ucc"/>
+        </record>
+        <record id="nhc_ldh_location_b26" model="nh.clinical.location">
+            <field name="name">Bed 26</field>
+            <field name="code">UCC26</field>
+            <field name="type">poc</field>
+            <field name="usage">bed</field>
+            <field name="parent_id" ref="nhc_ldh_location_ucc"/>
+        </record>
+        <record id="nhc_ldh_location_b27" model="nh.clinical.location">
+            <field name="name">Bed 27</field>
+            <field name="code">UCC27</field>
+            <field name="type">poc</field>
+            <field name="usage">bed</field>
+            <field name="parent_id" ref="nhc_ldh_location_ucc"/>
+        </record>
+        <record id="nhc_ldh_location_b28" model="nh.clinical.location">
+            <field name="name">Bed 28</field>
+            <field name="code">UCC28</field>
+            <field name="type">poc</field>
+            <field name="usage">bed</field>
+            <field name="parent_id" ref="nhc_ldh_location_ucc"/>
+        </record>
+        <record id="nhc_ldh_location_b29" model="nh.clinical.location">
+            <field name="name">Bed 29</field>
+            <field name="code">UCC29</field>
+            <field name="type">poc</field>
+            <field name="usage">bed</field>
+            <field name="parent_id" ref="nhc_ldh_location_ucc"/>
+        </record>
+        <record id="nhc_ldh_location_b30" model="nh.clinical.location">
+            <field name="name">Bed 30</field>
+            <field name="code">UCC30</field>
+            <field name="type">poc</field>
+            <field name="usage">bed</field>
+            <field name="parent_id" ref="nhc_ldh_location_ucc"/>
+        </record>
+    </data>
+</openerp>

@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <record model="nh.cancel.reason"
+                id="cancel_reason_patient_monitoring_exception">
+            <field name="name">Patient Monitoring Exception</field>
+            <field name="system" eval="True"/>
+        </record>
+    </data>
+</openerp>

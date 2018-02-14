@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="view_wardboard_form_btuh">
+            <field name="name">Wardboard Patients Form View (BTUH)</field>
+            <field name="model">nh.clinical.wardboard</field>
+            <field name="inherit_id" ref="nh_eobs.view_wardboard_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="/form/sheet/notebook/page[@string='Monitoring']" position="replace"/>
+                <xpath expr="/form/sheet/notebook/page[@string='Other Obs']/group[@string='Postural Blood Pressure']" position="replace">
+                    <group string="O2 Saturation Target">
+                        <field name="o2target" widget="selection" string="Current Target"/>
+                        <field name="o2target_ids" nolabel="1" colspan="2" readonly="1">
+                            <tree>
+                                <field name="date_terminated" string="Date" widget="nhc_datetime"/>
+                                <field name="level_id" string="Value"/>
+                                <field name="terminate_uid"/>
+                            </tree>
+                       </field>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_wardboard_form_discharged_btuh">
+            <field name="name">Wardboard Discharged Patients Form View (BTUH)</field>
+            <field name="model">nh.clinical.wardboard</field>
+            <field name="inherit_id" ref="nh_eobs.view_wardboard_form_discharged"/>
+            <field name="arch" type="xml">
+                <xpath expr="/form/sheet/notebook/page[@string='Monitoring']" position="replace"/>
+                <xpath expr="/form/sheet/notebook/page[@string='Other Obs']/group[@string='Postural Blood Pressure']" position="replace">
+                    <group string="O2 Saturation Target">
+                        <field name="o2target" widget="selection" string="Current Target"/>
+                        <field name="o2target_ids" nolabel="1" colspan="2" readonly="1">
+                            <tree>
+                                <field name="date_terminated" string="Date" widget="nhc_datetime"/>
+                                <field name="level_id" string="Value"/>
+                                <field name="terminate_uid"/>
+                            </tree>
+                       </field>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</openerp>

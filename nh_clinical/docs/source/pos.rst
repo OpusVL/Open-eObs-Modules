@@ -1,10 +1,13 @@
-POS
-===
+``POS``
+=======
 .. automodule:: pos
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Classes
-   :glob:
+``POS``
+-------
+.. autoclass:: nh_clinical_pos
+    :members:
 
-   pos/*
+``Company``
+-----------
+.. autoclass:: res_company
+    :members:

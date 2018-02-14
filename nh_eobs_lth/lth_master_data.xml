@@ -1,0 +1,348 @@
+<openerp>
+    <data>
+        <!--UI changes-->
+        <template id="assets_backend" name="lth assets" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <script type="text/javascript" src="/nh_eobs_lth/static/src/js/nh_eobs_lth.js"></script>
+            </xpath>
+        </template>
+        <!--Main Partner-->
+        <record model="res.company" id="base.main_company">
+            <field name="name">Leeds Teaching Hospitals</field>
+        </record>
+        <record model="res.partner" id="base.main_partner">
+            <field name="name">Leeds Teaching Hospitals</field>
+            <field name="website">http://www.leedsth.nhs.uk/</field>
+            <field name="image">
+                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
+            </field>
+        </record>
+
+        <!-- Location - Point of Service - Hospital -->
+        <record id="nh_eobs_lth_location_lth" model="nh.clinical.location">
+            <field name="name">LTH POS Location</field>
+            <field name="code">LTH</field>
+            <field name="type">pos</field>
+            <field name="usage">hospital</field>
+        </record>
+
+        <!-- Location Lots -->
+        <record id="nh_eobs_lth_pos_hospital" model="nh.clinical.pos">
+            <field name="name">Leeds Teaching Hospitals</field>
+            <field name="location_id" ref="nh_eobs_lth_location_lth"/>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+        <record id="nh_eobs_lth_location_lot_admission" model="nh.clinical.location">
+            <field name="name">Admission Location</field>
+            <field name="code">ADML-LTH</field>
+            <field name="type">structural</field>
+            <field name="usage">room</field>
+            <field name="parent_id" ref="nh_eobs_lth_location_lth"/>
+        </record>
+        <record id="nh_eobs_lth_location_lot_discharge" model="nh.clinical.location">
+            <field name="name">Discharge Location</field>
+            <field name="code">DISL-LTH</field>
+            <field name="type">structural</field>
+            <field name="usage">room</field>
+            <field name="parent_id" ref="nh_eobs_lth_location_lth"/>
+        </record>
+
+        <!-- Point of Service - Hospital -->
+        <record id="nh_eobs_lth_pos_hospital" model="nh.clinical.pos">
+            <field name="name">Leeds Teaching Hospitals</field>
+            <field name="location_id" ref="nh_eobs_lth_location_lth"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="lot_admission_id" ref="nh_eobs_lth_location_lot_admission"/>
+            <field name="lot_discharge_id" ref="nh_eobs_lth_location_lot_discharge"/>
+        </record>
+
+        <!-- Location - Wards -->
+        <record id="nh_eobs_lth_location_j83" model="nh.clinical.location">
+            <field name="name">Ward J83</field>
+            <field name="code">J83</field>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">ward</field>
+            <field name="parent_id" ref="nh_eobs_lth_location_lth"/>
+        </record>
+
+        <!-- Point of Care - Beds -->
+
+        <!-- BEDS E8 Ward -->
+        <record id="nh_eobs_lth_location_j83_bed_1" model="nh.clinical.location">
+            <field name="name">Bed 01</field>
+            <field name="code">J83B1</field>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+            <field name="parent_id" ref="nh_eobs_lth_location_j83"/>
+        </record>
+        <record id="nh_eobs_lth_location_j83_bed_2" model="nh.clinical.location">
+            <field name="name">Bed 02</field>
+            <field name="code">J83B2</field>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+            <field name="parent_id" ref="nh_eobs_lth_location_j83"/>
+        </record>
+        <record id="nh_eobs_lth_location_j83_bed_3" model="nh.clinical.location">
+            <field name="name">Bed 03</field>
+            <field name="code">J83B3</field>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+            <field name="parent_id" ref="nh_eobs_lth_location_j83"/>
+        </record>
+        <record id="nh_eobs_lth_location_j83_bed_4" model="nh.clinical.location">
+            <field name="name">Bed 04</field>
+            <field name="code">J83B4</field>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+            <field name="parent_id" ref="nh_eobs_lth_location_j83"/>
+        </record>
+        <record id="nh_eobs_lth_location_j83_bed_5" model="nh.clinical.location">
+            <field name="name">Bed 05</field>
+            <field name="code">J83B5</field>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+            <field name="parent_id" ref="nh_eobs_lth_location_j83"/>
+        </record>
+        <record id="nh_eobs_lth_location_j83_bed_6" model="nh.clinical.location">
+            <field name="name">Bed 06</field>
+            <field name="code">J83B6</field>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+            <field name="parent_id" ref="nh_eobs_lth_location_j83"/>
+        </record>
+        <record id="nh_eobs_lth_location_j83_bed_7" model="nh.clinical.location">
+            <field name="name">Bed 07</field>
+            <field name="code">J83B7</field>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+            <field name="parent_id" ref="nh_eobs_lth_location_j83"/>
+        </record>
+        <record id="nh_eobs_lth_location_j83_bed_8" model="nh.clinical.location">
+            <field name="name">Bed 08</field>
+            <field name="code">J83B8</field>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+            <field name="parent_id" ref="nh_eobs_lth_location_j83"/>
+        </record>
+        <record id="nh_eobs_lth_location_j83_bed_9" model="nh.clinical.location">
+            <field name="name">Bed 09</field>
+            <field name="code">J83B9</field>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+            <field name="parent_id" ref="nh_eobs_lth_location_j83"/>
+        </record>
+        <record id="nh_eobs_lth_location_j83_bed_10" model="nh.clinical.location">
+            <field name="name">Bed 10</field>
+            <field name="code">J83B10</field>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+            <field name="parent_id" ref="nh_eobs_lth_location_j83"/>
+        </record>
+        <record id="nh_eobs_lth_location_j83_bed_11" model="nh.clinical.location">
+            <field name="name">Bed 11</field>
+            <field name="code">J83B11</field>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+            <field name="parent_id" ref="nh_eobs_lth_location_j83"/>
+        </record>
+        <record id="nh_eobs_lth_location_j83_bed_12" model="nh.clinical.location">
+            <field name="name">Bed 12</field>
+            <field name="code">J83B12</field>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+            <field name="parent_id" ref="nh_eobs_lth_location_j83"/>
+        </record>
+        <record id="nh_eobs_lth_location_j83_bed_13" model="nh.clinical.location">
+            <field name="name">Bed 13</field>
+            <field name="code">J83B13</field>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+            <field name="parent_id" ref="nh_eobs_lth_location_j83"/>
+        </record>
+        <record id="nh_eobs_lth_location_j83_bed_14" model="nh.clinical.location">
+            <field name="name">Bed 14</field>
+            <field name="code">J83B14</field>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+            <field name="parent_id" ref="nh_eobs_lth_location_j83"/>
+        </record>
+        <record id="nh_eobs_lth_location_j83_bed_15" model="nh.clinical.location">
+            <field name="name">Bed 15</field>
+            <field name="code">J83B15</field>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+            <field name="parent_id" ref="nh_eobs_lth_location_j83"/>
+        </record>
+        <record id="nh_eobs_lth_location_j83_bed_16" model="nh.clinical.location">
+            <field name="name">Bed 16</field>
+            <field name="code">J83B16</field>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+            <field name="parent_id" ref="nh_eobs_lth_location_j83"/>
+        </record>
+        <record id="nh_eobs_lth_location_j83_bed_17" model="nh.clinical.location">
+            <field name="name">Bed 17</field>
+            <field name="code">J83B17</field>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+            <field name="parent_id" ref="nh_eobs_lth_location_j83"/>
+        </record>
+        <record id="nh_eobs_lth_location_j83_bed_18" model="nh.clinical.location">
+            <field name="name">Bed 18</field>
+            <field name="code">J83B18</field>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+            <field name="parent_id" ref="nh_eobs_lth_location_j83"/>
+        </record>
+        <record id="nh_eobs_lth_location_j83_bed_19" model="nh.clinical.location">
+            <field name="name">Bed 19</field>
+            <field name="code">J83B19</field>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+            <field name="parent_id" ref="nh_eobs_lth_location_j83"/>
+        </record>
+        <record id="nh_eobs_lth_location_j83_bed_20" model="nh.clinical.location">
+            <field name="name">Bed 20</field>
+            <field name="code">J83B20</field>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+            <field name="parent_id" ref="nh_eobs_lth_location_j83"/>
+        </record>
+        <record id="nh_eobs_lth_location_j83_bed_21" model="nh.clinical.location">
+            <field name="name">Bed 21</field>
+            <field name="code">J83B21</field>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+            <field name="parent_id" ref="nh_eobs_lth_location_j83"/>
+        </record>
+        <record id="nh_eobs_lth_location_j83_bed_22" model="nh.clinical.location">
+            <field name="name">Bed 22</field>
+            <field name="code">J83B22</field>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+            <field name="parent_id" ref="nh_eobs_lth_location_j83"/>
+        </record>
+        <record id="nh_eobs_lth_location_j83_bed_23" model="nh.clinical.location">
+            <field name="name">Bed 23</field>
+            <field name="code">J83B23</field>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+            <field name="parent_id" ref="nh_eobs_lth_location_j83"/>
+        </record>
+        <record id="nh_eobs_lth_location_j83_bed_24" model="nh.clinical.location">
+            <field name="name">Bed 24</field>
+            <field name="code">J83B24</field>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+            <field name="parent_id" ref="nh_eobs_lth_location_j83"/>
+        </record>
+        <record id="nh_eobs_lth_location_j83_bed_25" model="nh.clinical.location">
+            <field name="name">Bed 25</field>
+            <field name="code">J83B25</field>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+            <field name="parent_id" ref="nh_eobs_lth_location_j83"/>
+        </record>
+        <record id="nh_eobs_lth_location_j83_bed_26" model="nh.clinical.location">
+            <field name="name">Bed 26</field>
+            <field name="code">J83B26</field>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+            <field name="parent_id" ref="nh_eobs_lth_location_j83"/>
+        </record>
+        <record id="nh_eobs_lth_location_j83_bed_27" model="nh.clinical.location">
+            <field name="name">Bed 27</field>
+            <field name="code">J83B27</field>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+            <field name="parent_id" ref="nh_eobs_lth_location_j83"/>
+        </record>
+        <record id="nh_eobs_lth_location_j83_bed_28" model="nh.clinical.location">
+            <field name="name">Bed 28</field>
+            <field name="code">J83B28</field>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+            <field name="parent_id" ref="nh_eobs_lth_location_j83"/>
+        </record>
+        <record id="nh_eobs_lth_location_j83_bed_29" model="nh.clinical.location">
+            <field name="name">Bed 29</field>
+            <field name="code">J83B29</field>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+            <field name="parent_id" ref="nh_eobs_lth_location_j83"/>
+        </record>
+        <record id="nh_eobs_lth_location_j83_bed_30" model="nh.clinical.location">
+            <field name="name">Bed 30</field>
+            <field name="code">J83B30</field>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+            <field name="parent_id" ref="nh_eobs_lth_location_j83"/>
+        </record>
+        <record id="nh_eobs_lth_location_j83_bed_31" model="nh.clinical.location">
+            <field name="name">Bed 31</field>
+            <field name="code">J83B31</field>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+            <field name="parent_id" ref="nh_eobs_lth_location_j83"/>
+        </record>
+        <record id="nh_eobs_lth_location_j83_bed_32" model="nh.clinical.location">
+            <field name="name">Bed 32</field>
+            <field name="code">J83B32</field>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context')]]]"/>
+            <field name="usage">bed</field>
+            <field name="parent_id" ref="nh_eobs_lth_location_j83"/>
+        </record>
+
+        <!-- O2 Saturation Levels -->
+        <record id="nhc_sat_level_1" model="nh.clinical.o2level">
+            <field name="min">88</field>
+            <field name="max">92</field>
+        </record>
+        <record id="nhc_sat_level_2" model="nh.clinical.o2level">
+            <field name="min">92</field>
+            <field name="max">96</field>
+        </record>
+        <record id="nhc_sat_level_3" model="nh.clinical.o2level">
+            <field name="min">90</field>
+            <field name="max">94</field>
+        </record>
+        <record id="nhc_sat_level_4" model="nh.clinical.o2level">
+            <field name="min">86</field>
+            <field name="max">90</field>
+        </record>
+
+    </data>
+</openerp>

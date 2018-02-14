@@ -1,0 +1,492 @@
+<openerp>
+    <data>
+
+        <template id="assets_backend" name="nhclinical assets" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <script type="text/javascript" src="/nh_eobs_lister/static/src/js/nh_eobs_lister.js"></script>
+                <link rel="stylesheet" href="/nh_eobs_lister/static/src/css/nh_eobs_lister.css"/>
+            </xpath>
+        </template>
+
+        <record model="ir.actions.act_window" id="action_ccot_patients_by_ward">
+            <field name="name">Acuity Board</field>
+            <field name="res_model">nh.clinical.wardboard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,kanban</field>
+            <field name="domain">[('spell_state','=','started'),('spell_activity_id.user_ids','in',uid),
+                ('location_id.usage','=','bed')]</field>
+            <field name="context">{'search_default_group_by_ward':1, 'search_default_high_risk':1}</field>
+            <field name="search_view_id" ref="nh_eobs.view_wardboard_search"/>
+        </record>
+        <record model="ir.actions.act_window.view" id="action_ccot_patients_by_ward_tree">
+            <field eval="0" name="sequence"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="nh_eobs.view_wardboard_tree"/>
+            <field name="act_window_id" ref="action_ccot_patients_by_ward"/>
+        </record>
+        <record model="ir.actions.act_window.view" id="action_ccot_patients_by_ward_form">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="nh_eobs.view_wardboard_form"/>
+            <field name="act_window_id" ref="action_ccot_patients_by_ward"/>
+        </record>
+        <record model="ir.actions.act_window.view" id="action_ccot_patients_by_ward_kanban">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">kanban</field>
+            <field name="view_id" ref="nh_eobs.view_wardboard_kanban"/>
+            <field name="act_window_id" ref="action_ccot_patients_by_ward"/>
+        </record>
+
+        <record model="ir.ui.view" id="view_lister_wardboard_obs_list_form">
+            <field name="name">lister.wardboard.obs.list</field>
+            <field name="model">nh.clinical.wardboard</field>
+            <field name="arch" type="xml">
+                <form string="Observations" version="7.0" create="0">
+                    <sheet>
+                        <notebook>
+                            <page string="National Early Warning Score">
+                                <field name="ews_list_ids" readonly="1">
+                                    <tree class="nhc_obs_list">
+                                        <field name="date_terminated" string="Observation time" widget="nhc_datetime"/>
+                                        <field name="score_display" string="NEWS score"/>
+                                        <field name="pulse_rate"/>
+                                        <field name="bp_display"/>
+                                        <field name="respiration_rate"/>
+                                        <field name="indirect_oxymetry_spo2"/>
+                                        <field name="avpu_text"/>
+                                        <field name="body_temperature"/>
+                                        <field name="o2_display"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Postural Blood Pressure">
+                                <field name="pbp_ids" class="nhc_pbp" readonly="1">
+                                    <tree class="nhc_obs_list">
+                                        <field name="date_terminated" string="Date" widget="nhc_datetime"/>
+                                        <field name="systolic_sitting" string="Systolic"/>
+                                        <field name="diastolic_sitting" string="Diastolic"/>
+                                        <field name="systolic_standing" string="Systolic"/>
+                                        <field name="diastolic_standing" string="Diastolic"/>
+                                        <field name="terminate_uid"/>
+                                        <field name="result"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Glasgow Coma Scale">
+                                <field name="gcs_ids" readonly="1">
+                                    <tree>
+                                        <field name="score"/>
+                                        <field name="eyes"/>
+                                        <field name="verbal"/>
+                                        <field name="motor"/>
+                                        <field name="pupil_right_size"/>
+                                        <field name="pupil_right_reaction"/>
+                                        <field name="pupil_left_size"/>
+                                        <field name="pupil_left_reaction"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Urinary Analysis">
+                                <field name="urinary_analysis_ids" readonly="1">
+                                    <tree class="nh_oe_number_fix">
+                                        <field name="ph"/>
+                                        <field name="blood"/>
+                                        <field name="protein"/>
+                                        <field name="glucose"/>
+                                        <field name="ketones"/>
+                                        <field name="nitrates"/>
+                                        <field name="leucocytes"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Neurovascular">
+                                <field name="neurovascular_ids" readonly="1">
+                                    <tree>
+                                        <field name="limb"/>
+                                        <field name="colour"/>
+                                        <field name="warmth"/>
+                                        <field name="movement"/>
+                                        <field name="sensation"/>
+                                        <field name="pulse"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_lister_wardboard_tree">
+            <field name="name">lister.wardboard</field>
+            <field name="model">nh.clinical.wardboard</field>
+            <field name="inherit_id" ref="nh_eobs.view_wardboard_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="/tree/field[@name='sex']" position="before">
+                    <field name="pbp_flag" widget="lister_pbp" string=""/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_lister_wardboard_form">
+            <field name="name">lister.wardboard.form</field>
+            <field name="model">nh.clinical.wardboard</field>
+            <field name="inherit_id" ref="nh_eobs.view_wardboard_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@string='Weight']" position="before">
+                    <group string="Pain Score">
+                        <field name="pain_ids" readonly="1" nolabel="1">
+                            <tree class="nh_oe_number_fix">
+                                <field name="date_terminated" string="Date" widget="nhc_datetime"/>
+                                <field name="terminate_uid"/>
+                                <field name="rest_score" string="Score at Rest"/>
+                                <field name="movement_score" string="Score on Movement"/>
+                            </tree>
+                            <form>
+                                <field name="rest_score" string="Score at Rest"/>
+                                <field name="movement_score" string="Score on Movement"/>
+                                <field name="date_terminated" string="Date" widget="nhc_datetime"/>
+                                <field name="terminate_uid"/>
+                            </form>
+                        </field>
+                    </group>
+                    <group string="Urine Output">
+                        <field name="urine_output_ids" readonly="1" nolabel="1">
+                            <tree class="nh_oe_number_fix">
+                                <field name="date_terminated" string="Date" widget="nhc_datetime"/>
+                                <field name="terminate_uid"/>
+                                <field name="urine_output" string="Value"/>
+                            </tree>
+                            <form>
+                                <field name="urine_output" string="Value"/>
+                                <field name="date_terminated" string="Date" widget="nhc_datetime"/>
+                                <field name="terminate_uid"/>
+                            </form>
+                        </field>
+                    </group>
+                    <group string="Bowel Open">
+                        <field name="bss_ids" readonly="1" nolabel="1">
+                            <tree>
+                                <field name="date_terminated" string="Date" widget="nhc_datetime"/>
+                                <field name="terminate_uid"/>
+                                <field name="bowel_open" string="Value"/>
+                            </tree>
+                            <form>
+                                <field name="bowel_open" string="Value"/>
+                                <field name="date_terminated" string="Date" widget="nhc_datetime"/>
+                                <field name="terminate_uid"/>
+                            </form>
+                        </field>
+                    </group>
+                </xpath>
+                <xpath expr="//field[@name='palliative_care']" position="replace">
+                    <field name="palliative_care" on_change="onchange_palliative_care(palliative_care,post_surgery,critical_care)"/>
+                </xpath>
+                <xpath expr="//field[@name='palliative_care_ids']" position="after">
+                    <field name="post_surgery" on_change="onchange_post_surgery(palliative_care,post_surgery,critical_care)"/>
+                    <field name="post_surgery_ids" colspan="2" readonly="True" nolabel="1">
+                        <tree>
+                            <field name="date_terminated" string="Date" widget="nhc_datetime"/>
+                            <field name="value" string="Value"/>
+                            <field name="terminate_uid" string="Changed By"/>
+                        </tree>
+                    </field>
+                    <field name="critical_care" on_change="onchange_critical_care(palliative_care,post_surgery,critical_care)"/>
+                    <field name="critical_care_ids" colspan="2" readonly="True" nolabel="1">
+                        <tree>
+                            <field name="date_terminated" string="Date" widget="nhc_datetime"/>
+                            <field name="value" string="Value"/>
+                            <field name="terminate_uid" string="Changed By"/>
+                        </tree>
+                    </field>
+                </xpath>
+                <xpath expr="//group[@string='O2 Saturation Target']" position="after">
+                    <group string="Urine Output Target">
+                        <field name="uotarget_vol"/>
+                        <field name="uotarget_unit"/>
+                        <field name="uotarget_ids" colspan="2" readonly="True" nolabel="1">
+                            <tree class="nh_oe_number_fix">
+                                <field name="date_terminated" string="Date" widget="nhc_datetime"/>
+                                <field name="volume"/>
+                                <field name="unit"/>
+                                <field name="terminate_uid" string="Changed By"/>
+                            </tree>
+                        </field>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_enht_wardboard_discharged_form">
+            <field name="name">enht.discharged.wardboard.form</field>
+            <field name="model">nh.clinical.wardboard</field>
+            <field name="inherit_id" ref="nh_eobs.view_wardboard_form_discharged"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@string='Weight']" position="before">
+                    <group string="Pain Score">
+                        <field name="pain_ids" readonly="1" nolabel="1">
+                            <tree class="nh_oe_number_fix">
+                                <field name="date_terminated" string="Date" widget="nhc_datetime"/>
+                                <field name="terminate_uid"/>
+                                <field name="rest_score" string="Score at Rest"/>
+                                <field name="movement_score" string="Score on Movement"/>
+                            </tree>
+                            <form>
+                                <field name="rest_score" string="Score at Rest"/>
+                                <field name="movement_score" string="Score on Movement"/>
+                                <field name="date_terminated" string="Date" widget="nhc_datetime"/>
+                                <field name="terminate_uid"/>
+                            </form>
+                        </field>
+                    </group>
+                    <group string="Urine Output">
+                        <field name="urine_output_ids" readonly="1" nolabel="1">
+                            <tree class="nh_oe_number_fix">
+                                <field name="date_terminated" string="Date" widget="nhc_datetime"/>
+                                <field name="terminate_uid"/>
+                                <field name="urine_output" string="Value"/>
+                            </tree>
+                            <form>
+                                <field name="urine_output" string="Value"/>
+                                <field name="date_terminated" string="Date" widget="nhc_datetime"/>
+                                <field name="terminate_uid"/>
+                            </form>
+                        </field>
+                    </group>
+                    <group string="Bowel Open">
+                        <field name="bss_ids" readonly="1" nolabel="1">
+                            <tree>
+                                <field name="date_terminated" string="Date" widget="nhc_datetime"/>
+                                <field name="terminate_uid"/>
+                                <field name="bowel_open" string="Value"/>
+                            </tree>
+                            <form>
+                                <field name="bowel_open" string="Value"/>
+                                <field name="date_terminated" string="Date" widget="nhc_datetime"/>
+                                <field name="terminate_uid"/>
+                            </form>
+                        </field>
+                    </group>
+                </xpath>
+                <xpath expr="//field[@name='palliative_care_ids']" position="after">
+                    <field name="post_surgery" readonly="1"/>
+                    <field name="post_surgery_ids" colspan="2" readonly="True" nolabel="1">
+                        <tree>
+                            <field name="date_terminated" string="Date" widget="nhc_datetime"/>
+                            <field name="value" string="Value"/>
+                            <field name="terminate_uid" string="Changed By"/>
+                        </tree>
+                    </field>
+                    <field name="critical_care" readonly="1"/>
+                    <field name="critical_care_ids" colspan="2" readonly="True" nolabel="1">
+                        <tree>
+                            <field name="date_terminated" string="Date" widget="nhc_datetime"/>
+                            <field name="value" string="Value"/>
+                            <field name="terminate_uid" string="Changed By"/>
+                        </tree>
+                    </field>
+                </xpath>
+                <xpath expr="//group[@string='O2 Saturation Target']" position="after">
+                    <group string="Urine Output Target">
+                        <field name="uotarget_vol" readonly="1"/>
+                        <field name="uotarget_unit" readonly="1"/>
+                        <field name="uotarget_ids" colspan="2" readonly="True" nolabel="1">
+                            <tree class="nh_oe_number_fix">
+                                <field name="date_terminated" string="Date" widget="nhc_datetime"/>
+                                <field name="volume"/>
+                                <field name="unit"/>
+                                <field name="terminate_uid" string="Changed By"/>
+                            </tree>
+                        </field>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_lister_user_management_search">
+            <field name="name">enht.user.management.search</field>
+            <field name="model">nh.clinical.user.management</field>
+            <field name="inherit_id" ref="nh_clinical.view_nhc_user_management_search"/>
+            <field name="arch" type="xml">
+                <xpath expr="/search/group/filter[@name='filter_hca']" position="after">
+                    <filter name="filter_sn" string="Student Nurses" domain="[['category_id.name','in',['Student Nurse']]]"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="nh_clinical.action_nhc_user_management_wm" model="ir.actions.act_window">
+            <field name="name">Account Administration</field>
+            <field name="res_model">nh.clinical.user.management</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[['category_ids.name','in',['CSW','Nurse','Nurse in Charge','Student Nurse']]]</field>
+            <field name="search_view_id" ref="nh_clinical.view_nhc_user_management_search"/>
+            <field name="context">{'partner_category_display': 'short'}</field>
+        </record>
+        <record id="nh_clinical.action_nhc_user_management_admin" model="ir.actions.act_window">
+            <field name="name">Account Administration</field>
+            <field name="res_model">nh.clinical.user.management</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[['category_ids.name','in',
+                ['CSW','Nurse','Nurse in Charge','Doctor','Senior Manager','Kiosk','System Administrator','Senior Doctor',
+                'Junior Doctor','Registrar','Consultant','Receptionist','CCOT','Student Nurse']],['login','not in',['adt','admin']]]</field>
+            <field name="search_view_id" ref="nh_clinical.view_nhc_user_management_search"/>
+            <field name="context">{'partner_category_display': 'short'}</field>
+        </record>
+
+        <record model="ir.ui.view" id="view_enht_ward_dashboard_kanban">
+            <field name="name">nh.enht.ward.dashboard.kanban</field>
+            <field name="model">nh.eobs.ward.dashboard</field>
+            <field name="inherit_id" ref="nh_eobs.view_eobs_ward_dashboard_kanban"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@class='oe_kanban_content']" position="replace">
+                    <div class="oe_kanban_content">
+                        <div style="margin-top:5px;">
+                            <h3 style="width: 100%; display: inline-block;"><field name="name"/>
+                                <button style="float: right; margin: 0; font-weight: normal;" name="patient_board" type="object" class="oe_highlight">Patients Board</button>
+                                <button type="action" name="%(action_ccot_patients_by_ward)d" style="float: right; font-weight: normal;" class="oe_highlight" groups="nh_eobs_lister.group_enht_ccot,nh_clinical.group_nhc_dev">High Risk</button>
+                            </h3>
+                        </div>
+                        <div style="margin-top:5px;">Nurses in Charge:</div>
+                        <div style="margin-top:5px;"><field name="assigned_wm_ids" widget="many2many"/></div>
+                        <div class="oe_kanban_footer_left" style="margin-top:5px;">
+                            CSWs: <span><field name="related_hcas"/></span>
+                            Nurses: <span><field name="related_nurses"/></span>
+                            Doctors: <span><field name="related_doctors"/></span>
+                        </div>
+                        <div class="oe_kanban_footer_left" style="margin-top:5px;">
+                            Patients waiting: <span><field name="waiting_patients"/></span>
+                            In bed: <span><field name="patients_in_bed"/></span>
+                            Free beds: <span><field name="free_beds"/></span>
+                        </div>
+                        <div class="oe_kanban_footer_left" style="margin-top:5px;">
+                            High <span><field name="high_risk_patients"/></span>
+                            Medium <span><field name="med_risk_patients"/></span>
+                            Low <span><field name="low_risk_patients"/></span>
+                            No Risk <span><field name="no_risk_patients"/></span>
+                            No Score <span><field name="noscore_patients"/></span>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_enht_ward_dashboard_form">
+            <field name="name">nh.enht.ward.dashboard.form</field>
+            <field name="model">nh.eobs.ward.dashboard</field>
+            <field name="inherit_id" ref="nh_eobs.view_eobs_ward_dashboard_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='assigned_wm_ids']" position="replace">
+                    <field name="assigned_wm_ids" widget="many2many_tags" attrs="{'invisible': [('usage','!=','ward')]}"
+                           string="Nurses in Charge"/>
+                </xpath>
+                <xpath expr="//field[@name='assigned_hca_ids']" position="replace">
+                    <field name="assigned_hca_ids" widget="many2many_tags" string="CSWs"/>
+                </xpath>
+                <xpath expr="//field[@name='hca_follower_ids']" position="replace">
+                    <field name="hca_follower_ids" widget="many2many_tags" string="CSW Stand-Ins"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_enht_ccot_ward_dashboard_kanban">
+            <field name="name">nh.enht.ccot.ward.dashboard.kanban</field>
+            <field name="model">nh.eobs.ward.dashboard</field>
+            <field name="arch" type="xml">
+                <kanban edit="false" quick_create="false" create="false">
+                    <field name="location_id"/>
+                    <field name="name"/>
+                    <field name="related_hcas"/>
+                    <field name="related_nurses"/>
+                    <field name="waiting_patients"/>
+                    <field name="patients_in_bed"/>
+                    <field name="assigned_wm_ids"/>
+                    <field name="assigned_doctor_ids"/>
+                    <field name="kanban_color"/>
+                    <templates>
+                    <t t-name="kanban-box" colors="red:highest_risk=='High'; orange:highest_risk=='Medium'; green:highest_risk=='Low'">
+                        <div t-attf-class="oe_kanban_card oe_kanban_global_click oe_kanban_color_#{kanban_getcolor(record.kanban_color.raw_value)}">
+                            <div class="oe_kanban_content">
+                                <div style="margin-top:5px;">
+                                    <h3 style="width: 100%; display: inline-block;"><field name="name"/>
+                                        <button style="float: right; margin: 0; font-weight: normal;" name="patient_board" type="object" class="oe_highlight">Patients Board</button>
+                                        <button type="action" name="%(action_ccot_patients_by_ward)d" style="float: right; font-weight: normal;" class="oe_highlight" groups="nh_eobs_lister.group_enht_ccot,nh_clinical.group_nhc_dev">High Risk</button>
+                                    </h3>
+                                </div>
+                                <div class="oe_kanban_footer_left" style="margin-top:5px;"><b>High Risk Patients: </b><span><field name="high_risk_patients"/></span></div>
+                                <div class="oe_kanban_footer_left" style="margin-top:5px;">Medium Risk Patients: <span><field name="med_risk_patients"/></span></div>
+                                <div class="oe_kanban_footer_left" style="margin-top:5px;">Low Risk Patients: <span><field name="low_risk_patients"/></span></div>
+                                <div class="oe_kanban_footer_left" style="margin-top:5px;">No Risk Patients: <span><field name="no_risk_patients"/></span></div>
+                                <div class="oe_kanban_footer_left" style="margin-top:5px;">Patients without Score: <span><field name="noscore_patients"/></span></div>
+                            </div>
+                            <div class="oe_clear"></div>
+                        </div>
+                    </t>
+                    </templates>
+                </kanban>
+            </field>
+         </record>
+
+        <record id="action_show_ccot_ward_dashboard" model="ir.actions.act_window">
+            <field name="name">Ward Dashboard</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">nh.eobs.ward.dashboard</field>
+            <field name="domain">[('user_ids','in',uid)]</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,form</field>
+            <field name="view_id" ref="view_enht_ccot_ward_dashboard_kanban"/>
+        </record>
+        <record model="ir.actions.act_window.view" id="act_ccot_ward_dashboard_kanban">
+            <field eval="0" name="sequence"/>
+            <field name="view_mode">kanban</field>
+            <field name="view_id" ref="view_enht_ccot_ward_dashboard_kanban"/>
+            <field name="act_window_id" ref="action_show_ccot_ward_dashboard"/>
+        </record>
+        <record model="ir.actions.act_window.view" id="act_ccot_ward_dashboard_form">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="nh_eobs.view_eobs_ward_dashboard_form"/>
+            <field name="act_window_id" ref="action_show_ccot_ward_dashboard"/>
+        </record>
+
+        <record model="ir.ui.view" id="view_enht_allocating_form">
+            <field name="name">enht.nh.clinical.allocating.form</field>
+            <field name="model">nh.clinical.allocating</field>
+            <field name="inherit_id" ref="nh_clinical.view_nhc_allocating"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='hca_ids']" position="replace">
+                    <field name="hca_ids" widget="many2many_tags" options="{'no_create': True}"
+                           string="Responsible CSWs"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_enht_staff_allocation_wizard">
+            <field name="name">enht.nh.clinical.staff.allocation.form</field>
+            <field name="model">nh.clinical.staff.allocation</field>
+            <field name="inherit_id" ref="nh_clinical.view_nhc_staff_allocation_wizard"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='assigned_hca_ids']" position="replace">
+                    <field name="assigned_hca_ids" widget="many2many_tags"
+                            string="Assigned CSWs"/>
+                </xpath>
+                <xpath expr="//field[@name='hca_ids']" position="replace">
+                    <field name="hca_ids" widget="many2many_tags"
+                           string="Responsible CSWs"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_enht_staff_reallocation_wizard">
+            <field name="name">enht.nh.clinical.staff.reallocation.form</field>
+            <field name="model">nh.clinical.staff.reallocation</field>
+            <field name="inherit_id" ref="nh_clinical.view_nhc_staff_reallocation_wizard"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='hca_ids']" position="replace">
+                    <field name="hca_ids" widget="many2many_tags"
+                           string="Responsible CSWs"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</openerp>

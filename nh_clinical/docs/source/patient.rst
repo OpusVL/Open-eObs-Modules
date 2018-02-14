@@ -1,10 +1,8 @@
-Patient
-=======
+``Patient``
+===========
 .. automodule:: patient
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Classes
-   :glob:
-
-   patient/*
+``Patient``
+-----------
+.. autoclass:: nh_clinical_patient
+    :members:

@@ -1,0 +1,52 @@
+<openerp>
+    <data>
+        <menuitem name="Open eObs" sequence="10" id="nh_eobs.menu_eobs_top_root"
+                  groups="group_enht_ccot,nh_clinical.group_nhc_admin,nh_clinical.group_nhc_senior_manager,nh_clinical.group_nhc_ward_manager,nh_clinical.group_nhc_hca,nh_clinical.group_nhc_nurse,nh_clinical.group_nhc_doctor,nh_clinical.group_nhc_dev,base.user_root"/>
+
+        <menuitem name="Patient Management"
+                  id="nh_eobs.menu_eobs_category_patient_management"
+                  sequence="1"
+                  parent="nh_eobs.menu_eobs_top_root"
+                  groups="group_enht_ccot,nh_clinical.group_nhc_kiosk,nh_clinical.group_nhc_senior_manager,nh_clinical.group_nhc_ward_manager,nh_clinical.group_nhc_hca,nh_clinical.group_nhc_nurse,nh_clinical.group_nhc_doctor,nh_clinical.group_nhc_dev,base.user_root"/>
+
+        <menuitem name="Ward Management"
+                  sequence="3"
+                  id="nh_eobs.menu_eobs_category_ward_management"
+                  parent="nh_eobs.menu_eobs_top_root"
+                  groups="group_enht_ccot,nh_clinical.group_nhc_senior_manager,nh_clinical.group_nhc_ward_manager,nh_clinical.group_nhc_dev,nh_clinical.group_nhc_admin,base.user_root"/>
+
+        <menuitem name="Ward Dashboard"
+                  id="nh_eobs.menu_eobs_ward_dashboard_"
+                  sequence="5"
+                  parent="nh_eobs.menu_eobs_category_ward_management"
+                  action="nh_eobs.action_show_ward_dashboard"
+                  groups="nh_clinical.group_nhc_senior_manager,nh_clinical.group_nhc_ward_manager,nh_clinical.group_nhc_dev,nh_clinical.group_nhc_admin,base.user_root"/>
+
+        <menuitem name="Ward Dashboard"
+                  id="menu_enht_ccot_ward_dashboard"
+                  sequence="6"
+                  parent="nh_eobs.menu_eobs_category_ward_management"
+                  action="action_show_ccot_ward_dashboard"
+                  groups="group_enht_ccot,nh_clinical.group_nhc_dev,base.user_root"/>
+
+        <menuitem name="High Risk Patients"
+                  id="menu_enht_category_high_risk"
+                  sequence="6"
+                  parent="nh_eobs.menu_eobs_top_root"
+                  groups="group_enht_ccot,nh_clinical.group_nhc_dev,base.user_root"/>
+
+        <menuitem name="By Ward"
+                  id="menu_enht_ccot_patients_by_ward"
+                  sequence="1"
+                  action="action_ccot_patients_by_ward"
+                  parent="menu_enht_category_high_risk"
+                  groups="group_enht_ccot,nh_clinical.group_nhc_dev,base.user_root"/>
+
+        <menuitem name="Time Since Last Observation"
+                  id="menu_enht_ccot_patient_by_elapsed"
+                  sequence="2"
+                  action="action_high_risk_kanban"
+                  parent="menu_enht_category_high_risk"
+                  groups="group_enht_ccot,nh_clinical.group_nhc_dev,base.user_root"/>
+    </data>
+</openerp>

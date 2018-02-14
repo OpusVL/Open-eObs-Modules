@@ -1,0 +1,21 @@
+# -*- encoding: utf-8 -*-
+{
+    'name': 'Open e-Obs BHFT Configuration',
+    'version': '0.1',
+    'category': 'Clinical',
+    'license': 'AGPL-3',
+    'summary': '',
+    'description': """    """,
+    'author': 'Neova Health',
+    'website': 'http://www.neovahealth.co.uk/',
+    'depends': ['nh_eobs_mobile'],
+    'data': ['bhft_pos.xml',
+             'bhft_locations.xml',
+             'bhft_params.xml',
+             'bhft_users.xml',
+             'trust.xml'],
+    'qweb': ['static/src/xml/nh_eobs_bhft.xml'],
+    'application': True,
+    'installable': True,
+    'active': False,
+}

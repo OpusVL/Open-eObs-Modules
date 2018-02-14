@@ -1,0 +1,478 @@
+<openerp>
+    <data>
+        <record id="nh_renal_context" model="nh.clinical.context">
+            <field name="name">renal</field>
+            <field name="models">['nh.clinical.location']</field>
+        </record>
+        <!--Main Partner-->
+        <record model="res.company" id="base.main_company">
+            <field name="name">Lister Hospital</field>
+        </record>
+        <record model="res.partner" id="base.main_partner">
+            <field name="name">Lister Hospital</field>
+            <field name="email">generalenquiries.enh-tr@nhs.net</field>
+            <field name="website">http://www.enherts-tr.nhs.uk/</field>
+            <field name="image">
+                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
+            </field>
+        </record>
+
+        <!-- Location - Point of Service - Hospital -->
+        <record id="nhc_lister_location_lh" model="nh.clinical.location">
+            <field name="name">Lister POS Location</field>
+            <field name="code">LH</field>
+            <field name="type">pos</field>
+            <field name="usage">hospital</field>
+        </record>
+
+        <!-- Location Lots -->
+        <record id="nhc_lister_pos_hospital" model="nh.clinical.pos">
+            <field name="name">Lister Hospital</field>
+            <field name="location_id" ref="nhc_lister_location_lh"/>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+        <record id="nhc_lister_location_lot_admission" model="nh.clinical.location">
+            <field name="name">Admission Location</field>
+            <field name="code">ADML-LH</field>
+            <field name="type">structural</field>
+            <field name="usage">room</field>
+            <field name="parent_id" ref="nhc_lister_location_lh"/>
+        </record>
+        <record id="nhc_lister_location_lot_discharge" model="nh.clinical.location">
+            <field name="name">Discharge Location</field>
+            <field name="code">DISL-LH</field>
+            <field name="type">structural</field>
+            <field name="usage">room</field>
+            <field name="parent_id" ref="nhc_lister_location_lh"/>
+        </record>
+
+        <!-- Point of Service - Hospital -->
+        <record id="nhc_lister_pos_hospital" model="nh.clinical.pos">
+            <field name="name">Lister Hospital</field>
+            <field name="location_id" ref="nhc_lister_location_lh"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="lot_admission_id" ref="nhc_lister_location_lot_admission"/>
+            <field name="lot_discharge_id" ref="nhc_lister_location_lot_discharge"/>
+        </record>
+
+        <!-- Point of Service Delivery - Wards -->
+        <record id="nh_eobs_lister_location_6bn" model="nh.clinical.location">
+            <field name="name">6B North</field>
+            <field name="code">06BN</field>
+            <field name="parent_id" ref="nhc_lister_location_lh"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context'),ref('nh_renal_context')]]]"/>
+            <field name="usage">ward</field>
+        </record>
+
+        <record id="nh_eobs_lister_location_6bs" model="nh.clinical.location">
+            <field name="name">6B South</field>
+            <field name="code">06BS</field>
+            <field name="parent_id" ref="nhc_lister_location_lh"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context'),ref('nh_renal_context')]]]"/>
+            <field name="usage">ward</field>
+        </record>
+
+
+        <!-- Point of Service Delivery - Beds -->
+
+        <!-- 6BN Ward -->
+        <record id="nh_eobs_lister_location_6bn_bed_1" model="nh.clinical.location">
+            <field name="name">Bed 01</field>
+            <field name="code">6BN01</field>
+            <field name="parent_id" ref="nh_eobs_lister_location_6bn"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context'),ref('nh_renal_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+        <record id="nh_eobs_lister_location_6bn_bed_2" model="nh.clinical.location">
+            <field name="name">Bed 02</field>
+            <field name="code">6BN02</field>
+            <field name="parent_id" ref="nh_eobs_lister_location_6bn"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context'),ref('nh_renal_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+        <record id="nh_eobs_lister_location_6bn_bed_3" model="nh.clinical.location">
+            <field name="name">Bed 03</field>
+            <field name="code">6BN03</field>
+            <field name="parent_id" ref="nh_eobs_lister_location_6bn"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context'),ref('nh_renal_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+        <record id="nh_eobs_lister_location_6bn_bed_4" model="nh.clinical.location">
+            <field name="name">Bed 04</field>
+            <field name="code">6BN04</field>
+            <field name="parent_id" ref="nh_eobs_lister_location_6bn"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context'),ref('nh_renal_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+        <record id="nh_eobs_lister_location_6bn_bed_5" model="nh.clinical.location">
+            <field name="name">Bed 05</field>
+            <field name="code">6BN05</field>
+            <field name="parent_id" ref="nh_eobs_lister_location_6bn"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context'),ref('nh_renal_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+        <record id="nh_eobs_lister_location_6bn_bed_6" model="nh.clinical.location">
+            <field name="name">Bed 06</field>
+            <field name="code">6BN06</field>
+            <field name="parent_id" ref="nh_eobs_lister_location_6bn"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context'),ref('nh_renal_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+        <record id="nh_eobs_lister_location_6bn_bed_7" model="nh.clinical.location">
+            <field name="name">Bed 07</field>
+            <field name="code">6BN07</field>
+            <field name="parent_id" ref="nh_eobs_lister_location_6bn"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context'),ref('nh_renal_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+        <record id="nh_eobs_lister_location_6bn_bed_8" model="nh.clinical.location">
+            <field name="name">Bed 08</field>
+            <field name="code">6BN08</field>
+            <field name="parent_id" ref="nh_eobs_lister_location_6bn"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context'),ref('nh_renal_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+        <record id="nh_eobs_lister_location_6bn_bed_9" model="nh.clinical.location">
+            <field name="name">Bed 09</field>
+            <field name="code">6BN09</field>
+            <field name="parent_id" ref="nh_eobs_lister_location_6bn"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context'),ref('nh_renal_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+        <record id="nh_eobs_lister_location_6bn_bed_10" model="nh.clinical.location">
+            <field name="name">Bed 10</field>
+            <field name="code">6BN10</field>
+            <field name="parent_id" ref="nh_eobs_lister_location_6bn"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context'),ref('nh_renal_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+        <record id="nh_eobs_lister_location_6bn_bed_11" model="nh.clinical.location">
+            <field name="name">Bed 11</field>
+            <field name="code">6BN11</field>
+            <field name="parent_id" ref="nh_eobs_lister_location_6bn"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context'),ref('nh_renal_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+        <record id="nh_eobs_lister_location_6bn_bed_12" model="nh.clinical.location">
+            <field name="name">Bed 12</field>
+            <field name="code">6BN12</field>
+            <field name="parent_id" ref="nh_eobs_lister_location_6bn"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context'),ref('nh_renal_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+        <record id="nh_eobs_lister_location_6bn_bed_13" model="nh.clinical.location">
+            <field name="name">Bed 13</field>
+            <field name="code">6BN13</field>
+            <field name="parent_id" ref="nh_eobs_lister_location_6bn"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context'),ref('nh_renal_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+        <record id="nh_eobs_lister_location_6bn_bed_14" model="nh.clinical.location">
+            <field name="name">Bed 14</field>
+            <field name="code">6BN14</field>
+            <field name="parent_id" ref="nh_eobs_lister_location_6bn"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context'),ref('nh_renal_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+        <record id="nh_eobs_lister_location_6bn_bed_15" model="nh.clinical.location">
+            <field name="name">Bed 15</field>
+            <field name="code">6BN15</field>
+            <field name="parent_id" ref="nh_eobs_lister_location_6bn"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context'),ref('nh_renal_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+        <record id="nh_eobs_lister_location_6bn_swap" model="nh.clinical.location">
+            <field name="name">Swap Location</field>
+            <field name="code">6BNS</field>
+            <field name="parent_id" ref="nh_eobs_lister_location_6bn"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context'),ref('nh_renal_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+        <!-- 6BS Ward -->
+
+        <record id="nh_eobs_lister_location_6bs_bed_16" model="nh.clinical.location">
+            <field name="name">Bed 16</field>
+            <field name="code">6BS16</field>
+            <field name="parent_id" ref="nh_eobs_lister_location_6bs"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context'),ref('nh_renal_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+        <record id="nh_eobs_lister_location_6bs_bed_17" model="nh.clinical.location">
+            <field name="name">Bed 17</field>
+            <field name="code">6BS17</field>
+            <field name="parent_id" ref="nh_eobs_lister_location_6bs"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context'),ref('nh_renal_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+        <record id="nh_eobs_lister_location_6bs_bed_18" model="nh.clinical.location">
+            <field name="name">Bed 18</field>
+            <field name="code">6BS18</field>
+            <field name="parent_id" ref="nh_eobs_lister_location_6bs"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context'),ref('nh_renal_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+        <record id="nh_eobs_lister_location_6bs_bed_19" model="nh.clinical.location">
+            <field name="name">Bed 19</field>
+            <field name="code">6BS19</field>
+            <field name="parent_id" ref="nh_eobs_lister_location_6bs"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context'),ref('nh_renal_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+        <record id="nh_eobs_lister_location_6bs_bed_20" model="nh.clinical.location">
+            <field name="name">Bed 20</field>
+            <field name="code">6BS20</field>
+            <field name="parent_id" ref="nh_eobs_lister_location_6bs"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context'),ref('nh_renal_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+        <record id="nh_eobs_lister_location_6bs_bed_21" model="nh.clinical.location">
+            <field name="name">Bed 21</field>
+            <field name="code">6BS21</field>
+            <field name="parent_id" ref="nh_eobs_lister_location_6bs"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context'),ref('nh_renal_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+        <record id="nh_eobs_lister_location_6bs_bed_22" model="nh.clinical.location">
+            <field name="name">Bed 22</field>
+            <field name="code">6BS22</field>
+            <field name="parent_id" ref="nh_eobs_lister_location_6bs"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context'),ref('nh_renal_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+        <record id="nh_eobs_lister_location_6bs_bed_23" model="nh.clinical.location">
+            <field name="name">Bed 23</field>
+            <field name="code">6BS23</field>
+            <field name="parent_id" ref="nh_eobs_lister_location_6bs"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context'),ref('nh_renal_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+        <record id="nh_eobs_lister_location_6bs_bed_24" model="nh.clinical.location">
+            <field name="name">Bed 24</field>
+            <field name="code">6BS24</field>
+            <field name="parent_id" ref="nh_eobs_lister_location_6bs"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context'),ref('nh_renal_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+        <record id="nh_eobs_lister_location_6bs_bed_25" model="nh.clinical.location">
+            <field name="name">Bed 25</field>
+            <field name="code">6BS25</field>
+            <field name="parent_id" ref="nh_eobs_lister_location_6bs"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context'),ref('nh_renal_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+        <record id="nh_eobs_lister_location_6bs_bed_26" model="nh.clinical.location">
+            <field name="name">Bed 26</field>
+            <field name="code">6BS26</field>
+            <field name="parent_id" ref="nh_eobs_lister_location_6bs"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context'),ref('nh_renal_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+        <record id="nh_eobs_lister_location_6bs_dc_1" model="nh.clinical.location">
+            <field name="name">Day Case 1</field>
+            <field name="code">6BSDC01</field>
+            <field name="parent_id" ref="nh_eobs_lister_location_6bs"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context'),ref('nh_renal_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+        <record id="nh_eobs_lister_location_6bs_dc_2" model="nh.clinical.location">
+            <field name="name">Day Case 2</field>
+            <field name="code">6BSDC02</field>
+            <field name="parent_id" ref="nh_eobs_lister_location_6bs"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context'),ref('nh_renal_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+        <record id="nh_eobs_lister_location_6bs_dc_3" model="nh.clinical.location">
+            <field name="name">Day Case 3</field>
+            <field name="code">6BSDC03</field>
+            <field name="parent_id" ref="nh_eobs_lister_location_6bs"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context'),ref('nh_renal_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+        <record id="nh_eobs_lister_location_6bs_dc_4" model="nh.clinical.location">
+            <field name="name">Day Case 4</field>
+            <field name="code">6BSDC04</field>
+            <field name="parent_id" ref="nh_eobs_lister_location_6bs"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context'),ref('nh_renal_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+        <record id="nh_eobs_lister_location_6bs_dc_5" model="nh.clinical.location">
+            <field name="name">Day Case 5</field>
+            <field name="code">6BSDC05</field>
+            <field name="parent_id" ref="nh_eobs_lister_location_6bs"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context'),ref('nh_renal_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+        <record id="nh_eobs_lister_location_6bs_dc_6" model="nh.clinical.location">
+            <field name="name">Day Case 6</field>
+            <field name="code">6BSDC06</field>
+            <field name="parent_id" ref="nh_eobs_lister_location_6bs"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context'),ref('nh_renal_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+        <record id="nh_eobs_lister_location_6bs_dc_7" model="nh.clinical.location">
+            <field name="name">Day Case 7</field>
+            <field name="code">6BSDC07</field>
+            <field name="parent_id" ref="nh_eobs_lister_location_6bs"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context'),ref('nh_renal_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+        <record id="nh_eobs_lister_location_6bs_dc_8" model="nh.clinical.location">
+            <field name="name">Day Case 8</field>
+            <field name="code">6BSDC08</field>
+            <field name="parent_id" ref="nh_eobs_lister_location_6bs"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context'),ref('nh_renal_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+        <record id="nh_eobs_lister_location_6bs_dc_9" model="nh.clinical.location">
+            <field name="name">Day Case 9</field>
+            <field name="code">6BSDC09</field>
+            <field name="parent_id" ref="nh_eobs_lister_location_6bs"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context'),ref('nh_renal_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+        <record id="nh_eobs_lister_location_6bs_dc_10" model="nh.clinical.location">
+            <field name="name">Day Case 10</field>
+            <field name="code">6BSDC10</field>
+            <field name="parent_id" ref="nh_eobs_lister_location_6bs"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context'),ref('nh_renal_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+        <record id="nh_eobs_lister_location_6bs_swap" model="nh.clinical.location">
+            <field name="name">Swap Location</field>
+            <field name="code">6BSS</field>
+            <field name="parent_id" ref="nh_eobs_lister_location_6bs"/>
+            <field name="type">poc</field>
+            <field name="context_ids" eval="[[6, False, [ref('nh_eobs.nh_eobs_context'),ref('nh_renal_context')]]]"/>
+            <field name="usage">bed</field>
+        </record>
+
+        <!-- O2 Saturation Levels -->
+        <record id="nhc_sat_level_1" model="nh.clinical.o2level">
+            <field name="min">88</field>
+            <field name="max">92</field>
+        </record>
+        <record id="nhc_sat_level_2" model="nh.clinical.o2level">
+            <field name="min">92</field>
+            <field name="max">96</field>
+        </record>
+        <record id="nhc_sat_level_3" model="nh.clinical.o2level">
+            <field name="min">90</field>
+            <field name="max">94</field>
+        </record>
+        <record id="nhc_sat_level_4" model="nh.clinical.o2level">
+            <field name="min">86</field>
+            <field name="max">90</field>
+        </record>
+
+        <!-- User Groups -->
+        <record id="group_enht_ccot" model="res.groups">
+            <field name="name">ENHT CCOT Group</field>
+            <field name="category_id" ref="nh_clinical.module_category_nhc"/>
+            <field name="implied_ids" eval="[(6, False, [ref('nh_clinical.group_nhc_base')])]"/>
+        </record>
+
+        <!-- User Roles -->
+        <record id="role_enht_student_nurse" model="res.partner.category">
+            <field name="name">Student Nurse</field>
+            <field name="parent_id" eval="ref('nh_clinical.role_nhc_nurse')"/>
+            <field name="group_ids"
+                   eval="[(6, False, [ref('nh_clinical.group_nhc_hca'),ref('nh_clinical.group_nhc_base')])]"/>
+        </record>
+        <record id="nh_clinical.role_nhc_ward_manager" model="res.partner.category">
+            <field name="name">Nurse in Charge</field>
+            <field name="parent_id" eval="ref('nh_clinical.role_nhc_senior_manager')"/>
+            <field name="group_ids" eval="[(6, False, [ref('nh_clinical.group_nhc_ward_manager'),
+            ref('nh_clinical.group_nhc_base'), ref('base.group_partner_manager')])]"/>
+        </record>
+        <record id="nh_clinical.role_nhc_hca" model="res.partner.category">
+            <field name="name">CSW</field>
+            <field name="parent_id" eval="ref('nh_clinical.role_nhc_nurse')"/>
+            <field name="group_ids" eval="[(6, False, [ref('nh_clinical.group_nhc_hca'),
+            ref('nh_clinical.group_nhc_base')])]"/>
+        </record>
+
+        <record id="role_enht_ccot" model="res.partner.category">
+            <field name="name">CCOT</field>
+            <field name="parent_id" eval="ref('nh_clinical.role_nhc_admin')"/>
+            <field name="group_ids"
+                   eval="[(6, False, [ref('group_enht_ccot'),ref('nh_clinical.group_nhc_base')])]"/>
+        </record>
+
+    </data>
+</openerp>

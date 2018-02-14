@@ -1,0 +1,547 @@
+/*
+Form
+
+Styling for forms
+
+#patientName - Floating container for patient name & information button
+#patientName a - Link containing patient name & information button
+#patientName .icon-info - Information button, float right
+#obsForm - Form element with offset for floating patient name & information button
+#obsForm .obsField - Container for form element (text, number inputs)
+#obsForm .obsSelectField - Container for form element (select inputs)
+#obsForm .obsField.valHide, #obsForm .obsSelectField.valHide - Hidden input, used with NHMobileForm JS for form control
+#obsForm .obsField.error, #obsForm .obsSelectField.error - Container for invalid form element
+#obsForm .obsField .input-header - Container for label & input
+#obsForm .obsSelectField .input-header - Container for label
+#obsForm .obsField .input-header label - Label for form element, floats left
+#obsForm .obsField .input-header label - Label for form element
+#obsForm .obsField .input-header input - Input for form element, float right
+#obsForm .obsField .input-body - Container for form element information
+#obsForm .obsSelectField .input-body - Container for form select and information
+#obsForm .obsField .input-body .errors, #obsForm .obsSelectField .input-body .errors - Placeholder for error messages used in validation
+#obsForm .obsField .input-body .help, #obsForm .obsField .input-body .help - Placeholder for help messages
+#obsForm .obsSubmit input[type="submit"] - Submit observation
+
+Markup:
+<h2 id="patientName" class="block">
+  <a>Number Fields</a>
+</h2>
+<form id="obsForm">
+  <div>
+    <div class="obsField block">
+      <div class="input-header">
+        <label for="standard_number">Standard number field</label>
+        <input name="standard_number" type="number" min="1" max="59" step="1" value="18">
+      </div>
+      <div class="input-body">
+        <span class="errors"></span>
+        <span class="help"></span>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="obsField block">
+      <div class="input-header">
+        <label for="helper_number">Number field with helper text</label>
+        <input name="helper_number" type="number" min="51" max="100" step="1">
+      </div>
+      <div class="input-body">
+        <span class="errors"></span>
+        <span class="help">This is text explaining how to fill out field</span>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="obsField block">
+      <div class="input-header">
+        <label for="reference_number">Number field with reference</label>
+        <input name="reference_number" type="number" min="27.1" max="44.9" step="0.1">
+      </div>
+      <div class="input-body">
+        <span class="errors"></span>
+        <span class="help"></span>
+        <button class="button reference">Reference to load in modal</button>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="obsField block error">
+      <div class="input-header">
+        <label for="error_number">Errored number field</label>
+        <input name="error_number" type="number" min="1" max="59" step="1" value="18.7">
+      </div>
+      <div class="input-body">
+        <span class="errors"><label for="error_number" class="error">Value must be a whole number</label></span>
+        <span class="help"></span>
+      </div>
+    </div>
+  </div>
+</form>
+<p></p>
+<h2 id="patientName" class="block">
+  <a>Select Fields</a>
+</h2>
+<form id="obsForm">
+  <div>
+    <div class="obsSelectField block">
+      <div class="input-header">
+        <label for="standard_select">Standard Select</label>
+      </div>
+      <div class="input-body">
+        <select name="standard_select">
+          <option value="">Please Select</option>
+          <option value="1">Option 1</option>
+          <option value="2">Option 2</option>
+        </select>
+        <span class="errors"></span>
+        <span class="help"></span>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="obsSelectField block">
+      <div class="input-header">
+        <label for="helper_select">Select with helper text</label>
+      </div>
+      <div class="input-body">
+        <select name="helper_select">
+          <option value="">Please Select</option>
+          <option value="1">Option 1</option>
+          <option value="2">Option 2</option>
+        </select>
+        <span class="errors"></span>
+        <span class="help">This is text explaining how to fill out field</span>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="obsSelectField block">
+      <div class="input-header">
+        <label for="reference_select">Select with reference</label>
+      </div>
+      <div class="input-body">
+        <select name="reference_select">
+          <option value="">Please Select</option>
+          <option value="1">Option 1</option>
+          <option value="2">Option 2</option>
+        </select>
+        <span class="errors"></span>
+        <span class="help"></span>
+        <button class="button reference">Reference to load in modal</button>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="obsSelectField block error">
+      <div class="input-header">
+        <label for="error_select">Select with error</label>
+      </div>
+      <div class="input-body">
+        <select name="error_select">
+          <option value="">Please Select</option>
+          <option value="1">Option 1</option>
+          <option value="2">Option 2</option>
+        </select>
+        <span class="errors"><label for="error_select" class="error">Missing Value</label></span>
+        <span class="help"></span>
+      </div>
+    </div>
+  </div>
+</form>
+<p></p>
+<h2 id="patientName" class="block">
+  <a>Multiselect Fields</a>
+</h2>
+<form id="obsForm">
+  <div class="block obsSelectField">
+      <div class="input-header">
+          <label for="standard_multiselect">Standard Multiselect</label>
+      </div>
+      <div class="input-body">
+          <ul class="checklist">
+              <li>
+                  <input type="checkbox" name="standard_multiselect" value="1" class="checklist_box" checked="checked">
+                  <label>Option 1</label>
+              </li>
+              <li>
+                  <input type="checkbox" name="standard_multiselect" value="2" class="checklist_box">
+                  <label>Option 2</label>
+              </li>
+          </ul>
+          <span class="errors"></span>
+          <span class="help"></span>
+      </div>
+  </div>
+  <div class="block obsSelectField">
+      <div class="input-header">
+          <label for="helper_multiselect">Multiselect with helper text</label>
+      </div>
+      <div class="input-body">
+          <ul class="checklist">
+              <li>
+                  <input type="checkbox" name="helper_multiselect" value="1" class="checklist_box" checked="checked">
+                  <label>Option 1</label>
+              </li>
+              <li>
+                  <input type="checkbox" name="helper_multiselect" value="2" class="checklist_box">
+                  <label>Option 2</label>
+              </li>
+          </ul>
+          <span class="errors"></span>
+          <span class="help">This is some text explaining how to fill out field</span>
+      </div>
+  </div>
+  <div class="block obsSelectField">
+      <div class="input-header">
+          <label for="reference_multiselect">Multiselect with reference</label>
+      </div>
+      <div class="input-body">
+          <ul class="checklist">
+              <li>
+                  <input type="checkbox" name="reference_multiselect" value="1" class="checklist_box" checked="checked">
+                  <label>Option 1</label>
+              </li>
+              <li>
+                  <input type="checkbox" name="reference_multiselect" value="2" class="checklist_box">
+                  <label>Option 2</label>
+              </li>
+          </ul>
+          <span class="errors"></span>
+          <span class="help"></span>
+          <button class="button reference">Reference to load in modal</button>
+      </div>
+  </div>
+  <div class="block obsSelectField error">
+      <div class="input-header">
+          <label for="error_multiselect">Multiselect with errors</label>
+      </div>
+      <div class="input-body">
+          <ul class="checklist">
+              <li>
+                  <input type="checkbox" name="error_multiselect" value="1" class="checklist_box">
+                  <label>Option 1</label>
+              </li>
+              <li>
+                  <input type="checkbox" name="error_multiselect" value="2" class="checklist_box">
+                  <label>Option 2</label>
+              </li>
+          </ul>
+          <span class="errors"><label for="error_multiselect" class="error">Missing value</label></span>
+          <span class="help"></span>
+      </div>
+  </div>
+</form>
+<p></p>
+<h2 id="patientName" class="block">
+  <a>Text Fields</a>
+</h2>
+<form id="obsForm">
+  <div>
+    <div class="block obsField">
+      <div class="input-header">
+          <label for="standard_text">Standard Text</label>
+      </div>
+      <div class="input-body">
+          <span class="help"></span>
+          <textarea name="standard_text">Text to submit</textarea>
+          <span class="errors"></span>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="block obsField">
+      <div class="input-header">
+          <label for="helper_text">Text with helper text</label>
+      </div>
+      <div class="input-body">
+          <span class="help">This is some text explaining how to fill out field</span>
+          <textarea name="helper_text">Text to submit</textarea>
+          <span class="errors"></span>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="block obsField">
+      <div class="input-header">
+          <label for="reference_text">Text with reference</label>
+      </div>
+      <div class="input-body">
+          <span class="help"></span>
+          <textarea name="reference_text">Text to submit</textarea>
+          <span class="errors"></span>
+          <button class="button reference">Reference to load in modal</button>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="block obsField error">
+      <div class="input-header">
+          <label for="error_text">Text with error</label>
+      </div>
+      <div class="input-body">
+          <span class="help"></span>
+          <textarea name="error_text"></textarea>
+          <span class="errors"><label for="error_text" class="error">Missing Value</label></span>
+      </div>
+    </div>
+  </div>
+</form>
+
+Styleguide 2.3.0
+*/
+
+/*
+
+Notification Form
+
+Form that contains notifications, normally there's are triggered by hospital policy
+
+#obsForm h3 - Title for observation
+#obsForm p - Description for observation
+#obsForm .obsSubmit input[type="submit"] - Confirm notification acted upon
+#obsForm .obsConfirm input[type="reset"] - Cancel notification
+
+Markup:
+<h2 id="patientName" class="block">
+  <a>Test Patient <i class="icon-info"></i></a>
+</h2>
+<form id="obsForm" class="block">
+  <h3>Notification title</h3>
+  <p>A paragraph to explain the notification</p>
+  <div class="block obsSubmit">
+    <input type="submit" value="Confirm notification">
+  </div>
+  <p class="obsConfirm">
+    <input type="reset" value="Cancel notification" class="button" id="cancelSubmit">
+  </p>
+</form>
+
+Styleguide 2.3.1
+
+*/
+
+@import "utils.less";
+#patientName{
+  margin-top: -4px;
+  position: fixed;
+  background-color: white;
+  padding-top: 0.3em;
+  padding-bottom: 0.3em;
+  z-index: 9997;
+  box-shadow: 0px 1px 3px rgba(0,0,0,0.4);
+  a{
+    text-decoration: none;
+    color: #282828;
+    width: 100%;
+    display: block;
+  }
+  .icon-info{
+    float: right;
+  }
+}
+
+#obsForm{
+  padding-top: 3em;
+  .errors{
+      label{
+        font-weight: normal;
+      }
+    }
+
+    .help{
+      font-style: italic;
+    }
+  .obsField{
+    // Flex conversion
+    display: flex;
+    flex-direction: column;
+
+    border-bottom: 1px solid #888888;
+    padding-top: 1em;
+    padding-bottom: 0.7em;
+    //height: 3.4em;
+    .input-header{
+      // Flex conversion
+      display: flex;
+
+      label{
+        // Flex conversion
+        flex: 1 1;
+        padding-right: 5%;
+        font-weight: bold;
+
+        //width: 45%;
+        //float: left;
+        //font-size: 1.2em;
+        //padding-top: 0.6em;
+        //padding-bottom: 0.6em;
+        //word-break: break-all;
+      }
+      input{
+        // Flex conversion
+        flex: 1;
+        line-height: 1.75rem;
+        height: 1.75rem;
+        border-radius: 5px;
+        border: 1px solid rgba(0,0,0,0.5);
+
+       //width: 45%;
+       //float: right;
+      }
+    }
+    &.error{
+      .subtle-bgcolour(@error-color) !important;
+      //height: 4.4em;
+    }
+    &.warning{
+      .not-as-subtle-bgcolour(@warning-colour);
+      //height: 4.4em;
+    }
+    &.warning.error{
+      //height: 5em !important;
+    }
+    &.valHide{
+      display: none;
+    }
+
+    .input-body{
+      // Flex conversion
+      display: flex;
+      flex-direction: column;
+
+      //.errors{
+      //  display: block;
+      //}
+      //.help{
+      //  display: inline-block;
+      //  width: 43%;
+      //}
+      textarea{
+        border-radius: 5px;
+      }
+    }
+
+    .reference{
+      margin-top: 1em;
+    }
+  }
+
+  .obsSelectField{
+    border-bottom: 1px solid #888888;
+    padding-top: 1em;
+    padding-bottom: 0.7em;
+    .input-header{
+      margin-bottom: 1rem;
+      label{
+        //font-size: 1.2em;
+        //padding-top: 0.6em;
+        font-weight: bold;
+      }
+    }
+    &.error{
+      .subtle-bgcolour(@error-color);
+    }
+    &.warning{
+      .subtle-bgcolour(@warning-colour);
+    }
+    &.valHide{
+      display: none;
+    }
+  }
+  .input-body{
+      //padding-top: 1em;
+      select{
+        width: 100%;
+        //height: 2.4em;
+        padding: 0.3em 2% 0.3em 2%;
+        //font-size: 1em;
+        //line-height: 1.4;
+        border-radius: 5px;
+        border-color: @link-colour;
+        color: @action-colour;
+        font-weight: bold;
+        background-color: #ffffff;
+        margin-bottom: 1em;
+      }
+      .button{
+        background-color: @action-colour;
+        color: #ffffff;
+        text-shadow: 0px 1px 0px #666666;
+        width: 100%;
+        display: inline-block;
+        text-align: center;
+      }
+      .checklist{
+          padding-left: 0;
+          li {
+            > label{
+              flex: 4 0 0;
+              margin: 0.8em 0;
+            }
+          }
+          input{
+            height: 2.4em;
+            margin: 0.5em 0;
+          }
+      }
+    }
+  .obsSubmit, .obsConfirm{
+    padding-top: 1em;
+    /* padding-bottom: 1em; */
+    input{
+      //background-color: @action-colour;
+      //color: #ffffff;
+      //font-weight: bold;
+      //text-shadow: 0px 1px 0px #666666;
+      //border: 1px solid #ff9494;
+      //font-size: 1.2em;
+      //height: 2.4em;
+      width: 100%;
+    }
+  }
+}
+
+//.obsConfirm{
+//  margin: 0;
+//  margin-top: 1.75rem;
+//  #cancelSubmit{
+//     padding: 0px;
+//  }
+//}
+
+//.obsSubmit .button{
+//    background-color: @action-colour;
+//    width: 100%;
+//    color: #ffffff;
+//    font-weight: bold;
+//    text-shadow: 0px 1px 0px #666666;
+//    //font-size: 1.2em;
+//    //height: 2.4em;
+//    text-align: center;
+//    display: inline-block;
+//    padding: 0px;
+//    padding-top: 1em;
+//}
+//.obsConfirm .button{
+//    background-color: @link-colour;
+//    width: 100%;
+//    color: #ffffff;
+//    font-weight: bold;
+//    text-shadow: 0px 1px 0px #666666;
+//    //font-size: 1.2em;
+//    //height: 2.4em;
+//    text-align: center;
+//    display: inline-block;
+//    //padding: 0px;
+//    //padding-top: 1em;
+//}
+
+// For review frequency
+
+.obsChange .obsSelectField{
+  border-bottom: 0px solid black !important;
+  padding-bottom: 0px !important;
+}
+.obsChange .obsSubmit{
+  padding-bottom: 0px !important;
+}
