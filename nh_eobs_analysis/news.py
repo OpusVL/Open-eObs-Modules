@@ -15,6 +15,7 @@ class nh_eobs_news_report(osv.Model):
         'ward_id': fields.many2one('nh.clinical.location', 'Ward',
                                    readonly=True),
         'location_str': fields.char('Location', readonly=True),
+        'location_id': fields.integer('Location', readonly=True),
         'score': fields.char('Obtained Score', readonly=True),
         'clinical_risk': fields.char('Obtained Clinical Risk', readonly=True),
         'on_time': fields.integer('# On Time', readonly=True),
