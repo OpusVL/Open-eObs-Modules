@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+        <template id="assets_backend" name="nh_eobs_slam_web_graph" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <script type="text/javascript" src="/nh_eobs_slam/static/src/js/web_graph.js"></script>
+                
+            </xpath>
+        </template>
+    </data>
+</openerp>
