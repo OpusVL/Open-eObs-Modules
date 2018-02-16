@@ -282,7 +282,7 @@ openerp.nh_eobs = function (instance) {
                                     self.set_y_offset();
                                     set_ok = true;
                                 }
-                            }, 1500)
+                            }, 2200)
                         });
                     }, defaults[action][view_type]
                 )
