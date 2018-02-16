@@ -243,6 +243,17 @@ openerp.nh_eobs = function (instance) {
 
     instance.web.ViewManager.include({
 
+        goToYIndex: function() {
+            var self = this;
+            if ($('.oe_view_manager_body').hasVerticalScrollBar()){
+                self.set_y_offset();
+            } else {
+                setTimeout(function() {
+                    self.goToYIndex();
+                }, 50)
+            }
+        },
+
         // Sets timeout if action and view_type exist in defaults.refresh object
         // Timeout recalls same method which reloads the view
         switch_mode: function (view_type, no_store, view_options) {
@@ -273,16 +284,10 @@ openerp.nh_eobs = function (instance) {
                         // This should mean that as long as the page takes no longer than 1.5s to clear
                         // the kanban view, we will _always_ get the page location restored, no matter how long
                         // it takes to load the page
-
                         self.switch_mode(view_type, no_store, view_options).then(function() {
                             setTimeout(function() {
-                                // We need this flag else set_y_offset gets called infinite times when the page loads
-                                var set_ok = false;
-                                while($(window).height() > $('.oe_view_manager_body').height() && set_ok == false) {
-                                    self.set_y_offset();
-                                    set_ok = true;
-                                }
-                            }, 2200)
+                                self.goToYIndex();
+                            }, 1500)
                         });
                     }, defaults[action][view_type]
                 )
