@@ -239,11 +239,13 @@ openerp.nh_eobs = function (instance) {
     });
 
 
+    var y_offset;
+
     instance.web.ViewManager.include({
+
         // Sets timeout if action and view_type exist in defaults.refresh object
         // Timeout recalls same method which reloads the view
         switch_mode: function (view_type, no_store, view_options) {
-
             var action = null;
             if (this.action) {
                 action = this.action.name
@@ -253,11 +255,35 @@ openerp.nh_eobs = function (instance) {
             var self = this;
 
             window.clearTimeout(instance.nh_eobs.defaults.refresh._timer);
-
             if (defaults[action] && defaults[action][view_type]) {
                 instance.nh_eobs.defaults.refresh._timer = window.setTimeout(
                     function () {
-                        self.switch_mode(view_type, no_store, view_options)
+                        y_offset = $( ".oe_view_manager_body" ).scrollTop();
+                        // We can have a cheap and quick way of doing this by just setting a timeout
+                        // but this is fairly prone to failing if a connection is slow, or the page takes
+                        // abnormally long to load (lots of patient data?)
+                        // self.switch_mode(view_type, no_store, view_options).then(function() {
+                        //     setTimeout( self.set_y_offset ,2500)
+                        // });
+
+                        // Or we can relatively safely assume the time it will take to clear the kanban
+                        // view (1.5s), and set the y offset when the scrollbar appears
+                        // on the page by using a while loop
+
+                        // This should mean that as long as the page takes no longer than 1.5s to clear
+                        // the kanban view, we will _always_ get the page location restored, no matter how long
+                        // it takes to load the page
+
+                        self.switch_mode(view_type, no_store, view_options).then(function() {
+                            setTimeout(function() {
+                                // We need this flag else set_y_offset gets called infinite times when the page loads
+                                var set_ok = false;
+                                while($(window).height() > $('.oe_view_manager_body').height() && set_ok == false) {
+                                    self.set_y_offset();
+                                    set_ok = true;
+                                }
+                            }, 1500)
+                        });
                     }, defaults[action][view_type]
                 )
             }
@@ -268,8 +294,15 @@ openerp.nh_eobs = function (instance) {
                 window.clearInterval(instance.nh_eobs.defaults.kiosk._timer);
                 instance.nh_eobs.defaults.kiosk._timer = null
             }
-
             return this._super(view_type, no_store, view_options);
+        },
+
+        set_y_offset: function() {
+            console.log("set y_offset:");
+            console.log(y_offset);
+            if ('.oe_view_manager_body') {
+                $( '.oe_view_manager_body' ).scrollTop( y_offset );
+            }
         },
 
         //'nh.clinical.allocating' views will be opened in edit mode by default.
