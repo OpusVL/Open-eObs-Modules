@@ -21,6 +21,15 @@ from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT as dtf
 _logger = logging.getLogger(__name__)
 
 
+class NHClinicalPatientUseCustomFrequency(orm.Model):
+    _name = 'nh.clinical.patient.use_custom_frequency'
+    _inherit = ['nh.activity.data']
+    _columns = {
+        'status': fields.boolean('Use custom frequency'),
+        'patient_id': fields.many2one('nh.clinical.patient', 'Patient', required=True),
+    }
+
+
 class nh_clinical_patient_mrsa(orm.Model):
     """
     Represents the action of setting the

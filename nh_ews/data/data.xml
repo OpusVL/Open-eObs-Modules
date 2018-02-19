@@ -16,5 +16,20 @@
             <field name="min">92</field>
             <field name="max">96</field>
         </record>
+        <record id="nhc_frequency_time_0" model="nh.clinical.custom_frequency_options">
+            <field name="time">5</field>
+        </record>
+        <record id="nhc_frequency_time_1" model="nh.clinical.custom_frequency_options">
+            <field name="time">10</field>
+        </record>
+        <record id="nhc_frequency_time_2" model="nh.clinical.custom_frequency_options">
+            <field name="time">15</field>
+        </record>
+        <record id="nhc_frequency_time_3" model="nh.clinical.custom_frequency_options">
+            <field name="time">30</field>
+        </record>
+        <record id="nhc_frequency_time_4" model="nh.clinical.custom_frequency_options">
+            <field name="time">60</field>
+        </record>
     </data>
 </openerp>

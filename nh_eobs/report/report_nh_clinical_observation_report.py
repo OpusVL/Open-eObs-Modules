@@ -33,6 +33,7 @@ class ObservationReport(models.AbstractModel):
         'targeto2': 'nh.clinical.patient.o2target',
         'mrsa_history': 'nh.clinical.patient.mrsa',
         'diabetes_history': 'nh.clinical.patient.diabetes',
+        'use_custom_frequency_history': 'nh.clinical.patient.use_custom_frequency',
         'palliative_care_history': 'nh.clinical.patient.palliative_care',
         'post_surgery_history': 'nh.clinical.patient.post_surgery',
         'critical_care_history': 'nh.clinical.patient.critical_care'
