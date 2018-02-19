@@ -186,9 +186,16 @@
                   action="action_show_o2_targets"
                   groups="nh_clinical.group_nhc_dev"/>
 
+        <menuitem name="Manage Custom Frequencies"
+                  sequence="5"
+                  id="menu_eobs_custom_frequencices"
+                  parent="menu_eobs_category_data_management_administration"
+                  action="action_show_frequency_options"
+                  groups="nh_clinical.group_nhc_dev"/>
+
         <menuitem name="Cancel Notifications"
                   id="menu_eobs_cancel_notifications"
-                  sequence="5"
+                  sequence="6"
                   parent="menu_eobs_category_data_management_administration"
                   action="action_nhc_cancel_notifications"
                   groups="nh_clinical.group_nhc_dev,base.user_root"/>

@@ -385,6 +385,15 @@ class nh_clinical_wardboard(orm.Model):
                 context=context
             )
             res['fields']['o2target']['readonly'] = not (user in user_ids)
+        if view_type == 'form' and res['fields'].get('custom_frequency_time'):
+            user_pool = self.pool['res.users']
+            user_ids = user_pool.search(
+                cr, user, [
+                    ['groups_id.name', 'in', ['NH Clinical Doctor Group', 'NH Clinical Shift Coordinator Group']]
+                ],
+                context=context
+            )
+            res['fields']['custom_frequency_time']['readonly'] = not (user in user_ids)
         return res
 
     def _get_started_device_session_ids(self, cr, uid, ids, field_name, arg,
@@ -516,6 +525,7 @@ class nh_clinical_wardboard(orm.Model):
         'date_scheduled': fields.datetime("Date Scheduled"),
         'next_diff': fields.text("Time to Next Obs"),
         'frequency': fields.text("Frequency"),
+        'use_custom_frequency': fields.selection(_boolean_selection, string='Use Custom Frequency'),
         'ews_score_string': fields.text("Latest Score"),
         'ews_score': fields.integer("Latest Score"),
         'ews_trend_string': fields.selection(_trend_strings,
@@ -531,6 +541,7 @@ class nh_clinical_wardboard(orm.Model):
             _boolean_selection, "Postural Blood Pressure Monitoring"),
         'height': fields.float("Height"),
         'o2target': fields.many2one('nh.clinical.o2level', 'O2 Target'),
+        'custom_frequency_time': fields.many2one('nh.clinical.custom_frequency_options', 'Custom Frequency Time'),
         'uotarget_vol': fields.integer('Target Volume'),
         'uotarget_unit': fields.selection(
             [[1, 'ml/hour'], [2, 'L/day']], 'Unit'),
@@ -552,6 +563,10 @@ class nh_clinical_wardboard(orm.Model):
         'o2target_ids': fields.function(
             _get_data_ids_multi, multi='o2target_ids', type='many2many',
             relation='nh.clinical.patient.o2target', string='O2 Targets'),
+        'custom_frequency_time_ids': fields.function(
+            _get_data_ids_multi, multi='custom_frequency_time_ids', type='many2many',
+            relation='nh.clinical.patient.custom_frequency_time', string='Custom Frequency Times'
+        ),
         'uotarget_ids': fields.function(
             _get_data_ids_multi, multi='uotarget_ids', type='many2many',
             relation='nh.clinical.patient.uotarget',
@@ -1058,6 +1073,15 @@ class nh_clinical_wardboard(orm.Model):
                     'status': vals['diabetes'] == 'yes'
                 }, context=context)
                 activity_pool.complete(cr, uid, diabetes_id, context=context)
+            if 'use_custom_frequency' in vals:
+                use_custom_frequency_pool = self.pool['nh.clinical.patient.use_custom_frequency']
+                use_custom_frequency_id = use_custom_frequency_pool.create_activity(cr, SUPERUSER_ID, {
+                    'parent_id': wb.spell_activity_id.id,
+                }, {
+                   'patient_id': wb.spell_activity_id.patient_id.id,
+                   'status': vals['use_custom_frequency'] == 'yes'
+                }, context=context)
+                activity_pool.complete(cr, uid, use_custom_frequency_id, context=context)
             if 'pbp_monitoring' in vals:
                 pbpm_pool = self.pool['nh.clinical.patient.pbp_monitoring']
                 pbpm_id = pbpm_pool.create_activity(cr, SUPERUSER_ID, {
@@ -1076,6 +1100,15 @@ class nh_clinical_wardboard(orm.Model):
                     'level_id': vals['o2target']
                 }, context=context)
                 activity_pool.complete(cr, uid, o2target_id, context=context)
+            if 'custom_frequency_time' in vals:
+                custom_frequency_time_pool = self.pool['nh.clinical.patient.custom_frequency_time']
+                custom_frequency_time_id = custom_frequency_time_pool.create_activity(cr, SUPERUSER_ID, {
+                        'parent_id': wb.spell_activity_id.id,
+                }, {
+                    'patient_id': wb.spell_activity_id.patient_id.id,
+                    'options_id': vals['custom_frequency_time']
+                    }, context=context)
+                activity_pool.complete(cr, uid, custom_frequency_time_id, context=context)
             if 'palliative_care' in vals:
                 pc_pool = self.pool['nh.clinical.patient.palliative_care']
                 pc_id = pc_pool.create_activity(cr, SUPERUSER_ID, {
@@ -1251,29 +1284,42 @@ wb_activity_data as(
 
 create materialized view
 ews0 as(
-            select
-                activity.parent_id as spell_activity_id,
-                activity.patient_id,
-                activity.spell_id,
-                activity.state,
-                activity.date_scheduled,
-                ews.id,
-                ews.score,
-                ews.frequency,
-                ews.clinical_risk,
-                case when activity.date_scheduled < now() at time zone 'UTC'
-                    then 'overdue: ' else '' end as next_diff_polarity,
-                case activity.date_scheduled is null
-                    when false then justify_hours(greatest(now() at time zone
-                    'UTC',activity.date_scheduled) - least(now() at time zone
-                    'UTC', activity.date_scheduled))
-                    else interval '0s'
-                end as next_diff_interval,
-                activity.rank
-            from wb_ews_ranked activity
-            left join nh_clinical_patient_observation_ews ews
-                on activity.data_id = ews.id
-            where activity.rank = 1 and activity.state = 'scheduled'
+SELECT
+    activity.parent_id AS spell_activity_id,
+    activity.patient_id,
+    activity.spell_id,
+    activity.state,
+    ews.id,
+    ews.score,
+    use_custom_frequency.status as use_custom_frequency,
+    o.time as custom_frequency_time,
+    ews.clinical_risk,
+    CASE WHEN use_custom_frequency.status IS TRUE
+      THEN now() AT TIME ZONE 'UTC' + (o.time * INTERVAL '1 minute')
+      ELSE activity.date_scheduled
+    END as date_scheduled,
+    CASE WHEN activity.date_scheduled < now() AT TIME ZONE 'UTC'
+       THEN 'overdue: '
+    ELSE '' END        AS next_diff_polarity,
+    CASE activity.date_scheduled IS NULL
+    WHEN FALSE
+     THEN justify_hours(greatest(now() AT TIME ZONE 'UTC', activity.date_scheduled) - least(now() AT TIME ZONE 'UTC', activity.date_scheduled))
+    ELSE INTERVAL '0s'
+    END                AS next_diff_interval,
+    CASE WHEN use_custom_frequency.status IS TRUE
+      THEN o.time
+        ELSE ews.frequency
+    END AS frequency,
+    activity.rank
+    FROM wb_ews_ranked activity
+    LEFT JOIN nh_clinical_patient_observation_ews ews
+    ON activity.data_id = ews.id
+  LEFT JOIN nh_clinical_patient_use_custom_frequency use_custom_frequency
+    ON use_custom_frequency.patient_id = ews.patient_id
+  LEFT JOIN nh_clinical_patient_custom_frequency_time custom_frequency_time
+    ON custom_frequency_time.patient_id = ews.patient_id
+  LEFT JOIN nh_clinical_custom_frequency_options o ON custom_frequency_time.options_id = o.id
+WHERE activity.rank = 1 AND activity.state = 'scheduled'
 );
 
 create materialized view
@@ -1350,9 +1396,11 @@ param as(
             activity.spell_id,
             height.height,
             diabetes.status as diabetes,
+            use_custom_frequency.status as use_custom_frequency,
             mrsa.status as mrsa,
             pc.status,
             o2target_level.id as o2target_level_id,
+            custom_frequency_time_options.id as custom_frequency_time_options_id,
             ps.status as post_surgery,
             psactivity.date_terminated as post_surgery_date,
             cc.status as critical_care,
@@ -1364,10 +1412,16 @@ param as(
             on activity.ids && array[height.activity_id]
         left join nh_clinical_patient_diabetes diabetes
             on activity.ids && array[diabetes.activity_id]
+        left join nh_clinical_patient_use_custom_frequency use_custom_frequency
+            on activity.ids && array[use_custom_frequency.activity_id]
         left join nh_clinical_patient_o2target o2target
             on activity.ids && array[o2target.activity_id]
+        left join nh_clinical_patient_custom_frequency_time custom_frequency_time
+            on activity.ids && array[custom_frequency_time.activity_id]
         left join nh_clinical_o2level o2target_level
             on o2target_level.id = o2target.level_id
+        left join nh_clinical_custom_frequency_options custom_frequency_time_options
+            on custom_frequency_time_options.id = custom_frequency_time.options_id
         left join nh_clinical_patient_mrsa mrsa
             on activity.ids && array[mrsa.activity_id]
         left join nh_clinical_patient_palliative_care pc

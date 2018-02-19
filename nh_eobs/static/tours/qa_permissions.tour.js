@@ -270,6 +270,10 @@
                 waitFor: "select[name='diabetes']"
             },
             {
+                title: _t("They can apply a custom frequency"),
+                waitFor: "select[name='use_custom_frequency']"
+            },
+            {
                 title: _t("They can edit 'Monitoring' information"),
                 element: "a.ui-tabs-anchor:contains('Monitoring')"
             },
@@ -375,6 +379,10 @@
             {
                 title: _t("They can change Diabetes status"),
                 waitFor: "select[name='diabetes']"
+            },
+            {
+                title: _t("They can enable a custom frequency"),
+                waitFor: "select[name='use_custom_frequency']"
             },
             {
                 title: _t("They can edit 'Monitoring' information"),
