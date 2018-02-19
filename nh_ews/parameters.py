@@ -62,7 +62,7 @@ class NHClinicalCustomFrequencyOptions(orm.Model):
         'name': fields.function(_get_name, 'Time', type='char', size=16),
         'time': fields.integer("Time"),
         'active': fields.boolean(
-            'Active', help="HEEEEEEEEELLLLLLLLLPPPPP!!!"
+            'Active',
         )
     }
     _defaults = {
