@@ -81,11 +81,11 @@ class NhEobsApiRoutes(orm.AbstractModel):
                 vals_data['verbal'] = converted_data['verbal']
             if 'motor' in converted_data:
                 vals_data['motor'] = converted_data['motor']
-        # elif obs_model_name == 'food_fluid':
-        #     if 'passed_urine' in converted_data:
-        #         vals_data['passed_urine'] = converted_data['passed_urine']
-        #     if 'bowels_open' in converted_data:
-        #         vals_data['bowels_open'] = converted_data['bowels_open']
+        elif obs_model_name == 'food_fluid':
+            if 'passed_urine' in converted_data:
+                vals_data['passed_urine'] = converted_data['passed_urine']
+            if 'bowels_open' in converted_data:
+                vals_data['bowels_open'] = converted_data['bowels_open']
         else:
             vals_data = converted_data
 
