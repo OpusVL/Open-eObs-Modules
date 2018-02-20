@@ -24,6 +24,7 @@
              'data/slam_master_data.xml',
              'views/mobile_template.xml',
              'views/wardboard.xml',
+             'views/web_graph_view.xml',
              'data/slam_hospital_data.xml',
              'data/slam_1_ann_moss_way_wards.xml',
              'data/slam_27_inglemere_road_wards.xml',

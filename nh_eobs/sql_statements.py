@@ -114,6 +114,8 @@ class NHEobsSQL(orm.AbstractModel):
         ews1.score - ews2.score AS ews_trend,
         param.height,
         param.o2target_level_id AS o2target,
+        param.custom_frequency_time_options_id as custom_frequency_time,
+        CASE WHEN param.use_custom_frequency THEN 'yes' ELSE 'no' END AS use_custom_frequency,
         CASE WHEN param.mrsa THEN 'yes' ELSE 'no' END AS mrsa,
         CASE WHEN param.diabetes THEN 'yes' ELSE 'no' END AS diabetes,
         CASE WHEN pbp.status THEN 'yes' ELSE 'no' END AS pbp_monitoring,
@@ -422,8 +424,8 @@ class NHEobsSQL(orm.AbstractModel):
                 when ews1.id is null and ews2.id is not null then 'no latest'
             end as ews_trend,
             case
-                when ews0.frequency is not null then ews0.frequency
-                else 0
+              when ews0.use_custom_frequency.status IS TRUE THEN ews0.custom_frequency_time
+              else ews0.frequency
             end as frequency
         from nh_activity activity
         inner join nh_clinical_patient patient

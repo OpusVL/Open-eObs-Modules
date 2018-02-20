@@ -24,6 +24,16 @@ class nh_clinical_patient_o2target(orm.Model):
             cr, uid, activity_id, context)
 
 
+class NHClinicalPatientCustomFrequencyTime(orm.Model):
+    _inherit = 'nh.clinical.patient.custom_frequency_time'
+
+    @refresh_materialized_views('param')
+    def complete(self, cr, uid, activity_id, context=None):
+        return super(NHClinicalPatientCustomFrequencyTime, self).complete(
+            cr, uid, activity_id, context
+        )
+
+
 class nh_clinical_notification_frequency(orm.Model):
     _inherit = 'nh.clinical.notification.frequency'
 
@@ -102,6 +112,16 @@ class nh_clinical_patient_diabetes(orm.Model):
         return super(
             nh_clinical_patient_diabetes, self).complete(
             cr, uid, activity_id, context)
+
+
+class NHClinicalPatientUseCustomFrequency(orm.Model):
+    _inherit = 'nh.clinical.patient.use_custom_frequency'
+
+    @refresh_materialized_views('param')
+    def complete(self, cr, uid, activity_id, context=None):
+        return super(NHClinicalPatientUseCustomFrequency, self).complete(
+            cr, uid, activity_id, context
+        )
 
 
 class nh_clinical_patient_palliative_care(orm.Model):

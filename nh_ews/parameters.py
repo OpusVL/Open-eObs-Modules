@@ -49,6 +49,30 @@ class nh_clinical_o2level(orm.Model):
         return self.write(cr, uid, ids, {'active': False}, context=context)
 
 
+class NHClinicalCustomFrequencyOptions(orm.Model):
+    _name = 'nh.clinical.custom_frequency_options'
+
+    def _get_name(self, cr, uid, ids, fn, args, context=None):
+        result = dict.fromkeys(ids, False)
+        for r in self.read(cr, uid, ids, ['time'], context=context):
+            result[r['id']] = str(r['time'])
+        return result
+
+    _columns = {
+        'name': fields.function(_get_name, 'Time', type='char', size=16),
+        'time': fields.integer("Time"),
+        'active': fields.boolean(
+            'Active',
+        )
+    }
+    _defaults = {
+        'active': True
+    }
+
+    def unlink(self, cr, uid, ids, context=None):
+        return self.write(cr, uid, ids, {'active': False}, context=context)
+
+
 class nh_clinical_patient_o2target(orm.Model):
     """
     Represents a :class:`patient<base.nh_clinical_patient>` oxygen
@@ -95,3 +119,36 @@ class nh_clinical_patient_o2target(orm.Model):
             cr, uid, o2target_ids[0], context=context)
         return activity.data_ref.level_id.id \
             if activity.data_ref.level_id else False
+
+
+class NHClinicalPatientCustomFrequencyTime(orm.Model):
+
+    _name = 'nh.clinical.patient.custom_frequency_time'
+    _inherit = ['nh.activity.data']
+    _rec_name = 'options_id'
+    _columns = {
+        'options_id': fields.many2one('nh.clinical.custom_frequency_options', 'Custom frequency options'),
+        'patient_id': fields.many2one('nh.clinical.patient', 'Patient', required=True)
+    }
+
+    def get_last(self, cr, uid, patient_id, datetime=False, context=None):
+        if not datetime:
+            datetime = dt.now().strftime(dtf)
+        domain = [
+            ['patient_id', '=', patient_id],
+            ['data_model', '=', 'nh.clinical.patient.custom_frequency_time'],
+            ['state', '=', 'completed'],
+            ['parent_id.state', '=', 'started'],
+            ['date_terminated', '<=', datetime]
+        ]
+        activity_pool = self.pool['nh.activity']
+        custom_frequency_time_ids = activity_pool.search(
+            cr, uid, domain, order='date_terminated desc, sequence desc',
+            context=context
+        )
+        if not custom_frequency_time_ids:
+            return False
+        activity = activity_pool.browse(
+            cr, uid, custom_frequency_time_ids[0], context=context
+        )
+        return activity.data_ref.options_id.id if activity.data_ref.options_id else False

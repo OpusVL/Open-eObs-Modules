@@ -10,6 +10,7 @@ def migrate(cr, installed_version):
         tables = [
             ("nh_clinical_patient_mrsa", "mrsa"),
             ("nh_clinical_patient_diabetes", "diabetes"),
+            ("nh_clinical_patient_use_custom_frequency", "use_custom_frequency"),
             ("nh_clinical_patient_weight_monitoring", "weight_monitoring")
         ]
         for t in tables:

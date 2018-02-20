@@ -37,6 +37,7 @@
             <xpath expr="." position="inside">
                 <link rel="stylesheet" href="/nh_eobs/static/src/css/nh_eobs.css"/>
                 <script type="text/javascript" src="/nh_eobs/static/src/js/nh_eobs.js"></script>
+                <script type="text/javascript" src="/nh_eobs/static/src/js/scrollbar_plugin.js"></script>
                 <script type="text/javascript" src="/nh_eobs/static/tours/helper.js"></script>
                 <script type="text/javascript" src="/nh_eobs/static/tours/staff_allocation.tour.js"></script>
                 <script type="text/javascript" src="/nh_eobs/static/tours/palliative_status.tour.js"></script>
@@ -413,6 +414,42 @@
             <field name="name">O2 Targets</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">nh.clinical.o2level</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!--Admin Views - Frequency Options -->
+        <record id="view_nhc_custom_frequency_options_form" model="ir.ui.view">
+            <field name="name">NHC Custom Frequency Options Form</field>
+            <field name="model">nh.clinical.custom_frequency_options</field>
+            <field name="arch" type="xml">
+                <form string="Frequency Options" version="7.0" edit="0">
+                	<sheet>
+	                	<div class="oe_title">
+                            <label string="Range" for="name"/>
+                            <h1><field name="name" readonly="True"/></h1>
+                        </div>
+                        <group string="values">
+                            <field name="time"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="view_nhc_custom_frequency_options_tree">
+            <field name="name">NHC Custom Frequency Options Tree</field>
+            <field name="model">nh.clinical.custom_frequency_options</field>
+            <field name="arch" type="xml">
+                <tree string="Frequency Options" version="7.0">
+                    <field name="name" string="Time (Minutes)"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_show_frequency_options">
+            <field name="name">Frequency Options</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">nh.clinical.custom_frequency_options</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
         </record>
