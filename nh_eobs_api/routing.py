@@ -92,7 +92,7 @@ class Route(object):
 
 class RouteManager(object):
     """Class storing and managing Route objects."""
-    def __init__(self, server_protocol='http',
+    def __init__(self, server_protocol='https',
                  server_address='localhost', server_port=None, url_prefix='/'):
         self.SERVER_PROTOCOL = server_protocol
         self.SERVER_ADDRESS = server_address
