@@ -19,6 +19,7 @@
         'nh_weight',
         'nh_clinical',
         'nh_eobs',
+        'web_graph',
     ],
     'data': ['security/ir.model.access.csv',
              'data/slam_master_data.xml',
