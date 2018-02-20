@@ -424,8 +424,8 @@ class NHEobsSQL(orm.AbstractModel):
                 when ews1.id is null and ews2.id is not null then 'no latest'
             end as ews_trend,
             case
-              when ews0.use_custom_frequency.status IS TRUE THEN ews0.custom_frequency_time
-              else ews0.frequency
+              when ews0.frequency is not null then ews0.frequency
+              else 0
             end as frequency
         from nh_activity activity
         inner join nh_clinical_patient patient
