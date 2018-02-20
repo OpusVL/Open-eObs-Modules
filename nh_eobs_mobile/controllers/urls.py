@@ -3,7 +3,7 @@
 Defines routes and builds a route dictionary.
 """
 from openerp.tools import config
-SERVER_PROTOCOL = "http"
+SERVER_PROTOCOL = "https"
 SERVER_ADDRESS = "localhost"
 SERVER_PORT = "{0}".format(config['xmlrpc_port'])
 URL_PREFIX = '/mobile/'
