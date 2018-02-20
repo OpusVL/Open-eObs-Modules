@@ -37,7 +37,7 @@ class NhClinicalObsStop(models.Model):
             )
         cancel_open_ews = self.cancel_open_ews(activity.parent_id.id,
                                                cancel_reason_pme.id)
-        self._cancel_open_food_and_fluid_review_tasks()
+        # self._cancel_open_food_and_fluid_review_tasks()
         if not cancel_open_ews:
             raise osv.except_osv(
                 'Error', 'There was an issue cancelling '
