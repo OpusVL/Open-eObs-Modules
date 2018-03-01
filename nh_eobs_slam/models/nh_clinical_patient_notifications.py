@@ -7,9 +7,10 @@ Notification overrides for SLaM configuration
  - Changes the triggered notifications for Assess Patient
 """
 
+import copy
 from openerp import api
 from openerp.addons.nh_observations import frequencies
-from openerp.osv import orm
+from openerp.osv import orm, fields
 
 
 class NHClinicalNotificationAssessment(orm.Model):
@@ -508,6 +509,39 @@ class NHClinicalNotificationMedicalTeam(orm.Model):
         ]
     ]
 
+    _form_description = [
+        {
+            'name': 'doctor_notified',
+            'type': 'text',
+            'label': 'Doctor Notified',
+            'initially_hidden': False,
+            'necessary': 'true'
+        }
+    ]
+
+    _columns = {
+        'doctor_notified': fields.char("Doctor Notified", size=128)
+    }
+
+    @api.model
+    def get_form_description(self, patient_id):
+        """
+        Returns a description in dictionary format of the input fields
+        that would be required in the user gui to submit this
+        observation.
+
+        Adds the lists of recorded concerns and dietary needs to the
+        form description as these are stored in separate models to allow
+        for multi select
+
+        :param patient_id: :class:`patient<base.nh_clinical_patient>` id
+        :type patient_id: int
+        :returns: a list of dictionaries
+        :rtype: list
+        """
+        form_desc = copy.deepcopy(self._form_description)
+        return form_desc
+
     def get_notifications(self, cr, uid, activity):
         """ Override of
         :py:meth:`get_notifications`
@@ -538,7 +572,7 @@ class NHClinicalNotificationMedicalTeam(orm.Model):
             'parent_id': activity.parent_id.id,
             'creator_id': activity_id,
             'patient_id': activity.data_ref.patient_id.id,
-            'model': activity.creator_id.data_ref._name,
+            'model': 'nh.clinical.notification.medical_team',
             'group': 'nurse'
         }, context=context)
         return super(NHClinicalNotificationMedicalTeam, self).complete(
