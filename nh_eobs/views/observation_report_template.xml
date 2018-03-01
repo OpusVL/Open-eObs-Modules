@@ -834,6 +834,16 @@
                                 </t>
                             </td>
                         </tr>
+
+                        <!-- If the data_modal is medical_team then show the details in the task on the report -->
+                        <tr t-if="task.get('doctor_notified')">
+                            <td class="col-xs-6">
+                                <strong>Doctor Notified:</strong>
+                            </td>
+                            <td>
+                                <span t-esc="task.get('doctor_notified')"/>
+                            </td>
+                        </tr>
                     </table>
                 </td>
             </tr>
