@@ -10,7 +10,7 @@ Notification overrides for SLaM configuration
 import copy
 from openerp import api
 from openerp.addons.nh_observations import frequencies
-from openerp.osv import orm
+from openerp.osv import orm, fields
 
 
 class NHClinicalNotificationAssessment(orm.Model):
@@ -519,6 +519,10 @@ class NHClinicalNotificationMedicalTeam(orm.Model):
         }
     ]
 
+    _columns = {
+        'doctor_notified': fields.char("Doctor Notified", size=128)
+    }
+
     @api.model
     def get_form_description(self, patient_id):
         """
@@ -568,7 +572,7 @@ class NHClinicalNotificationMedicalTeam(orm.Model):
             'parent_id': activity.parent_id.id,
             'creator_id': activity_id,
             'patient_id': activity.data_ref.patient_id.id,
-            'model': activity.creator_id.data_ref._name,
+            'model': 'nh.clinical.notification.medical_team',
             'group': 'nurse'
         }, context=context)
         return super(NHClinicalNotificationMedicalTeam, self).complete(

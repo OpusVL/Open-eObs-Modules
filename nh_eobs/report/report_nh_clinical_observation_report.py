@@ -441,9 +441,22 @@ class ObservationReport(models.AbstractModel):
         triggered_actions_ids = self.get_triggered_action_ids(
             observation_activity_id, activity_list=activity_list
         )
-        return self.pool['nh.activity'].read(
-            self.env.cr, self.env.uid, triggered_actions_ids
-        )
+
+        obj_nh_activity = self.pool.get('nh.activity')
+        recs_nh_activity = obj_nh_activity.read(self.env.cr, self.env.uid, triggered_actions_ids)
+
+        obj_nh_clinical_notification_medical_team = self.env['nh.clinical.notification.medical_team']
+
+        for rec in recs_nh_activity:
+            if rec.get('data_model') == 'nh.clinical.notification.medical_team':
+                res = obj_nh_clinical_notification_medical_team.search([
+                    ('activity_id', '=', rec['id'])
+                ])
+                rec_nh_clinical_notification_medical_team = obj_nh_clinical_notification_medical_team.browse(res.id)
+                if rec_nh_clinical_notification_medical_team.doctor_notified:
+                    rec['doctor_notified'] = rec_nh_clinical_notification_medical_team.doctor_notified
+
+        return recs_nh_activity
 
     def get_triggered_action_ids(self, cr, uid,
                                  activity_id, activity_list=None):
