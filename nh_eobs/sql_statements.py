@@ -89,11 +89,17 @@ class NHEobsSQL(orm.AbstractModel):
                 ews0.date_scheduled)), 'HH24:MI') || ' hours'
             ELSE to_char((INTERVAL '0s'), 'HH24:MI')
         END AS next_diff,
+        CASE 
+        WHEN param.use_custom_frequency IS NOT TRUE
+        THEN 
         CASE ews0.frequency < 60
             WHEN true THEN ews0.frequency || ' min(s)'
             ELSE ews0.frequency/60 || ' hour(s) ' || ews0.frequency -
                 ews0.frequency/60*60 || ' min(s)'
-        END AS frequency,
+         END
+         ELSE 
+         o.time || ' min(s)'
+         END AS frequency,
         ews0.date_scheduled,
         CASE WHEN ews1.id IS NULL THEN 'none' ELSE ews1.score::text END
             AS ews_score_string,
@@ -151,6 +157,7 @@ class NHEobsSQL(orm.AbstractModel):
     LEFT JOIN consulting_doctors ON consulting_doctors.spell_id = spell.id
     LEFT JOIN pbp pbp ON pbp.spell_id = spell.id
     LEFT JOIN param ON param.spell_id = spell.id
+    LEFT JOIN nh_clinical_custom_frequency_options o ON param.custom_frequency_time_options_id = o.id
     ORDER BY location.name"""
 
     workload_skeleton = """
@@ -423,10 +430,11 @@ class NHEobsSQL(orm.AbstractModel):
                 when ews1.id is not null and ews2.id is null then 'first'
                 when ews1.id is null and ews2.id is not null then 'no latest'
             end as ews_trend,
-            case
-              when ews0.frequency is not null then ews0.frequency
-              else 0
-            end as frequency
+            CASE
+              WHEN use_custom_frequency.status IS NOT TRUE 
+              THEN ews0.frequency
+              ELSE o.time
+            END AS frequency
         from nh_activity activity
         inner join nh_clinical_patient patient
           on patient.id = activity.patient_id
@@ -437,6 +445,9 @@ class NHEobsSQL(orm.AbstractModel):
         left join ews1 on ews1.spell_activity_id = activity.id
         left join ews2 on ews2.spell_activity_id = activity.id
         left join ews0 on ews0.spell_activity_id = activity.id
+        LEFT JOIN nh_clinical_patient_custom_frequency_time custom_frequency_time ON custom_frequency_time.patient_id = activity.patient_id
+        LEFT JOIN nh_clinical_patient_use_custom_frequency use_custom_frequency ON use_custom_frequency.patient_id = activity.patient_id
+        LEFT JOIN nh_clinical_custom_frequency_options o ON custom_frequency_time.options_id = o.id
         where activity.state = 'started' and activity.data_model =
           'nh.clinical.spell' and activity.id in ({spell_ids})
         order by location
