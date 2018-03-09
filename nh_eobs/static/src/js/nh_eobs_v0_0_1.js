@@ -245,7 +245,7 @@ openerp.nh_eobs = function (instance) {
 
         goToYIndex: function() {
             var self = this;
-            if ($('.oe_view_manager_body').hasVerticalScrollBar()){
+            if ($('.oe_view_manager_body').hasVerticalScrollBar() || $('.oe_view_manager_body').eq(1).hasVerticalScrollBar()){
                 self.set_y_offset();
             } else {
                 setTimeout(function() {
@@ -270,14 +270,15 @@ openerp.nh_eobs = function (instance) {
                 instance.nh_eobs.defaults.refresh._timer = window.setTimeout(
                     function () {
                         y_offset = $( ".oe_view_manager_body" ).scrollTop();
-                        // We can have a cheap and quick way of doing this by just setting a timeout
-                        // but this is fairly prone to failing if a connection is slow, or the page takes
-                        // abnormally long to load (lots of patient data?)
-                        // self.switch_mode(view_type, no_store, view_options).then(function() {
-                        //     setTimeout( self.set_y_offset ,2500)
-                        // });
-
-                        // Or we can relatively safely assume the time it will take to clear the kanban
+                        if (y_offset === 0) {
+                            // The ward dashboard renders two, yes TWO .oe_view_manager_body nodes
+                            // so we check the second if the first doesn't give any value
+                            if($('.oe_view_manager_body').eq(1).scrollTop() != null) {
+                                console.log("setting y_offset for the second node")
+                                y_offset = $('.oe_view_manager_body').eq(1).scrollTop();
+                            }
+                        }
+                        // We can relatively safely assume the time it will take to clear the kanban
                         // view (1.5s), and set the y offset when the scrollbar appears
                         // on the page by using a while loop
 
@@ -820,7 +821,6 @@ openerp.nh_eobs = function (instance) {
         init: function (parent, dataset, view_id, options) {
             var self = this;
             this._super(parent, dataset, view_id, options);
-
             this.has_been_loaded.done(function () {
 
                 var kiosk = instance.nh_eobs.defaults.kiosk;
@@ -828,7 +828,6 @@ openerp.nh_eobs = function (instance) {
                 if (self.options.action.name == "Kiosk Board" ||
                     self.options.action.name == "Kiosk Workload NEWS" ||
                     self.options.action.name == "Kiosk Workload Other Tasks") {
-
                     // Hide the side menu
                     $(".oe_leftbar").attr("style", "");
                     $(".oe_leftbar").addClass("nh_eobs_hide");
