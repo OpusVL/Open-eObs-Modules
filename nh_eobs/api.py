@@ -616,6 +616,23 @@ class nh_eobs_api(orm.AbstractModel):
         patient[0]['activities'] = activities
         return patient
 
+    def get_all_patients(self, cr, uid, ids, context=None):
+
+        if ids:
+            domain = [
+                ('patient_id', 'in', ids),
+                ('state', '=', 'started'),
+                ('data_model', '=', 'nh.clinical.spell'),
+                '|',
+                ('patient_id.follower_ids', 'in', [uid])
+            ]
+        else:
+            domain = [
+                ('state', '=', 'started'),
+                ('data_model', '=', 'nh.clinical.spell'),
+            ]
+        return self.collect_patients(cr, uid, domain, context=context)
+
     def get_patients(self, cr, uid, ids, context=None):
         """
         Return containing every field from
