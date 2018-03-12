@@ -17,6 +17,12 @@ routes = [
         'args': False
     },
     {
+        'name': 'all_patients',
+        'endpoint': 'all_patients/',
+        'method': 'GET',
+        'args': False
+    },
+    {
         'name': 'single_patient',
         'endpoint': 'patient/',
         'method': 'GET',
