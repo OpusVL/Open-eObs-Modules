@@ -38,6 +38,12 @@ single_patient = EobsRoute(
     methods=['GET'],
     url_prefix='/mobile'
 )
+all_patients = EobsRoute(
+    'all_patients',
+    '/all_patients/',
+    methods=['GET'],
+    url_prefix='/mobile'
+)
 patient_list = EobsRoute(
     'patient_list',
     '/patients/',
@@ -551,6 +557,41 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
         )
         patients = self.process_patient_list(
             cr, uid, patient_api.get_patients(
+                cr, uid, [], context=context), context=context)
+        patient_api.get_patient_followers(cr, uid, patients, context=context)
+        following_patients = self.process_patient_list(
+            cr, uid, patient_api.get_followed_patients(
+                cr, uid, []), context=context)
+        return request.render(
+            'nh_eobs_mobile.patient_task_list',
+            qcontext={
+                'notifications': follow_activities,
+                'items': patients,
+                'notification_count': len(follow_activities),
+                'followed_items': following_patients,
+                'section': 'patient',
+                'username': request.session['login'],
+                'urls': URLS}
+        )
+
+    @http.route(URLS['all_patients'], type='http', auth="user")
+    def get_all_patients(self, *args, **kw):
+        """
+        Returns the patient task list for all patients.
+        :returns: patient task list response object
+        :rtype: :class:`http.Response<openerp.http.Response>`
+        """
+
+        cr, uid, context = request.cr, request.session.uid, request.context
+        patient_api = request.registry['nh.eobs.api']
+        patient_api.unassign_my_activities(cr, uid)
+        follow_activities = patient_api.get_assigned_activities(
+            cr, uid,
+            activity_type='nh.clinical.patient.follow',
+            context=context
+        )
+        patients = self.process_patient_list(
+            cr, uid, patient_api.get_all_patients(
                 cr, uid, [], context=context), context=context)
         patient_api.get_patient_followers(cr, uid, patients, context=context)
         following_patients = self.process_patient_list(
