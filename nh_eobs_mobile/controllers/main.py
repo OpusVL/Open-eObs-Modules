@@ -577,7 +577,7 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
     @http.route(URLS['all_patients'], type='http', auth="user")
     def get_all_patients(self, *args, **kw):
         """
-        Returns the patient task list for patients.
+        Returns the patient task list for all patients.
         :returns: patient task list response object
         :rtype: :class:`http.Response<openerp.http.Response>`
         """
