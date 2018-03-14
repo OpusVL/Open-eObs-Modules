@@ -182,6 +182,7 @@ class StaffReallocationWizard(models.TransientModel):
     _nursing_groups = ['NH Clinical Nurse Group', 'NH Clinical HCA Group']
     _stages = [['users', 'Current Roll Call'], ['allocation', 'Allocation']]
 
+    @api.multi
     def _get_default_ward(self):
         NhClinicalLocation = self.env['nh.clinical.location']
         ward_ids = NhClinicalLocation.search([['usage', '=', 'ward'], ['user_ids', 'in', [self.env.uid]]])
@@ -195,20 +196,23 @@ class StaffReallocationWizard(models.TransientModel):
         ResUsers = self.env['res.users']
         return ResUsers.search([
             ['groups_id.name', 'in', self._nursing_groups],
-            ['location_ids', 'in', location_ids.ids]]
+            ['location_ids', 'in', locations.ids]]
         )
 
+    @api.multi
     def _get_default_users(self):
         locations = self._get_default_locations()
         return self.get_users_for_locations(locations)
 
+    @api.multi
     def _get_default_locations(self):
         NhClinicalLocation = self.env['nh.clinical.location']
         ward_id = self._get_default_ward()
-        locations = NhClinicalLocation.search([['id', 'child_of', ward_id]])
+        locations = NhClinicalLocation.search([['id', 'child_of', ward_id.id]])
         return locations
 
-    def _get_default_allocatings(self, cr, uid, context=None):
+    @api.model
+    def _get_default_allocatings(self):
         NhClinicalLocation = self.env['nh.clinical.location']
         NhClinicalAllocating = self.env['nh.clinical.allocating']
         locations = self._get_default_locations()
@@ -270,13 +274,11 @@ class StaffReallocationWizard(models.TransientModel):
         # TODO: Make this function return a 'special' action which performs
         # a batch allocation.
         selected = [(x.id, x.selected) for x in self.allocating_ids]
-        import pdb;pdb.set_trace()
 
-    
     @api.multi
     def reallocate(self):
         ResUsers = self.env['res.users']
-        wiz = self.read(['location_ids', 'user_ids'])
+        wiz = self.read(['location_ids', 'user_ids'])[0]
         location_ids = wiz.get('location_ids')
         loc_user_ids = self.get_users_for_locations(location_ids)
         user_ids = wiz.get('user_ids')
@@ -338,6 +340,7 @@ class doctor_allocation_wizard(models.TransientModel):
                       'NH Clinical Consultant Group',
                       'NH Clinical Registrar Group']
 
+    @api.multi
     def _get_default_ward(self):
         NhClinicalLocation = self.env['nh.clinical.location']
         ward_ids = NhClinicalLocation.search([['usage', '=', 'ward'], ['user_ids', 'in', [uid]]])
@@ -481,6 +484,7 @@ class allocating_user(models.TransientModel):
                     ['groups_id.name', 'in', ['NH Clinical HCA Group']]
                 ]
         return res
+
 
 class user_allocation_wizard(models.TransientModel):
     _name = 'nh.clinical.user.allocation'
