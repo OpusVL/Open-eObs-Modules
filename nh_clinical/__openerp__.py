@@ -32,7 +32,7 @@
     'demo': ['data/test/locations.xml', 'data/test/users.xml'],
     'css': [],
     'js': [],
-    'qweb': [],
+    'qweb': ['static/src/xml/form_tree_selected_widget_template.xml'],
     'images': [],
     'application': True,
     'installable': True,

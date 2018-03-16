@@ -1,25 +1,37 @@
-openerp.nh_clinical = function(instance, local) {
+openerp.nh_clinical = function (instance) {
 
-    local.FormTreeSelectedWidget = instance.web.form.FieldBoolean.extend({
-        start: function() {
-            // TODO: Fix this widget so that it actually runs when it's used
-            // i.e on the 'selected' field on the nh allocation wizard.
-            // I'm not entirely sure how to declare a field widget so may need to look at other extensions
-            // where it has been done on Odoo 8.0
+    var QWeb = instance.web.qweb;
+    var _t = instance.web._t;
+    
+    // Declare our widget so it can be used on a view
+    instance.web.list.columns.add('field.form_tree_selected', 'instance.web.list.FormTreeSelectedColumn');
 
+    instance.web.list.FormTreeSelectedColumn = instance.web.list.Boolean.extend({
 
-            // TODO: Add an onclick handler for each widget which makes an
-            // rpc call to `nh.clinical.allocating`.write() to write the value
-            // of the 'selected' field for the record whos row the widget is sat on.
+        // Extend the format function of the boolean widget to add a click event to the node
+        format: function (row_data, options) {
+            var self = this;
+            var clickableId = "o_web_tree_selected_clickable-" +
+                                  row_data.id.value;
 
-            // This means that when we call batch_allocate, the rows which need to be
-            // actioned will easily be visible
-            this._super();
+            // defer execution of setting the click event until the function has returned
+            window.setTimeout(function() {
+                $("#" + clickableId).click(function() {
+                    if( $('#' + clickableId + ':checkbox:checked').length > 0 ) {
+                        // Make the RPC call with the value of true
+                        new instance.web.Model("nh.clinical.allocating")
+                            .call("write", [row_data.id.value], {'vals': {'selected': true}});
+                    } else {
+                        // Make the RPC call with the value of false
+                        new instance.web.Model("nh.clinical.allocating")
+                            .call("write", [row_data.id.value], {'vals': {'selected': false}});
+                    }
+                });
+            }, 0);
+            return QWeb.render(
+                'FormTreeSelected',
+                {widget: self._format(row_data, options), clickableId: clickableId}
+            );
         },
     });
-
-    instance.web.form.widgets.add('form_tree_selected_widget', 'instance.nh_clinical.FormTreeSelectedWidget');
-
-
-
-} 
+};

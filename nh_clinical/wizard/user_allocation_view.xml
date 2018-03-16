@@ -121,7 +121,7 @@
                                colspan="2" attrs="{'invisible': [['stage','!=','allocation']]}" readonly="1">
                                 <tree>
                                     <!-- This one is for the 'Nursing Shift Change' wizard -->
-                                    <field name="selected" readonly="0" widget="form_tree_selected_widget"/>
+                                    <field name="selected" readonly="0" widget="form_tree_selected"/>
                                     <field name="location_id" readonly="1"/>
                                     <field name="patient_ids" readonly="1"/>
                                     <field name="nurse_name" widget="nh_many2one"/>
@@ -167,7 +167,7 @@
                                colspan="2" readonly="1" attrs="{'invisible': [['stage','!=','allocation']]}">
                                 <tree>
                                     <!-- This one is for the 'Nursing Re-Allocation' wizard -->
-                                    <field name="selected" readonly="0" widget="form_tree_selected_widget"/>
+                                    <field name="selected" readonly="0" widget="form_tree_selected"/>
                                     <field name="location_id" readonly="1"/>
                                     <field name="patient_ids" readonly="1"/>
                                     <field name="nurse_name" widget="nh_many2one"/>
