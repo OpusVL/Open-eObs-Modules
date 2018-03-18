@@ -75,7 +75,8 @@ class StaffAllocationWizard(models.TransientModel):
     _rec_name = 'create_uid'
 
     _stages = [['wards', 'My Ward'], ['review', 'De-allocate'],
-               ['users', 'Roll Call'], ['allocation', 'Allocation']]
+               ['users', 'Roll Call'], ['allocation', 'Allocation'],
+               ['batch_allocation', 'Batch Allocation']]
 
 
     stage = fields.Selection(_stages, string='Stage')
@@ -99,17 +100,78 @@ class StaffAllocationWizard(models.TransientModel):
                                        'allocation_id',
                                        'allocating_id',
                                        string='Allocating Locations')
+    # Clone the fields from nh.clinical.allocation to allow us to do the batch
+    # operation on this model, instead of a new modal.
+    nurse_id = fields.Many2one(
+        'res.users', 'Responsible Nurse',
+        domain=[['groups_id.name', 'in', ['NH Clinical Nurse Group']]])
+    hca_ids = fields.Many2many(
+        'res.users',
+        string='Responsible HCAs',
+        domain=[['groups_id.name', 'in', ['NH Clinical HCA Group']]])
+
 
     _defaults = {
         'stage': 'wards'
     }
 
+    # We need to clone this function from nh.clinical.allocation to ensure
+    # the values which show up in nurse_id and hca_ids are correct
+    def fields_view_get(self, cr, uid, view_id=None, view_type='form',
+                        context=None, toolbar=False, submenu=False):
+        res = super(StaffAllocationWizard, self).fields_view_get(cr, uid, view_id,
+                                                           view_type, context,
+                                                           toolbar, submenu)
+        allocation_pool = self.pool['nh.clinical.staff.allocation']
+        al_id = allocation_pool.search(cr, uid, [['create_uid', '=', uid]],
+                                       order='id desc')
+        allocation = True if al_id else False
+        if not al_id or view_type != 'form':
+            return res
+        else:
+            if allocation:
+                allocation = allocation_pool.browse(cr, uid, al_id[0],
+                                                    context=context)
+                user_ids = [u.id for u in allocation.user_ids]
+                res['fields']['nurse_id']['domain'] = [
+                    ['id', 'in', user_ids],
+                    ['groups_id.name', 'in', ['NH Clinical Nurse Group']]
+                ]
+                res['fields']['hca_ids']['domain'] = [
+                    ['id', 'in', user_ids],
+                    ['groups_id.name', 'in', ['NH Clinical HCA Group']]
+                ]
+        return res
+
+    @api.multi
+    def confirm_batch(self):
+        self.write({'stage': 'allocation'})
+        for record in [x for x in self.allocating_ids if x.selected == True]:
+            record.write({
+                'nurse_id': self.nurse_id.id,
+                'hca_ids': [[6, 0, self.hca_ids.ids]]
+            })
+        self.write({'nurse_id': False, 'hca_ids': [[6, 0, []]]})
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Nursing Shift Change',
+            'res_model': 'nh.clinical.staff.allocation',
+            'res_id': self.id,
+            'view_mode': 'form',
+            'target': 'new',
+        }
+
     @api.multi
     def batch_allocate(self):
-        # TODO: Make this function return a 'special' action which performs
-        # a batch allocation.
-        selected = [(x.id, x.selected) for x in self.allocating_ids]
-        import pdb;pdb.set_trace()
+        self.write({'stage': 'batch_allocation'})
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Nursing Shift Change',
+            'res_model': 'nh.clinical.staff.allocation',
+            'res_id': self.id,
+            'view_mode': 'form',
+            'target': 'new',
+        }
 
     @api.multi
     def submit_ward(self):
@@ -180,7 +242,7 @@ class StaffReallocationWizard(models.TransientModel):
     _rec_name = 'create_uid'
 
     _nursing_groups = ['NH Clinical Nurse Group', 'NH Clinical HCA Group']
-    _stages = [['users', 'Current Roll Call'], ['allocation', 'Allocation']]
+    _stages = [['users', 'Current Roll Call'], ['allocation', 'Allocation'], ['batch_allocation', 'Batch Allocation']]
 
     @api.multi
     def _get_default_ward(self):
@@ -194,9 +256,11 @@ class StaffReallocationWizard(models.TransientModel):
 
     def get_users_for_locations(self, locations):
         ResUsers = self.env['res.users']
+        if not isinstance(locations, list):
+            locations = locations.ids
         return ResUsers.search([
             ['groups_id.name', 'in', self._nursing_groups],
-            ['location_ids', 'in', locations.ids]]
+            ['location_ids', 'in', locations]]
         )
 
     @api.multi
@@ -260,6 +324,16 @@ class StaffReallocationWizard(models.TransientModel):
                                        'reallocation_id',
                                        'allocating_id',
                                        string='Allocating Locations')
+    # These fields are copied from nh.clinical.allocating, needed for our batch.
+    # I would have put them in a new 'batch' model, but doing anything other than an edit
+    # in a new modal closes the previous one, so instead we're just changing the stage of the existing one
+    nurse_id = fields.Many2one(
+        'res.users', 'Responsible Nurse',
+        domain=[['groups_id.name', 'in', ['NH Clinical Nurse Group']]])
+    hca_ids = fields.Many2many(
+        'res.users',
+        string='Responsible HCAs',
+        domain=[['groups_id.name', 'in', ['NH Clinical HCA Group']]])
 
     _defaults = {
         'stage': 'users',
@@ -269,11 +343,84 @@ class StaffReallocationWizard(models.TransientModel):
         'allocating_ids': _get_default_allocatings
     }
 
+    def fields_view_get(self, cr, uid, view_id=None, view_type='form',
+                        context=None, toolbar=False, submenu=False):
+        res = super(StaffReallocationWizard, self).fields_view_get(cr, uid, view_id,
+                                                           view_type, context,
+                                                           toolbar, submenu)
+        allocation_pool = self.pool['nh.clinical.staff.allocation']
+        reallocation_pool = self.pool['nh.clinical.staff.reallocation']
+        al_id = allocation_pool.search(cr, uid, [['create_uid', '=', uid]],
+                                       order='id desc')
+        real_id = reallocation_pool.search(cr, uid, [['create_uid', '=', uid]],
+                                           order='id desc')
+        allocation = True if al_id else False
+        if al_id and real_id:
+            al = allocation_pool.browse(cr, uid, al_id[0], context=context)
+            real = reallocation_pool.browse(cr, uid, real_id[0],
+                                            context=context)
+            allocation = True if al.create_date > real.create_date else False
+        if not (al_id or real_id) or view_type != 'form':
+            return res
+        else:
+            if allocation:
+                allocation = allocation_pool.browse(cr, uid, al_id[0],
+                                                    context=context)
+                user_ids = [u.id for u in allocation.user_ids]
+                res['fields']['nurse_id']['domain'] = [
+                    ['id', 'in', user_ids],
+                    ['groups_id.name', 'in', ['NH Clinical Nurse Group']]
+                ]
+                res['fields']['hca_ids']['domain'] = [
+                    ['id', 'in', user_ids],
+                    ['groups_id.name', 'in', ['NH Clinical HCA Group']]
+                ]
+            else:
+                reallocation = reallocation_pool.browse(cr, uid, real_id[0],
+                                                        context=context)
+                user_ids = [u.id for u in reallocation.user_ids]
+                res['fields']['nurse_id']['domain'] = [
+                    ['id', 'in', user_ids],
+                    ['groups_id.name', 'in', ['NH Clinical Nurse Group']]
+                ]
+                res['fields']['hca_ids']['domain'] = [
+                    ['id', 'in', user_ids],
+                    ['groups_id.name', 'in', ['NH Clinical HCA Group']]
+                ]
+        return res
+
+
+    @api.multi
+    def confirm_batch(self):
+        self.write({'stage': 'allocation'})
+        for record in [x for x in self.allocating_ids if x.selected == True]:
+            record.write({
+                'nurse_id': self.nurse_id.id,
+                'hca_ids': [[6, 0, self.hca_ids.ids]]
+            })
+        # Clear the field
+        self.write({'nurse_id': False, 'hca_ids': [[6, 0, []]]})
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Nursing Re-Allocation',
+            'res_model': 'nh.clinical.staff.reallocation',
+            'res_id': self.id,
+            'view_mode': 'form',
+            'target': 'new',
+        }
+
     @api.multi
     def batch_allocate(self):
-        # TODO: Make this function return a 'special' action which performs
-        # a batch allocation.
-        selected = [(x.id, x.selected) for x in self.allocating_ids]
+        self.write({'stage': 'batch_allocation'})
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Nursing Re-Allocation',
+            'res_model': 'nh.clinical.staff.reallocation',
+            'res_id': self.id,
+            'view_mode': 'form',
+            'target': 'new',
+        }
+
 
     @api.multi
     def reallocate(self):
@@ -343,16 +490,17 @@ class doctor_allocation_wizard(models.TransientModel):
     @api.multi
     def _get_default_ward(self):
         NhClinicalLocation = self.env['nh.clinical.location']
-        ward_ids = NhClinicalLocation.search([['usage', '=', 'ward'], ['user_ids', 'in', [uid]]])
+        ward_ids = NhClinicalLocation.search([['usage', '=', 'ward'], ['user_ids', 'in', [self.env.uid]]])
         if not ward_ids:
             raise osv.except_osv(
                 'Shift Management Error!',
                 'You must be in charge of a ward to do this task!')
         return ward_ids[0]
 
+    @api.multi
     def _get_default_locations(self):
         NhClinicalLocation = self.env['nh.clinical.location']
-        ward_ids = NhClinicalLocation.search([['usage', '=', 'ward'], ['user_ids', 'in', [uid]]])
+        ward_ids = NhClinicalLocation.search([['usage', '=', 'ward'], ['user_ids', 'in', [self.env.uid]]])
         if not ward_ids:
             raise osv.except_osv(
                 'Shift Management Error!',
@@ -360,10 +508,11 @@ class doctor_allocation_wizard(models.TransientModel):
         location_ids = NhClinicalLocation.search([['id', 'child_of', ward_ids.ids]])
         return location_ids
 
+    @api.multi
     def _get_current_doctors(self):
         NhClinicalLocation = self.env['nh.clinical.location']
         ResUsers = self.env['res.users']
-        ward_ids = NhClinicalLocation.search([['usage', '=', 'ward'], ['user_ids', 'in', [uid]]])
+        ward_ids = NhClinicalLocation.search([['usage', '=', 'ward'], ['user_ids', 'in', [self.env.uid]]])
         if not ward_ids:
             raise osv.except_osv(
                 'Shift Management Error!',
@@ -395,6 +544,7 @@ class doctor_allocation_wizard(models.TransientModel):
         'doctor_ids': _get_current_doctors
     }
 
+    @api.multi
     def deallocate(self):
         deallocate_location_ids = self.location_ids.ids
 
@@ -417,6 +567,7 @@ class doctor_allocation_wizard(models.TransientModel):
             'target': 'new',
         }
 
+    @api.multi
     def submit_users(self):
         NhClinicalUserResponsibilityAllocation = self.env[
             'nh.clinical.user.responsibility.allocation'
@@ -427,9 +578,8 @@ class doctor_allocation_wizard(models.TransientModel):
                 'responsible_user_id': doctor.id,
                 'location_ids': [[6, 0, [self.ward_id.id]]]
             })
-            activity.complete()
+            NhActivity.complete(activity)
         return {'type': 'ir.actions.act_window_close'}
-
 
 class allocating_user(models.TransientModel):
     _name = 'nh.clinical.allocating'
@@ -450,21 +600,31 @@ class allocating_user(models.TransientModel):
         domain=[['groups_id.name', 'in', ['NH Clinical HCA Group']]])
     nurse_name = fields.Char(related='nurse_id.name', size=100, string='Responsible Nurse')
 
-    def fields_view_get(self, view_id=None, view_type='form', toolbar=False, submenu=False):
-        res = super(allocating_user, self).fields_view_get(view_id, view_type,
+
+    def fields_view_get(self, cr, uid, view_id=None, view_type='form',
+                        context=None, toolbar=False, submenu=False):
+        res = super(allocating_user, self).fields_view_get(cr, uid, view_id,
+                                                           view_type, context,
                                                            toolbar, submenu)
-        NhClinicalStaffAllocation = self.env['nh.clinical.staff.allocation']
-        NhClinicalStaffReallocation = self.env['nh.clinical.staff.reallocation']
-        al = NhClinicalStaffAllocation.search([['create_uid', '=', self.env.uid]], order='id desc')
-        real = NhClinicalStaffReallocation.search([['create_uid', '=', self.env.uid]], order='id desc')
-        allocation = True if al else False
-        if al and real:
+        allocation_pool = self.pool['nh.clinical.staff.allocation']
+        reallocation_pool = self.pool['nh.clinical.staff.reallocation']
+        al_id = allocation_pool.search(cr, uid, [['create_uid', '=', uid]],
+                                       order='id desc')
+        real_id = reallocation_pool.search(cr, uid, [['create_uid', '=', uid]],
+                                           order='id desc')
+        allocation = True if al_id else False
+        if al_id and real_id:
+            al = allocation_pool.browse(cr, uid, al_id[0], context=context)
+            real = reallocation_pool.browse(cr, uid, real_id[0],
+                                            context=context)
             allocation = True if al.create_date > real.create_date else False
-        if not (al or real) or view_type != 'form':
+        if not (al_id or real_id) or view_type != 'form':
             return res
         else:
             if allocation:
-                user_ids = [u.id for u in al.user_ids]
+                allocation = allocation_pool.browse(cr, uid, al_id[0],
+                                                    context=context)
+                user_ids = [u.id for u in allocation.user_ids]
                 res['fields']['nurse_id']['domain'] = [
                     ['id', 'in', user_ids],
                     ['groups_id.name', 'in', ['NH Clinical Nurse Group']]
@@ -474,7 +634,9 @@ class allocating_user(models.TransientModel):
                     ['groups_id.name', 'in', ['NH Clinical HCA Group']]
                 ]
             else:
-                user_ids = [u.id for u in real.user_ids]
+                reallocation = reallocation_pool.browse(cr, uid, real_id[0],
+                                                        context=context)
+                user_ids = [u.id for u in reallocation.user_ids]
                 res['fields']['nurse_id']['domain'] = [
                     ['id', 'in', user_ids],
                     ['groups_id.name', 'in', ['NH Clinical Nurse Group']]
@@ -484,7 +646,6 @@ class allocating_user(models.TransientModel):
                     ['groups_id.name', 'in', ['NH Clinical HCA Group']]
                 ]
         return res
-
 
 class user_allocation_wizard(models.TransientModel):
     _name = 'nh.clinical.user.allocation'
