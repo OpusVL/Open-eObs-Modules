@@ -95,10 +95,14 @@
                         <button string="Confirm Allocation" type="object" name="complete" class="oe_highlight"
                                 attrs="{'invisible': [['stage','!=','allocation']]}"/>
                         <button string="Batch Allocate" type="object" name="batch_allocate" class="oe_highlight"
-                                attrs="{'invisible': [['stage','!=','allocation']]}" context="{'allocating_ids': allocating_ids}"/>
+                                attrs="{'invisible': [['stage','!=','allocation']]}"/>
+                        <button string="Confirm" type="object" name="confirm_batch" class="oe_highlight"
+                                attrs="{'invisible': [['stage', '!=', 'batch_allocation']]}"/>
                     </header>
                     <sheet>
                         <group>
+                            <field name="nurse_id" widget="nh_many2one" options="{'no_create': True}" attrs="{'invisible': [['stage', '!=', 'batch_allocation']]}"/>
+                            <field name="hca_ids" widget="many2many_tags" options="{'no_create': True}" attrs="{'invisible': [['stage', '!=', 'batch_allocation']]}"/>
                             <field name="ward_id" options="{'no_create': True, 'no_open': True}" colspan="2" widget="nh_many2one"
                                    attrs="{'readonly': [['stage','!=','wards']]}" required="1"
                                    string="Ward:"/>
@@ -151,9 +155,13 @@
                                 attrs="{'invisible': [['stage','!=','allocation']]}"/>
                         <button string="Batch Allocate" type="object" name="batch_allocate" 
                                 nh_icon="allocate_btn" class="oe_highlight" attrs="{'invisible': [['stage','!=','allocation']]}"/>
+                        <button string="Confirm" type="object" name="confirm_batch" class="oe_highlight"
+                                attrs="{'invisible': [['stage', '!=', 'batch_allocation']]}"/>
                     </header>
                     <sheet>
                         <group>
+                            <field name="nurse_id" widget="nh_many2one" options="{'no_create': True}" attrs="{'invisible': [['stage', '!=', 'batch_allocation']]}"/>
+                            <field name="hca_ids" widget="many2many_tags" options="{'no_create': True}" attrs="{'invisible': [['stage', '!=', 'batch_allocation']]}"/>
                             <field name="ward_id" options="{'no_open': True}" readonly="1"/>
                         </group>
                         <group>
