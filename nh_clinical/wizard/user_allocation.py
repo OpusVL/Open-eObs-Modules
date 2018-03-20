@@ -434,10 +434,10 @@ class StaffReallocationWizard(models.TransientModel):
         for u_id in loc_user_ids:
             if u_id not in user_ids and u_id != self.env.uid:
                 recompute = True
-                user = u_id.read(['location_ids'])
+                user = u_id.read(['location_ids'])[0]
                 uloc_ids = user.get('location_ids')
                 loc_ids = list_diff(uloc_ids, location_ids)
-                self.responsibility_allocation_activity(u_id, loc_ids)
+                self.responsibility_allocation_activity(u_id.id, loc_ids)
                 # Remove patient followers
                 loc_ids = list_intersect(uloc_ids, location_ids)
                 self.unfollow_patients_in_locations(loc_ids)
