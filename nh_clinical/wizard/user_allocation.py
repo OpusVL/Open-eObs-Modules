@@ -53,6 +53,7 @@ class AllocationWizards(models.AbstractModel):
             NhActivity.complete(unfollow_activity)
         return True
 
+    @api.multi
     def complete(self):
         NhClinicalAllocating = self.env['nh.clinical.allocating']
         allocation = {u.id: [l.id for l in u.location_ids] for u in
