@@ -61,7 +61,7 @@ class AllocationWizards(models.AbstractModel):
         for allocating in self.allocating_ids:
             if allocating.nurse_id:
                 allocation[allocating.nurse_id.id].append(allocating.location_id.id)
-                if allocating.nurse_id.id == uid:
+                if allocating.nurse_id.id == self.env.uid:
                     allocation[allocating.nurse_id.id].append(self.ward_id.id)
             for hca in allocating.hca_ids:
                 allocation[hca.id].append(allocating.location_id.id)
@@ -432,7 +432,7 @@ class StaffReallocationWizard(models.TransientModel):
         user_ids = wiz.get('user_ids')
         recompute = False
         for u_id in loc_user_ids:
-            if u_id not in user_ids and u_id != uid:
+            if u_id not in user_ids and u_id != self.env.uid:
                 recompute = True
                 user = u_id.read(['location_ids'])
                 uloc_ids = user.get('location_ids')
@@ -464,15 +464,15 @@ class StaffReallocationWizard(models.TransientModel):
             if allocating.nurse_id:
                 allocation[allocating.nurse_id.id].append(
                     allocating.location_id.id)
-                if allocating.nurse_id.id == uid:
+                if allocating.nurse_id.id == self.env.uid:
                     allocation[allocating.nurse_id.id].append(
                         self.ward_id.id)
             for hca in allocating.hca_ids:
                 allocation[hca.id].append(allocating.location_id.id)
-            if uid not in allocation:
-                allocation[uid] = [self.ward_id.id]
-            elif self.ward_id.id not in allocation.get(uid):
-                allocation[uid].append(self.ward_id.id)
+            if self.env.uid not in allocation:
+                allocation[self.env.uid] = [self.ward_id.id]
+            elif self.ward_id.id not in allocation.get(self.env.uid):
+                allocation[self.env.uid].append(self.ward_id.id)
         for key, value in allocation.iteritems():
             self.responsibility_allocation_activity(key, value)
         return {'type': 'ir.actions.act_window_close'}
