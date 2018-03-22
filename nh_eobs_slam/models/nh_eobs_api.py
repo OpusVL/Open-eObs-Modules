@@ -91,9 +91,9 @@ class NhEobsApi(orm.AbstractModel):
                 ('patient_id', 'in', ids),
                 ('state', '=', 'started'),
                 ('data_model', '=', 'nh.clinical.spell'),
-                '|',
-                ('user_ids', 'in', [uid]),  # filter user responsibility
-                ('patient_id.follower_ids', 'in', [uid])
+                # '|',
+                # ('user_ids', 'in', [uid]),  # filter user responsibility
+                # ('patient_id.follower_ids', 'in', [uid])
             ]
         else:
             domain += [
