@@ -340,8 +340,13 @@ class nh_clinical_api(orm.AbstractModel):
         :rtype: bool
         """
         activity_pool = self.pool['nh.activity']
-        domain = [('id', '=', activity_id), '|', ('user_ids', 'in', [uid]),
-                  ('user_id', '=', uid)]
+
+        # Original version
+        # domain = [('id', '=', activity_id), '|', ('user_ids', 'in', [uid]),
+        #           ('user_id', '=', uid)]
+
+        # New version
+        domain = [('id', '=', activity_id)]
         activity_ids = activity_pool.search(cr, uid, domain, context=context)
         if not activity_ids:
             return False
