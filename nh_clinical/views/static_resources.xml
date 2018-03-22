@@ -3,6 +3,7 @@
         <template id="assets_backend" name="nh_clinical assets" inherit_id="web.assets_backend">
             <xpath expr="." position="inside">
                 <script type="text/javascript" src="/nh_clinical/static/src/js/Many2ManyTags_override.js"></script>
+                <script type="text/javascript" src="/nh_clinical/static/src/js/form_tree_selected_widget.js"></script>
             </xpath>
         </template>
     </data>
