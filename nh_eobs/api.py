@@ -503,7 +503,7 @@ class nh_eobs_api(orm.AbstractModel):
         """
         activity_pool = self.pool['nh.activity']
         spell_id = activity_pool.search(
-            cr, uid, [['location_id.user_ids', 'in', [uid]],
+            cr, uid, [
                       ['patient_id', '=', int(patient_id)],
                       ['state', '=', 'started'],
                       ['data_model', '=', 'nh.clinical.spell']],
@@ -623,7 +623,7 @@ class nh_eobs_api(orm.AbstractModel):
                 ('patient_id', 'in', ids),
                 ('state', '=', 'started'),
                 ('data_model', '=', 'nh.clinical.spell'),
-                '|',
+                # '|',
                 ('patient_id.follower_ids', 'in', [uid])
             ]
         else:
