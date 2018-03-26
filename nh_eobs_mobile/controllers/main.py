@@ -604,7 +604,7 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
                 'items': patients,
                 'notification_count': len(follow_activities),
                 'followed_items': following_patients,
-                'section': 'patient',
+                'section': 'allPatient',
                 'username': request.session['login'],
                 'urls': URLS}
         )
