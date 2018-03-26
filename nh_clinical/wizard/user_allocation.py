@@ -1,6 +1,7 @@
 # Part of NHClinical. See LICENSE file for full copyright and licensing details
 # -*- coding: utf-8 -*-
 from openerp import models, fields, api
+from openerp.osv import osv
 
 
 def list_diff(a, b):
