@@ -46,17 +46,17 @@ class NHClinicalFoodAndFluid(models.Model):
         string='Consider Special Dietary Needs', necessary=False
     )
     fluid_taken = obs_fields.Integer('Fluid Taken (ml) - Include IV / NG',
-                                     required=True)
-    fluid_description = obs_fields.Text('Fluid Description', required=True)
-    food_taken = obs_fields.Text('Food Taken', required=True)
+                                     necessary=False)
+    fluid_description = obs_fields.Text('Fluid Description')
+    food_taken = obs_fields.Text('Food Taken')
     food_fluid_rejected = obs_fields.Text(
-        'Food and Fluid Offered but Rejected', required=True
+        'Food and Fluid Offered but Rejected', necessary=False
     )
     passed_urine = obs_fields.Selection(_passed_urine_options, 'Passed Urine',
                                         required=True)
     bowels_open = obs_fields.Selection(_bowels_open_options, 'Bowels Open',
                                        required=True)
-    fluid_output = obs_fields.Integer('Fluid Output (ml)', required=True)
+    fluid_output = obs_fields.Integer('Fluid Output (ml)', necessary=False)
 
     @api.constrains('fluid_output')
     def _in_min_max_range(self):
@@ -144,32 +144,28 @@ class NHClinicalFoodAndFluid(models.Model):
                 'title': 'Fluid Taken Guidance',
                 'label': 'Fluid Taken Guidance'
             },
-            'required': True,
-            # 'necessary': 'false'
+            'necessary': 'false'
         },
         {
             'name': 'fluid_description',
             'type': 'text',
             'label': 'Fluid Description',
             'initially_hidden': False,
-            'required': True,
-            # 'necessary': 'false'
+            'necessary': 'false'
         },
         {
             'name': 'food_taken',
             'type': 'text',
             'label': 'Food Taken',
             'initially_hidden': False,
-            'required': True,
-            # 'necessary': 'false'
+            'necessary': 'false'
         },
         {
             'name': 'food_fluid_rejected',
             'type': 'text',
             'label': 'Food and Fluid Offered but Rejected',
             'initially_hidden': False,
-            'required': True,
-            # 'necessary': 'false'
+            'necessary': 'false'
         },
         {
             'name': 'passed_urine',
@@ -217,8 +213,7 @@ class NHClinicalFoodAndFluid(models.Model):
             'min': 1,
             'max': 999,
             'initially_hidden': True,
-            'required': True,
-            # 'necessary': False
+            'necessary': False
         },
         {
             'name': 'bowels_open',
