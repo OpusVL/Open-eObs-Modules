@@ -153,7 +153,10 @@ class StaffAllocationWizard(models.TransientModel):
                 'nurse_id': self.nurse_id.id,
                 'hca_ids': [[6, 0, self.hca_ids.ids]]
             })
+        # Clear the field
         self.write({'nurse_id': False, 'hca_ids': [[6, 0, []]]})
+        # Clear the selected field
+        self.allocating_ids.write({'selected': False})
         return {
             'type': 'ir.actions.act_window',
             'name': 'Nursing Shift Change',
@@ -402,6 +405,8 @@ class StaffReallocationWizard(models.TransientModel):
             })
         # Clear the field
         self.write({'nurse_id': False, 'hca_ids': [[6, 0, []]]})
+        # Clear the selected tickboxes
+        self.allocating_ids.write({'selected': False})
         return {
             'type': 'ir.actions.act_window',
             'name': 'Nursing Re-Allocation',
