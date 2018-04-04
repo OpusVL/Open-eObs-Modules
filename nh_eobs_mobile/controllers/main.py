@@ -75,7 +75,6 @@ route_manager.add_route(patient_list)
 route_manager.add_route(single_task)
 route_manager.add_route(task_list)
 route_manager.add_route(all_patients)
-# route_manager.add_route(escalations)
 
 
 def abort_and_redirect(url):
@@ -586,15 +585,17 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
 
     @http.route(URLS['escalations'] + '<creator_id>', type='http', auth='user')
     def process_escalations(self, creator_id, *args, **kwargs):
+        """
+        The route loaded once the observation has been confirmed. Prepares values for the escalation tasks form
+        :param creator_id: The id of the activity that started the chain of escalation tasks
+        :param args:
+        :param kwargs:
+        :return: The escalations form view
+        """
         cr, uid, context = request.cr, request.session.uid, request.context
         obj_nh_activity = request.registry['nh.activity']
         obj_nh_eobs_api = request.registry('nh.eobs.api')
-        task_models = {
-            "nh.clinical.notification.frequency": "",
-            "nh.clinical.notification.medical_team": "",
-            "nh.clinical.notification.shift_coordinator": "",
-            "nh.clinical.notification.assessment": ""
-        }
+
         cancel_reasons = obj_nh_eobs_api.get_cancel_reasons(cr, uid, context=context)
         activities = obj_nh_activity.search(cr, uid, [('creator_id', '=', int(creator_id))])
         data = {
@@ -627,6 +628,12 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
         )
 
     def _get_input_field(self, obj):
+        """
+        Some escalation tasks require additional data when they are confirmed. This checks the type of task and if
+        applicable returns the required field type and associated data
+        :param obj: The task type (defined as the model that the task is recorded in)
+        :return: dict(): A dictionary containing the type of input field required and any associated values
+        """
 
         input_field = dict()
 
@@ -651,6 +658,13 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
 
     @http.route(URLS['confirm_escalations'], type='http', auth='user')
     def confirm_escalations(self, *args, **kwargs):
+        """
+        The return route once the escalation tasks form has been confirmed (with extra data if applicable). Updates the
+        state for the task activity record and adds any additional data to the task record.
+        :param args:
+        :param kwargs: The fields and values from the escalation tasks form
+        :return: the 'get_tasks()' method
+        """
         cr, uid, context = request.cr, request.session.uid, request.context
         obj_nh_activity = request.registry['nh.activity']
         for key, val in kwargs.items():
