@@ -100,82 +100,7 @@ class NhEobsApiRoutes(orm.AbstractModel):
 
         if obs_model_name == "ews":
 
-            task_tree = {
-                "nurse": {
-                    "case_1": [
-                        {
-                            "model": "nh.clinical.notification.shift_coordinator",
-                            "fields": {}
-                        },
-                        {
-                            "model": "nh.clinical.notification.frequency",
-                            "fields": {
-                                "observation": "nh.clinical.patient.observation.ews",
-                                "frequency": False
-                            }
-                        },
-                        {
-                            "model": "nh.clinical.notification.medical_team",
-                            "fields": {
-                                "doctor_notified": False
-                            }
-                        }
-                    ],
-                    "case_2": [
-                        {
-                            "model": "nh.clinical.notification.shift_coordinator",
-                            "fields": {}
-                        },
-                        {
-                            "model": "",
-                            "fields": {}
-                        },
-                        {
-                            "model": "",
-                            "fields": {}
-                        }
-
-                    ],
-                    "case_3": [
-                        {
-                            "model": "nh.clinical.notification.medical_team",
-                            "fields": {
-                                "doctor_notified": False
-                            }
-                        },
-                        {
-                            "model": "nh.clinical.notification.ambulance",
-                            "fields": {}
-                        }
-                    ],
-                    "case_4": [
-                        {
-                            "model": "nh.clinical.notification.medical_team",
-                            "fields": {
-                                "doctor_notified": False
-                            }
-                        },
-                        {
-                            "model": "nh.clinical.notification.ambulance",
-                            "fields": {}
-                        }
-                    ]
-                },
-                "hca": {
-                    "case_1": [
-                        "inform_nurse"
-                    ],
-                    "case_2": [
-                        "inform_nurse"
-                    ],
-                    "case_3": [
-                        "inform_nurse"
-                    ],
-                    "case_4": [
-                        "inform_nurse"
-                    ],
-                }
-            }
+            task_tree = self._get_task_tree(uid)
 
             user_type = "nurse"
             current_case = self._get_case(obs)
@@ -189,35 +114,7 @@ class NhEobsApiRoutes(orm.AbstractModel):
 
             obj_nh_activity = self.pool['nh.activity']
             for t in tasks_required:
-                obj_model = self.pool[t['model']]
-                activity_id = obj_nh_activity.create(cr, uid,
-                                                     {
-                                                         "data_model": t['model'],
-                                                         "state": "new",
-                                                         "creator_id": int(new_activity_id),
-                                                         "user_id": new_activity.user_id.id,
-                                                         "parent_id": new_activity.parent_id.id,
-                                                         "date_deadline": datetime.now() + timedelta(minutes=5),
-                                                         # "data_ref": False,
-                                                         "pos_id": new_activity.pos_id.id,
-                                                         "patient_id": new_activity.patient_id.id,
-                                                         "location_id": new_activity.location_id.id,
-                                                         "spell_activity_id": new_activity.spell_activity_id.id,
-                                                     }
-                                                     )
-                t['fields'].update({
-                    "activity_id": activity_id,
-                    "patient_id": new_activity.patient_id.id,
-                })
-                model_id = obj_model.create(cr, uid, t['fields'])
-                obj_nh_activity.write(cr, uid, activity_id, {"data_ref": "%s,%s" % (t['model'], model_id)})
-                task_list.append(
-                    {
-                        "model": t['model'],
-                        "activity_id": activity_id,
-                        "task_id": model_id
-                    }
-                )
+                self._create_associated_tasks(cr, uid, t, new_activity, new_activity_id, obj_nh_activity, task_list)
 
         description = self.get_submission_message(obs)
         response_data = obs.get_submission_response_data()
@@ -236,6 +133,37 @@ class NhEobsApiRoutes(orm.AbstractModel):
             headers=ResponseJSON.HEADER_CONTENT_TYPE
         )
 
+    def _create_associated_tasks(self, cr, uid, t, new_activity, new_activity_id, obj_nh_activity, task_list):
+        obj_model = self.pool[t['model']]
+        activity_id = obj_nh_activity.create(cr, uid,
+                                             {
+                                                 "data_model": t['model'],
+                                                 "state": "new",
+                                                 "creator_id": int(new_activity_id),
+                                                 "user_id": new_activity.user_id.id,
+                                                 "parent_id": new_activity.parent_id.id,
+                                                 "date_deadline": datetime.now() + timedelta(minutes=5),
+                                                 # "data_ref": False,
+                                                 "pos_id": new_activity.pos_id.id,
+                                                 "patient_id": new_activity.patient_id.id,
+                                                 "location_id": new_activity.location_id.id,
+                                                 "spell_activity_id": new_activity.spell_activity_id.id,
+                                             }
+                                             )
+        t['fields'].update({
+            "activity_id": activity_id,
+            "patient_id": new_activity.patient_id.id,
+        })
+        model_id = obj_model.create(cr, uid, t['fields'])
+        obj_nh_activity.write(cr, uid, activity_id, {"data_ref": "%s,%s" % (t['model'], model_id)})
+        task_list.append(
+            {
+                "model": t['model'],
+                "activity_id": activity_id,
+                "task_id": model_id
+            }
+        )
+
     def _get_case(self, obs):
         score = obs.score
         case = ""
@@ -248,48 +176,12 @@ class NhEobsApiRoutes(orm.AbstractModel):
 
         return case
 
-    @http.route(
-        **route_api.route_manager.expose_route('json_task_form_action'))
-    def process_ajax_form(self, *args, **kw):
-        observation = kw.get('observation')  # TODO: add a check if is None (?)
-        task_id = kw.get('task_id')  # TODO: add a check if is None (?)
-        cr, uid, context = request.cr, request.uid, request.context
-        api = request.registry('nh.eobs.api')
-        activity_api = request.registry('nh.activity')
-        ob_str = 'nh.clinical.patient.observation.' + observation
-        ob_pool = request.registry(ob_str)
-        converter_pool = request.registry('ir.fields.converter')
-        converter = converter_pool.for_model(cr, uid, ob_pool, str,
-                                             context=context)
-        kw_copy = kw.copy() if kw else {}
-        data_timestamp = kw_copy.get('startTimestamp', None)
-        data_task_id = kw_copy.get('taskId', None)
-        data_device_id = kw_copy.get('device_id', None)
-
-        if data_timestamp is not None:
-            del kw_copy['startTimestamp']
-        if data_task_id is not None:
-            del kw_copy['taskId']
-        if task_id is not None:
-            del kw_copy['task_id']
-        if observation is not None:
-            del kw_copy['observation']
-        if data_device_id is not None:
-            del kw_copy['device_id']
-        for key, value in kw_copy.items():
-            if not value:
-                del kw_copy[key]
-
-        converted_data = converter(kw_copy, _logger.debug)
-        if data_timestamp is not None:
-            converted_data['date_started'] = \
-                datetime.fromtimestamp(int(data_timestamp)).strftime(DTF)
-        if data_device_id is not None:
-            converted_data['device_id'] = data_device_id
-
-        api.complete(cr, uid, int(task_id), converted_data, context)
-        activity = activity_api.browse(cr, uid, int(task_id))
-        obs = activity.data_ref
+    def _get_task_tree(self, uid):
+        """
+        A tree representation of the escalation tasks that are required depending on the the observation score.
+        :param uid: the current user id
+        :return: dict(): The task tree
+        """
 
         task_tree = {
             "nurse": {
@@ -368,6 +260,53 @@ class NhEobsApiRoutes(orm.AbstractModel):
             }
         }
 
+        return task_tree
+
+    @http.route(
+        **route_api.route_manager.expose_route('json_task_form_action'))
+    def process_ajax_form(self, *args, **kw):
+        observation = kw.get('observation')  # TODO: add a check if is None (?)
+        task_id = kw.get('task_id')  # TODO: add a check if is None (?)
+        cr, uid, context = request.cr, request.uid, request.context
+        api = request.registry('nh.eobs.api')
+        activity_api = request.registry('nh.activity')
+        ob_str = 'nh.clinical.patient.observation.' + observation
+        ob_pool = request.registry(ob_str)
+        converter_pool = request.registry('ir.fields.converter')
+        converter = converter_pool.for_model(cr, uid, ob_pool, str,
+                                             context=context)
+        kw_copy = kw.copy() if kw else {}
+        data_timestamp = kw_copy.get('startTimestamp', None)
+        data_task_id = kw_copy.get('taskId', None)
+        data_device_id = kw_copy.get('device_id', None)
+
+        if data_timestamp is not None:
+            del kw_copy['startTimestamp']
+        if data_task_id is not None:
+            del kw_copy['taskId']
+        if task_id is not None:
+            del kw_copy['task_id']
+        if observation is not None:
+            del kw_copy['observation']
+        if data_device_id is not None:
+            del kw_copy['device_id']
+        for key, value in kw_copy.items():
+            if not value:
+                del kw_copy[key]
+
+        converted_data = converter(kw_copy, _logger.debug)
+        if data_timestamp is not None:
+            converted_data['date_started'] = \
+                datetime.fromtimestamp(int(data_timestamp)).strftime(DTF)
+        if data_device_id is not None:
+            converted_data['device_id'] = data_device_id
+
+        api.complete(cr, uid, int(task_id), converted_data, context)
+        activity = activity_api.browse(cr, uid, int(task_id))
+        obs = activity.data_ref
+
+        task_tree = self._get_task_tree(uid)
+
         user_type = "nurse"
         current_case = self._get_case(obs)
         tasks_required = task_tree[user_type][current_case]
@@ -380,35 +319,7 @@ class NhEobsApiRoutes(orm.AbstractModel):
 
         obj_nh_activity = self.pool['nh.activity']
         for t in tasks_required:
-            obj_model = self.pool[t['model']]
-            activity_id = obj_nh_activity.create(cr, uid,
-                                                 {
-                                                     "data_model": t['model'],
-                                                     "state": "new",
-                                                     "creator_id": int(task_id),
-                                                     "user_id": activity.user_id.id,
-                                                     "parent_id": activity.parent_id.id,
-                                                     "date_deadline": datetime.now() + timedelta(minutes=5),
-                                                     # "data_ref": False,
-                                                     "pos_id": activity.pos_id.id,
-                                                     "patient_id": activity.patient_id.id,
-                                                     "location_id": activity.location_id.id,
-                                                     "spell_activity_id": activity.spell_activity_id.id,
-                                                 }
-                                                 )
-            t['fields'].update({
-                "activity_id": activity_id,
-                "patient_id": activity.patient_id.id,
-            })
-            model_id = obj_model.create(cr, uid, t['fields'])
-            obj_nh_activity.write(cr, uid, activity_id, {"data_ref": "%s,%s" % (t['model'], model_id)})
-            task_list.append(
-                {
-                    "model": t['model'],
-                    "activity_id": activity_id,
-                    "task_id": model_id
-                }
-            )
+            self._create_associated_tasks(cr, uid, t, activity, task_id, obj_nh_activity, task_list)
 
         description = self.get_submission_message(obs)
         response_data = obs.get_submission_response_data()
