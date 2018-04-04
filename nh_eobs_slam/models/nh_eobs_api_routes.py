@@ -1,5 +1,6 @@
+import json
 import logging
-from datetime import datetime
+from datetime import datetime, timedelta
 
 import openerp.modules as addons
 from openerp import http
@@ -97,11 +98,132 @@ class NhEobsApiRoutes(orm.AbstractModel):
         new_activity = activity_api.browse(cr, uid, new_activity_id)
         obs = new_activity.data_ref
 
+        if obs_model_name == "ews":
+
+            task_tree = {
+                "nurse": {
+                    "case_1": [
+                        {
+                            "model": "nh.clinical.notification.shift_coordinator",
+                            "fields": {}
+                        },
+                        {
+                            "model": "nh.clinical.notification.frequency",
+                            "fields": {
+                                "observation": "nh.clinical.patient.observation.ews",
+                                "frequency": False
+                            }
+                        },
+                        {
+                            "model": "nh.clinical.notification.medical_team",
+                            "fields": {
+                                "doctor_notified": False
+                            }
+                        }
+                    ],
+                    "case_2": [
+                        {
+                            "model": "nh.clinical.notification.shift_coordinator",
+                            "fields": {}
+                        },
+                        {
+                            "model": "",
+                            "fields": {}
+                        },
+                        {
+                            "model": "",
+                            "fields": {}
+                        }
+
+                    ],
+                    "case_3": [
+                        {
+                            "model": "nh.clinical.notification.medical_team",
+                            "fields": {
+                                "doctor_notified": False
+                            }
+                        },
+                        {
+                            "model": "nh.clinical.notification.ambulance",
+                            "fields": {}
+                        }
+                    ],
+                    "case_4": [
+                        {
+                            "model": "nh.clinical.notification.medical_team",
+                            "fields": {
+                                "doctor_notified": False
+                            }
+                        },
+                        {
+                            "model": "nh.clinical.notification.ambulance",
+                            "fields": {}
+                        }
+                    ]
+                },
+                "hca": {
+                    "case_1": [
+                        "inform_nurse"
+                    ],
+                    "case_2": [
+                        "inform_nurse"
+                    ],
+                    "case_3": [
+                        "inform_nurse"
+                    ],
+                    "case_4": [
+                        "inform_nurse"
+                    ],
+                }
+            }
+
+            user_type = "nurse"
+            current_case = self._get_case(obs)
+            tasks_required = task_tree[user_type][current_case]
+
+            task_list = [
+                {
+                    "escalation_task_list": True,
+                }
+            ]
+
+            obj_nh_activity = self.pool['nh.activity']
+            for t in tasks_required:
+                obj_model = self.pool[t['model']]
+                activity_id = obj_nh_activity.create(cr, uid,
+                                                     {
+                                                         "data_model": t['model'],
+                                                         "state": "new",
+                                                         "creator_id": int(new_activity_id),
+                                                         "user_id": new_activity.user_id.id,
+                                                         "parent_id": new_activity.parent_id.id,
+                                                         "date_deadline": datetime.now() + timedelta(minutes=5),
+                                                         # "data_ref": False,
+                                                         "pos_id": new_activity.pos_id.id,
+                                                         "patient_id": new_activity.patient_id.id,
+                                                         "location_id": new_activity.location_id.id,
+                                                         "spell_activity_id": new_activity.spell_activity_id.id,
+                                                     }
+                                                     )
+                t['fields'].update({
+                    "activity_id": activity_id,
+                    "patient_id": new_activity.patient_id.id,
+                })
+                model_id = obj_model.create(cr, uid, t['fields'])
+                obj_nh_activity.write(cr, uid, activity_id, {"data_ref": "%s,%s" % (t['model'], model_id)})
+                task_list.append(
+                    {
+                        "model": t['model'],
+                        "activity_id": activity_id,
+                        "task_id": model_id
+                    }
+                )
+
         description = self.get_submission_message(obs)
         response_data = obs.get_submission_response_data()
 
         response_json = ResponseJSON.get_json_data(
-            status=ResponseJSON.STATUS_SUCCESS,
+            status=ResponseJSON.STATUS_LIST if "ews" in obs_model_name else ResponseJSON.STATUS_SUCCESS,
             title='Successfully Submitted{0} {1}'.format(
                 ' Partial' if obs.is_partial else '',
                 observation_pool.get_description()
@@ -113,6 +235,18 @@ class NhEobsApiRoutes(orm.AbstractModel):
             response_json,
             headers=ResponseJSON.HEADER_CONTENT_TYPE
         )
+
+    def _get_case(self, obs):
+        score = obs.score
+        case = ""
+        if 0 < score <= 4:
+            case = "case_1"
+        elif 5 <= score <= 6:
+            case = "case_3"
+        elif 7 <= score:
+            case = "case_4"
+
+        return case
 
     @http.route(
         **route_api.route_manager.expose_route('json_task_form_action'))
@@ -157,16 +291,136 @@ class NhEobsApiRoutes(orm.AbstractModel):
         activity = activity_api.browse(cr, uid, int(task_id))
         obs = activity.data_ref
 
+        task_tree = {
+            "nurse": {
+                "case_1": [
+                    {
+                        "model": "nh.clinical.notification.shift_coordinator",
+                        "fields": {}
+                    },
+                    {
+                        "model": "nh.clinical.notification.frequency",
+                        "fields": {
+                            "observation": "nh.clinical.patient.observation.ews",
+                            "frequency": False
+                        }
+                    },
+                    {
+                        "model": "nh.clinical.notification.medical_team",
+                        "fields": {
+                            "doctor_notified": False
+                        }
+                    }
+                ],
+                "case_2": [
+                    {
+                        "model": "nh.clinical.notification.shift_coordinator",
+                        "fields": {}
+                    },
+                    {
+                        "model": "",
+                        "fields": {}
+                    },
+                    {
+                        "model": "",
+                        "fields": {}
+                    }
+
+                ],
+                "case_3": [
+                    {
+                        "model": "nh.clinical.notification.medical_team",
+                        "fields": {
+                            "doctor_notified": False
+                        }
+                    },
+                    {
+                        "model": "nh.clinical.notification.ambulance",
+                        "fields": {}
+                    }
+                ],
+                "case_4": [
+                    {
+                        "model": "nh.clinical.notification.medical_team",
+                        "fields": {
+                            "doctor_notified": False
+                        }
+                    },
+                    {
+                        "model": "nh.clinical.notification.ambulance",
+                        "fields": {}
+                    }
+                ]
+            },
+            "hca": {
+                "case_1": [
+                    "inform_nurse"
+                ],
+                "case_2": [
+                    "inform_nurse"
+                ],
+                "case_3": [
+                    "inform_nurse"
+                ],
+                "case_4": [
+                    "inform_nurse"
+                ],
+            }
+        }
+
+        user_type = "nurse"
+        current_case = self._get_case(obs)
+        tasks_required = task_tree[user_type][current_case]
+
+        task_list = [
+            {
+                "escalation_task_list": True,
+            }
+        ]
+
+        obj_nh_activity = self.pool['nh.activity']
+        for t in tasks_required:
+            obj_model = self.pool[t['model']]
+            activity_id = obj_nh_activity.create(cr, uid,
+                                                 {
+                                                     "data_model": t['model'],
+                                                     "state": "new",
+                                                     "creator_id": int(task_id),
+                                                     "user_id": activity.user_id.id,
+                                                     "parent_id": activity.parent_id.id,
+                                                     "date_deadline": datetime.now() + timedelta(minutes=5),
+                                                     # "data_ref": False,
+                                                     "pos_id": activity.pos_id.id,
+                                                     "patient_id": activity.patient_id.id,
+                                                     "location_id": activity.location_id.id,
+                                                     "spell_activity_id": activity.spell_activity_id.id,
+                                                 }
+                                                 )
+            t['fields'].update({
+                "activity_id": activity_id,
+                "patient_id": activity.patient_id.id,
+            })
+            model_id = obj_model.create(cr, uid, t['fields'])
+            obj_nh_activity.write(cr, uid, activity_id, {"data_ref": "%s,%s" % (t['model'], model_id)})
+            task_list.append(
+                {
+                    "model": t['model'],
+                    "activity_id": activity_id,
+                    "task_id": model_id
+                }
+            )
+
         description = self.get_submission_message(obs)
         response_data = obs.get_submission_response_data()
 
         response_json = ResponseJSON.get_json_data(
-            status=ResponseJSON.STATUS_SUCCESS,
+            status=ResponseJSON.STATUS_LIST,
             title='Successfully Submitted{0} {1}'.format(
                 ' Partial' if obs.is_partial else '',
                 ob_pool.get_description()),
             description=description,
             data=response_data)
+
         return request.make_response(
             response_json, headers=ResponseJSON.HEADER_CONTENT_TYPE)
 

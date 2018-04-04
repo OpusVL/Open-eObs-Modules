@@ -29,6 +29,12 @@ routes = [
         'args': ['patient_id']
     },
     {
+        'name': 'escalations',
+        'endpoint': 'escalations/',
+        'method': 'GET',
+        'args': ['creator_id'],
+    },
+    {
         'name': 'json_patient_info',
         'endpoint': 'patient/info/',
         'method': 'GET',
@@ -153,6 +159,12 @@ routes = [
         'endpoint': 'patient/submit_ajax/',
         'method': 'POST',
         'args': ['observation', 'patient_id']
+    },
+    {
+        'name': 'confirm_escalations',
+        'endpoint': 'confirm_escalations',
+        'method': 'POST',
+        'args': ['escalations']
     },
     {
         'name': 'calculate_obs_score',

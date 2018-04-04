@@ -51,6 +51,8 @@ route_list = [
     Route('json_patient_form_action',
           '/patient/submit_ajax/<observation>/<patient_id>/',
           methods=['POST']),
+    Route('escalations', '/escalations/', methods=['POST']),
+    Route('confim_escalations', '/escalations/submit/', methods=['POST']),
 
     Route('calculate_obs_score',
           '/observation/score/<observation>/', methods=['POST']),
