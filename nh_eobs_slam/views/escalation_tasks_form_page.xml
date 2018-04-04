@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <openerp>
     <data>
-        <template t-name="nh_eobs_mobile.escalations_form" name="Escalations to be Processed">
-            <t t-call="nh_eobs_mobile.base">
-                <div class="content">
-                    <h1>Fuck Yeah!</h1>
-                </div>
-            </t>
-        </template>
+        <!--<template t-name="nh_eobs_mobile.escalations_form" name="Escalations to be Processed">-->
+            <!--<t t-call="nh_eobs_mobile.base">-->
+                <!--<div class="content">-->
+                    <!--<h1>Fuck Yeah!</h1>-->
+                <!--</div>-->
+            <!--</t>-->
+        <!--</template>-->
     </data>
 </openerp>

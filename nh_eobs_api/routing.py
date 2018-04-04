@@ -237,6 +237,7 @@ class ResponseJSON(object):
     STATUS_SUCCESS = 'success'
     STATUS_FAIL = 'fail'
     STATUS_ERROR = 'error'
+    STATUS_LIST = 'list'
     # default Content-Type header for this class' responses
     HEADER_CONTENT_TYPE = {'Content-Type': 'application/json'}
 
