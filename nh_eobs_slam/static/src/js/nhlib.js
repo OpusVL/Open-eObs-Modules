@@ -2279,15 +2279,19 @@ NHMobileFormSLaM = (function(superClass) {
       data = server_data.data;
       body = document.getElementsByTagName('body')[0];
       if (server_data.status === 'success' && data.status === 3) {
-        data_action = !partial ? 'submit' : 'display_partial_reasons';
-        can_btn = '<a href="#" data-action="renable" ' + 'data-target="submit_observation">Do not submit</a>';
-        act_btn = '<a href="#" data-target="submit_observation" ' + 'data-action="' + data_action + '" data-ajax-action="' + data.next_action + '">Submit</a>';
-        new window.NH.NHModal('submit_observation', server_data.title + ' for ' + self.patient_name() + '?', server_data.desc, [can_btn, act_btn], 0, body);
-        if ('clinical_risk' in data.score) {
-          sub_ob = document.getElementById('submit_observation');
-          cls = 'clinicalrisk-' + data.score.clinical_risk.toLowerCase();
-          return sub_ob.classList.add(cls);
-        }
+          data_action = !partial ? 'submit' : 'display_partial_reasons';
+          can_btn = '<a href="#" data-action="renable" ' + 'data-target="submit_observation">Do not submit</a>';
+          act_btn = '<a href="#" data-target="submit_observation" ' + 'data-action="' + data_action + '" data-ajax-action="' + data.next_action + '">Submit</a>';
+          new window.NH.NHModal('submit_observation', server_data.title + ' for ' + self.patient_name() + '?', server_data.desc, [can_btn, act_btn], 0, body);
+          if ('clinical_risk' in data.score) {
+              sub_ob = document.getElementById('submit_observation');
+              cls = 'clinicalrisk-' + data.score.clinical_risk.toLowerCase();
+              return sub_ob.classList.add(cls);
+          }
+      } else if (server_data.status === 'list') {
+          // Redirect to http route here
+          return window.location.replace('/mobile/escalations/' + data.related_tasks[0].creator_id[0])
+
       } else if (server_data.status === 'success' && data.status === 1) {
         triggered_tasks = '';
         buttons = ['<a href="' + self.urls['task_list']().url + '" data-action="confirm">Go to My Tasks</a>'];
@@ -2386,4 +2390,11 @@ if (!window.NH) {
 
 if (typeof window !== "undefined" && window !== null) {
   window.NH.NHMobileForm = NHMobileFormSLaM;
+}
+
+function yesnoCheck(element) {
+    if (document.getElementById(element.id).checked) {
+        document.getElementById(element.id+'_cancel').style.visibility = 'hidden';
+    }
+    else document.getElementById(element.id+'_cancel').style.visibility = 'visible';
 }

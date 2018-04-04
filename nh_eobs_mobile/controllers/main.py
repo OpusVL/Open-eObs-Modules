@@ -20,6 +20,8 @@ from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT as DTF
 from werkzeug import exceptions
 from werkzeug import utils
 
+from openerp.addons.nh_observations import frequencies
+
 _logger = logging.getLogger(__name__)
 
 URL_PREFIX = '/mobile/'
@@ -35,6 +37,12 @@ env = jinja2.Environment(loader=loader)
 single_patient = EobsRoute(
     'single_patient',
     '/patient/<patient_id>',
+    methods=['GET'],
+    url_prefix='/mobile'
+)
+escalations = EobsRoute(
+    'escalations',
+    '/escalations/',
     methods=['GET'],
     url_prefix='/mobile'
 )
@@ -66,6 +74,7 @@ route_manager.add_route(single_patient)
 route_manager.add_route(patient_list)
 route_manager.add_route(single_task)
 route_manager.add_route(task_list)
+route_manager.add_route(all_patients)
 
 
 def abort_and_redirect(url):
@@ -573,6 +582,120 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
                 'username': request.session['login'],
                 'urls': URLS}
         )
+
+    @http.route(URLS['escalations'] + '<creator_id>', type='http', auth='user')
+    def process_escalations(self, creator_id, *args, **kwargs):
+        """
+        The route loaded once the observation has been confirmed. Prepares values for the escalation tasks form
+        :param creator_id: The id of the activity that started the chain of escalation tasks
+        :param args:
+        :param kwargs:
+        :return: The escalations form view
+        """
+        cr, uid, context = request.cr, request.session.uid, request.context
+        obj_nh_activity = request.registry['nh.activity']
+        obj_nh_eobs_api = request.registry('nh.eobs.api')
+
+        cancel_reasons = obj_nh_eobs_api.get_cancel_reasons(cr, uid, context=context)
+        activities = obj_nh_activity.search(cr, uid, [('creator_id', '=', int(creator_id))])
+        data = {
+            "tasks": [],
+            "patient": {},
+            "cancel_reasons": cancel_reasons
+        }
+        for activity in activities:
+            activity_detail = obj_nh_activity.browse(cr, uid, activity, context=context)
+            if str(activity_detail.data_model) == 'nh.clinical.patient.observation.ews':
+                data['patient']['name'] = activity_detail.patient_id.full_name
+                data['patient']['patient_id'] = activity_detail.patient_id.id
+            else:
+                data['tasks'].append(
+                    {
+                        "task_name": activity_detail.display_name,
+                        "task_model": str(activity_detail.data_model),
+                        "activity_id": activity_detail.id,
+                        "task_id": activity_detail.data_ref.id,
+                        "input_field": self._get_input_field(str(activity_detail.data_model))
+                    }
+                )
+
+        return request.render(
+            'nh_eobs_mobile.escalations_form',
+            qcontext={
+                'urls': URLS,
+                'data': data,
+            }
+        )
+
+    def _get_input_field(self, obj):
+        """
+        Some escalation tasks require additional data when they are confirmed. This checks the type of task and if
+        applicable returns the required field type and associated data
+        :param obj: The task type (defined as the model that the task is recorded in)
+        :return: dict(): A dictionary containing the type of input field required and any associated values
+        """
+
+        input_field = dict()
+
+        if obj == "nh.clinical.notification.medical_team":
+            input_field.update(
+                {
+                    "name": obj,
+                    "type": "text_input"
+                }
+            )
+
+        if obj == "nh.clinical.notification.frequency":
+            input_field.update(
+                {
+                    "name": obj,
+                    "type": "selection",
+                    "values": frequencies.as_list()
+                }
+            )
+
+        return input_field
+
+    @http.route(URLS['confirm_escalations'], type='http', auth='user')
+    def confirm_escalations(self, *args, **kwargs):
+        """
+        The return route once the escalation tasks form has been confirmed (with extra data if applicable). Updates the
+        state for the task activity record and adds any additional data to the task record.
+        :param args:
+        :param kwargs: The fields and values from the escalation tasks form
+        :return: the 'get_tasks()' method
+        """
+        cr, uid, context = request.cr, request.session.uid, request.context
+        obj_nh_activity = request.registry['nh.activity']
+        for key, val in kwargs.items():
+            try:
+                int(key)
+                continue
+            except ValueError:
+                if not any(state in key for state in ["cancel", "value"]):
+                    vals = {"state": "completed", "date_terminated": datetime.now(), "terminate_uid": uid}
+                    obj_model = request.registry[key]
+                    if kwargs[kwargs[key]].encode("utf-8") == 'no':
+                        reason_id = int(kwargs[kwargs[key]+'_cancel'])
+                        obj_model.write(cr, uid, int(val), {"reason": reason_id}, context=context)
+                    record_id = int(kwargs[key])
+                    record = obj_model.browse(cr, uid, record_id, context=context)
+                    activity_id = record.activity_id
+                    obj_nh_activity.write(cr, uid, activity_id.id, vals, context=context)
+                if "value" in key:
+                    value_detail = key.split("_")
+                    if kwargs[value_detail[0]].encode("utf-8") != 'no':
+                        record_id = int(value_detail[0])
+                        obj_model_name = next(x for x, y in kwargs.items() if y == value_detail[0])
+                        obj_model = request.registry[obj_model_name]
+                        vals = dict()
+                        if "frequency" in obj_model_name:
+                            vals.update({"frequency": int(val)})
+                        if "medical_team" in obj_model_name:
+                            vals.update({"doctor_notified": val.encode("utf-8")})
+                        obj_model.write(cr, uid, record_id, vals)
+
+        return self.get_tasks()
 
     @http.route(URLS['all_patients'], type='http', auth="user")
     def get_all_patients(self, *args, **kw):
