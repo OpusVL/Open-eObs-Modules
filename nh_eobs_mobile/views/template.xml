@@ -385,11 +385,18 @@
                                             </label>
                                             <t t-if="task['input_field']">
                                                 <t t-if="task['input_field']['type'] == 'text_input'">
+                                                    <label t-att-for="str(task['task_id'])+'_value'">
+                                                        <t t-esc="task['input_field']['label']"/>
+                                                    </label>
                                                     <input type="text" t-att-name="str(task['task_id'])+'_value'" t-att-id="str(task['task_id'])+'_value'"/>
+
                                                 </t>
                                             </t>
                                             <t t-if="task['input_field']">
                                                 <t t-if="task['input_field']['type'] == 'selection'">
+                                                    <label t-att-for="str(task['task_id'])+'_value'">
+                                                        <t t-esc="task['input_field']['label']"/>
+                                                    </label>
                                                     <select t-att-name="str(task['task_id'])+'_value'" t-att-id="str(task['task_id'])+'_value'">
                                                         <option value="">Please select...</option>
                                                         <t t-foreach="task['input_field']['values']" t-as="value">
@@ -398,6 +405,7 @@
                                                             </option>
                                                         </t>
                                                     </select>
+
                                                 </t>
                                             </t>
                                             <select t-att-name="str(task['task_id'])+'_cancel'" t-att-id="str(task['task_id'])+'_cancel'" style="visibility: hidden">
