@@ -641,7 +641,8 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
             input_field.update(
                 {
                     "name": obj,
-                    "type": "text_input"
+                    "type": "text_input",
+                    "label": "Doctor Notified"
                 }
             )
 
@@ -650,7 +651,8 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
                 {
                     "name": obj,
                     "type": "selection",
-                    "values": frequencies.as_list()
+                    "values": frequencies.as_list(),
+                    "label": "Notification Frequency"
                 }
             )
 
