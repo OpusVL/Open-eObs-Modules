@@ -200,7 +200,8 @@ class NhEobsApiRoutes(orm.AbstractModel):
                     {
                         "model": "nh.clinical.notification.medical_team",
                         "fields": {
-                            "doctor_notified": False
+                            "doctor_notified": False,
+                            "is_duty_doctor": False
                         }
                     }
                 ],
@@ -223,7 +224,8 @@ class NhEobsApiRoutes(orm.AbstractModel):
                     {
                         "model": "nh.clinical.notification.medical_team",
                         "fields": {
-                            "doctor_notified": False
+                            "doctor_notified": False,
+                            "is_duty_doctor": False
                         }
                     },
                     {
@@ -235,7 +237,8 @@ class NhEobsApiRoutes(orm.AbstractModel):
                     {
                         "model": "nh.clinical.notification.medical_team",
                         "fields": {
-                            "doctor_notified": False
+                            "doctor_notified": False,
+                            "is_duty_doctor": False
                         }
                     },
                     {

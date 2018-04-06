@@ -370,11 +370,11 @@
                                         <t t-esc="task['task_name']"/>
                                     </div>
                                     <fieldset>
-                                        <div class="input-body">
+                                        <div class="input-body escalations">
                                             <input type="hidden" t-att-name="task['task_model']"
                                                    t-att-value="task['task_id']"/>
                                             <input type="radio" t-att-name="task['task_id']"
-                                                   t-att-id="task['task_id']" value="yes" onclick="yesnoCheck(this)"/>
+                                                   t-att-id="task['task_id']" value="yes" onclick="yesnoCheck(this)" required="1"/>
                                             <label t-att-for="task['task_id']">
                                                 Yes
                                             </label>
@@ -383,32 +383,37 @@
                                             <label t-att-for="task['task_id']">
                                                 No
                                             </label>
-                                            <t t-if="task['input_field']">
-                                                <t t-if="task['input_field']['type'] == 'text_input'">
-                                                    <label t-att-for="str(task['task_id'])+'_value'">
-                                                        <t t-esc="task['input_field']['label']"/>
-                                                    </label>
-                                                    <input type="text" t-att-name="str(task['task_id'])+'_value'" t-att-id="str(task['task_id'])+'_value'"/>
+                                            <t t-if="task['input_fields']">
+                                                <t t-foreach="task['input_fields']" t-as="input_field">
+                                                    <t t-if="input_field['type'] == 'text_input'">
+                                                        <label t-att-for="str(task['task_id'])+'_value_text'" class="text_input">
+                                                            <t t-esc="input_field['label']"/>
+                                                        </label>
+                                                        <input type="text" t-att-name="str(task['task_id'])+'_value_text'" t-att-id="str(task['task_id'])+'_value_text'"/>
 
+                                                    </t>
+                                                    <t t-if="input_field['type'] == 'checkbox'">
+                                                        <label t-att-for="str(task['task_id'])+'_value_checkbox'" class="text_input">
+                                                            <t t-esc="input_field['label']"/>
+                                                        </label>
+                                                        <input type="checkbox" t-att-name="str(task['task_id'])+'_value_checkbox'" t-att-id="str(task['task_id'])+'_value_checkbox'"/>
+                                                    </t>
+                                                    <t t-if="input_field['type'] == 'selection'">
+                                                        <label t-att-for="str(task['task_id'])+'_value_selection'" class="text_input">
+                                                            <t t-esc="input_field['label']"/>
+                                                        </label>
+                                                        <select t-att-name="str(task['task_id'])+'_value_selection'" t-att-id="str(task['task_id'])+'_value_selection'">
+                                                            <option value="">Please select...</option>
+                                                            <t t-foreach="input_field['values']" t-as="value">
+                                                                <option t-att-value="value[0]">
+                                                                    <t t-esc="value[1]"/>
+                                                                </option>
+                                                            </t>
+                                                        </select>
+                                                    </t>
                                                 </t>
                                             </t>
-                                            <t t-if="task['input_field']">
-                                                <t t-if="task['input_field']['type'] == 'selection'">
-                                                    <label t-att-for="str(task['task_id'])+'_value'">
-                                                        <t t-esc="task['input_field']['label']"/>
-                                                    </label>
-                                                    <select t-att-name="str(task['task_id'])+'_value'" t-att-id="str(task['task_id'])+'_value'">
-                                                        <option value="">Please select...</option>
-                                                        <t t-foreach="task['input_field']['values']" t-as="value">
-                                                            <option t-att-value="value[0]">
-                                                                <t t-esc="value[1]"/>
-                                                            </option>
-                                                        </t>
-                                                    </select>
-
-                                                </t>
-                                            </t>
-                                            <select t-att-name="str(task['task_id'])+'_cancel'" t-att-id="str(task['task_id'])+'_cancel'" style="visibility: hidden">
+                                            <select t-att-name="str(task['task_id'])+'_cancel'" t-att-id="str(task['task_id'])+'_cancel'" style="visibility: hidden" class="input-spacer">
                                                 <option value="">Please select...</option>
                                                 <t t-foreach="data['cancel_reasons']" t-as="reason">
                                                     <option t-att-value="reason['id']" >

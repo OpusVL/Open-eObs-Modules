@@ -516,11 +516,19 @@ class NHClinicalNotificationMedicalTeam(orm.Model):
             'label': 'Doctor Notified',
             'initially_hidden': False,
             'necessary': 'true'
+        },
+        {
+            'name': 'is_duty_doctor',
+            'type': 'checkbox',
+            'label': 'Is Duty Doctor',
+            'initially_hidden': False,
+            'necessary': 'true'
         }
     ]
 
     _columns = {
-        'doctor_notified': fields.char("Doctor Notified", size=128)
+        'doctor_notified': fields.char("Doctor Notified", size=128),
+        'is_duty_doctor': fields.boolean("Is Duty Doctor")
     }
 
     @api.model
