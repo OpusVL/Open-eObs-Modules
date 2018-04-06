@@ -454,6 +454,7 @@ class ObservationReport(models.AbstractModel):
                 rec_nh_clinical_notification_medical_team = obj_nh_clinical_notification_medical_team.browse(res.id)
                 if rec_nh_clinical_notification_medical_team.doctor_notified:
                     rec['doctor_notified'] = rec_nh_clinical_notification_medical_team.doctor_notified
+                    rec['is_duty_doctor'] = rec_nh_clinical_notification_medical_team.is_duty_doctor
 
         return recs_nh_activity
 
