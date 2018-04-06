@@ -615,7 +615,7 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
                         "task_model": str(activity_detail.data_model),
                         "activity_id": activity_detail.id,
                         "task_id": activity_detail.data_ref.id,
-                        "input_field": self._get_input_field(str(activity_detail.data_model))
+                        "input_fields": self._get_input_field(str(activity_detail.data_model))
                     }
                 )
 
@@ -635,28 +635,36 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
         :return: dict(): A dictionary containing the type of input field required and any associated values
         """
 
-        input_field = dict()
+        input_fields = list()
 
         if obj == "nh.clinical.notification.medical_team":
-            input_field.update(
-                {
-                    "name": obj,
-                    "type": "text_input",
-                    "label": "Doctor Notified"
-                }
+            input_fields.extend(
+                [
+                    {
+                        # "name": obj,
+                        "type": "text_input",
+                        "label": "Name of Doctor Notified"
+                    },
+                    {
+                        "type": "checkbox",
+                        "label": "Is Duty Doctor"
+                    }
+                ]
             )
 
         if obj == "nh.clinical.notification.frequency":
-            input_field.update(
-                {
-                    "name": obj,
-                    "type": "selection",
-                    "values": frequencies.as_list(),
-                    "label": "Notification Frequency"
-                }
+            input_fields.extend(
+                [
+                    {
+                        # "name": obj,
+                        "type": "selection",
+                        "values": frequencies.as_list(),
+                        "label": "Notification Frequency"
+                    }
+                ]
             )
 
-        return input_field
+        return input_fields
 
     @http.route(URLS['confirm_escalations'], type='http', auth='user')
     def confirm_escalations(self, *args, **kwargs):
@@ -694,7 +702,10 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
                         if "frequency" in obj_model_name:
                             vals.update({"frequency": int(val)})
                         if "medical_team" in obj_model_name:
-                            vals.update({"doctor_notified": val.encode("utf-8")})
+                            if "text" in key:
+                                vals.update({"doctor_notified": val.encode("utf-8")})
+                            if "checkbox" in key:
+                                vals.update({"is_duty_doctor": True})
                         obj_model.write(cr, uid, record_id, vals)
 
         return self.get_tasks()
