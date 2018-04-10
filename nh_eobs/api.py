@@ -631,7 +631,15 @@ class nh_eobs_api(orm.AbstractModel):
                 ('state', '=', 'started'),
                 ('data_model', '=', 'nh.clinical.spell'),
             ]
-        return self.collect_patients(cr, uid, domain, context=context)
+
+        patient_list = self.collect_patients(cr, uid, domain, context=context)
+
+        # The list of all patients needs to be filtered by locations (Wards) that the current user is assigned to
+        obj_res_users = self.pool['res.users']
+        user_record = obj_res_users.browse(cr, uid, uid, context=context)
+        user_locations = [x.parent_id.name for x in user_record.location_ids]
+        filtered_patient_list = [x for x in patient_list if x['parent_location'] in user_locations]
+        return filtered_patient_list
 
     def get_patients(self, cr, uid, ids, context=None):
         """
