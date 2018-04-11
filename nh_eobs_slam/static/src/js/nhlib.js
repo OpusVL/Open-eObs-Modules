@@ -2424,3 +2424,12 @@ function yesnoCheck(element) {
       }
     }
 }
+
+function doctorSelection(elem) {
+    var e = document.getElementById(elem.id);
+    var doctorSelectValue = e.options[e.selectedIndex].text;
+    if (doctorSelectValue !== 'Please select...') {
+      document.getElementById(elem.id.split("_")[0]+'_value_text').style.visibility = 'hidden';
+      document.getElementById(elem.id.split("_")[0]+'_value_text_label').style.visibility = 'hidden';
+    }
+}

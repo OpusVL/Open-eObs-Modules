@@ -615,7 +615,7 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
                         "task_model": str(activity_detail.data_model),
                         "activity_id": activity_detail.id,
                         "task_id": activity_detail.data_ref.id,
-                        "input_fields": self._get_input_field(str(activity_detail.data_model))
+                        "input_fields": self._get_input_field(cr, uid, str(activity_detail.data_model), context=context)
                     }
                 )
 
@@ -627,7 +627,7 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
             }
         )
 
-    def _get_input_field(self, obj):
+    def _get_input_field(self, cr, uid, obj, context=None):
         """
         Some escalation tasks require additional data when they are confirmed. This checks the type of task and if
         applicable returns the required field type and associated data
@@ -635,20 +635,46 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
         :return: dict(): A dictionary containing the type of input field required and any associated values
         """
 
+        def _get_doctors_list():
+
+            """
+            Generates a list of users that have been assigned as a doctor.
+            :return: list: A list of tuples in the the format (id, name)
+            """
+
+            obj_nh_clinical_doctor = request.registry['nh.clinical.doctor']
+            doctors_list = obj_nh_clinical_doctor.search(cr, uid, [], context=context)
+            doctors_list_details = [
+                (
+                    obj_nh_clinical_doctor.browse(cr, uid, x, context=context).user_id.id,
+                    obj_nh_clinical_doctor.browse(cr, uid, x, context=context).user_id.name,
+                )
+                for x in doctors_list
+            ]
+
+            return doctors_list_details
+
         input_fields = list()
 
         if obj == "nh.clinical.notification.medical_team":
             input_fields.extend(
                 [
                     {
-                        # "name": obj,
+                        "name": obj,
+                        "type": "selection",
+                        "values": _get_doctors_list(),
+                        "label": "Name of Doctor Notified"
+                    },
+                    {
+                        "name": obj,
                         "type": "text_input",
                         "label": "Name of Doctor Notified"
                     },
                     {
+                        "name": obj,
                         "type": "checkbox",
                         "label": "Is Duty Doctor"
-                    }
+                    },
                 ]
             )
 
@@ -656,7 +682,7 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
             input_fields.extend(
                 [
                     {
-                        # "name": obj,
+                        "name": obj,
                         "type": "selection",
                         "values": frequencies.as_list(),
                         "label": "Notification Frequency"
