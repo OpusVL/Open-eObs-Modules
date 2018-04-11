@@ -1075,13 +1075,20 @@ class nh_clinical_wardboard(orm.Model):
                 activity_pool.complete(cr, uid, diabetes_id, context=context)
             if 'use_custom_frequency' in vals:
                 use_custom_frequency_pool = self.pool['nh.clinical.patient.use_custom_frequency']
-                use_custom_frequency_id = use_custom_frequency_pool.create_activity(cr, SUPERUSER_ID, {
-                    'parent_id': wb.spell_activity_id.id,
-                }, {
-                   'patient_id': wb.spell_activity_id.patient_id.id,
-                   'status': vals['use_custom_frequency'] == 'yes'
-                }, context=context)
-                activity_pool.complete(cr, uid, use_custom_frequency_id, context=context)
+                custom_frequency_patient = use_custom_frequency_pool.search(
+                    cr, uid, [('patient_id', '=', wb.spell_activity_id.patient_id.id)], context=context
+                )
+                if custom_frequency_patient:
+                    use_custom_frequency_pool.write(
+                        cr, uid, custom_frequency_patient,
+                        {'status': True if vals['use_custom_frequency'] == 'yes' else False}, context=context
+                    )
+                else:
+                    use_custom_frequency_pool.create(
+                        cr, uid,
+                        {'status': vals['use_custom_frequency'], 'patient_id': wb.spell_activity_id.patient_id.id},
+                        context=context
+                    )
             if 'pbp_monitoring' in vals:
                 pbpm_pool = self.pool['nh.clinical.patient.pbp_monitoring']
                 pbpm_id = pbpm_pool.create_activity(cr, SUPERUSER_ID, {
@@ -1102,13 +1109,17 @@ class nh_clinical_wardboard(orm.Model):
                 activity_pool.complete(cr, uid, o2target_id, context=context)
             if 'custom_frequency_time' in vals:
                 custom_frequency_time_pool = self.pool['nh.clinical.patient.custom_frequency_time']
-                custom_frequency_time_id = custom_frequency_time_pool.create_activity(cr, SUPERUSER_ID, {
-                        'parent_id': wb.spell_activity_id.id,
-                }, {
-                    'patient_id': wb.spell_activity_id.patient_id.id,
-                    'options_id': vals['custom_frequency_time']
-                    }, context=context)
-                activity_pool.complete(cr, uid, custom_frequency_time_id, context=context)
+                custom_frequency_time_record = custom_frequency_time_pool.search(
+                    cr, uid, [('patient_id', '=', wb.spell_activity_id.patient_id.id)], context=context
+                )
+                if custom_frequency_time_record:
+                    custom_frequency_time_pool.write(cr, uid, custom_frequency_time_record, {}, context=context)
+                else:
+                    custom_frequency_time_pool.create(
+                        cr, uid,
+                        {'options_id': vals['custom_frequency_time'], 'patient_id': wb.spell_activity_id.patient_id.id},
+                        context=context
+                    )
             if 'palliative_care' in vals:
                 pc_pool = self.pool['nh.clinical.patient.palliative_care']
                 pc_id = pc_pool.create_activity(cr, SUPERUSER_ID, {
@@ -1291,11 +1302,9 @@ SELECT
     activity.state,
     ews.id,
     ews.score,
-    use_custom_frequency.status as use_custom_frequency,
-    o.time as custom_frequency_time,
     ews.clinical_risk,
     CASE WHEN use_custom_frequency.status IS TRUE
-      THEN now() AT TIME ZONE 'UTC' + (o.time * INTERVAL '1 minute')
+      THEN now() AT TIME ZONE 'UTC' + (o.time * (INTERVAL '1 minute'))
       ELSE activity.date_scheduled
     END as date_scheduled,
     CASE WHEN activity.date_scheduled < now() AT TIME ZONE 'UTC'
@@ -1396,11 +1405,9 @@ param as(
             activity.spell_id,
             height.height,
             diabetes.status as diabetes,
-            use_custom_frequency.status as use_custom_frequency,
             mrsa.status as mrsa,
             pc.status,
             o2target_level.id as o2target_level_id,
-            custom_frequency_time_options.id as custom_frequency_time_options_id,
             ps.status as post_surgery,
             psactivity.date_terminated as post_surgery_date,
             cc.status as critical_care,
@@ -1412,16 +1419,10 @@ param as(
             on activity.ids && array[height.activity_id]
         left join nh_clinical_patient_diabetes diabetes
             on activity.ids && array[diabetes.activity_id]
-        left join nh_clinical_patient_use_custom_frequency use_custom_frequency
-            on activity.ids && array[use_custom_frequency.activity_id]
         left join nh_clinical_patient_o2target o2target
             on activity.ids && array[o2target.activity_id]
-        left join nh_clinical_patient_custom_frequency_time custom_frequency_time
-            on activity.ids && array[custom_frequency_time.activity_id]
         left join nh_clinical_o2level o2target_level
             on o2target_level.id = o2target.level_id
-        left join nh_clinical_custom_frequency_options custom_frequency_time_options
-            on custom_frequency_time_options.id = custom_frequency_time.options_id
         left join nh_clinical_patient_mrsa mrsa
             on activity.ids && array[mrsa.activity_id]
         left join nh_clinical_patient_palliative_care pc
