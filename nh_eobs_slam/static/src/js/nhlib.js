@@ -2395,6 +2395,32 @@ if (typeof window !== "undefined" && window !== null) {
 function yesnoCheck(element) {
     if (document.getElementById(element.id).checked) {
         document.getElementById(element.id+'_cancel').style.visibility = 'hidden';
+        if (document.getElementById(element.id+'_value_selection')) {
+          document.getElementById(element.id+'_value_selection').style.visibility = 'visible';
+          document.getElementById(element.id+'_value_selection_label').style.visibility = 'visible';
+        }
+        if (document.getElementById(element.id+'_value_text')) {
+          document.getElementById(element.id+'_value_text').style.visibility = 'visible';
+          document.getElementById(element.id+'_value_text_label').style.visibility = 'visible';
+        }
+        if (document.getElementById(element.id+'_value_checkbox')) {
+          document.getElementById(element.id+'_value_checkbox').style.visibility = 'visible';
+          document.getElementById(element.id+'_value_checkbox_label').style.visibility = 'visible';
+        }
     }
-    else document.getElementById(element.id+'_cancel').style.visibility = 'visible';
+    else {
+      document.getElementById(element.id+'_cancel').style.visibility = 'visible';
+      if (document.getElementById(element.id+'_value_selection')) {
+        document.getElementById(element.id+'_value_selection').style.visibility = 'hidden';
+        document.getElementById(element.id+'_value_selection_label').style.visibility = 'hidden';
+      }
+      if (document.getElementById(element.id+'_value_text')) {
+        document.getElementById(element.id+'_value_text').style.visibility = 'hidden';
+        document.getElementById(element.id+'_value_text_label').style.visibility = 'hidden';
+      }
+      if (document.getElementById(element.id+'_value_checkbox')) {
+        document.getElementById(element.id+'_value_checkbox').style.visibility = 'hidden';
+        document.getElementById(element.id+'_value_checkbox_label').style.visibility = 'hidden';
+      }
+    }
 }

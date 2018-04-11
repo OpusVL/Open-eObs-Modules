@@ -386,20 +386,20 @@
                                             <t t-if="task['input_fields']">
                                                 <t t-foreach="task['input_fields']" t-as="input_field">
                                                     <t t-if="input_field['type'] == 'text_input'">
-                                                        <label t-att-for="str(task['task_id'])+'_value_text'" class="text_input">
+                                                        <label t-att-for="str(task['task_id'])+'_value_text'" class="text_input" t-att-id="str(task['task_id'])+'_value_text_label'">
                                                             <t t-esc="input_field['label']"/>
                                                         </label>
                                                         <input type="text" t-att-name="str(task['task_id'])+'_value_text'" t-att-id="str(task['task_id'])+'_value_text'"/>
 
                                                     </t>
                                                     <t t-if="input_field['type'] == 'checkbox'">
-                                                        <label t-att-for="str(task['task_id'])+'_value_checkbox'" class="text_input">
+                                                        <label t-att-for="str(task['task_id'])+'_value_checkbox'" class="text_input" t-att-id="str(task['task_id'])+'_value_checkbox_label'">
                                                             <t t-esc="input_field['label']"/>
                                                         </label>
                                                         <input type="checkbox" t-att-name="str(task['task_id'])+'_value_checkbox'" t-att-id="str(task['task_id'])+'_value_checkbox'"/>
                                                     </t>
                                                     <t t-if="input_field['type'] == 'selection'">
-                                                        <label t-att-for="str(task['task_id'])+'_value_selection'" class="text_input">
+                                                        <label t-att-for="str(task['task_id'])+'_value_selection'" class="text_input" t-att-id="str(task['task_id'])+'_value_selection_label'">
                                                             <t t-esc="input_field['label']"/>
                                                         </label>
                                                         <select t-att-name="str(task['task_id'])+'_value_selection'" t-att-id="str(task['task_id'])+'_value_selection'">
