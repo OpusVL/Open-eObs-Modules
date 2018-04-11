@@ -1059,16 +1059,6 @@ class nh_clinical_patient_observation_ews(orm.Model):
             cr, uid, d, ['name'],
             context=context)['name']] for d in device_ids]
 
-        # Custom frequency times
-        custom_frequency_time_pool = self.pool['nh.clinical.patient.custom_frequency_time']
-        custom_frequency_options_pool = self.pool['nh.clinical.custom_frequency_options']
-        custom_frequency_options_id = custom_frequency_time_pool.get_last(cr, uid, patient_id, context=context)
-        if not custom_frequency_options_id:
-            custom_frequency_options_id = False
-        else:
-            custom_frequency_options = custom_frequency_options_pool.browse(cr, uid, custom_frequency_options_id, context=context)
-            custom_frequency_time = custom_frequency_options.name
-
         for field in fd:
             if field['name'] == 'indirect_oxymetry_spo2' and o2target:
                 field['secondary_label'] = 'Target: {0}'.format(o2target)

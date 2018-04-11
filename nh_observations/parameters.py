@@ -23,7 +23,6 @@ _logger = logging.getLogger(__name__)
 
 class NHClinicalPatientUseCustomFrequency(orm.Model):
     _name = 'nh.clinical.patient.use_custom_frequency'
-    _inherit = ['nh.activity.data']
     _columns = {
         'status': fields.boolean('Use custom frequency'),
         'patient_id': fields.many2one('nh.clinical.patient', 'Patient', required=True),

@@ -124,31 +124,8 @@ class nh_clinical_patient_o2target(orm.Model):
 class NHClinicalPatientCustomFrequencyTime(orm.Model):
 
     _name = 'nh.clinical.patient.custom_frequency_time'
-    _inherit = ['nh.activity.data']
     _rec_name = 'options_id'
     _columns = {
         'options_id': fields.many2one('nh.clinical.custom_frequency_options', 'Custom frequency options'),
         'patient_id': fields.many2one('nh.clinical.patient', 'Patient', required=True)
     }
-
-    def get_last(self, cr, uid, patient_id, datetime=False, context=None):
-        if not datetime:
-            datetime = dt.now().strftime(dtf)
-        domain = [
-            ['patient_id', '=', patient_id],
-            ['data_model', '=', 'nh.clinical.patient.custom_frequency_time'],
-            ['state', '=', 'completed'],
-            ['parent_id.state', '=', 'started'],
-            ['date_terminated', '<=', datetime]
-        ]
-        activity_pool = self.pool['nh.activity']
-        custom_frequency_time_ids = activity_pool.search(
-            cr, uid, domain, order='date_terminated desc, sequence desc',
-            context=context
-        )
-        if not custom_frequency_time_ids:
-            return False
-        activity = activity_pool.browse(
-            cr, uid, custom_frequency_time_ids[0], context=context
-        )
-        return activity.data_ref.options_id.id if activity.data_ref.options_id else False
