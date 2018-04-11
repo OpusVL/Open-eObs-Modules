@@ -385,6 +385,19 @@
                                             </label>
                                             <t t-if="task['input_fields']">
                                                 <t t-foreach="task['input_fields']" t-as="input_field">
+                                                    <t t-if="input_field['type'] == 'selection'">
+                                                        <label t-att-for="str(task['task_id'])+'_value_selection'" class="text_input" t-att-id="str(task['task_id'])+'_value_selection_label'">
+                                                            <t t-esc="input_field['label']"/>
+                                                        </label>
+                                                        <select t-att-name="str(task['task_id'])+'_value_selection'" t-att-id="str(task['task_id'])+'_value_selection'" onclick="doctorSelection(this)">
+                                                            <option value="">Please select...</option>
+                                                            <t t-foreach="input_field['values']" t-as="value">
+                                                                <option t-att-value="value[0]">
+                                                                    <t t-esc="value[1]"/>
+                                                                </option>
+                                                            </t>
+                                                        </select>
+                                                    </t>
                                                     <t t-if="input_field['type'] == 'text_input'">
                                                         <label t-att-for="str(task['task_id'])+'_value_text'" class="text_input" t-att-id="str(task['task_id'])+'_value_text_label'">
                                                             <t t-esc="input_field['label']"/>
@@ -397,19 +410,6 @@
                                                             <t t-esc="input_field['label']"/>
                                                         </label>
                                                         <input type="checkbox" t-att-name="str(task['task_id'])+'_value_checkbox'" t-att-id="str(task['task_id'])+'_value_checkbox'"/>
-                                                    </t>
-                                                    <t t-if="input_field['type'] == 'selection'">
-                                                        <label t-att-for="str(task['task_id'])+'_value_selection'" class="text_input" t-att-id="str(task['task_id'])+'_value_selection_label'">
-                                                            <t t-esc="input_field['label']"/>
-                                                        </label>
-                                                        <select t-att-name="str(task['task_id'])+'_value_selection'" t-att-id="str(task['task_id'])+'_value_selection'">
-                                                            <option value="">Please select...</option>
-                                                            <t t-foreach="input_field['values']" t-as="value">
-                                                                <option t-att-value="value[0]">
-                                                                    <t t-esc="value[1]"/>
-                                                                </option>
-                                                            </t>
-                                                        </select>
                                                     </t>
                                                 </t>
                                             </t>
