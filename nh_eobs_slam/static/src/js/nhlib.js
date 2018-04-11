@@ -2432,4 +2432,8 @@ function doctorSelection(elem) {
       document.getElementById(elem.id.split("_")[0]+'_value_text').style.visibility = 'hidden';
       document.getElementById(elem.id.split("_")[0]+'_value_text_label').style.visibility = 'hidden';
     }
+    else {
+      document.getElementById(elem.id.split("_")[0]+'_value_text').style.visibility = 'visible';
+      document.getElementById(elem.id.split("_")[0]+'_value_text_label').style.visibility = 'visible';
+    }
 }
