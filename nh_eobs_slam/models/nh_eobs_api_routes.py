@@ -167,7 +167,9 @@ class NhEobsApiRoutes(orm.AbstractModel):
     def _get_case(self, obs):
         score = obs.score
         case = ""
-        if 0 < score <= 4:
+        if score == 0:
+            case = "case_0"
+        elif 0 < score <= 4:
             case = "case_1"
         elif 5 <= score <= 6:
             case = "case_3"
@@ -185,6 +187,10 @@ class NhEobsApiRoutes(orm.AbstractModel):
 
         task_tree = {
             "nurse": {
+                "case_0": [
+                    # No need for an activity to be declared here as there will only be one activity (select_frequency)
+                    # which is automatically created at the end of the observation.
+                ],
                 "case_1": [
                     {
                         "model": "nh.clinical.notification.shift_coordinator",
@@ -248,6 +254,9 @@ class NhEobsApiRoutes(orm.AbstractModel):
                 ]
             },
             "hca": {
+                "case_0": [
+                    "inform_nurse"
+                ],
                 "case_1": [
                     "inform_nurse"
                 ],
