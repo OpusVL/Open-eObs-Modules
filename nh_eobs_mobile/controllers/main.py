@@ -678,6 +678,22 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
                 ]
             )
 
+        if obj == 'nh.clinical.notification.select_frequency':
+            input_fields.extend(
+                [
+                    {
+                        "name": obj,
+                        "type": "selection",
+                        "values": [
+                            frequencies.EVERY_DAY,
+                            frequencies.EVERY_3_DAYS,
+                            frequencies.EVERY_WEEK,
+                        ],
+                        "label": "Frequency",
+                    },
+                ]
+            )
+
         if obj == "nh.clinical.notification.frequency":
             input_fields.extend(
                 [
