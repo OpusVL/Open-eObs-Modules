@@ -188,13 +188,8 @@ class NhEobsApiRoutes(orm.AbstractModel):
         task_tree = {
             "nurse": {
                 "case_0": [
-                    # {
-                    #     "model": "nh.clinical.notification.frequency",
-                    #     "fields": {
-                    #         "observation": "nh.clinical.patient.observation.ews",
-                    #         "frequency": False,
-                    #     },
-                    # },
+                    # No need for an activity to be declared here as there will only be one activity (select_frequency)
+                    # which is automatically created at the end of the observation.
                 ],
                 "case_1": [
                     {
