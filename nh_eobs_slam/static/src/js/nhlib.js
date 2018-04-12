@@ -2392,35 +2392,59 @@ if (typeof window !== "undefined" && window !== null) {
   window.NH.NHMobileForm = NHMobileFormSLaM;
 }
 
-function yesnoCheck(element) {
-    if (document.getElementById(element.id).checked) {
-        document.getElementById(element.id+'_cancel').style.visibility = 'hidden';
-        if (document.getElementById(element.id+'_value_selection')) {
-          document.getElementById(element.id+'_value_selection').style.visibility = 'visible';
-          document.getElementById(element.id+'_value_selection_label').style.visibility = 'visible';
-        }
-        if (document.getElementById(element.id+'_value_text')) {
-          document.getElementById(element.id+'_value_text').style.visibility = 'visible';
-          document.getElementById(element.id+'_value_text_label').style.visibility = 'visible';
-        }
-        if (document.getElementById(element.id+'_value_checkbox')) {
-          document.getElementById(element.id+'_value_checkbox').style.visibility = 'visible';
-          document.getElementById(element.id+'_value_checkbox_label').style.visibility = 'visible';
-        }
+function yesnoCheck(elem) {
+  if (document.getElementById(elem.id).checked) {
+    document.getElementById(elem.id+'_cancel_wrapper').style.display = 'none';
+    document.getElementById(elem.id+'_wrapper').style.display = 'block';
+  }
+  else {
+    document.getElementById(elem.id+'_cancel_wrapper').style.display = 'block';
+    document.getElementById(elem.id+'_wrapper').style.display = 'none';
+  }
+}
+
+// function yesnoCheck(element) {
+//     if (document.getElementById(element.id).checked) {
+//         document.getElementById(element.id+'_cancel').style.visibility = 'hidden';
+//         if (document.getElementById(element.id+'_value_selection')) {
+//           document.getElementById(element.id+'_value_selection').style.visibility = 'visible';
+//           document.getElementById(element.id+'_value_selection_label').style.visibility = 'visible';
+//         }
+//         if (document.getElementById(element.id+'_value_text')) {
+//           document.getElementById(element.id+'_value_text').style.visibility = 'visible';
+//           document.getElementById(element.id+'_value_text_label').style.visibility = 'visible';
+//         }
+//         if (document.getElementById(element.id+'_value_checkbox')) {
+//           document.getElementById(element.id+'_value_checkbox').style.visibility = 'visible';
+//           document.getElementById(element.id+'_value_checkbox_label').style.visibility = 'visible';
+//         }
+//     }
+//     else {
+//       document.getElementById(element.id+'_cancel').style.visibility = 'visible';
+//       if (document.getElementById(element.id+'_value_selection')) {
+//         document.getElementById(element.id+'_value_selection').style.visibility = 'hidden';
+//         document.getElementById(element.id+'_value_selection_label').style.visibility = 'hidden';
+//       }
+//       if (document.getElementById(element.id+'_value_text')) {
+//         document.getElementById(element.id+'_value_text').style.visibility = 'hidden';
+//         document.getElementById(element.id+'_value_text_label').style.visibility = 'hidden';
+//       }
+//       if (document.getElementById(element.id+'_value_checkbox')) {
+//         document.getElementById(element.id+'_value_checkbox').style.visibility = 'hidden';
+//         document.getElementById(element.id+'_value_checkbox_label').style.visibility = 'hidden';
+//       }
+//     }
+// }
+
+function doctorSelection(elem) {
+    var e = document.getElementById(elem.id);
+    var doctorSelectValue = e.options[e.selectedIndex].text;
+    if (doctorSelectValue !== 'Please select...') {
+      document.getElementById(elem.id.split("_")[0]+'_value_text').style.display = 'none';
+      document.getElementById(elem.id.split("_")[0]+'_value_text_label').style.display = 'none';
     }
     else {
-      document.getElementById(element.id+'_cancel').style.visibility = 'visible';
-      if (document.getElementById(element.id+'_value_selection')) {
-        document.getElementById(element.id+'_value_selection').style.visibility = 'hidden';
-        document.getElementById(element.id+'_value_selection_label').style.visibility = 'hidden';
-      }
-      if (document.getElementById(element.id+'_value_text')) {
-        document.getElementById(element.id+'_value_text').style.visibility = 'hidden';
-        document.getElementById(element.id+'_value_text_label').style.visibility = 'hidden';
-      }
-      if (document.getElementById(element.id+'_value_checkbox')) {
-        document.getElementById(element.id+'_value_checkbox').style.visibility = 'hidden';
-        document.getElementById(element.id+'_value_checkbox_label').style.visibility = 'hidden';
-      }
+      document.getElementById(elem.id.split("_")[0]+'_value_text').style.display = 'block';
+      document.getElementById(elem.id.split("_")[0]+'_value_text_label').style.display = 'block';
     }
 }
