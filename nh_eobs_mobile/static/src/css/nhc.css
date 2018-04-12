@@ -2954,3 +2954,12 @@ Styleguide 2.6.2
   background-color: #ffffff;
   margin-bottom: 1em;
 }
+
+.radio_wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  padding: 1rem 0;
+}
