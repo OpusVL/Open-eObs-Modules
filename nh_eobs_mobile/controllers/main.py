@@ -744,7 +744,11 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
                         if "frequency" in obj_model_name:
                             vals.update({"frequency": int(val)})
                         if "medical_team" in obj_model_name:
-                            if "text" in key:
+                            if "selection" in key and kwargs[key]:
+                                obj_res_users = request.registry['res.users']
+                                doctor_name = obj_res_users.browse(cr, uid, int(val), context=context).name
+                                vals.update({"doctor_notified": doctor_name})
+                            elif "text" in key and kwargs[key]:
                                 vals.update({"doctor_notified": val.encode("utf-8")})
                             if "checkbox" in key:
                                 vals.update({"is_duty_doctor": True})
