@@ -642,12 +642,12 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
             :return: list: A list of tuples in the the format (id, name)
             """
 
-            obj_nh_clinical_doctor = request.registry['nh.clinical.doctor']
-            doctors_list = obj_nh_clinical_doctor.search(cr, uid, [], context=context)
+            obj_res_users = request.registry['res.users']
+            doctors_list = obj_res_users.search(cr, uid, [('partner_id.doctor', '=', True)], context=context)
             doctors_list_details = [
                 (
-                    obj_nh_clinical_doctor.browse(cr, uid, x, context=context).user_id.id,
-                    obj_nh_clinical_doctor.browse(cr, uid, x, context=context).user_id.name,
+                    obj_res_users.browse(cr, uid, x, context=context).id,
+                    obj_res_users.browse(cr, uid, x, context=context).partner_id.name,
                 )
                 for x in doctors_list
             ]
