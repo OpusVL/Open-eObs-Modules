@@ -103,7 +103,10 @@ class NhEobsApiRoutes(orm.AbstractModel):
             task_tree = self._get_task_tree(uid)
 
             user_type = "nurse"
-            current_case = self._get_case(obs)
+            score_dict = api.get_activity_score(
+                cr, uid, obs_model_name, converted_data, context=context
+            )
+            current_case = self._get_case(score_dict)
             tasks_required = task_tree[user_type][current_case]
 
             task_list = [
@@ -164,10 +167,12 @@ class NhEobsApiRoutes(orm.AbstractModel):
             }
         )
 
-    def _get_case(self, obs):
-        score = obs.score
+    def _get_case(self, score_dict):
+        score = score_dict['score']
         case = ""
-        if score == 0:
+        if score_dict['three_in_one']:
+            case = "case_2"
+        elif score == 0:
             case = "case_0"
         elif 0 < score <= 4:
             case = "case_1"
@@ -213,18 +218,16 @@ class NhEobsApiRoutes(orm.AbstractModel):
                 ],
                 "case_2": [
                     {
-                        "model": "nh.clinical.notification.shift_coordinator",
-                        "fields": {}
+                        "model": "nh.clinical.notification.medical_team",
+                        "fields": {
+                            "doctor_notified": False,
+                            "is_duty_doctor": False
+                        }
                     },
                     {
-                        "model": "",
-                        "fields": {}
-                    },
-                    {
-                        "model": "",
+                        "model": "nh.clinical.notification.ambulance",
                         "fields": {}
                     }
-
                 ],
                 "case_3": [
                     {
@@ -320,7 +323,10 @@ class NhEobsApiRoutes(orm.AbstractModel):
         task_tree = self._get_task_tree(uid)
 
         user_type = "nurse"
-        current_case = self._get_case(obs)
+        score_dict = api.get_activity_score(
+            cr, uid, ob_str, converted_data, context=context
+        )
+        current_case = self._get_case(score_dict)
         tasks_required = task_tree[user_type][current_case]
 
         task_list = [
