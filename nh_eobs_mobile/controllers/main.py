@@ -743,6 +743,22 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
                         vals = dict()
                         if "frequency" in obj_model_name:
                             vals.update({"frequency": int(val)})
+
+                            # As well as the activity, if the task is the notification frequency then this must also be
+                            # written to the scheduled observation activity
+                            obj_nh_clinical_patient_observation_ews = request.registry['nh.clinical.patient.observation.ews']
+                            obs_activity_id = obj_nh_activity.search(
+                                cr, uid, [
+                                    ('creator_id', '=', activity_id.creator_id.id),
+                                    ('data_model', '=', 'nh.clinical.patient.observation.ews')
+                                ]
+                            )
+                            obs_id = obj_nh_clinical_patient_observation_ews.search(cr, uid, [
+                                ('activity_id', '=', obs_activity_id)
+                            ])
+                            if len(obs_id) == 1:
+                                obj_nh_clinical_patient_observation_ews.write(cr, uid, obs_id, vals, context=context)
+                                cr.execute('refresh materialized view ews0;\n')
                         if "medical_team" in obj_model_name:
                             if "selection" in key and kwargs[key]:
                                 obj_res_users = request.registry['res.users']
