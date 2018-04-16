@@ -104,7 +104,7 @@ class NhEobsApiRoutes(orm.AbstractModel):
 
             user_type = "nurse"
             score_dict = api.get_activity_score(
-                cr, uid, obs_model_name, converted_data, context=context
+                cr, uid, obs_str, converted_data, context=context
             )
             current_case = self._get_case(score_dict)
             tasks_required = task_tree[user_type][current_case]
