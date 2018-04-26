@@ -25,23 +25,40 @@ class NHClinicalPatientObservationSlamEws(orm.Model):
                 {
                     'model': 'select_frequency',
                     'summary': 'Select Frequency',
-                    'groups': ['hca', 'nurse']
+                    'groups': ['nurse']
                 }
             ],
             [
                 {
                     'model': 'assessment',
-                    'groups': ['nurse', 'hca']
+                    'groups': ['nurse']
                 },
                 {
                     'model': 'hca',
                     'summary': 'Inform Nurse About Patient',
                     'groups': ['hca']
                 },
+                # {
+                #     'model': 'nurse',
+                #     'summary': 'Informed About Patient Status (NEWS)?',
+                #     'groups': ['hca']
+                # }
+            ],
+            [
                 {
-                    'model': 'nurse',
-                    'summary': 'Informed About Patient Status (NEWS)?',
+                    'model': 'hca',
+                    'summary': 'Inform Nurse About Patient',
                     'groups': ['hca']
+                },
+                # {
+                #     'model': 'nurse',
+                #     'summary': 'Informed About Patient Status (NEWS)?',
+                #     'groups': ['hca']
+                # },
+                {
+                    'model': 'shift_coordinator',
+                    'summary': 'Inform Shift Coordinator',
+                    'groups': ['nurse']
                 }
             ],
             [
@@ -50,32 +67,15 @@ class NHClinicalPatientObservationSlamEws(orm.Model):
                     'summary': 'Inform Nurse About Patient',
                     'groups': ['hca']
                 },
-                {
-                    'model': 'nurse',
-                    'summary': 'Informed About Patient Status (NEWS)?',
-                    'groups': ['hca']
-                },
-                {
-                    'model': 'shift_coordinator',
-                    'summary': 'Inform Shift Coordinator',
-                    'groups': ['hca', 'nurse']
-                }
-            ],
-            [
-                {
-                    'model': 'hca',
-                    'summary': 'Inform Nurse About Patient',
-                    'groups': ['hca']
-                },
-                {
-                    'model': 'nurse',
-                    'summary': 'Informed About Patient Status (NEWS)?',
-                    'groups': ['hca']
-                },
+                # {
+                #     'model': 'nurse',
+                #     'summary': 'Informed About Patient Status (NEWS)?',
+                #     'groups': ['hca']
+                # },
                 {
                     'model': 'shift_coordinator',
                     'summary': 'Inform Shift Coordinator',
-                    'groups': ['hca', 'nurse']
+                    'groups': ['nurse']
                 }
             ]
         ],

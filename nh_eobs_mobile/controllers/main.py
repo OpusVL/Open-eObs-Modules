@@ -747,6 +747,7 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
                             # As well as the activity, if the task is the notification frequency then this must also be
                             # written to the scheduled observation activity
                             obj_nh_clinical_patient_observation_ews = request.registry['nh.clinical.patient.observation.ews']
+                            activity_id = obj_model.browse(cr, uid, record_id, context=context).activity_id
                             obs_activity_id = obj_nh_activity.search(
                                 cr, uid, [
                                     ('creator_id', '=', activity_id.creator_id.id),

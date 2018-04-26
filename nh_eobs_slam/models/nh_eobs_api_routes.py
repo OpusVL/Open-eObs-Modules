@@ -102,7 +102,7 @@ class NhEobsApiRoutes(orm.AbstractModel):
 
             task_tree = self._get_task_tree(uid)
 
-            user_type = "nurse"
+            user_type = self._get_user_role(cr, uid, context=context)
             score_dict = api.get_activity_score(
                 cr, uid, obs_str, converted_data, context=context
             )
@@ -258,24 +258,34 @@ class NhEobsApiRoutes(orm.AbstractModel):
             },
             "hca": {
                 "case_0": [
-                    "inform_nurse"
+                    # "inform_nurse"
                 ],
                 "case_1": [
-                    "inform_nurse"
+                    # "inform_nurse"
                 ],
                 "case_2": [
-                    "inform_nurse"
+                    # "inform_nurse"
                 ],
                 "case_3": [
-                    "inform_nurse"
+                    # "inform_nurse"
                 ],
                 "case_4": [
-                    "inform_nurse"
+                    # "inform_nurse"
                 ],
             }
         }
 
         return task_tree
+
+    def _get_user_role(self, cr, uid, context=None):
+
+        obj_res_users = self.pool['res.users']
+        user_record = obj_res_users.browse(cr, uid, uid, context=context)
+
+        if 'HCA' in [x.name for x in user_record.category_id]:
+            return 'hca'
+        else:
+            return 'nurse'
 
     @http.route(
         **route_api.route_manager.expose_route('json_task_form_action'))
@@ -322,7 +332,7 @@ class NhEobsApiRoutes(orm.AbstractModel):
 
         task_tree = self._get_task_tree(uid)
 
-        user_type = "nurse"
+        user_type = self._get_user_role(cr, uid, context=context)
         score_dict = api.get_activity_score(
             cr, uid, ob_str, converted_data, context=context
         )
