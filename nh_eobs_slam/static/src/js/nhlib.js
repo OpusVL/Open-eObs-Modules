@@ -2290,7 +2290,12 @@ NHMobileFormSLaM = (function(superClass) {
           }
       } else if (server_data.status === 'list') {
           // Redirect to http route here
-          return window.location.replace('/mobile/escalations/' + data.related_tasks[0].creator_id[0])
+          if (data.related_tasks.length === 0) {
+            return window.location.replace('/mobile/tasks')
+          }
+          else {
+              return window.location.replace('/mobile/escalations/' + data.related_tasks[0].creator_id[0])
+          }
 
       } else if (server_data.status === 'success' && data.status === 1) {
         triggered_tasks = '';
