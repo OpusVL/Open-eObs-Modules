@@ -438,7 +438,7 @@ class StaffReallocationWizard(models.TransientModel):
         user_ids = wiz.get('user_ids')
         recompute = False
         for u_id in loc_user_ids:
-            if u_id.id not in user_ids and u_id != self.env.uid:
+            if u_id.id not in user_ids and u_id.id != self.env.uid:
                 recompute = True
                 user = u_id.read(['location_ids'])[0]
                 uloc_ids = user.get('location_ids')
