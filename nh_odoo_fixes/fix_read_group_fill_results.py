@@ -64,8 +64,13 @@ def _read_group_fill_results(self, cr, uid, domain, groupby,
         right_side = all_groups[0] if all_groups else None
         # #### NHC BEGIN
         if left_side and not isinstance(left_side[groupby], (tuple, list)):
-            if left_side[groupby] and all_group_tuples[left_side[groupby]]:
+
+            # T14019 - variable assignment changed to a try/else to catch a KeyError. The exception case assignment
+            # (to a value of 'False' is already correctly handled)
+            try:
                 left_side[groupby] = all_group_tuples[left_side[groupby]]
+            except KeyError:
+                left_side[groupby] = False
         # ### NHC END
         assert left_side is None or left_side[groupby] is False \
             or isinstance(left_side[groupby], (tuple, list)), \
