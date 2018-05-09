@@ -1,6 +1,7 @@
 openerp.nh_eobs_mental_health = function (instance) {
 
-    var QWeb = instance.web.qweb;
+    var QWeb = instance.web.qweb,
+        _t = instance.web._t;
     //Kanban view visual customizations (coloured backgrounds for the patient
     //board columns). Manages the refresh timer for the Kanban board too.
     instance.nh_eobs_mental_health.RapidTranqWidget = instance.web.list.Column.extend({
