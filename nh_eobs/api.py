@@ -988,8 +988,12 @@ class nh_eobs_api(orm.AbstractModel):
         patient.ensure_one()
 
         spell_model = self.env['nh.clinical.spell']
-        domain = [('patient_id', '=', patient.id)]
-        spell = spell_model.search(domain)
+        spell = spell_model.search(
+            [
+                ('patient_id', '=', patient.id),
+                ('activity_id.state', '!=', 'completed')
+            ]
+        )
         spell.ensure_one()
 
         return spell.activity_id.id
