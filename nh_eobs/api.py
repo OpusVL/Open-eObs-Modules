@@ -994,9 +994,14 @@ class nh_eobs_api(orm.AbstractModel):
                 ('activity_id.state', '!=', 'completed')
             ]
         )
-        spell.ensure_one()
+        # There may be no open spells, so the ensure_one is disabled for now
+        # spell.ensure_one()
+        if spell:
+            return spell.activity_id.id
+        else:
+            return None
 
-        return spell.activity_id.id
+        # return spell.activity_id.id
 
     def cancel_transfer(self, cr, uid, hospital_number, context=None):
         """
