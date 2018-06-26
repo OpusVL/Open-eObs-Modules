@@ -59,7 +59,9 @@ class NhEobsApi(AbstractModel):
         """
         spell_activity_id = self.get_spell_activity_id(hospital_number)
 
-        food_and_fluid_review_model = \
-            self.env['nh.clinical.notification.food_fluid_review']
-        food_and_fluid_review_model.cancel_review_tasks(
-            cancel_reason, spell_activity_id=spell_activity_id)
+        if spell_activity_id:
+            food_and_fluid_review_model = self.env['nh.clinical.notification.food_fluid_review']
+            food_and_fluid_review_model.cancel_review_tasks(
+                cancel_reason,
+                spell_activity_id=spell_activity_id
+            )
