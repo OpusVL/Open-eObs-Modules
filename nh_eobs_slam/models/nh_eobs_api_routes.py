@@ -180,6 +180,8 @@ class NhEobsApiRoutes(orm.AbstractModel):
             case = "case_3"
         elif 7 <= score:
             case = "case_4"
+        elif not score:
+            case = "case_5"
 
         return case
 
@@ -197,6 +199,7 @@ class NhEobsApiRoutes(orm.AbstractModel):
                     # which is automatically created at the end of the observation.
                 ],
                 "case_1": [
+                    # Low Risk
                     {
                         "model": "nh.clinical.notification.shift_coordinator",
                         "fields": {}
@@ -217,6 +220,7 @@ class NhEobsApiRoutes(orm.AbstractModel):
                     }
                 ],
                 "case_2": [
+                    # Three-in-one Risk
                     {
                         "model": "nh.clinical.notification.medical_team",
                         "fields": {
@@ -230,6 +234,7 @@ class NhEobsApiRoutes(orm.AbstractModel):
                     }
                 ],
                 "case_3": [
+                    # Medium Risk
                     {
                         "model": "nh.clinical.notification.medical_team",
                         "fields": {
@@ -243,6 +248,7 @@ class NhEobsApiRoutes(orm.AbstractModel):
                     }
                 ],
                 "case_4": [
+                    # High Risk
                     {
                         "model": "nh.clinical.notification.medical_team",
                         "fields": {
@@ -254,7 +260,12 @@ class NhEobsApiRoutes(orm.AbstractModel):
                         "model": "nh.clinical.notification.ambulance",
                         "fields": {}
                     }
-                ]
+                ],
+                "case_5": [
+                    # Unable to complete, ie patient is asleep
+                    # No need for an activity to be declared here as there will only be one activity (select_frequency)
+                    # which is automatically created at the end of the observation.
+                ],
             },
             "hca": {
                 "case_0": [
