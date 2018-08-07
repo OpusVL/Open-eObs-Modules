@@ -253,19 +253,23 @@ class NHClinicalObservationReportPrinting(orm.Model):
                     s=surname,
                     n=nhs_number
                 )
+
+                # Write to database disabled on 07/08/2018 at request of client
+
                 # Save to database
-                db = self.add_report_to_database(
-                    cr, uid,
-                    'nh.clinical.observation_report',
-                    report_pdf,
-                    file_name,
-                    'nh.clinical.observation_report_wizard',
-                    obs_report_wizard_id)
+                # db = self.add_report_to_database(
+                #     cr, uid,
+                #     'nh.clinical.observation_report',
+                #     report_pdf,
+                #     file_name,
+                #     'nh.clinical.observation_report_wizard',
+                #     obs_report_wizard_id)
 
                 # Save to file system
                 fs = self.add_report_to_backup_location('/bcp/out', report_pdf,
                                                         file_name)
-                if db and fs:
+                # if db and fs:
+                if fs:
                     self.pool['nh.clinical.spell'].write(
                         cr, uid, spell, {'report_printed': True})
             except except_orm:
