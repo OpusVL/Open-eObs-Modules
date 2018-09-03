@@ -51,6 +51,7 @@ ALL_FREQUENCIES = {
 # Frequency tuples organised by risk and frequency in minutes.
 FREQUENCIES_BY_RISK = {
     'None': {
+        EVERY_15_MINUTES[0]: EVERY_15_MINUTES,
         EVERY_12_HOURS[0]: EVERY_12_HOURS,
         EVERY_DAY[0]: EVERY_DAY,
         EVERY_3_DAYS[0]: EVERY_3_DAYS,
