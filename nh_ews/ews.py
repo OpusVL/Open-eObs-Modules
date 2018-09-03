@@ -857,8 +857,7 @@ class nh_clinical_patient_observation_ews(orm.Model):
         return refusal_adjusted_frequency
 
     @api.model
-    def get_date_scheduled_for_refusal(
-            self, previous_activity_completed_datetime, frequency):
+    def get_date_scheduled_for_refusal(self, previous_activity_completed_datetime, frequency):
         """
         Get the expected schedule date for a new observation triggered based on
         the passed completion date of the previous observation and it's
@@ -871,14 +870,11 @@ class nh_clinical_patient_observation_ews(orm.Model):
         :type frequency: int
         :return:
         """
-        previous_activity_completed_datetime = \
-            dt.strptime(previous_activity_completed_datetime, dtf)
-        date_scheduled = \
-            previous_activity_completed_datetime + timedelta(minutes=frequency)
+        previous_activity_completed_datetime = dt.strptime(previous_activity_completed_datetime, dtf)
+        date_scheduled = previous_activity_completed_datetime + timedelta(minutes=frequency)
         return date_scheduled
 
-    def lookup_adjusted_frequency_for_patient_refusal(self, case,
-                                                      frequency=None):
+    def lookup_adjusted_frequency_for_patient_refusal(self, case, frequency=None):
         """
         Lookup the frequency adjusted to take into account the fact that the
         patient is refusing observations. There are some cases where this needs
