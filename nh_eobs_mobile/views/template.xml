@@ -405,7 +405,7 @@
                                                                 <label t-att-for="str(task['task_id'])+'_value_text'" class="text_input" t-att-id="str(task['task_id'])+'_value_text_label'">
                                                                     <t t-esc="input_field['label']"/>
                                                                 </label>
-                                                                <input type="text" t-att-name="str(task['task_id'])+'_value_text'" t-att-id="str(task['task_id'])+'_value_text'"/>
+                                                                <input type="text" t-att-name="str(task['task_id'])+'_value_text'" t-att-id="str(task['task_id'])+'_value_text'" oninput="doctorFreeText(this)"/>
                                                         </t>
                                                         <t t-if="input_field['type'] == 'checkbox'">
                                                                 <label t-att-for="str(task['task_id'])+'_value_checkbox'" class="text_input" t-att-id="str(task['task_id'])+'_value_checkbox_label'">
