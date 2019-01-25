@@ -24,7 +24,7 @@ class NhClinicalPatientObservationWeight(models.Model):
     waist_measurement = obs_fields.Float(string='Waist Measurement (cm)',
                                          digits=(3, 1))
     score = fields.Float(string='Body Mass Index (kg/m2)', digits=(3, 1),
-                         compute='_get_score',)
+                         compute='_get_score', store=True)
 
     @api.constrains('weight', 'waist_measurement')
     def _in_min_max_range(self):
