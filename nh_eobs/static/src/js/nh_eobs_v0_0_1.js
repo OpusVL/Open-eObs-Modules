@@ -15,15 +15,15 @@ openerp.nh_eobs = function (instance) {
     instance.nh_eobs.defaults = {
         refresh: {
             'Acuity Board': {
-                'kanban': 30000,
-                'list': 30000
+                'kanban': 600000, //Refresh time (10mins)
+                'list': 600000 //Refresh time (10mins)
             },
             'Patients by Ward': {
-                'list': 30000
+                'list': 600000 //Refresh time (10mins)
             }
         },
         kiosk: {
-            interval: 15000
+            interval: 300000 //Refresh time (5mins)
         },
         logout: 1200000 //Inactivity auto-logout time (20mins)
     };
