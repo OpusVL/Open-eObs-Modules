@@ -180,26 +180,28 @@ class NHClinicalObservationReportPrinting(orm.Model):
         report_pool = self.pool['report']
         obs_report_pool = self.pool['report.nh.clinical.observation_report']
         for spell in spell_ids:
-            obs_report_wizard_pool = \
-                self.pool['nh.clinical.observation_report_wizard']
-            obs_report_wizard_id = obs_report_wizard_pool.create(
-                cr, uid, {
-                    'start_time': None,
-                    'end_time': None
-                }
-            )
-            data = obs_report_wizard_pool.read(cr, uid, obs_report_wizard_id)
-            data['spell_id'] = spell
-            data['ews_only'] = True
+		    # TAT - 20/02/2019: Moved try to resolve script failing, added additional logging to identify failure
+            try:
+                _logger.info('Spell Id: {0}'.format(spell))
+                obs_report_wizard_pool = \
+                    self.pool['nh.clinical.observation_report_wizard']
+                obs_report_wizard_id = obs_report_wizard_pool.create(
+                    cr, uid, {
+                        'start_time': None,
+                        'end_time': None
+                    }
+                )
+                data = obs_report_wizard_pool.read(cr, uid, obs_report_wizard_id)
+                data['spell_id'] = spell
+                data['ews_only'] = True
 
-            # Render the HTML for the report
-            report_html = obs_report_pool.render_html(cr, uid,
+                # Render the HTML for the report
+                report_html = obs_report_pool.render_html(cr, uid,
                                                       obs_report_wizard_id,
                                                       data=data,
                                                       context=context)
 
-            # Create PDF from HTML
-            try:
+                # Create PDF from HTML
                 report_pdf = report_pool.get_pdf(
                     cr, uid, [obs_report_wizard_id],
                     'nh.clinical.observation_report',
@@ -207,7 +209,8 @@ class NHClinicalObservationReportPrinting(orm.Model):
                     data=data, context=context
                 )
 
-                # file name in ward_surname_nhsnumber format
+                # file name - fetch values trustid,ward,surname,nhsnumber
+		        # TAT - 20/02/2019: added 'other_identifier' to patient_id array, data handler and file name
                 spell_obj = spell_pool.read(cr, uid, spell)
                 patient_id = spell_obj['patient_id'][0]
                 patient = self.pool['nh.clinical.patient'].read(
@@ -215,6 +218,7 @@ class NHClinicalObservationReportPrinting(orm.Model):
                     patient_id,
                     [
                         'patient_identifier',
+                        'other_identifier',
                         'current_location_id',
                         'family_name'
                     ]
@@ -248,30 +252,40 @@ class NHClinicalObservationReportPrinting(orm.Model):
                 surname = None
                 if 'family_name' in patient and patient['family_name']:
                     surname = patient['family_name']
-                file_name = '{w}_{s}_{n}'.format(
-                    w=ward,
-                    s=surname,
-                    n=nhs_number
-                )
+                trust_id = None
+                if 'other_identifier' in patient and patient['other_identifier']:
+                    trust_id = patient['other_identifier']
+                #file_name = '{w}_{s}_{n}'.format(
+                #    w=ward,
+                #    s=surname,
+                #    n=nhs_number
+                #)
+                # TAT - 20/02/2019: added code here to handle if trustid == None and log error, do not create PDF or updated report_printed flag
+                if trust_id:
+                    file_name = '{t}'.format(
+                        t=trust_id
+                    )
+                    # Write to database disabled on 07/08/2018 at request of client
 
-                # Write to database disabled on 07/08/2018 at request of client
+                    # Save to database
+                    # db = self.add_report_to_database(
+                    #     cr, uid,
+                    #     'nh.clinical.observation_report',
+                    #     report_pdf,
+                    #     file_name,
+                    #     'nh.clinical.observation_report_wizard',
+                    #     obs_report_wizard_id)
 
-                # Save to database
-                # db = self.add_report_to_database(
-                #     cr, uid,
-                #     'nh.clinical.observation_report',
-                #     report_pdf,
-                #     file_name,
-                #     'nh.clinical.observation_report_wizard',
-                #     obs_report_wizard_id)
 
-                # Save to file system
-                fs = self.add_report_to_backup_location('/bcp/out', report_pdf,
+                    # Save to file system
+                    fs = self.add_report_to_backup_location('/bcp/out', report_pdf,
                                                         file_name)
-                # if db and fs:
-                if fs:
-                    self.pool['nh.clinical.spell'].write(
-                        cr, uid, spell, {'report_printed': True})
+                    # if db and fs:
+                    if fs:
+                        self.pool['nh.clinical.spell'].write(
+                            cr, uid, spell, {'report_printed': True})
+                else:
+                    _logger.warning('Cannot save PDF report, trust id missing, Spell Id: {0}'.format(spell))
             except except_orm:
                 pass
         return True
