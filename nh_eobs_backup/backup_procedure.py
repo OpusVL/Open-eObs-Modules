@@ -285,7 +285,10 @@ class NHClinicalObservationReportPrinting(orm.Model):
                         self.pool['nh.clinical.spell'].write(
                             cr, uid, spell, {'report_printed': True})
                 else:
-                    _logger.warning('Cannot save PDF report, trust id missing, Spell Id: {0}'.format(spell))
+                    _logger.warning('Cannot save PDF report for Spell: {0}, other_identifier missing'.format(spell))
             except except_orm:
+                pass
+            except:
+                _logger.error('Error creating PDF for Spell: {0}'.format(spell))
                 pass
         return True
