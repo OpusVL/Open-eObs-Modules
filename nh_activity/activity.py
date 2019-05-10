@@ -124,6 +124,9 @@ class nh_activity(orm.Model):
         'date_terminated': fields.datetime(
             'Termination Time', help="Completed, Aborted, Expired, Cancelled",
             readonly=True),
+        'effective_date_terminated': fields.datetime(
+            'Effective Termination Time', help="Completed, Aborted, Expired, Cancelled",
+            readonly=True),
         # dates limits
         'date_deadline': fields.datetime('Deadline Time', readonly=True),
         'date_expiry': fields.datetime('Expiry Time', readonly=True),
@@ -433,6 +436,9 @@ class nh_activity_data(orm.AbstractModel):
         'date_terminated': fields.related('activity_id', 'date_terminated',
                                           string='Terminated Time',
                                           type='datetime'),
+        'effective_date_terminated': fields.related('activity_id', 'effective_date_terminated',
+                                                    string='Effective Terminated Time',
+                                                    type='datetime'),
         'state': fields.related('activity_id', 'state', type='char',
                                 string='State', size=64),
         'terminate_uid': fields.related('activity_id', 'terminate_uid',
