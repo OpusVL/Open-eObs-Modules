@@ -522,10 +522,16 @@ class nh_activity_data(orm.AbstractModel):
         activity_pool = self.pool['nh.activity']
         activity = activity_pool.browse(cr, uid, activity_id, context=context)
         self.check_action(activity.state, 'complete')
-        activity_pool.write(cr, uid, activity.id,
-                            {'state': 'completed', 'terminate_uid': uid,
-                             'date_terminated': datetime.now().strftime(DTF)},
-                            context=context)
+
+        now = datetime.now().strftime(DTF)
+        vals = {
+            'state': 'completed',
+            'terminate_uid': uid,
+            'date_terminated': now
+        }
+        if not activity.effective_date_terminated:
+            vals.update({'effective_date_terminated': now})
+        activity_pool.write(cr, uid, activity.id, vals, context=context)
         _logger.debug("activity '%s', activity.id=%s completed",
                       activity.data_model, activity.id)
         return True
