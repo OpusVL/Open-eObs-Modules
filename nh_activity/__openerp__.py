@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'NH Activity',
-    'version': '0.1',
+    'version': '1.0.2',
     'category': 'General',
     'license': 'AGPL-3',
     'summary': '',
