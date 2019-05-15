@@ -273,8 +273,8 @@ NHGraphLib = (function() {
         this.style.timePadding = this.oneHundredSecondsInMilliseconds;
       }
       if (this.data.raw.length > 0) {
-        start = this.date_from_string(this.data.raw[0]['date_terminated']);
-        end = this.date_from_string(this.data.raw[this.data.raw.length - 1]['date_terminated']);
+        start = this.date_from_string(this.data.raw[0]['effective_date_terminated']);
+        end = this.date_from_string(this.data.raw[this.data.raw.length - 1]['effective_date_terminated']);
         if (!this.style.timePadding) {
           this.rangeInMilliseconds = end.getTime() - start.getTime();
           this.fivePercentOfRange = this.rangeInMilliseconds * 0.05;
@@ -349,7 +349,7 @@ NHGraphLib = (function() {
     tbody = container.append('tbody').attr('class', 'tbody');
     header_row = [
       {
-        'date_terminated': 'Date'
+        'effective_date_terminated': 'Date'
       }
     ];
     raw_data = self.data.raw.reverse();
@@ -371,9 +371,9 @@ NHGraphLib = (function() {
     }
     thead.append('tr').selectAll('.column-header').data(header_row.concat(raw_data)).enter().append('th').html(function(d) {
       var date_rotate, term_date;
-      term_date = d.date_terminated;
-      if (d.date_terminated !== "Date") {
-        term_date = self.date_to_string(self.date_from_string(d.date_terminated), false);
+      term_date = d.effective_date_terminated;
+      if (d.effective_date_terminated !== "Date") {
+        term_date = self.date_to_string(self.date_from_string(d.effective_date_terminated), false);
       }
       date_rotate = term_date.split(' ');
       if (date_rotate.length === 1) {
@@ -1233,7 +1233,7 @@ NHGraph = (function(superClass) {
             return d;
           }
         }).x(function(d) {
-          return self.axes.x.scale(self.date_from_string(d.date_terminated));
+          return self.axes.x.scale(self.date_from_string(d.effective_date_terminated));
         }).y(function(d) {
           return self.axes.y.scale(d[self.options.keys[0]]);
         });
@@ -1247,7 +1247,7 @@ NHGraph = (function(superClass) {
             return d;
           }
         })).enter().append("circle").attr("cx", function(d) {
-          return self.axes.x.scale(self.date_from_string(d.date_terminated));
+          return self.axes.x.scale(self.date_from_string(d.effective_date_terminated));
         }).attr("cy", function(d) {
           return self.axes.y.scale(d[self.options.keys[0]]);
         }).attr("r", self.style.pointRadius).attr("class", "point").attr("clip-path", "url(#" + self.options.keys.join('-') + '-clip' + ")").on('mouseover', function(d) {
@@ -1271,7 +1271,7 @@ NHGraph = (function(superClass) {
             return d;
           }
         })).enter().append("circle").attr("cx", function(d) {
-          return self.axes.x.scale(self.date_from_string(d.date_terminated));
+          return self.axes.x.scale(self.date_from_string(d.effective_date_terminated));
         }).attr("cy", function(d) {
           return self.axes.y.scale(d[self.options.keys[0]]);
         }).attr("r", self.style.pointRadius).attr("class", "empty_point").attr("clip-path", "url(#" + self.options.keys.join('-') + '-clip' + ")").on('mouseover', function(d) {
@@ -1296,7 +1296,7 @@ NHGraph = (function(superClass) {
           }
         })).enter().append("text").attr("x", function(d) {
           var point_x;
-          point_x = self.date_from_string(d.date_terminated);
+          point_x = self.date_from_string(d.effective_date_terminated);
           return self.axes.x.scale(point_x);
         }).attr("y", function(d) {
           var domainEnd, domainStart, point_y;
@@ -1320,7 +1320,7 @@ NHGraph = (function(superClass) {
           }
         })).enter().append("text").attr("x", function(d) {
           var point_x;
-          point_x = self.date_from_string(d.date_terminated);
+          point_x = self.date_from_string(d.effective_date_terminated);
           return self.axes.x.scale(point_x);
         }).attr("y", function(d) {
           var domainEnd, domainStart, point_y;
@@ -1344,7 +1344,7 @@ NHGraph = (function(superClass) {
               return self.axes.y.scale(d[self.options.keys[0]]);
             },
             'x': function(d) {
-              return self.axes.x.scale(self.date_from_string(d.date_terminated)) - (self.style.range.cap.width / 2) + 1;
+              return self.axes.x.scale(self.date_from_string(d.effective_date_terminated)) - (self.style.range.cap.width / 2) + 1;
             },
             'height': self.style.range.cap.height,
             'width': self.style.range.cap.width,
@@ -1371,7 +1371,7 @@ NHGraph = (function(superClass) {
               return self.axes.y.scale(d[self.options.keys[1]]);
             },
             'x': function(d) {
-              return self.axes.x.scale(self.date_from_string(d.date_terminated)) - (self.style.range.cap.width / 2) + 1;
+              return self.axes.x.scale(self.date_from_string(d.effective_date_terminated)) - (self.style.range.cap.width / 2) + 1;
             },
             'height': self.style.range.cap.height,
             'width': self.style.range.cap.width,
@@ -1401,7 +1401,7 @@ NHGraph = (function(superClass) {
               return self.axes.y.scale(d[self.options.keys[0]]);
             },
             'x': function(d) {
-              return self.axes.x.scale(self.date_from_string(d.date_terminated));
+              return self.axes.x.scale(self.date_from_string(d.effective_date_terminated));
             },
             'height': function(d) {
               return self.axes.y.scale(d[self.options.keys[1]]) - self.axes.y.scale(d[self.options.keys[0]]);
@@ -1442,7 +1442,7 @@ NHGraph = (function(superClass) {
               return self.axes.y.scale(d[self.options.keys[0]]);
             },
             'x': function(d) {
-              return self.axes.x.scale(self.date_from_string(d.date_terminated)) - (self.style.range.cap.width / 2) + 1;
+              return self.axes.x.scale(self.date_from_string(d.effective_date_terminated)) - (self.style.range.cap.width / 2) + 1;
             },
             'height': self.style.range.cap.height,
             'width': self.style.range.cap.width,
@@ -1481,7 +1481,7 @@ NHGraph = (function(superClass) {
               return self.axes.y.scale(d[self.options.keys[1]]);
             },
             'x': function(d) {
-              return self.axes.x.scale(self.date_from_string(d.date_terminated)) - (self.style.range.cap.width / 2) + 1;
+              return self.axes.x.scale(self.date_from_string(d.effective_date_terminated)) - (self.style.range.cap.width / 2) + 1;
             },
             'height': self.style.range.cap.height,
             'width': self.style.range.cap.width,
@@ -1521,7 +1521,7 @@ NHGraph = (function(superClass) {
               return self.axes.y.scale(d[self.options.keys[0]]);
             },
             'x': function(d) {
-              return self.axes.x.scale(self.date_from_string(d.date_terminated));
+              return self.axes.x.scale(self.date_from_string(d.effective_date_terminated));
             },
             'height': function(d) {
               return self.axes.y.scale(d[self.options.keys[1]]) - self.axes.y.scale(d[self.options.keys[0]]);
@@ -1558,7 +1558,7 @@ NHGraph = (function(superClass) {
             }
           })).enter().append("text").attr("x", function(d) {
             var point_x;
-            point_x = self.date_from_string(d.date_terminated);
+            point_x = self.date_from_string(d.effective_date_terminated);
             return self.axes.x.scale(point_x);
           }).attr("y", function(d) {
             var domainEnd, domainStart, point_y;
@@ -1582,7 +1582,7 @@ NHGraph = (function(superClass) {
             }
           })).enter().append("text").attr("x", function(d) {
             var point_x;
-            point_x = self.date_from_string(d.date_terminated);
+            point_x = self.date_from_string(d.effective_date_terminated);
             return self.axes.x.scale(point_x);
           }).attr("y", function(d) {
             var domainEnd, domainStart, point_y;
@@ -1673,18 +1673,18 @@ NHGraph = (function(superClass) {
       case 'linear':
         self.drawables.data.selectAll('.path').attr("d", self.drawables.area);
         self.drawables.data.selectAll('.point').attr('cx', function(d) {
-          return self.axes.x.scale(self.date_from_string(d.date_terminated));
+          return self.axes.x.scale(self.date_from_string(d.effective_date_terminated));
         }).attr('cy', function(d) {
           return self.axes.y.scale(d[self.options.keys[0]]);
         });
         self.drawables.data.selectAll('.empty_point').attr('cx', function(d) {
-          return self.axes.x.scale(self.date_from_string(d.date_terminated));
+          return self.axes.x.scale(self.date_from_string(d.effective_date_terminated));
         }).attr("cy", function(d) {
           return self.axes.y.scale(d[self.options.keys[0]]);
         });
         self.drawables.data.selectAll('.partial_point').attr('x', function(d) {
           var point_x;
-          point_x = self.date_from_string(d.date_terminated);
+          point_x = self.date_from_string(d.effective_date_terminated);
           return self.axes.x.scale(point_x);
         }).attr("y", function(d) {
           var domainEnd, domainStart, point_y;
@@ -1695,7 +1695,7 @@ NHGraph = (function(superClass) {
         }).attr('dx', '-4px').attr('dy', '5px');
         self.drawables.data.selectAll('.refused_point').attr('x', function(d) {
           var point_x;
-          point_x = self.date_from_string(d.date_terminated);
+          point_x = self.date_from_string(d.effective_date_terminated);
           return self.axes.x.scale(point_x);
         }).attr("y", function(d) {
           var domainEnd, domainStart, point_y;
@@ -1707,21 +1707,21 @@ NHGraph = (function(superClass) {
         break;
       case 'range':
         self.drawables.data.selectAll('.range.top').attr('x', function(d) {
-          return self.axes.x.scale(self.date_from_string(d.date_terminated)) - (self.style.range.cap.width / 2) + 1;
+          return self.axes.x.scale(self.date_from_string(d.effective_date_terminated)) - (self.style.range.cap.width / 2) + 1;
         }).attr({
           'y': function(d) {
             return self.axes.y.scale(d[self.options.keys[0]]);
           }
         });
         self.drawables.data.selectAll('.range.bottom').attr('x', function(d) {
-          return self.axes.x.scale(self.date_from_string(d.date_terminated)) - (self.style.range.cap.width / 2) + 1;
+          return self.axes.x.scale(self.date_from_string(d.effective_date_terminated)) - (self.style.range.cap.width / 2) + 1;
         }).attr({
           'y': function(d) {
             return self.axes.y.scale(d[self.options.keys[1]]);
           }
         });
         self.drawables.data.selectAll('.range.extent').attr('x', function(d) {
-          return self.axes.x.scale(self.date_from_string(d.date_terminated));
+          return self.axes.x.scale(self.date_from_string(d.effective_date_terminated));
         }).attr({
           'y': function(d) {
             return self.axes.y.scale(d[self.options.keys[0]]);
@@ -1733,7 +1733,7 @@ NHGraph = (function(superClass) {
         });
         self.drawables.data.selectAll('.partial_point').attr('x', function(d) {
           var point_x;
-          point_x = self.date_from_string(d.date_terminated);
+          point_x = self.date_from_string(d.effective_date_terminated);
           return self.axes.x.scale(point_x);
         }).attr("y", function(d) {
           var domainEnd, domainStart, point_y;
@@ -1744,7 +1744,7 @@ NHGraph = (function(superClass) {
         }).attr('dx', '-4px').attr('dy', '5px');
         self.drawables.data.selectAll('.refused_point').attr('x', function(d) {
           var point_x;
-          point_x = self.date_from_string(d.date_terminated);
+          point_x = self.date_from_string(d.effective_date_terminated);
           return self.axes.x.scale(point_x);
         }).attr("y", function(d) {
           var domainEnd, domainStart, point_y;
@@ -1832,7 +1832,7 @@ NHTable = (function(superClass) {
   NHTable.prototype.draw = function(parent_obj) {
     var i, key, keys, len, ref, self;
     self = this;
-    keys = ['date_terminated'];
+    keys = ['effective_date_terminated'];
     ref = self.keys;
     for (i = 0, len = ref.length; i < len; i++) {
       key = ref[i];
@@ -1841,7 +1841,7 @@ NHTable = (function(superClass) {
     self.data_rows.selectAll('tr').data(function() {
       var data, data_map, data_to_use;
       data_map = self.data.map(function(row) {
-        if (self.date_from_string(row['date_terminated']) >= self.range[0] && self.date_from_string(row['date_terminated']) <= self.range[1]) {
+        if (self.date_from_string(row['effective_date_terminated']) >= self.range[0] && self.date_from_string(row['effective_date_terminated']) <= self.range[1]) {
           return keys.map(function(column) {
             return {
               column: column,
@@ -1867,7 +1867,7 @@ NHTable = (function(superClass) {
     }).enter().append('td').html(function(d) {
       var data, date_rotate;
       data = d.value;
-      if (d.column === 'date_terminated') {
+      if (d.column === 'effective_date_terminated') {
         data = self.date_to_string(self.date_from_string(data), false);
         date_rotate = data.split(' ');
         if (date_rotate.length === 1) {
@@ -1882,7 +1882,7 @@ NHTable = (function(superClass) {
   NHTable.prototype.redraw = function(parent_obj) {
     var i, key, keys, len, ref, self;
     self = this;
-    keys = ['date_terminated'];
+    keys = ['effective_date_terminated'];
     ref = self.keys;
     for (i = 0, len = ref.length; i < len; i++) {
       key = ref[i];
@@ -1892,7 +1892,7 @@ NHTable = (function(superClass) {
     self.data_rows.selectAll('tr').data(function() {
       var data, data_map, data_to_use;
       data_map = self.data.map(function(row) {
-        if (self.date_from_string(row['date_terminated']) >= self.range[0] && self.date_from_string(row['date_terminated']) <= self.range[1]) {
+        if (self.date_from_string(row['effective_date_terminated']) >= self.range[0] && self.date_from_string(row['effective_date_terminated']) <= self.range[1]) {
           return keys.map(function(column) {
             return {
               column: column,
@@ -1918,7 +1918,7 @@ NHTable = (function(superClass) {
     }).enter().append('td').html(function(d) {
       var data, date_rotate;
       data = d.value;
-      if (d.column === 'date_terminated') {
+      if (d.column === 'effective_date_terminated') {
         data = self.date_to_string(self.date_from_string(data), false);
         date_rotate = data.split(' ');
         if (date_rotate.length === 1) {
