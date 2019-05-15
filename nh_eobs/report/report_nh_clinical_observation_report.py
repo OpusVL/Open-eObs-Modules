@@ -262,7 +262,7 @@ class ObservationReport(models.AbstractModel):
         self.add_exclude_placement_cancel_reason_parameter_to_domain(domain)
 
         activity_ids = activity_model.search(cr, uid, domain,
-                                             order='date_terminated asc')
+                                             order='effective_date_terminated asc')
         activity_data = activity_model.read(cr, uid, activity_ids)
         self.add_user_key(activity_data)
 
@@ -750,15 +750,15 @@ class ObservationReport(models.AbstractModel):
             ('date_started', '<=', end_date) if end_date else None,
             '|' if include_pme_active_throughout_report_range else None,
             '&' if start_date and end_date else None,
-            ('date_terminated', '>=', start_date) if start_date else None,
-            ('date_terminated', '<=', end_date) if end_date else None,
+            ('effective_date_terminated', '>=', start_date) if start_date else None,
+            ('effective_date_terminated', '<=', end_date) if end_date else None,
         ]
         if include_pme_active_throughout_report_range:
             pme_active_throughout_report_date_range_parameters = [
                 '&' if start_date and end_date else None,
                 ('date_started', '<=', start_date) if start_date and end_date
                 else None,
-                ('date_terminated', '>=', end_date) if start_date and end_date
+                ('effective_date_terminated', '>=', end_date) if start_date and end_date
                 else None
             ]
             filter_on_date_parameters.extend(
@@ -821,7 +821,7 @@ class ObservationReport(models.AbstractModel):
 
         # Get report entry for end of patient monitoring exception if it is not
         # still open.
-        if activity['date_terminated']:
+        if activity['effective_date_terminated']:
             pme_completed_entry = self.get_report_entry_dictionary(
                 pme_activity_id, pme_started=False)
             report_entries.append(pme_completed_entry)
@@ -844,9 +844,9 @@ class ObservationReport(models.AbstractModel):
         :return:
         :rtype: bool
         """
-        if activity['date_terminated']:
+        if activity['effective_date_terminated']:
             return self.is_datetime_within_range(
-                activity['date_terminated'], start_date, end_date
+                activity['effective_date_terminated'], start_date, end_date
             )
         return False
 
@@ -897,7 +897,7 @@ class ObservationReport(models.AbstractModel):
             raise ValueError("Need both dates to test if within range.")
 
         pme_start = activity.get('date_started')
-        pme_end = activity.get('date_terminated')
+        pme_end = activity.get('effective_date_terminated')
         if not pme_start and not pme_end:
             return False
         if not start_date and not end_date:
@@ -951,7 +951,7 @@ class ObservationReport(models.AbstractModel):
         pme = data_ref_model.read(cr, uid, pme_id)
 
         date = activity['date_started'] if pme_started \
-            else activity['date_terminated']
+            else activity['effective_date_terminated']
         status = start_pme if pme_started \
             else stop_pme
         uid_field = 'create_uid' if pme_started else 'terminate_uid'
@@ -985,7 +985,7 @@ class ObservationReport(models.AbstractModel):
 
     def _localise_and_format_datetimes(self, report_data):
         date_started = 'date_started'
-        date_terminated = 'date_terminated'
+        date_terminated = 'effective_date_terminated'
 
         # Report period datetimes
         self._localise_dict_time(report_data, 'report_start')
@@ -1118,7 +1118,7 @@ class ObservationReport(models.AbstractModel):
 
             for obs_data in graph_data:
                 self._localise_dict_time(
-                    obs_data, 'date_terminated', return_string_format=DTF)
+                    obs_data, 'effective_date_terminated', return_string_format=DTF)
 
     def _convert_graph_data_to_json(self, report_data):
         """
