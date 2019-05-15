@@ -12,6 +12,7 @@ class nh_eobs_news_report(osv.Model):
         'user_id': fields.many2one('res.users', 'Taken By', readonly=True),
         'date_scheduled': fields.datetime('Date Scheduled', readonly=True),
         'date_terminated': fields.datetime('Date Taken', readonly=True),
+        'effective_date_terminated': fields.datetime('Date Taken', readonly=True),
         'ward_id': fields.many2one('nh.clinical.location', 'Ward',
                                    readonly=True),
         'location_str': fields.char('Location', readonly=True),
@@ -49,7 +50,7 @@ class nh_eobs_news_report(osv.Model):
                 else 'Complete'
             end as obs_type,
             a.date_scheduled as date_scheduled,
-            a.date_terminated as date_terminated,
+            a.effective_date_terminated as effective_date_terminated,
             a.location_id as location_id,
             case
                 when char_length(loc.name) = 5 then
@@ -74,25 +75,25 @@ class nh_eobs_news_report(osv.Model):
             end as clinical_risk,
             case
                 when a.date_scheduled is null then 0
-                when a.date_scheduled >= a.date_terminated then 1
+                when a.date_scheduled >= a.effective_date_terminated then 1
                 else 0
             end as on_time,
             case
                 when a.date_scheduled is null then 0
-                when a.date_scheduled < a.date_terminated then 1
+                when a.date_scheduled < a.effective_date_terminated then 1
                 else 0
             end as not_on_time,
             case
                 when a.date_scheduled is null then 0
-                when a.date_scheduled >= a.date_terminated then 0
+                when a.date_scheduled >= a.effective_date_terminated then 0
                 else extract(epoch
-                from (a.date_terminated - a.date_scheduled))/60
+                from (a.effective_date_terminated - a.date_scheduled))/60
             end as delay,
             case
                 when a.date_scheduled is null then 0
-                when a.date_scheduled < a.date_terminated then 0
+                when a.date_scheduled < a.effective_date_terminated then 0
                 else extract(epoch
-                from (a.date_scheduled - a.date_terminated))/60
+                from (a.date_scheduled - a.effective_date_terminated))/60
             end as minutes_early,
             case
                 when (%s)::text[] @> ARRAY['NH Clinical Nurse Group']
@@ -154,7 +155,7 @@ class nh_eobs_news_report(osv.Model):
                 a.terminate_uid,
                 obs_type,
                 a.date_scheduled,
-                a.date_terminated,
+                a.effective_date_terminated,
                 a.location_id,
                 location_str,
                 trigger_type,
