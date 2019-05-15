@@ -47,7 +47,7 @@ class ReportDates(object):
 def create_search_filter(spell_activity_id, model,
                          start_datetime, end_datetime,
                          states='completed',
-                         date_field='date_terminated'):
+                         date_field='effective_date_terminated'):
     if not spell_activity_id:
         raise ValueError('No spell activity id supplied.')
     if not model:
