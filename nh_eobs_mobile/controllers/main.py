@@ -717,6 +717,11 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
         :param kwargs: The fields and values from the escalation tasks form
         :return: the 'get_tasks()' method
         """
+
+        def _update_effective_date():
+            effective_date = record.activity_id.creator_id.effective_date_terminated
+            vals.update({'effective_date_terminated': effective_date})
+
         cr, uid, context = request.cr, request.session.uid, request.context
         obj_nh_activity = request.registry['nh.activity']
         for key, val in kwargs.items():
@@ -732,6 +737,10 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
                         obj_model.write(cr, uid, int(val), {"reason": reason_id}, context=context)
                     record_id = int(kwargs[key])
                     record = obj_model.browse(cr, uid, record_id, context=context)
+
+                    # All the associated escalation tasks need to be updated with the same effective date
+                    _update_effective_date()
+
                     activity_id = record.activity_id
                     obj_nh_activity.write(cr, uid, activity_id.id, vals, context=context)
                 if "value" in key:

@@ -124,6 +124,9 @@ class nh_activity(orm.Model):
         'date_terminated': fields.datetime(
             'Termination Time', help="Completed, Aborted, Expired, Cancelled",
             readonly=True),
+        'effective_date_terminated': fields.datetime(
+            'Effective Termination Time', help="Completed, Aborted, Expired, Cancelled",
+            readonly=True),
         # dates limits
         'date_deadline': fields.datetime('Deadline Time', readonly=True),
         'date_expiry': fields.datetime('Expiry Time', readonly=True),
@@ -433,6 +436,9 @@ class nh_activity_data(orm.AbstractModel):
         'date_terminated': fields.related('activity_id', 'date_terminated',
                                           string='Terminated Time',
                                           type='datetime'),
+        'effective_date_terminated': fields.related('activity_id', 'effective_date_terminated',
+                                                    string='Effective Terminated Time',
+                                                    type='datetime'),
         'state': fields.related('activity_id', 'state', type='char',
                                 string='State', size=64),
         'terminate_uid': fields.related('activity_id', 'terminate_uid',
@@ -516,10 +522,16 @@ class nh_activity_data(orm.AbstractModel):
         activity_pool = self.pool['nh.activity']
         activity = activity_pool.browse(cr, uid, activity_id, context=context)
         self.check_action(activity.state, 'complete')
-        activity_pool.write(cr, uid, activity.id,
-                            {'state': 'completed', 'terminate_uid': uid,
-                             'date_terminated': datetime.now().strftime(DTF)},
-                            context=context)
+
+        now = datetime.now().strftime(DTF)
+        vals = {
+            'state': 'completed',
+            'terminate_uid': uid,
+            'date_terminated': now
+        }
+        if not activity.effective_date_terminated:
+            vals.update({'effective_date_terminated': now})
+        activity_pool.write(cr, uid, activity.id, vals, context=context)
         _logger.debug("activity '%s', activity.id=%s completed",
                       activity.data_model, activity.id)
         return True

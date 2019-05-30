@@ -1115,6 +1115,20 @@ drop materialized view if exists ward_locations cascade;
 drop materialized view if exists param cascade;
 drop materialized view if exists pbp cascade;
 
+drop view if exists wb_activity_ranked cascade;
+drop view if exists wb_ews_ranked cascade;
+drop view if exists wb_spell_ranked cascade;
+drop view if exists wb_transfer_ranked cascade;
+drop view if exists wb_discharge_ranked cascade;
+drop view if exists wb_activity_latest cascade;
+drop view if exists wb_activity_data cascade;
+drop view if exists consulting_doctors cascade;
+drop view if exists last_movement_users cascade;
+drop view if exists last_discharge_users cascade;
+drop view if exists last_transfer_users cascade;
+drop view if exists nh_clinical_wardboard cascade;
+
+
 create or replace view
 -- activity per spell, data_model, state
 wb_activity_ranked as(
@@ -1128,6 +1142,7 @@ wb_activity_ranked as(
         inner join nh_activity activity
             on activity.spell_activity_id = spell.activity_id
 );
+
 
 create or replace view
 -- ews per spell, data_model, state

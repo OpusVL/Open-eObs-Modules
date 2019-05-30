@@ -62,6 +62,18 @@ class NHClinicalWardDashboard(orm.Model):
             cr, 'Acute hospital ED')
         cr.execute(
             """
+            -- Drop existing views
+            DROP VIEW IF EXISTS wdb_transfer_ranked cascade;
+            DROP VIEW IF EXISTS wdb_reasons cascade;
+            DROP VIEW IF EXISTS wdb_awol_count cascade;
+            DROP VIEW IF EXISTS wdb_extended_leave_count cascade;
+            DROP VIEW IF EXISTS wdb_acute_hospital_ed_count cascade;
+            DROP VIEW IF EXISTS wdb_workload_count cascade;
+            DROP VIEW IF EXISTS wdb_bed_count cascade;
+            DROP VIEW IF EXISTS wdb_capacity_count cascade;
+            DROP VIEW IF EXISTS wdb_obs_stop_count cascade;
+            DROP VIEW IF EXISTS wdb_on_ward_count cascade;
+            DROP VIEW IF EXISTS wdb_refused_obs_count cascade;
             -- Create Helper Views
             CREATE OR REPLACE VIEW wdb_transfer_ranked AS ({transfer_ranked});
             CREATE OR REPLACE VIEW wdb_reasons AS ({reasons_view});
