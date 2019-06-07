@@ -79,7 +79,6 @@ class nh_clinical_patient_observation_gcs(models.Model):
                                   required=True)
     motor = obs_fields.Selection(_motor_selection, 'Best Motor Response',
                                  required=True)
-    effective_date_terminated = obs_fields.Datetime(related="activity_id.effective_date_terminated")
 
     @api.model
     def calculate_score(self, obs_data, return_dictionary=True):

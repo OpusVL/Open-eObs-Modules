@@ -20,8 +20,7 @@ class FieldUtils(models.AbstractModel):
             nh_obs_fields.One2many,
             nh_obs_fields.Many2one,
             nh_obs_fields.Many2Many,
-            nh_obs_fields.Float,
-            nh_obs_fields.Datetime
+            nh_obs_fields.Float
         )
         return isinstance(field, fields)
 
