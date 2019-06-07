@@ -12,17 +12,27 @@ class FormDescription(models.TransientModel):
         field_utils = cls.pool['nh.clinical.field_utils']
         obs_fields = field_utils.get_obs_fields_from_model(model)
         for field in obs_fields:
-            field_description = {
-                'name': field.name,
-                'type': field.type,
-                'label': field.string,
-                'selection': field.selection,
-                'selection_type': 'text',
-                'initially_hidden': False,
-                'required': str(field.required).lower(),
-                'necessary': str(field.necessary).lower()
-            }
+            if field.type != 'datetime':
+                field_description = {
+                    'name': field.name,
+                    'type': field.type,
+                    'label': field.string,
+                    'selection': field.selection,
+                    'selection_type': 'text',
+                    'initially_hidden': False,
+                    'required': str(field.required).lower(),
+                    'necessary': str(field.necessary).lower()
+                }
+            else:
+                field_description = {
+                    'name': field.name,
+                    'type': field.type,
+                    'label': field.string,
+                    'initially_hidden': False,
+                    'required': str(field.required).lower()
+                }
             form_description.append(field_description)
+
         desired_order = model.get_obs_field_order()
         form_description.sort(key=lambda e: desired_order.index(e.get('name')))
         return form_description
