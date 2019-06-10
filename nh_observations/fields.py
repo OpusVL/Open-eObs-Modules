@@ -105,7 +105,7 @@ class Float(odoo_fields.Float):
         super(Float, self).__init__(*args, **kwargs)
 
 
-class Datetime(odoo_fields.Datetime):
+class Datetime(odoo_fields.Datetime, ObservationField):
 
     def __init__(self, *args, **kwargs):
         super(Datetime, self).__init__(
