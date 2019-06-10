@@ -41,7 +41,8 @@ class NhClinicalPatientObservationNeurological(models.Model):
         'eyes', 'verbal', 'motor', 'pupil_right_size', 'pupil_right_reaction',
         'pupil_left_size', 'pupil_left_reaction',
         'limb_movement_left_arm', 'limb_movement_right_arm',
-        'limb_movement_left_leg', 'limb_movement_right_leg'
+        'limb_movement_left_leg', 'limb_movement_right_leg',
+        'effective_date_terminated'
     ]
 
     pupil_right_size = obs_fields.Selection(

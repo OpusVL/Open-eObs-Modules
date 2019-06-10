@@ -16,7 +16,7 @@ class FormDescription(models.TransientModel):
                 'name': field.name,
                 'type': field.type,
                 'label': field.string,
-                'selection': field.selection,
+                'selection': field.selection if field.type == 'selection' else False,
                 'selection_type': 'text',
                 'initially_hidden': False,
                 'required': str(field.required).lower(),

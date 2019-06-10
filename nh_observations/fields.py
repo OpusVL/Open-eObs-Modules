@@ -105,6 +105,13 @@ class Float(odoo_fields.Float):
         super(Float, self).__init__(*args, **kwargs)
 
 
+class Datetime(odoo_fields.Datetime, ObservationField):
+
+    def __init__(self, *args, **kwargs):
+        super(Datetime, self).__init__(
+            *args, **kwargs
+        )
+
 # Hack to reset the `MetaField.by_type` dictionary to the state it was in
 # before these class declarations were read.
 #
