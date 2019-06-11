@@ -845,19 +845,6 @@
                                     <span t-esc="task.get('doctor_notified')"/>
                                 </td>
                             </tr>
-                            <tr>
-                                <td class="col-xs-6">
-                                    <strong>Is Duty Doctor:</strong>
-                                </td>
-                                <td>
-                                    <t t-if="task.get('is_duty_doctor')">
-                                        <span>Yes</span>
-                                    </t>
-                                    <t t-if="not task.get('is_duty_doctor')">
-                                        <span>No</span>
-                                    </t>
-                                </td>
-                            </tr>
                         </t>
                     </table>
                 </td>
