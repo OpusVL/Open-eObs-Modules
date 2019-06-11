@@ -635,48 +635,7 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
         :return: dict(): A dictionary containing the type of input field required and any associated values
         """
 
-        def _get_doctors_list():
-
-            """
-            Generates a list of users that have been assigned as a doctor.
-            :return: list: A list of tuples in the the format (id, name)
-            """
-
-            obj_res_users = request.registry['res.users']
-            doctors_list = obj_res_users.search(cr, uid, [('partner_id.doctor', '=', True)], context=context)
-            doctors_list_details = [
-                (
-                    obj_res_users.browse(cr, uid, x, context=context).id,
-                    obj_res_users.browse(cr, uid, x, context=context).partner_id.name,
-                )
-                for x in doctors_list
-            ]
-
-            return doctors_list_details
-
         input_fields = list()
-
-        if obj == "nh.clinical.notification.medical_team":
-            input_fields.extend(
-                [
-                    {
-                        "name": obj,
-                        "type": "selection",
-                        "values": _get_doctors_list(),
-                        "label": "Name of Doctor Notified"
-                    },
-                    {
-                        "name": obj,
-                        "type": "text_input",
-                        "label": "Name of Doctor Notified"
-                    },
-                    {
-                        "name": obj,
-                        "type": "checkbox",
-                        "label": "Is Duty Doctor"
-                    },
-                ]
-            )
 
         if obj == 'nh.clinical.notification.select_frequency':
             input_fields.extend(
@@ -769,15 +728,6 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
                             if len(obs_id) == 1:
                                 obj_nh_clinical_patient_observation_ews.write(cr, uid, obs_id, vals, context=context)
                                 cr.execute('refresh materialized view ews0;\n')
-                        if "medical_team" in obj_model_name:
-                            if "selection" in key and kwargs[key]:
-                                obj_res_users = request.registry['res.users']
-                                doctor_name = obj_res_users.browse(cr, uid, int(val), context=context).name
-                                vals.update({"doctor_notified": doctor_name})
-                            elif "text" in key and kwargs[key]:
-                                vals.update({"doctor_notified": val.encode("utf-8")})
-                            if "checkbox" in key:
-                                vals.update({"is_duty_doctor": True})
                         obj_model.write(cr, uid, record_id, vals)
 
         return self.get_tasks()
