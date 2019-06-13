@@ -222,10 +222,7 @@ function drawEwsChart(settings, serverData) {
 }
 
 function drawEwsTable(settings, serverData){
-    var obs = serverData.sort(function (a, b) {
-        var dateA = new Date(a.effective_date_terminated), dateB = new Date(b.effective_date_terminated);
-        return dateA - dateB
-    });
+    var obs = serverData.reverse();
     var tableEl = new window.NH.NHGraphLib("#table");
     tableEl.table = {
         element: "#table",
