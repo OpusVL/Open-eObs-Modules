@@ -605,7 +605,7 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
         }
         for activity in activities:
             activity_detail = obj_nh_activity.browse(cr, uid, activity, context=context)
-            if str(activity_detail.data_model) == 'nh.clinical.patient.observation.ews':
+            if str(activity_detail.data_model) in ['nh.clinical.patient.observation.ews', 'nh.clinical.patient.observation.blood_glucose']:
                 data['patient']['name'] = activity_detail.patient_id.full_name
                 data['patient']['patient_id'] = activity_detail.patient_id.id
             else:
@@ -714,19 +714,19 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
 
                             # As well as the activity, if the task is the notification frequency then this must also be
                             # written to the scheduled observation activity
-                            obj_nh_clinical_patient_observation_ews = request.registry['nh.clinical.patient.observation.ews']
                             activity_id = obj_model.browse(cr, uid, record_id, context=context).activity_id
                             obs_activity_id = obj_nh_activity.search(
                                 cr, uid, [
                                     ('creator_id', '=', activity_id.creator_id.id),
-                                    ('data_model', '=', 'nh.clinical.patient.observation.ews')
+                                    ('data_model', '=', activity_id.creator_id.data_model)
                                 ]
                             )
-                            obs_id = obj_nh_clinical_patient_observation_ews.search(cr, uid, [
+                            creator_data_model = request.registry[activity_id.creator_id.data_model]
+                            obs_id = creator_data_model.search(cr, uid, [
                                 ('activity_id', '=', obs_activity_id)
                             ])
                             if len(obs_id) == 1:
-                                obj_nh_clinical_patient_observation_ews.write(cr, uid, obs_id, vals, context=context)
+                                creator_data_model.write(cr, uid, obs_id, vals, context=context)
                                 cr.execute('refresh materialized view ews0;\n')
                         obj_model.write(cr, uid, record_id, vals)
 
