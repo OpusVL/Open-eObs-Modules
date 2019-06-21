@@ -5,6 +5,8 @@ import copy
 # TODO EOBS-840: Make frequencies.py a model and split it across modules as
 # appropriate.
 # Frequencies in minutes.
+FIVE_MINUTES = 5
+TEN_MINUTES = 10
 FIFTEEN_MINUTES = 15
 THIRTY_MINUTES = 30
 ONE_HOUR = 60
@@ -19,6 +21,8 @@ THREE_DAYS = 4320
 ONE_WEEK = 10080
 
 # Tuples with the time and a label.
+EVERY_5_MINUTES = (FIVE_MINUTES, 'Every 5 Minutes')
+EVERY_10_MINUTES = (TEN_MINUTES, 'Every 10 Minutes')
 EVERY_15_MINUTES = (FIFTEEN_MINUTES, 'Every 15 Minutes')
 EVERY_30_MINUTES = (THIRTY_MINUTES, 'Every 30 Minutes')
 EVERY_HOUR = (ONE_HOUR, 'Every Hour')
@@ -34,6 +38,8 @@ EVERY_WEEK = (ONE_WEEK, 'Every Week')
 
 # Dictionary to lookup tuples by frequency in minutes.
 ALL_FREQUENCIES = {
+    FIVE_MINUTES: EVERY_5_MINUTES,
+    TEN_MINUTES: EVERY_10_MINUTES,
     FIFTEEN_MINUTES: EVERY_15_MINUTES,
     THIRTY_MINUTES: EVERY_30_MINUTES,
     ONE_HOUR: EVERY_HOUR,
