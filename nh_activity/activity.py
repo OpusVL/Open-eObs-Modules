@@ -527,10 +527,9 @@ class nh_activity_data(orm.AbstractModel):
         vals = {
             'state': 'completed',
             'terminate_uid': uid,
-            'date_terminated': now
+            'date_terminated': now,
+            'effective_date_terminated': context.get('effective_date_terminated') or now
         }
-        if not activity.effective_date_terminated:
-            vals.update({'effective_date_terminated': now})
         activity_pool.write(cr, uid, activity.id, vals, context=context)
         _logger.debug("activity '%s', activity.id=%s completed",
                       activity.data_model, activity.id)
