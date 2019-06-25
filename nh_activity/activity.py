@@ -522,6 +522,8 @@ class nh_activity_data(orm.AbstractModel):
         activity_pool = self.pool['nh.activity']
         activity = activity_pool.browse(cr, uid, activity_id, context=context)
         self.check_action(activity.state, 'complete')
+        if context is None:
+            context = {}
 
         now = datetime.now().strftime(DTF)
         vals = {
