@@ -681,8 +681,40 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
             effective_date = record.activity_id.creator_id.effective_date_terminated
             vals.update({'effective_date_terminated': effective_date})
 
+        def _check_if_custom_frequency():
+
+            def _find_next_ews_obs(patient_id):
+                activity_data_ids = obj_nh_activity.search(cr, uid, [
+                    ('state', 'not in', ['completed', 'cancelled']),
+                    ('data_model', '=', 'nh.clinical.patient.observation.ews'),
+                    ('patient_id', '=', patient_id)
+                ], context=context)
+                if len(activity_data_ids) == 1:
+                    return obj_nh_activity.browse(cr, uid, activity_data_ids, context=context)
+
+            for k, v in kwargs.items():
+                try:
+                    data_id = int(v)
+                    data_model = request.registry[k]
+                    activity = data_model.browse(cr, uid, data_id, context=context)
+                    patient = activity.patient_id
+                    obj_nh_clinical_spell = request.registry['nh.clinical.spell']
+                    current_spell_id = obj_nh_clinical_spell.search(cr, uid, [
+                        ('patient_id', '=', patient.id),
+                        ('state', '=', 'started')
+                    ], context=context)
+                    current_spell = obj_nh_clinical_spell.browse(cr, uid, current_spell_id, context=context)
+                    if current_spell.custom_frequency:
+                        next_ews_obs_activity = _find_next_ews_obs(patient.id)
+                        next_ews_obs_activity.data_ref.write({'frequency': current_spell.custom_frequency})
+                        request.cr.execute("""refresh materialized view ews0;""")
+                    break
+                except ValueError:
+                    pass
+
         cr, uid, context = request.cr, request.session.uid, request.context
         obj_nh_activity = request.registry['nh.activity']
+
         for key, val in kwargs.items():
             try:
                 int(key)
@@ -730,6 +762,7 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
                                 cr.execute('refresh materialized view ews0;\n')
                         obj_model.write(cr, uid, record_id, vals)
 
+        _check_if_custom_frequency()
         return self.get_tasks()
 
     @http.route(URLS['all_patients'], type='http', auth="user")
