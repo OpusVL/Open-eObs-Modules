@@ -707,6 +707,7 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
                     if current_spell.custom_frequency:
                         next_ews_obs_activity = _find_next_ews_obs(patient.id)
                         next_ews_obs_activity.data_ref.write({'frequency': current_spell.custom_frequency})
+                        request.cr.execute("""refresh materialized view ews0;""")
                     break
                 except ValueError:
                     pass
