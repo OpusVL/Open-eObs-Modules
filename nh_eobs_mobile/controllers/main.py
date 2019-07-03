@@ -873,9 +873,17 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
             cr, uid, task_api.get_activities(
                 cr, uid, [], context=context),
             context=context)
+
+        user_filters = request.env['ir.filters'].search([
+            ('user_id', '=', uid),
+            ('model_id', '=', 'nh.clinical.wardboard'),
+        ])
+        favourites = [f.name for f in user_filters]
+
         return request.render(
             'nh_eobs_mobile.patient_task_list',
             qcontext={
+                'favourites': favourites,
                 'items': tasks,
                 'section': 'task',
                 'username': request.session['login'],
