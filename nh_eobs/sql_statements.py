@@ -425,7 +425,8 @@ class NHEobsSQL(orm.AbstractModel):
                 when ews0.frequency is not null then ews0.frequency
                 else 0
             end as frequency,
-            spell.custom_frequency
+            spell.custom_frequency,
+            spell.custom_frequency_reason
         from nh_activity activity
         inner join nh_clinical_patient patient
           on patient.id = activity.patient_id
