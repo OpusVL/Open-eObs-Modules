@@ -30,23 +30,18 @@
                                 </li>
                             </ul>
                         </div>
-                        <ul class="header-menu three-col">
+                        <ul class="header-menu two-col">
                             <t t-if="section=='task'">
                                 <li>
                                     <a t-att-href="urls['task_list']" id="taskNavItem" class="selected">Tasks</a>
                                 </li>
                                 <li>
-                                    <a t-att-href="urls['patient_list']" id="patientNavItem">My Patients
+                                    <a t-att-href="urls['patient_list']" id="patientNavItem">All Patients
                                         <t t-if="notification_count and notification_count &gt; 0">
                                             <span class="urgent-badge">
                                                 <t t-esc="notification_count"/>
                                             </span>
                                         </t>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a t-att-href="urls['all_patients']" id="allPatientNavItem">
-                                        All Patients
                                     </a>
                                 </li>
                             </t>
@@ -58,33 +53,6 @@
                                 </li>
                                 <li>
                                     <a t-att-href="urls['patient_list']" id="patientNavItem" class="selected">
-                                        My Patients
-                                        <t t-if="notification_count and notification_count &gt; 0">
-                                            <span class="urgent-badge">
-                                                <t t-esc="notification_count"/>
-                                            </span>
-                                        </t>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a t-att-href="urls['all_patients']" id="allPatientNavItem">
-                                    All Patients<t t-if="notification_count and notification_count &gt; 0"><span class="urgent-badge"><t t-esc="notification_count"/></span></t>
-                                    </a>
-                                </li>
-                            </t>
-                            <t t-if="section=='allPatient'">
-                                <li>
-                                    <a t-att-href="urls['task_list']" id="taskNavItem">
-                                    Tasks
-                                    </a>
-                                </li>
-                                <li>
-                                    <a t-att-href="urls['patient_list']" id="patientNavItem">
-                                    My Patients <t t-if="notification_count and notification_count &gt; 0"><span class="urgent-badge"><t t-esc="notification_count"/></span></t>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a t-att-href="urls['all_patients']" id="allPatientNavItem" class="selected">
                                         All Patients
                                         <t t-if="notification_count and notification_count &gt; 0">
                                             <span class="urgent-badge">
@@ -102,7 +70,7 @@
                             <p class="user">
                                 <t t-esc="username"/>
                             </p>
-                            <ul class="header-menu three-col">
+                            <ul class="header-menu two-col">
                                 <li>
                                     <a href="#" class="share">Share</a>
                                 </li>
