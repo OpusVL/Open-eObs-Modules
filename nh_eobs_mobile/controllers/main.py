@@ -571,9 +571,13 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
         following_patients = self.process_patient_list(
             cr, uid, patient_api.get_followed_patients(
                 cr, uid, []), context=context)
+
+        favourites = self.get_user_favourites(uid)
+
         return request.render(
             'nh_eobs_mobile.patient_task_list',
             qcontext={
+                'favourites': favourites,
                 'notifications': follow_activities,
                 'items': patients,
                 'notification_count': len(follow_activities),
@@ -874,11 +878,7 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
                 cr, uid, [], context=context),
             context=context)
 
-        user_filters = request.env['ir.filters'].search([
-            ('user_id', '=', uid),
-            ('model_id', '=', 'nh.clinical.wardboard'),
-        ])
-        favourites = [f.name for f in user_filters]
+        favourites = self.get_user_favourites(uid)
 
         return request.render(
             'nh_eobs_mobile.patient_task_list',
@@ -891,6 +891,15 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
                 'urls': URLS
             }
         )
+
+    @staticmethod
+    def get_user_favourites(uid):
+        user_filters = request.env['ir.filters'].search([
+            ('user_id', '=', uid),
+            ('model_id', '=', 'nh.clinical.wardboard'),
+        ])
+        favourites = [f.name for f in user_filters]
+        return favourites
 
     def get_task_form(self, cr, uid, task, patient, request, context=None):
         """
