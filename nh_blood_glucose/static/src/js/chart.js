@@ -68,6 +68,10 @@ function drawBlood_glucoseTable(settings, serverData){
                 keys: ["table_blood_glucose"]
             },
             {
+                title: "Partial Reason",
+                keys: ["partial_reason"]
+            },
+            {
                 title: "Completed By",
                 keys: ["completed_by"]
             }
