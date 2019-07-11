@@ -222,7 +222,14 @@ function drawEwsChart(settings, serverData) {
 }
 
 function drawEwsTable(settings, serverData){
-    var obs = serverData.reverse();
+    serverData.sort(function (a, b) {
+        var dateA = new Date(a.effective_date_terminated).getTime(), dateB = new Date(b.effective_date_terminated).getTime();
+        return dateA - dateB;
+    });
+    for (var i = 0; i < serverData.length; i++) {
+        serverData[i].completed_by = serverData[i].terminate_uid[1]
+    }
+    var obs = serverData;
     var tableEl = new window.NH.NHGraphLib("#table");
     tableEl.table = {
         element: "#table",
@@ -295,6 +302,14 @@ function drawEwsTable(settings, serverData){
                         keys: ["niv_backup"]
                     }
                 ]
+            },
+            {
+                title: "Partial Reason",
+                keys: ["partial_reason"]
+            },
+            {
+                title: "Completed By",
+                keys: ["completed_by"]
             }
         ]
     };
