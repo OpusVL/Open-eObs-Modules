@@ -870,12 +870,19 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
             if wardboard_records:
                 locations = set([l.location_id.name if l.location_id.type in ['bed']
                                  else l.location_id.parent_id.name for l in wardboard_records])
-                favourites.extend(locations)
+                for location in locations:
+                    favourites.append({
+                        'location': location,
+                        'default': 'false',
+                    })
 
         user = request.env['nh.clinical.user.management'].browse(uid)
         for ward in user.ward_ids:
             if ward.name not in favourites:
-                favourites.append(ward.name)
+                favourites.append({
+                    'location': ward.name,
+                    'default': 'true',
+                })
 
         return favourites
 
