@@ -16,7 +16,7 @@ from openerp.addons.nh_eobs_mobile.controllers import urls
 from openerp.http import request
 from openerp.modules.module import get_module_path
 from openerp.osv import orm
-from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT as DTF
+from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT as DTF, safe_eval
 from werkzeug import exceptions
 from werkzeug import utils
 
@@ -859,11 +859,31 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
 
     @staticmethod
     def get_user_favourites(uid):
+        obj_nh_clinical_wardboard = request.env['nh.clinical.wardboard']
         user_filters = request.env['ir.filters'].search([
             ('user_id', '=', uid),
             ('model_id', '=', 'nh.clinical.wardboard'),
         ])
-        favourites = [f.name for f in user_filters]
+        favourites = list()
+        for f in user_filters:
+            wardboard_records = obj_nh_clinical_wardboard.search(safe_eval(f.domain))
+            if wardboard_records:
+                locations = set([l.location_id.name if l.location_id.type in ['bed']
+                                 else l.location_id.parent_id.name for l in wardboard_records])
+                for location in locations:
+                    favourites.append({
+                        'location': location,
+                        'default': 'false',
+                    })
+
+        user = request.env['nh.clinical.user.management'].browse(uid)
+        for ward in user.ward_ids:
+            if ward.name not in favourites:
+                favourites.append({
+                    'location': ward.name,
+                    'default': 'true',
+                })
+
         return favourites
 
     def get_task_form(self, cr, uid, task, patient, request, context=None):
