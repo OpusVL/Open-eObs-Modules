@@ -14,7 +14,7 @@ class WardDashboardSQL(orm.AbstractModel):
         FROM nh_clinical_spell AS spell
         LEFT JOIN nh_clinical_location AS location
         ON spell.location_id = location.id
-        AND location.usage = 'bed'
+        AND location.usage IN ('bed', 'ward')
         LEFT JOIN wdb_ward_locations AS ward_locations
         ON location.id = ward_locations.id
         LEFT JOIN nh_clinical_pme_obs_stop AS obs_stop
@@ -63,7 +63,7 @@ class WardDashboardSQL(orm.AbstractModel):
         FROM nh_clinical_location AS loc
         INNER JOIN wdb_ward_locations AS ward_locations
         ON ward_locations.id = loc.id
-        WHERE loc.usage = 'bed'
+        WHERE loc.usage IN ('bed', 'ward')
         GROUP BY ward_locations.ward_id
         """
 
@@ -80,7 +80,7 @@ class WardDashboardSQL(orm.AbstractModel):
         ward_dashboard_workload_skeleton.replace(
             'ON location.id = spell.location_id',
             'ON location.id = spell.location_id '
-            'AND location.usage = \'bed\''
+            'AND location.usage IN (\'bed\', \'ward\')'
         ).replace(
             'count(spell.patient_id)',
             'SUM(CASE WHEN spell.obs_stop = \'t\' THEN 1 ELSE 0 END) AS count'
@@ -161,10 +161,10 @@ class WardDashboardSQL(orm.AbstractModel):
             AND clu1.group_name = 'NH Clinical HCA Group'
         LEFT JOIN child_loc_users AS clu2
             ON clu2.location_id = location.id
-            AND clu2.group_name = 'NH Clinical Nurse Group'
+            AND clu2.group_name = 'Other'
         LEFT JOIN child_loc_users AS clu3
             ON clu3.location_id = location.id
-            AND clu3.group_name = 'NH Clinical Doctor Group'
+            AND clu3.group_name = 'Other'
         LEFT JOIN loc_risk_patients_count AS rpc
             ON rpc.location_id = location.id
         WHERE location.usage = 'ward'
