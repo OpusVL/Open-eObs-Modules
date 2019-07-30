@@ -96,10 +96,8 @@ class nh_eobs_news_report(osv.Model):
                 from (a.date_scheduled - a.effective_date_terminated))/60
             end as minutes_early,
             case
-                when (%s)::text[] @> ARRAY['NH Clinical Nurse Group']
-                  then 'Nurse'
                 when (%s)::text[] @> ARRAY['NH Clinical HCA Group']
-                  then 'HCA'
+                  then 'Clinical Support Worker'
                 else 'Other'
             end as staff_type,
             case
