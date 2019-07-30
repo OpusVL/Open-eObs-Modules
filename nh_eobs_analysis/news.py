@@ -32,7 +32,7 @@ class nh_eobs_news_report(osv.Model):
         'trend_down': fields.integer('# Trend Down', readonly=True),
         'trend_same': fields.integer('# Trend Same', readonly=True)
     }
-    _order = 'date_terminated desc, location_id'
+    _order = 'effective_date_terminated desc, location_id'
 
     def _select(self):
         group_array = """select array(
@@ -96,10 +96,8 @@ class nh_eobs_news_report(osv.Model):
                 from (a.date_scheduled - a.effective_date_terminated))/60
             end as minutes_early,
             case
-                when (%s)::text[] @> ARRAY['NH Clinical Nurse Group']
-                  then 'Nurse'
                 when (%s)::text[] @> ARRAY['NH Clinical HCA Group']
-                  then 'HCA'
+                  then 'Clinical Support Worker'
                 else 'Other'
             end as staff_type,
             case
@@ -145,7 +143,7 @@ class nh_eobs_news_report(osv.Model):
                 when p.score = n.score then 1
                 else 0
             end as trend_same
-        """ % (group_array, group_array)
+        """ % group_array
         return select_str
 
     def _group_by(self):
