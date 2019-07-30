@@ -31,7 +31,7 @@ class nh_eobs_ward_dashboard(orm.Model):
         res = {}.fromkeys(ids, False)
         sql = """select location_id, user_ids
                  from loc_users
-                 where group_name = 'NH Clinical Shift Coordinator Group'
+                 where group_name = 'Other'
                         and location_id in (%s)""" % ", ".join(
             [str(location_id) for location_id in ids])
         cr.execute(sql)
@@ -43,7 +43,7 @@ class nh_eobs_ward_dashboard(orm.Model):
         res = {}.fromkeys(ids, False)
         sql = """select location_id, user_ids
                  from child_loc_users
-                 where group_name = 'NH Clinical Doctor Group'
+                 where group_name = 'Other'
                         and location_id in (%s)""" % ", ".join(
             [str(location_id) for location_id in ids])
         cr.execute(sql)
@@ -242,7 +242,7 @@ class nh_eobs_ward_dashboard(orm.Model):
             inner join nh_activity activity
             on activity.id = spell.activity_id and activity.state = 'started'
             inner join nh_clinical_location location
-            on location.id = spell.location_id and location.usage = 'bed'
+            on location.id = spell.location_id and location.usage IN ('bed', 'ward')
             inner join wdb_ward_locations wl on wl.id = location.id
             left join wdb_ews e1 on e1.spell_activity_id = activity.id
             group by wl.ward_id, e1.clinical_risk
@@ -280,7 +280,7 @@ class nh_eobs_ward_dashboard(orm.Model):
             on spell.location_id = location.id
             left join nh_activity activity
             on activity.id = spell.activity_id and activity.state = 'started'
-            where location.usage = 'bed' and location.active = true
+            where location.usage IN ('bed', 'ward') and location.active = true
             group by wl.ward_id
         );
 
@@ -334,7 +334,7 @@ class nh_eobs_ward_dashboard(orm.Model):
                 array_agg(distinct location.id) as bed_ids
             from nh_clinical_location location
             inner join wdb_ward_locations wl on wl.id = location.id
-            where location.usage = 'bed'
+            where location.usage IN ('bed', 'ward')
             group by wl.ward_id
         );
 
@@ -367,9 +367,9 @@ class nh_eobs_ward_dashboard(orm.Model):
             left join child_loc_users clu1 on clu1.location_id = location.id
                 and clu1.group_name = 'NH Clinical HCA Group'
             left join child_loc_users clu2 on clu2.location_id = location.id
-                and clu2.group_name = 'NH Clinical Nurse Group'
+                and clu2.group_name = 'Other'
             left join child_loc_users clu3 on clu3.location_id = location.id
-                and clu3.group_name = 'NH Clinical Doctor Group'
+                and clu3.group_name = 'Other'
             left join loc_risk_patients_count rpc
                 on rpc.location_id = location.id
             where location.usage = 'ward'
@@ -409,7 +409,7 @@ class nh_eobs_bed_dashboard(orm.Model):
         res = {}.fromkeys(ids, False)
         sql = """select location_id, user_ids
                  from loc_users
-                 where group_name = 'NH Clinical Nurse Group'
+                 where group_name = 'Other'
                         and location_id in (%s)""" % ", ".join(
             [str(location_id) for location_id in ids])
         cr.execute(sql)
@@ -433,7 +433,7 @@ class nh_eobs_bed_dashboard(orm.Model):
         res = {}.fromkeys(ids, False)
         sql = """select location_id, follower_ids
                  from loc_followers
-                 where group_name = 'NH Clinical Nurse Group'
+                 where group_name = 'Other'
                         and location_id in (%s)""" % ", ".join(
             [str(location_id) for location_id in ids])
         cr.execute(sql)
@@ -518,6 +518,6 @@ class nh_eobs_bed_dashboard(orm.Model):
                 location.id as id,
                 location.id as location_id
             from nh_clinical_location location
-            where location.usage = 'bed'
+            where location.usage IN ('bed', 'ward')
         )
         """ % (self._table, self._table))
