@@ -32,7 +32,7 @@ class nh_eobs_news_report(osv.Model):
         'trend_down': fields.integer('# Trend Down', readonly=True),
         'trend_same': fields.integer('# Trend Same', readonly=True)
     }
-    _order = 'date_terminated desc, location_id'
+    _order = 'effective_date_terminated desc, location_id'
 
     def _select(self):
         group_array = """select array(
@@ -145,7 +145,7 @@ class nh_eobs_news_report(osv.Model):
                 when p.score = n.score then 1
                 else 0
             end as trend_same
-        """ % (group_array, group_array)
+        """ % group_array
         return select_str
 
     def _group_by(self):
