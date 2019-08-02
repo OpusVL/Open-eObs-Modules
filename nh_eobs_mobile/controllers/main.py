@@ -863,26 +863,18 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
         user_filters = request.env['ir.filters'].search([
             ('user_id', '=', uid),
             ('model_id', '=', 'nh.clinical.wardboard'),
+            ('action_id', '=', request.env['ir.model.data'].get_object_reference('nh_eobs', 'action_wardboard')[1])
         ])
         favourites = list()
         for f in user_filters:
             wardboard_records = obj_nh_clinical_wardboard.search(safe_eval(f.domain))
             if wardboard_records:
-                locations = set([l.location_id.name if l.location_id.type in ['bed']
-                                 else l.location_id.parent_id.name for l in wardboard_records])
+                locations = set([l.ward_id.name for l in wardboard_records])
                 for location in locations:
                     favourites.append({
                         'location': location,
-                        'default': 'false',
+                        'default': '{}'.format(f.is_default).lower(),
                     })
-
-        user = request.env['nh.clinical.user.management'].browse(uid)
-        for ward in user.ward_ids:
-            if ward.name not in favourites:
-                favourites.append({
-                    'location': ward.name,
-                    'default': 'true',
-                })
 
         return favourites
 
