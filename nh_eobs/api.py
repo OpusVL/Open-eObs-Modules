@@ -1129,8 +1129,8 @@ class nh_eobs_api(orm.AbstractModel):
         domain = [
             ('patient_id', '=', patient_id),
             ('state', '=', 'completed'),
-            ('date_terminated', '>=', start_date.strftime(DTF)),
-            ('date_terminated', '<=', end_date.strftime(DTF))] \
+            ('effective_date_terminated', '>=', start_date.strftime(DTF)),
+            ('effective_date_terminated', '<=', end_date.strftime(DTF))] \
             if activity_type \
             else [('patient_id', '=', patient_id),
                   ('state', 'not in', ['completed', 'cancelled']),
