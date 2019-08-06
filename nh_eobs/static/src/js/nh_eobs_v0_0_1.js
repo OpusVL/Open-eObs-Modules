@@ -860,7 +860,7 @@ openerp.nh_eobs = function (instance) {
                     if (kiosk._timer) {
                         clearInterval(kiosk._timer);
                     }
-                    $(".oe_leftbar").addClass("nh_eobs_show");
+                    $(".oe_leftbar").removeClass('nh_eobs_hide').addClass('nh_eobs_show').show();
                     $(".oe_searchview").show();
                 }
             })
