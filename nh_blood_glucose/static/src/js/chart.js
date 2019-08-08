@@ -59,6 +59,10 @@ function drawBlood_glucoseChart(settings, obs){
 }
 
 function drawBlood_glucoseTable(settings, serverData){
+    serverData.sort(function (a, b) {
+        var dateA = new Date(a.effective_date_terminated).getTime(), dateB = new Date(b.effective_date_terminated).getTime();
+        return dateA - dateB;
+    });
     var tableEl = new window.NH.NHGraphLib("#table");
     tableEl.table = {
         element: "#table",
