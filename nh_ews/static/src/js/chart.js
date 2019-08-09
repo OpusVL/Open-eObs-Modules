@@ -221,21 +221,11 @@ function drawEwsChart(settings, serverData) {
     svg.draw();
 }
 
-function localise_datetime(datetime) {
-        var dt = new Date(datetime + ' UTC');
-        return dt.getFullYear() + "-" + (dt.getMonth() + 1) + "-" + dt.getDate() + " " + dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
-}
-
 function drawEwsTable(settings, serverData){
     serverData.sort(function (a, b) {
         var dateA = new Date(a.effective_date_terminated).getTime(), dateB = new Date(b.effective_date_terminated).getTime();
         return dateA - dateB;
     });
-    for (var i = 0; i < serverData.length; i++) {
-        serverData[i].completed_by = serverData[i].terminate_uid[1];
-        var ed = serverData[i].effective_date_terminated;
-        serverData[i].effective_date_terminated = localise_datetime(ed)
-    }
     var obs = serverData;
     var tableEl = new window.NH.NHGraphLib("#table");
     tableEl.table = {
