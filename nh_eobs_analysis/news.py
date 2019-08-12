@@ -96,9 +96,11 @@ class nh_eobs_news_report(osv.Model):
                 from (a.date_scheduled - a.effective_date_terminated))/60
             end as minutes_early,
             case
-                when (%s)::text[] @> ARRAY['NH Clinical HCA Group']
-                  then 'Clinical Support Worker'
-                else 'Other'
+                when (%s)::text[] @> ARRAY['NH Clinical Admin Group']
+                  then 'NH Clinical Admin Group'
+                when (%s)::text[] @> ARRAY['Other']
+                  then 'Other'
+                else 'Clinical Support Worker'
             end as staff_type,
             case
                 when n.partial_reason = 'patient_away_from_bed'
@@ -143,7 +145,7 @@ class nh_eobs_news_report(osv.Model):
                 when p.score = n.score then 1
                 else 0
             end as trend_same
-        """ % group_array
+        """ % (group_array, group_array)
         return select_str
 
     def _group_by(self):
