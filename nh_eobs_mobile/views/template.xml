@@ -36,7 +36,7 @@
                                     <a t-att-href="urls['task_list']" id="taskNavItem" class="selected">Tasks</a>
                                 </li>
                                 <li>
-                                    <a t-att-href="urls['patient_list']" id="patientNavItem">My Patients
+                                    <a t-att-href="urls['patient_list']" id="patientNavItem">Patients
                                         <t t-if="notification_count and notification_count &gt; 0">
                                             <span class="urgent-badge">
                                                 <t t-esc="notification_count"/>
@@ -53,7 +53,7 @@
                                 </li>
                                 <li>
                                     <a t-att-href="urls['patient_list']" id="patientNavItem" class="selected">
-                                        My Patients
+                                        Patients
                                         <t t-if="notification_count and notification_count &gt; 0">
                                             <span class="urgent-badge">
                                                 <t t-esc="notification_count"/>
