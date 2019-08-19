@@ -11,8 +11,8 @@ class nh_eobs_news_report(osv.Model):
     _columns = {
         'user_id': fields.many2one('res.users', 'Taken By', readonly=True),
         'date_scheduled': fields.datetime('Date Scheduled', readonly=True),
-        'date_terminated': fields.datetime('Date Taken', readonly=True),
-        'effective_date_terminated': fields.datetime('Date Taken', readonly=True),
+        'date_terminated': fields.datetime('Submitted Date', readonly=True),
+        'effective_date_terminated': fields.datetime('Effective Date Taken', readonly=True),
         'ward_id': fields.many2one('nh.clinical.location', 'Ward',
                                    readonly=True),
         'location_str': fields.char('Location', readonly=True),
@@ -51,6 +51,7 @@ class nh_eobs_news_report(osv.Model):
             end as obs_type,
             a.date_scheduled as date_scheduled,
             a.effective_date_terminated as effective_date_terminated,
+            a.date_terminated as date_terminated,
             a.location_id as location_id,
             case
                 when char_length(loc.name) = 5 then
@@ -155,6 +156,7 @@ class nh_eobs_news_report(osv.Model):
                 a.terminate_uid,
                 obs_type,
                 a.date_scheduled,
+                a.date_terminated,
                 a.effective_date_terminated,
                 a.location_id,
                 location_str,
