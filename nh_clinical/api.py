@@ -350,8 +350,5 @@ class nh_clinical_api(orm.AbstractModel):
         activity_ids = activity_pool.search(cr, uid, domain, context=context)
         if not activity_ids:
             return False
-        user_id = activity_pool.read(
-            cr, uid, activity_id, ['user_id'], context=context)['user_id']
-        if user_id and user_id[0] != uid:
-            return False
+
         return True
