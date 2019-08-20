@@ -125,7 +125,8 @@ class nh_activity(orm.Model):
             'Termination Time', help="Completed, Aborted, Expired, Cancelled",
             readonly=True),
         'effective_date_terminated': fields.datetime(
-            'Effective Termination Time', help="Completed, Aborted, Expired, Cancelled",
+            'Effective Date (ONLY CHANGE EFFECTIVE TIME IF NEEDED - Observation times can only be back-dated by 8 hours)',
+            help="Completed, Aborted, Expired, Cancelled",
             readonly=True),
         # dates limits
         'date_deadline': fields.datetime('Deadline Time', readonly=True),
