@@ -715,6 +715,8 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
                     break
                 except ValueError:
                     pass
+                except KeyError:
+                    pass
 
         cr, uid, context = request.cr, request.session.uid, request.context
         obj_nh_activity = request.registry['nh.activity']
