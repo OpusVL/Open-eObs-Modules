@@ -24,6 +24,8 @@ class NHClinicalWardDashboard(orm.Model):
 
     _columns = {
         'awol_count': fields.integer('Patient Monitoring Exception - AWOL'),
+        'paper_in_use_count': fields.integer(
+            'Patient Monitoring Exception - Alternative paper EWS chart in use'),
         'acute_hospital_ed_count': fields.integer(
             'Patient Monitoring Exception - Acute hospital ED'),
         'extended_leave_count': fields.integer(
@@ -56,6 +58,7 @@ class NHClinicalWardDashboard(orm.Model):
         super(NHClinicalWardDashboard, self).init(cr)
         sql_statements = self.pool['nh.clinical.sql']
         awol = sql_statements.get_ward_dashboard_reason_count(cr, 'AWOL')
+        paper_in_use = sql_statements.get_ward_dashboard_reason_count(cr, 'Alternative paper EWS chart in use')
         extended_leave = sql_statements.get_ward_dashboard_reason_count(
             cr, 'Extended leave')
         acute_ed = sql_statements.get_ward_dashboard_reason_count(
@@ -66,6 +69,7 @@ class NHClinicalWardDashboard(orm.Model):
             DROP VIEW IF EXISTS wdb_transfer_ranked cascade;
             DROP VIEW IF EXISTS wdb_reasons cascade;
             DROP VIEW IF EXISTS wdb_awol_count cascade;
+            DROP VIEW IF EXISTS wdb_paper_in_use_count cascade;
             DROP VIEW IF EXISTS wdb_extended_leave_count cascade;
             DROP VIEW IF EXISTS wdb_acute_hospital_ed_count cascade;
             DROP VIEW IF EXISTS wdb_workload_count cascade;
@@ -78,6 +82,7 @@ class NHClinicalWardDashboard(orm.Model):
             CREATE OR REPLACE VIEW wdb_transfer_ranked AS ({transfer_ranked});
             CREATE OR REPLACE VIEW wdb_reasons AS ({reasons_view});
             CREATE OR REPLACE VIEW wdb_awol_count AS ({awol_count});
+            CREATE OR REPLACE VIEW wdb_paper_in_use_count AS ({paper_in_use_count});
             CREATE OR REPLACE VIEW wdb_extended_leave_count
             AS ({extended_leave_count});
             CREATE OR REPLACE VIEW wdb_acute_hospital_ed_count
@@ -96,6 +101,7 @@ class NHClinicalWardDashboard(orm.Model):
             .format(
                 reasons_view=sql_statements.get_ward_dashboard_reason_view(),
                 awol_count=awol,
+                paper_in_use_count=paper_in_use,
                 extended_leave_count=extended_leave,
                 acute_ed_count=acute_ed,
                 pt_on_ward=sql_statements.get_ward_dashboard_workload(),

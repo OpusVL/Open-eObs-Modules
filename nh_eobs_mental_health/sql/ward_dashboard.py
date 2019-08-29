@@ -132,6 +132,7 @@ class WardDashboardSQL(orm.AbstractModel):
                 ELSE 7
             END AS kanban_color,
             awol.count AS awol_count,
+            paper_in_use.count AS paper_in_use_count,
             acute_ed.count AS acute_hospital_ed_count,
             extended_leave.count AS extended_leave_count,
             capacity.count AS capacity_count,
@@ -142,6 +143,7 @@ class WardDashboardSQL(orm.AbstractModel):
         LEFT JOIN loc_waiting_patients AS lwp
             ON lwp.location_id = location.id
         LEFT JOIN wdb_awol_count AS awol ON awol.location_id = location.id
+        LEFT JOIN wdb_paper_in_use_count AS paper_in_use ON paper_in_use.location_id = location.id
         LEFT JOIN wdb_acute_hospital_ed_count AS acute_ed
             ON acute_ed.location_id = location.id
         LEFT JOIN wdb_extended_leave_count AS extended_leave
