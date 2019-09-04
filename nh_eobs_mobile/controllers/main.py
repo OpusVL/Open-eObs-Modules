@@ -685,6 +685,17 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
             effective_date = record.activity_id.creator_id.effective_date_terminated
             vals.update({'effective_date_terminated': effective_date})
 
+        def _cancel_next_blood_glucose():
+            nh_activity_obj = request.registry['nh.activity']
+            task = obj_model.browse(cr, uid, int(val), context=context)
+            if task.observation == 'nh.clinical.patient.observation.blood_glucose':
+                next_blood_glucose_activity_id = nh_activity_obj.search(cr, uid, [
+                    ('state', '=', 'scheduled'),
+                    ('data_model', '=', 'nh.clinical.patient.observation.blood_glucose'),
+                    ('patient_id', '=', task.patient_id.id)
+                ], context=context)
+                nh_activity_obj.cancel(cr, uid, next_blood_glucose_activity_id, context=context)
+
         def _check_if_custom_frequency():
 
             def _find_next_ews_obs(patient_id):
@@ -732,6 +743,7 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
                     if kwargs[kwargs[key]].encode("utf-8") == 'no':
                         reason_id = int(kwargs[kwargs[key]+'_cancel'])
                         obj_model.write(cr, uid, int(val), {"reason": reason_id}, context=context)
+                        _cancel_next_blood_glucose()
                     record_id = int(kwargs[key])
                     record = obj_model.browse(cr, uid, record_id, context=context)
 
