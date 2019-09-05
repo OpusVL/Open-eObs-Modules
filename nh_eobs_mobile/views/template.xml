@@ -113,7 +113,7 @@
                     <ul class="tasklist">
                         <t t-if="notifications">
                             <t t-foreach="notifications" t-as="notification">
-                                <li>
+                                <li style="display: none;">
                                     <a href="#" class="share_invite block" t-att-data-invite-id="notification['id']">
                                         <div class="task-meta" t-att-data-invite-id="notification['id']">
                                             <div class="task-right" t-att-data-invite-id="notification['id']">
@@ -135,7 +135,7 @@
                             </t>
                         </t>
                         <t t-foreach="items" t-as="item">
-                            <li>
+                            <li style="display: none;">
                                 <a t-att-href="item['url']" t-att-class="item['color']+' block'">
                                     <div class="task-meta">
                                         <div class="task-right">
@@ -343,13 +343,22 @@
                                             <input type="hidden" t-att-name="task['task_model']"
                                                    t-att-value="task['task_id']"/>
                                             <input type="radio" t-att-name="task['task_id']"
-                                                   t-att-id="task['task_id']" value="yes" onclick="yesnoCheck(this)" required="1"/>
-                                            <label t-att-for="task['task_id']">
+                                                   t-att-id="task['task_id']" value="yes" onclick="yesnoCheck(this)"
+                                                   t-att-checked="'checked' if task['task_model']=='nh.clinical.notification.hca' else ''"
+                                                   t-att-style="'display: none;' if task['task_model']=='nh.clinical.notification.hca' else ''"
+                                            />
+                                            <label t-att-for="task['task_id']"
+                                                   t-att-style="'display: none;' if task['task_model']=='nh.clinical.notification.hca' else ''"
+                                            >
                                                 Yes
                                             </label>
                                             <input type="radio" t-att-name="task['task_id']"
-                                                   t-att-id="task['task_id']" value="no" onclick="yesnoCheck(this)"/>
-                                            <label t-att-for="task['task_id']">
+                                                   t-att-id="task['task_id']" value="no" onclick="yesnoCheck(this)"
+                                                   t-att-style="'display: none;' if task['task_model']=='nh.clinical.notification.hca' else ''"
+                                            />
+                                            <label t-att-for="task['task_id']"
+                                                   t-att-style="'display: none;' if task['task_model']=='nh.clinical.notification.hca' else ''"
+                                            >
                                                 No
                                             </label>
                                                 </div>
