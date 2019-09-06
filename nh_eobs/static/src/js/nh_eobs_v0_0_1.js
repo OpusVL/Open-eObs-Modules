@@ -55,22 +55,29 @@ openerp.nh_eobs = function (instance) {
             }
             this.ref = window.setTimeout(
                 function () {
-                    instance.web.notification.warn(
-                        'Logging Out',
-                        'You are about to be logged out due to inactivity. ' +
-                        'Close this notification to continue your session.',
-                        true
-                    ).element.find('.ui-notify-close').click(
-                        // Required as click event not propagated to window.
-                        instance.nh_eobs.Logout.reset.bind(instance.nh_eobs.Logout)
-                    );
-                    self.ref = window.setTimeout(function () {
-                        instance.session.session_logout()
-                            .done(function () {
-                                location.reload();
-                                console.log('Logged out due to inactivity');
-                            });
-                    }, 10000);
+                    var NhClinicalWardboard = new instance.web.Model('nh.clinical.wardboard');
+                    NhClinicalWardboard.call('is_kiosk_role').done(function(is_kiosk_role) {
+                        if (is_kiosk_role) {
+                            instance.nh_eobs.Logout.reset.bind(instance.nh_eobs.Logout)
+                        } else {
+                            instance.web.notification.warn(
+                                'Logging Out',
+                                'You are about to be logged out due to inactivity. ' +
+                                'Close this notification to continue your session.',
+                                true
+                            ).element.find('.ui-notify-close').click(
+                                // Required as click event not propagated to window.
+                                instance.nh_eobs.Logout.reset.bind(instance.nh_eobs.Logout)
+                            );
+                            self.ref = window.setTimeout(function () {
+                                instance.session.session_logout()
+                                    .done(function () {
+                                        location.reload();
+                                        console.log('Logged out due to inactivity');
+                                    });
+                            }, 10000);
+                        }
+                    })
                 },
                 (time || interval) - 10000
             );
