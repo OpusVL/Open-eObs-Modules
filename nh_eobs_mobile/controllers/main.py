@@ -873,6 +873,12 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
 
     @staticmethod
     def get_user_favourites(uid):
+
+        def add_if_not_false_or_already_exists():
+            if location and (location not in [x['location'] for x in favourites] or f.is_default):
+                return True
+            return False
+
         obj_nh_clinical_wardboard = request.env['nh.clinical.wardboard']
         user_filters = request.env['ir.filters'].search([
             ('user_id', '=', uid),
@@ -885,10 +891,11 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
             if wardboard_records:
                 locations = set([l.ward_id.name for l in wardboard_records])
                 for location in locations:
-                    favourites.append({
-                        'location': location,
-                        'default': '{}'.format(f.is_default).lower(),
-                    })
+                    if add_if_not_false_or_already_exists():
+                        favourites.append({
+                            'location': location,
+                            'default': '{}'.format(f.is_default).lower(),
+                        })
 
         return favourites
 
