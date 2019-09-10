@@ -874,7 +874,7 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
     @staticmethod
     def get_user_favourites(uid):
 
-        def add_if_not_false_or_already_exists():
+        def location_not_false_or_already_exists():
             if location and (location not in [x['location'] for x in favourites] or f.is_default):
                 return True
             return False
@@ -891,7 +891,7 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
             if wardboard_records:
                 locations = set([l.ward_id.name for l in wardboard_records])
                 for location in locations:
-                    if add_if_not_false_or_already_exists():
+                    if location_not_false_or_already_exists():
                         favourites.append({
                             'location': location,
                             'default': '{}'.format(f.is_default).lower(),
