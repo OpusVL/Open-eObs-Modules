@@ -25,7 +25,7 @@ class NHClinicalWardDashboard(orm.Model):
     _columns = {
         'awol_count': fields.integer('Patient Monitoring Exception - AWOL'),
         'paper_in_use_count': fields.integer(
-            'Patient Monitoring Exception - Alternative paper EWS chart in use'),
+            'Patient Monitoring Exception - Not appropriate for NEWS, alternative paper EWS chart in use'),
         'acute_hospital_ed_count': fields.integer(
             'Patient Monitoring Exception - Acute hospital ED'),
         'extended_leave_count': fields.integer(
@@ -58,7 +58,7 @@ class NHClinicalWardDashboard(orm.Model):
         super(NHClinicalWardDashboard, self).init(cr)
         sql_statements = self.pool['nh.clinical.sql']
         awol = sql_statements.get_ward_dashboard_reason_count(cr, 'AWOL')
-        paper_in_use = sql_statements.get_ward_dashboard_reason_count(cr, 'Alternative paper EWS chart in use')
+        paper_in_use = sql_statements.get_ward_dashboard_reason_count(cr, 'Not appropriate for NEWS, alternative paper EWS chart in use')
         extended_leave = sql_statements.get_ward_dashboard_reason_count(
             cr, 'Extended leave')
         acute_ed = sql_statements.get_ward_dashboard_reason_count(

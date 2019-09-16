@@ -26,7 +26,7 @@
                         Patients on Ward: <span><field name="on_ward_count"/></span>
                         On Extended Leave: <span><field name="extended_leave_count"/></span>
                         AWOL: <span><field name="awol_count"/></span>
-                        Alternative paper EWS chart in use: <span><field name="paper_in_use_count"/></span>
+                        Not appropriate for NEWS, alternative paper EWS chart in use: <span><field name="paper_in_use_count"/></span>
                         Acute ED: <span><field name="acute_hospital_ed_count"/></span>
                     </div>
                 </xpath>
