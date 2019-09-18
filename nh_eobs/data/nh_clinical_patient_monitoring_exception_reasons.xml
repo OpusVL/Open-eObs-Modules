@@ -11,7 +11,7 @@
             <field name="display_text">AWOL</field>
         </record>
         <record model="nh.clinical.patient_monitoring_exception.reason" id="paper_in_uses">
-            <field name="display_text">Alternative paper EWS chart in use</field>
+            <field name="display_text">Not appropriate for NEWS, alternative paper EWS chart in use</field>
         </record>
     </data>
 </openerp>
