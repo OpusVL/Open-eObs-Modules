@@ -874,10 +874,12 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
     @staticmethod
     def get_user_favourites(uid):
 
-        def location_not_false_or_already_exists():
-            if location and (location not in [x['location'] for x in favourites] or f.is_default):
-                return True
-            return False
+        def _remove_duplicates():
+            cleaned = [fav for fav in favourites if fav['default'] == 'true']
+            for fav in favourites:
+                if fav['location'] not in [loc['location'] for loc in cleaned]:
+                    cleaned.append(fav)
+            return cleaned
 
         obj_nh_clinical_wardboard = request.env['nh.clinical.wardboard']
         user_filters = request.env['ir.filters'].search([
@@ -890,13 +892,8 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
             wardboard_records = obj_nh_clinical_wardboard.search(safe_eval(f.domain))
             if wardboard_records:
                 locations = set([l.ward_id.name for l in wardboard_records])
-                for location in locations:
-                    if location_not_false_or_already_exists():
-                        favourites.append({
-                            'location': location,
-                            'default': '{}'.format(f.is_default).lower(),
-                        })
-
+                favourites.extend([{'location': l, 'default': '{}'.format(f.is_default).lower()} for l in locations])
+        favourites = _remove_duplicates()
         return favourites
 
     def get_task_form(self, cr, uid, task, patient, request, context=None):
