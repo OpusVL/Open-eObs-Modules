@@ -874,29 +874,33 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
     @staticmethod
     def get_user_favourites(uid):
 
-        def location_not_false_or_already_exists():
-            if location and (location not in [x['location'] for x in favourites] or f.is_default):
-                return True
-            return False
+        def _remove_duplicates():
+            cleaned = []
+            for fav in sorted(favourites, key=lambda f: f['default'], reverse=True):
+                if fav['location'] not in [loc['location'] for loc in cleaned]:
+                    cleaned.append(fav)
+            return cleaned
 
         obj_nh_clinical_wardboard = request.env['nh.clinical.wardboard']
         user_filters = request.env['ir.filters'].search([
             ('user_id', '=', uid),
             ('model_id', '=', 'nh.clinical.wardboard'),
-            ('action_id', '=', request.env['ir.model.data'].get_object_reference('nh_eobs', 'action_wardboard')[1])
+            ('action_id', '=', request.env['ir.model.data'].get_object_reference(
+                'nh_eobs', 'action_wardboard'
+            )[1])
         ])
         favourites = list()
-        for f in user_filters:
-            wardboard_records = obj_nh_clinical_wardboard.search(safe_eval(f.domain))
+        for user_filter in user_filters:
+            wardboard_records = obj_nh_clinical_wardboard.search(safe_eval(user_filter.domain))
             if wardboard_records:
                 locations = set([l.ward_id.name for l in wardboard_records])
-                for location in locations:
-                    if location_not_false_or_already_exists():
-                        favourites.append({
-                            'location': location,
-                            'default': '{}'.format(f.is_default).lower(),
-                        })
+                favourites.extend([
+                    {
+                        'location': l,
+                        'default': '{}'.format(user_filter.is_default).lower()
+                    } for l in locations])
 
+        favourites = _remove_duplicates()
         return favourites
 
     def get_task_form(self, cr, uid, task, patient, request, context=None):
