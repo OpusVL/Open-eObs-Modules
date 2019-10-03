@@ -1085,6 +1085,13 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
         :returns: patient response object
         :rtype: :class:`http.Response<openerp.http.Response>`
         """
+        def _is_hca():
+            role = request.registry('res.users').browse(
+                cr, uid, request.session.uid, context=context).role_id
+            if role.id == request.env['ir.model.data'].get_object_reference(
+                    'nh_clinical', 'role_nhc_hca')[1]:
+                return 'True'
+            return 'False'
 
         try:
             patient_id = int(patient_id)
@@ -1130,7 +1137,8 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
                 'notification_count': len(follow_activities),
                 'username': request.session['login'],
                 'data_vis_list': obs_data_vis_list,
-                'user_groups': user_groups
+                'user_groups': user_groups,
+                'is_hca': _is_hca(),
             }
         )
 
