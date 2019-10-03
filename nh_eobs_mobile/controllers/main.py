@@ -688,13 +688,18 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
         def _cancel_next_blood_glucose():
             nh_activity_obj = request.registry['nh.activity']
             task = obj_model.browse(cr, uid, int(val), context=context)
-            if task.observation == 'nh.clinical.patient.observation.blood_glucose':
-                next_blood_glucose_activity_id = nh_activity_obj.search(cr, uid, [
-                    ('state', '=', 'scheduled'),
-                    ('data_model', '=', 'nh.clinical.patient.observation.blood_glucose'),
-                    ('patient_id', '=', task.patient_id.id)
-                ], context=context)
-                nh_activity_obj.cancel(cr, uid, next_blood_glucose_activity_id, context=context)
+            try:
+                if task.observation == 'nh.clinical.patient.observation.blood_glucose':
+                    next_blood_glucose_activity_id = nh_activity_obj.search(cr, uid, [
+                        ('state', '=', 'scheduled'),
+                        ('data_model', '=', 'nh.clinical.patient.observation.blood_glucose'),
+                        ('patient_id', '=', task.patient_id.id)
+                    ], context=context)
+                    nh_activity_obj.cancel(cr, uid, next_blood_glucose_activity_id, context=context)
+            except AttributeError:
+                # task.observation does not exist
+                # The task is not an observation (probably an escalation task)
+                pass
 
         def _check_if_custom_frequency():
 
@@ -1080,6 +1085,13 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
         :returns: patient response object
         :rtype: :class:`http.Response<openerp.http.Response>`
         """
+        def _is_hca():
+            role = request.registry('res.users').browse(
+                cr, uid, request.session.uid, context=context).role_id
+            if role.id == request.env['ir.model.data'].get_object_reference(
+                    'nh_clinical', 'role_nhc_hca')[1]:
+                return 'True'
+            return 'False'
 
         try:
             patient_id = int(patient_id)
@@ -1125,7 +1137,8 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
                 'notification_count': len(follow_activities),
                 'username': request.session['login'],
                 'data_vis_list': obs_data_vis_list,
-                'user_groups': user_groups
+                'user_groups': user_groups,
+                'is_hca': _is_hca(),
             }
         )
 
