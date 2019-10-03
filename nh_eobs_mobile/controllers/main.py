@@ -688,13 +688,18 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
         def _cancel_next_blood_glucose():
             nh_activity_obj = request.registry['nh.activity']
             task = obj_model.browse(cr, uid, int(val), context=context)
-            if task.observation == 'nh.clinical.patient.observation.blood_glucose':
-                next_blood_glucose_activity_id = nh_activity_obj.search(cr, uid, [
-                    ('state', '=', 'scheduled'),
-                    ('data_model', '=', 'nh.clinical.patient.observation.blood_glucose'),
-                    ('patient_id', '=', task.patient_id.id)
-                ], context=context)
-                nh_activity_obj.cancel(cr, uid, next_blood_glucose_activity_id, context=context)
+            try:
+                if task.observation == 'nh.clinical.patient.observation.blood_glucose':
+                    next_blood_glucose_activity_id = nh_activity_obj.search(cr, uid, [
+                        ('state', '=', 'scheduled'),
+                        ('data_model', '=', 'nh.clinical.patient.observation.blood_glucose'),
+                        ('patient_id', '=', task.patient_id.id)
+                    ], context=context)
+                    nh_activity_obj.cancel(cr, uid, next_blood_glucose_activity_id, context=context)
+            except AttributeError:
+                # task.observation does not exist
+                # The task is not an observation (probably an escalation task)
+                pass
 
         def _check_if_custom_frequency():
 
