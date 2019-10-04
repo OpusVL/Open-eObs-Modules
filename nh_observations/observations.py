@@ -278,8 +278,10 @@ class NhClinicalPatientObservation(orm.AbstractModel):
                 # TODO Is it right that updating the frequency will
                 # automatically update the date_scheduled to
                 # create_date + frequency?
+                date = context.get('effective_date_terminated') \
+                       or obs.activity_id.creator_id.effective_date_terminated
                 scheduled = (dt.strptime(
-                    obs.activity_id.create_date, DTF)+td(
+                    date, DTF)+td(
                     minutes=vals['frequency'])).strftime(DTF)
                 activity_pool.schedule(
                     cr, uid, obs.activity_id.id, date_scheduled=scheduled,
