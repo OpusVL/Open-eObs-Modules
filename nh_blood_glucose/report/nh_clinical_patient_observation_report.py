@@ -37,3 +37,4 @@ class NhClinicalPatientObservationReport(models.AbstractModel):
             ._localise_and_format_datetimes(report_data)
         for obs in report_data.get('blood_glucoses', []):
             self._localise_dict_time(obs['values'], 'effective_date_terminated')
+            self._localise_dict_time(obs['values'], 'date_terminated')
