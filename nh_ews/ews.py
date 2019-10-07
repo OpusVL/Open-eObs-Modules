@@ -713,20 +713,26 @@ class nh_clinical_patient_observation_ews(orm.Model):
         # trigger notifications
         if not activity.data_ref.is_partial:
             notifications = self.get_notifications(cr, uid, activity)
-            if len(notifications) > 0:
-                api_pool.trigger_notifications(cr, uid, {
-                    'notifications': notifications,
-                    'parent_id': spell_activity_id,
-                    'creator_id': activity.id,
-                    'patient_id': activity.data_ref.patient_id.id,
-                    'model': self._name,
-                    'group': group
-                }, context=context)
+
+            self.trigger_notifications(cr, uid, activity, api_pool, group,
+                                       notifications, spell_activity_id, context)
 
         res = super(nh_clinical_patient_observation_ews, self).complete(
             cr, uid, activity_id, context)
         self.create_next_obs(cr, uid, activity, context)
         return res
+
+    def trigger_notifications(self, cr, uid, activity, api_pool, group, notifications,
+                              spell_activity_id, context):
+        if len(notifications) > 0:
+            api_pool.trigger_notifications(cr, uid, {
+                'notifications': notifications,
+                'parent_id': spell_activity_id,
+                'creator_id': activity.id,
+                'patient_id': activity.data_ref.patient_id.id,
+                'model': self._name,
+                'group': group
+            }, context=context)
 
     @api.model
     def create_next_obs(self, previous_obs_activity):
