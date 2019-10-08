@@ -19,7 +19,8 @@
                         <table class="striped col-xs-12 row">
                             <thead>
                                 <tr>
-                                    <th class="col-xs-3">Date</th>
+                                    <th class="col-xs-2">Effective Date</th>
+                                    <th class="col-xs-2">Submitted Date</th>
                                     <th class="col-xs-3">Blood Glucose (mmol/L)</th>
                                     <th class="col-xs-3">Partial Reason</th>
                                     <th class="col-xs-3">Completed By</th>
@@ -28,6 +29,7 @@
                             <tbody>
                                 <t t-foreach="blood_glucoses" t-as="blood_glucose">
                                     <tr>
+                                        <td class="col-xs-3"><t t-esc="blood_glucose['values']['effective_date_terminated']"/></td>
                                         <td class="col-xs-3"><t t-esc="blood_glucose['values']['date_terminated']"/></td>
                                         <td class="col-xs-3"><t t-esc="blood_glucose['values']['blood_glucose']"/></td>
                                         <td class="col-xs-3"><t t-esc="blood_glucose['values']['partial_reason']"/></td>

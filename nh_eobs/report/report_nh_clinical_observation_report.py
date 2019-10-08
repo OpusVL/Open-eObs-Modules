@@ -973,6 +973,7 @@ class ObservationReport(models.AbstractModel):
     def _localise_and_format_datetimes(self, report_data):
         date_started = 'date_started'
         date_terminated = 'effective_date_terminated'
+        submitted_date = 'date_terminated'
 
         # Report period datetimes
         self._localise_dict_time(report_data, 'report_start')
@@ -994,25 +995,31 @@ class ObservationReport(models.AbstractModel):
         for obs_activity in report_data['ews']:
             self._localise_dict_time(obs_activity, date_started)
             self._localise_dict_time(obs_activity, date_terminated)
+            self._localise_dict_time(obs_activity, submitted_date)
             # EWS model datetimes
             obs = obs_activity['values']
             self._localise_dict_time(obs, date_started)
             self._localise_dict_time(obs, date_terminated)
+            self._localise_dict_time(obs, submitted_date)
             # EWS triggered tasks
             for action in obs_activity['triggered_actions']:
                 self._localise_dict_time(action, date_terminated)
+                self._localise_dict_time(action, submitted_date)
 
         # EWS table datetimes
         for obs in report_data['table_ews']:
             self._localise_dict_time(obs, date_terminated)
+            self._localise_dict_time(obs, submitted_date)
 
         # Blood product datetimes
         for obs in report_data.get('blood_products', []):
             self._localise_dict_time(obs['values'], date_terminated)
+            self._localise_dict_time(obs['values'], submitted_date)
 
         # PBPS (blood pressure) datetimes
         for obs in report_data.get('pbps', []):
             self._localise_dict_time(obs, date_terminated)
+            self._localise_dict_time(obs, submitted_date)
 
         # Patient monitoring exception history datetimes
         for pme in report_data['patient_monitoring_exception_history']:

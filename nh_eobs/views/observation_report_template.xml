@@ -291,7 +291,8 @@
                             <table class="striped col-xs-12 row">
                                 <thead class="small-header">
                                     <tr>
-                                        <th class="col-xs-3">Date</th>
+                                        <th class="col-xs-2">Effective Date</th>
+                                        <th class="col-xs-2">Submitted Date</th>
                                         <th class="col-xs-1">Respiration<br/>Rate</th>
                                         <th class="col-xs-1">O2<br/>Saturation</th>
                                         <th class="col-xs-1">Body<br/>Temperature</th>
@@ -305,7 +306,8 @@
                                 <tbody>
                                     <t t-foreach="table_ews" t-as="ew">
                                         <tr>
-                                            <td class="col-xs-3"><t t-esc="ew.get('effective_date_terminated', '')"/></td>
+                                            <td class="col-xs-2"><t t-esc="ew.get('effective_date_terminated', '')"/></td>
+                                            <td class="col-xs-2"><t t-esc="ew.get('date_terminated', '')"/></td>
                                             <td class="col-xs-1"><t t-esc="ew.get('respiration_rate', '')"/></td>
                                             <td class="col-xs-1"><t t-esc="ew.get('indirect_oxymetry_spo2', '')"/>
                                                 <t t-if="ew.get('o2_target')"><br/><strong>Target:</strong> <t t-esc="ew.get('o2_target', '')"/></t></td>
@@ -327,7 +329,8 @@
                             <table class="striped col-xs-12 row">
                                 <thead>
                                     <tr>
-                                        <th class="col-xs-3">Date</th>
+                                        <th class="col-xs-2">Effective Date</th>
+                                        <th class="col-xs-2">Submitted Date</th>
                                         <th class="col-xs-3">Device</th>
                                         <th class="col-xs-6">Values</th>
                                     </tr>
@@ -336,7 +339,8 @@
                                     <t t-foreach="table_ews" t-as="ew">
                                         <t t-if="ew.get('oxygen_administration_flag')">
                                             <tr>
-                                                <td class="col-xs-3"><t t-esc="ew.get('effective_date_terminated', '')"/></td>
+                                                <td class="col-xs-2"><t t-esc="ew.get('effective_date_terminated', '')"/></td>
+                                                <td class="col-xs-2"><t t-esc="ew.get('date_terminated', '')"/></td>
                                                 <td class="col-xs-3">
                                                     <t t-if="ew.get('device_id') and len(ew.get('device_id', [])) > 1">
                                                         <t t-esc="ew.get('device_id')[1]"/>
@@ -396,7 +400,8 @@
                             <table class="striped col-xs-12 row">
                                 <thead>
                                     <tr>
-                                        <th class="col-xs-3">Date</th>
+                                        <th class="col-xs-2">Effective Date</th>
+                                        <th class="col-xs-2">Submitted Date</th>
                                         <th class="col-xs-3">Eyes</th>
                                         <th class="col-xs-3">Verbal</th>
                                         <th class="col-xs-3">Motor</th>
@@ -405,7 +410,8 @@
                                 <tbody>
                                     <t t-foreach="gcs" t-as="gcs_score">
                                         <tr>
-                                            <td class="col-xs-3"><t t-esc="gcs_score.get('values', {}).get('effective_date_terminated', '')"/></td>
+                                            <td class="col-xs-2"><t t-esc="gcs_score.get('values', {}).get('effective_date_terminated', '')"/></td>
+                                            <td class="col-xs-2"><t t-esc="gcs_score.get('values', {}).get('date_terminated', '')"/></td>
                                             <td class="col-xs-3"><t t-esc="gcs_score.get('values', {}).get('eyes', '')"/></td>
                                             <td class="col-xs-3"><t t-esc="gcs_score.get('values', {}).get('verbal', '')"/></td>
                                             <td class="col-xs-3"><t t-esc="gcs_score.get('values', {}).get('motor', '')"/></td>
@@ -422,7 +428,8 @@
                             <table class="striped col-xs-12 row">
                                 <thead>
                                     <tr>
-                                        <th class="col-xs-3">Date</th>
+                                        <th class="col-xs-2">Effective Date</th>
+                                        <th class="col-xs-2">Submitted Date</th>
                                         <th class="col-xs-4">Resting Score</th>
                                         <th class="col-xs-4">Movement Score</th>
                                     </tr>
@@ -430,7 +437,8 @@
                                 <tbody>
                                     <t t-foreach="pains" t-as="pain">
                                         <tr>
-                                            <td class="col-xs-3"><t t-esc="pain.get('values', {}).get('effective_date_terminated', '')"/></td>
+                                            <td class="col-xs-2"><t t-esc="pain.get('values', {}).get('effective_date_terminated', '')"/></td>
+                                            <td class="col-xs-2"><t t-esc="pain.get('values', {}).get('date_terminated', '')"/></td>
                                             <td class="col-xs-4"><t t-esc="pain.get('values', {}).get('rest_score', '')"/></td>
                                             <td class="col-xs-4"><t t-esc="pain.get('values', {}).get('movement_score', '')"/></td>
                                         </tr>
@@ -446,7 +454,8 @@
                             <table class="striped col-xs-12 row">
                                 <thead>
                                     <tr>
-                                        <th class="col-xs-3">Date</th>
+                                        <th class="col-xs-2">Effective Date</th>
+                                        <th class="col-xs-2">Submitted Date</th>
                                         <th class="col-xs-3">Vol (ml)</th>
                                         <th class="col-xs-6">Blood Product</th>
                                     </tr>
@@ -454,7 +463,8 @@
                                 <tbody>
                                     <t t-foreach="blood_products" t-as="blood_product">
                                         <tr>
-                                            <td class="col-xs-3"><t t-esc="blood_product.get('values', {}).get('effective_date_terminated', '')"/></td>
+                                            <td class="col-xs-2"><t t-esc="blood_product.get('values', {}).get('effective_date_terminated', '')"/></td>
+                                            <td class="col-xs-2"><t t-esc="blood_product.get('values', {}).get('date_terminated', '')"/></td>
                                             <td class="col-xs-3"><t t-esc="blood_product.get('values', {}).get('vol', '')"/></td>
                                             <td class="col-xs-6"><t t-esc="blood_product.get('values', {}).get('product', '')"/></td>
                                         </tr>
@@ -470,7 +480,8 @@
                             <table class="striped col-xs-12 row">
                                 <thead>
                                     <tr>
-                                        <th class="col-xs-1">Date</th>
+                                        <th class="col-xs-1">Effective Date</th>
+                                        <th class="col-xs-1">Submitted Date</th>
                                         <th class="col-xs-1">Bowel Open</th>
                                         <th class="col-xs-1">Nausea</th>
                                         <th class="col-xs-1">Vomiting</th>
@@ -488,6 +499,7 @@
                                     <t t-foreach="bristol_stools" t-as="bristol_stool">
                                         <tr>
                                             <td class="col-xs-1"><t t-esc="bristol_stool.get('values', {}).get('effective_date_terminated', '')"/></td>
+                                            <td class="col-xs-1"><t t-esc="bristol_stool.get('values', {}).get('date_terminated', '')"/></td>
                                             <td class="col-xs-1"><t t-esc="bristol_stool.get('values', {}).get('bowel_open', '')"/></td>
                                             <td class="col-xs-1"><t t-esc="bristol_stool.get('values', {}).get('nausea', '')"/></td>
                                             <td class="col-xs-1"><t t-esc="bristol_stool.get('values', {}).get('vomiting', '')"/></td>
@@ -512,7 +524,8 @@
                             <table class="striped col-xs-12 row">
                                 <thead>
                                     <tr>
-                                        <th class="col-xs-3">Date</th>
+                                        <th class="col-xs-2">Effective Date</th>
+                                        <th class="col-xs-2">Submitted Date</th>
                                         <th class="col-xs-2">User</th>
                                         <th class="col-xs-2">Dehydrated</th>
                                         <th class="col-xs-5">Values</th>
@@ -521,7 +534,8 @@
                                 <tbody>
                                     <t t-foreach="pbps" t-as="pbp_ob">
                                         <tr>
-                                            <td class="col-xs-3"><t t-esc="pbp_ob.get('effective_date_terminated', '')"/></td>
+                                            <td class="col-xs-2"><t t-esc="pbp_ob.get('effective_date_terminated', '')"/></td>
+                                            <td class="col-xs-2"><t t-esc="pbp_ob.get('date_terminated', '')"/></td>
                                             <td class="col-xs-2"><t t-esc="pbp_ob.get('terminate_uid', ['', ''])[1]"/></td>
                                             <td class="col-xs-2"><t t-esc="pbp_ob.get('values', {}).get('result', '')"/></td>
                                             <td class="col-xs-5 pre-pre-compact-data">
@@ -561,7 +575,8 @@
                             <table class="striped col-xs-12 row">
                                 <thead>
                                     <tr>
-                                        <th class="col-xs-3">Date</th>
+                                        <th class="col-xs-2">Effective Date</th>
+                                        <th class="col-xs-2">Submitted Date</th>
                                         <th class="col-xs-3">Target</th>
                                         <th class="col-xs-6">User</th>
                                     </tr>
@@ -570,7 +585,8 @@
                                     <t t-foreach="targeto2" t-as="o2">
                                         <t t-if="isinstance(o2, dict)">
                                             <tr class="main-entry">
-                                                <td class="col-xs-3"><t t-esc="o2.get('values', {}).get('effective_date_terminated', '')"/></td>
+                                                <td class="col-xs-2"><t t-esc="o2.get('values', {}).get('effective_date_terminated', '')"/></td>
+                                                <td class="col-xs-2"><t t-esc="o2.get('values', {}).get('date_terminated', '')"/></td>
                                                 <t t-set="level_id" t-value="o2.get('values', {}).get('level_id', ['', ''])"/>
                                                 <td class="col-xs-3"><t t-esc="level_id[1] if isinstance(level_id, (tuple, list)) else ''"/></td>
                                                 <td class="col-xs-6"><t t-esc="o2.get('write_uid', ['', ''])[1]"/></td>
@@ -657,7 +673,8 @@
                             <table class="striped col-xs-12 row">
                                 <thead>
                                     <tr>
-                                        <th class="col-xs-3">Date</th>
+                                        <th class="col-xs-2">Effective Date</th>
+                                        <th class="col-xs-2">Submitted Date</th>
                                         <th class="col-xs-2">Bed</th>
                                         <th class="col-xs-7">Ward</th>
                                     </tr>
@@ -665,7 +682,8 @@
                                 <tbody>
                                     <t t-foreach="transfer_history" t-as="transfer">
                                         <tr class="main-entry">
-                                            <td class="col-xs-3"><t t-esc="transfer.get('effective_date_terminated', '')"/></td>
+                                            <td class="col-xs-2"><t t-esc="transfer.get('effective_date_terminated', '')"/></td>
+                                            <td class="col-xs-2"><t t-esc="transfer.get('date_terminated', '')"/></td>
                                             <td class="col-xs-2"><t t-esc="transfer.get('bed', '')"/></td>
                                             <td class="col-xs-7"><t t-esc="transfer.get('ward', '')"/></td>
                                         </tr>
@@ -681,7 +699,8 @@
                         <table class="striped col-xs-12 row">
                             <thead>
                                 <tr>
-                                    <th class="col-xs-3">Date</th>
+                                    <th class="col-xs-2">Effective Date</th>
+                                    <th class="col-xs-2">Submitted Date</th>
                                     <th class="col-xs-3">User</th>
                                     <th class="col-xs-3">Status</th>
                                     <th class="col-xs-3">Reason</th>
@@ -691,7 +710,8 @@
                                 <t t-if="patient_monitoring_exception_history">
                                     <t t-foreach="patient_monitoring_exception_history" t-as="pme">
                                         <tr class="main-entry">
-                                            <td class="col-xs-3"><t t-esc="pme.get('date', '')"/></td>
+                                            <td class="col-xs-2"/>
+                                            <td class="col-xs-2"><t t-esc="pme.get('date', '')"/></td>
                                             <td class="col-xs-3"><t t-esc="pme.get('user', '')"/></td>
                                             <td class="col-xs-3"><t t-esc="pme.get('status', '')"/></td>
                                             <td class="col-xs-3"><t t-esc="pme.get('reason', '')"/></td>
@@ -701,7 +721,8 @@
                                 <t t-if="mrsa_history">
                                     <t t-foreach="mrsa_history" t-as="mrsa">
                                         <tr class="main-entry">
-                                            <td class="col-xs-3"><t t-esc="mrsa.get('values', {}).get('effective_date_terminated', '')"/></td>
+                                            <td class="col-xs-2"><t t-esc="mrsa.get('values', {}).get('effective_date_terminated', '')"/></td>
+                                            <td class="col-xs-2"><t t-esc="mrsa.get('values', {}).get('date_terminated', '')"/></td>
                                             <td class="col-xs-3"><t t-esc="mrsa.get('values', {}).get('terminate_uid', ['', ''])[1]"/></td>
                                             <td class="col-xs-3"><t t-esc="mrsa.get('values', {}).get('status', '')"/></td>
                                             <td class="col-xs-3">MRSA</td>
@@ -711,7 +732,8 @@
                                 <t t-if="diabetes_history">
                                     <t t-foreach="diabetes_history" t-as="diabetes">
                                         <tr class="main-entry">
-                                            <td class="col-xs-3"><t t-esc="diabetes.get('values', {}).get('effective_date_terminated', '')"/></td>
+                                            <td class="col-xs-2"><t t-esc="diabetes.get('values', {}).get('effective_date_terminated', '')"/></td>
+                                            <td class="col-xs-2"><t t-esc="diabetes.get('values', {}).get('date_terminated', '')"/></td>
                                             <td class="col-xs-3"><t t-esc="diabetes.get('values', {}).get('terminate_uid', ['', ''])[1]"/></td>
                                             <td class="col-xs-3"><t t-esc="diabetes.get('values', {}).get('status', '')"/></td>
                                             <td class="col-xs-3">Diabetes</td>
@@ -721,7 +743,8 @@
                                 <t t-if="palliative_care_history">
                                     <t t-foreach="palliative_care_history" t-as="palliative_care">
                                         <tr class="main-entry">
-                                            <td class="col-xs-3"><t t-esc="palliative_care.get('values', {}).get('effective_date_terminated', '')"/></td>
+                                            <td class="col-xs-2"><t t-esc="palliative_care.get('values', {}).get('effective_date_terminated', '')"/></td>
+                                            <td class="col-xs-2"><t t-esc="palliative_care.get('values', {}).get('date_terminated', '')"/></td>
                                             <td class="col-xs-3"><t t-esc="palliative_care.get('values', {}).get('terminate_uid', ['', ''])[1]"/></td>
                                             <td class="col-xs-3"><t t-esc="palliative_care.get('values', {}).get('status', '')"/></td>
                                             <td class="col-xs-3">Palliative Care</td>
@@ -731,7 +754,8 @@
                                 <t t-if="post_surgery_history">
                                     <t t-foreach="post_surgery_history" t-as="post_surgery">
                                         <tr class="main-entry">
-                                            <td class="col-xs-3"><t t-esc="post_surgery.get('values', {}).get('effective_date_terminated', '')"/></td>
+                                            <td class="col-xs-2"><t t-esc="post_surgery.get('values', {}).get('effective_date_terminated', '')"/></td>
+                                            <td class="col-xs-2"><t t-esc="post_surgery.get('values', {}).get('date_terminated', '')"/></td>
                                             <td class="col-xs-3"><t t-esc="post_surgery.get('values', {}).get('terminate_uid', ['', ''])[1]"/></td>
                                             <td class="col-xs-3"><t t-esc="post_surgery.get('values', {}).get('status', '')"/></td>
                                             <td class="col-xs-3">Post Surgery</td>
@@ -741,7 +765,8 @@
                                 <t t-if="critical_care_history">
                                     <t t-foreach="critical_care_history" t-as="critical_care">
                                         <tr class="main-entry">
-                                            <td class="col-xs-3"><t t-esc="critical_care.get('values', {}).get('effective_date_terminated', '')"/></td>
+                                            <td class="col-xs-2"><t t-esc="critical_care.get('values', {}).get('effective_date_terminated', '')"/></td>
+                                            <td class="col-xs-2"><t t-esc="critical_care.get('values', {}).get('date_terminated', '')"/></td>
                                             <td class="col-xs-3"><t t-esc="critical_care.get('values', {}).get('terminate_uid', ['', ''])[1]"/></td>
                                             <td class="col-xs-3"><t t-esc="critical_care.get('values', {}).get('status', '')"/></td>
                                             <td class="col-xs-3">Critical Care</td>
@@ -759,10 +784,11 @@
                             <table class="striped col-xs-12 row">
                                 <thead>
                                     <tr>
-                                        <th class="col-xs-3">Date</th>
-                                        <th class="col-xs-2">EWS Score</th>
-                                        <th class="col-xs-2">Clinical Risk</th>
-                                        <th class="col-xs-5">Action Taken</th>
+                                        <th class="col-xs-2">Effective Date</th>
+                                        <th class="col-xs-2">Submitted Date</th>
+                                        <th class="col-xs-1">EWS Score</th>
+                                        <th class="col-xs-1">Clinical Risk</th>
+                                        <th class="col-xs-6">Action Taken</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -787,6 +813,7 @@
             <t t-set="clinical_risk" t-value="observation.get('values', {}).get('clinical_risk', '')"/>
             <tr class="main-entry">
                 <td id="triggered_actions_date" class="col-xs-3"><t t-esc="observation.get('effective_date_terminated', '')"/></td>
+                <td id="triggered_actions_date" class="col-xs-3"><t t-esc="observation.get('date_terminated', '')"/></td>
                 <td id="triggered_actions_score" class="col-xs-2"><t t-esc="score"/></td>
                 <td id="triggered_actions_clinical_risk" class="col-xs-2"><t t-esc="clinical_risk"/></td>
                 <td class="col-xs-5 pre-pre-compact-data">
@@ -825,7 +852,7 @@
                             <td class="col-xs-6 triggered_action_task_body">
                                 <t t-set="freq_models" t-value="['nh.clinical.notification.frequency', 'nh.clinical.notification.select_frequency']"/>
                                 <t t-if="task.get('effective_date_terminated') and (task.get('data_model') not in freq_models or task.get('data_model') in freq_models and task.get('state') != 'cancelled')">
-                                    <strong>Date:</strong> <t t-esc="task.get('effective_date_terminated', '')"/>
+                                    <strong>Effective Date:</strong> <t t-esc="task.get('effective_date_terminated', '')"/>
                                 </t><br/>
                                 <!-- TODO For cancelled frequency tasks we still display 'Task Still in Progress' as a temporary measure until EOBS-485 is implemented.
                                      This isn't very nice, but before it was misleading because it looked as though the tasks had been completed (see EOBS-513). -->
@@ -853,7 +880,8 @@
 
         <template id="observation_cancellation">
             <tr class="main-entry">
-                <td class="col-xs-3"><t t-esc="observation.get('effective_date_terminated', '')"/></td>
+                <td class="col-xs-2"><t t-esc="observation.get('effective_date_terminated', '')"/></td>
+                <td class="col-xs-2"><t t-esc="observation.get('effective_date_terminated', '')"/></td>
                 <td class="col-xs-2">N/A</td>
                 <td class="col-xs-2">N/A</td>
                 <td class="col-xs-5 pre-pre-compact-data">
