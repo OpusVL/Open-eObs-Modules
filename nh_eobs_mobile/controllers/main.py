@@ -497,6 +497,8 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
             patient['trend_icon'] = 'icon-{0}-arrow'.format(
                 patient['ews_trend'])
             patient['deadline_time'] = patient['next_ews_time']
+            patient['bg_deadline_time'] = patient['next_bg_time'] \
+                if patient['next_bg_time'] else ''
             patient['summary'] = patient.get('summary', False)
             if patient.get('followers'):
                 followers = patient['followers']
@@ -782,7 +784,8 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
                             ])
                             if len(obs_id) == 1:
                                 creator_data_model.write(cr, uid, obs_id, vals, context=context)
-                                cr.execute('refresh materialized view ews0;\n')
+                                cr.execute('refresh materialized view ews0;\n'
+                                           'refresh materialized view bg0;')
                         obj_model.write(cr, uid, record_id, vals)
 
         _check_if_custom_frequency()

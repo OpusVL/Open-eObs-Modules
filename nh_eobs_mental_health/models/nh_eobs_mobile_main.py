@@ -78,8 +78,11 @@ class NHEobsMobileMain(orm.AbstractModel):
                 patient['ews_trend'])
             if status_map.get(patient.get('id'), {}).get('obs_stop'):
                 patient['deadline_time'] = 'Observations Stopped'
+                patient['bg_deadline_time'] = 'Observations Stopped'
             else:
                 patient['deadline_time'] = patient['next_ews_time']
+                patient['bg_deadline_time'] = patient['next_bg_time'] \
+                    if patient['next_bg_time'] else ''
             patient['rapid_tranq'] = status_map.get(
                 patient.get('id'), {}).get('rapid_tranq', False)
             patient['summary'] = patient.get('summary', False)

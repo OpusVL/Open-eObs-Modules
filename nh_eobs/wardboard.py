@@ -514,8 +514,10 @@ class nh_clinical_wardboard(orm.Model):
         'nhs_number': fields.text('NHS Number'),
         'age': fields.integer("Age"),
         'date_scheduled': fields.datetime("Date Scheduled"),
-        'next_diff': fields.text("Time to Next Obs"),
-        'frequency': fields.text("Frequency"),
+        'next_diff': fields.text("Time to Next NEWS Obs"),
+        'frequency': fields.text("NEWS Frequency"),
+        'next_blood_glucose_diff': fields.text("Time to Next Blood Glucose Obs"),
+        'blood_glucose_frequency': fields.text("Blood Glucose Frequency"),
         'ews_score_string': fields.text("Latest Score"),
         'ews_score': fields.integer("Latest Score"),
         'ews_trend_string': fields.selection(_trend_strings,
@@ -1109,6 +1111,7 @@ class nh_clinical_wardboard(orm.Model):
 
 -- materialized views
 drop materialized view if exists ews0 cascade;
+drop materialized view if exists bg0 cascade;
 drop materialized view if exists ews1 cascade;
 drop materialized view if exists ews2 cascade;
 drop materialized view if exists ward_locations cascade;
@@ -1117,6 +1120,7 @@ drop materialized view if exists pbp cascade;
 
 drop view if exists wb_activity_ranked cascade;
 drop view if exists wb_ews_ranked cascade;
+drop view if exists wb_bg_ranked cascade;
 drop view if exists wb_spell_ranked cascade;
 drop view if exists wb_transfer_ranked cascade;
 drop view if exists wb_discharge_ranked cascade;
@@ -1164,6 +1168,28 @@ wb_ews_ranked as(
     where activity.state = 'scheduled'
     or (activity.state != 'scheduled'
         and ews.clinical_risk != 'Unknown')) sub_query
+    where rank < 3
+);
+
+create or replace view
+-- ews per spell, data_model, state
+wb_bg_ranked as(
+    select *
+    from (
+        select
+            spell.id as spell_id,
+            activity.*,
+            split_part(activity.data_ref, ',', 2)::int as data_id,
+            rank() over (partition by spell.id, activity.data_model,
+                activity.state order by activity.sequence desc)
+    from nh_clinical_spell spell
+    inner join nh_activity activity
+        on activity.spell_activity_id = spell.activity_id
+        and activity.data_model = 'nh.clinical.patient.observation.blood_glucose'
+    left join nh_clinical_patient_observation_blood_glucose bg
+        on bg.activity_id = activity.id
+    where activity.state = 'scheduled'
+    ) sub_query
     where rank < 3
 );
 
@@ -1288,6 +1314,31 @@ ews0 as(
             from wb_ews_ranked activity
             left join nh_clinical_patient_observation_ews ews
                 on activity.data_id = ews.id
+            where activity.rank = 1 and activity.state = 'scheduled'
+);
+
+create materialized view
+bg0 as(
+            select
+                activity.parent_id as spell_activity_id,
+                activity.patient_id,
+                activity.spell_id,
+                activity.state,
+                activity.date_scheduled,
+                bg.id,
+                bg.frequency,
+                case when activity.date_scheduled < now() at time zone 'UTC'
+                    then 'overdue: ' else '' end as next_diff_polarity,
+                case activity.date_scheduled is null
+                    when false then justify_hours(greatest(now() at time zone
+                    'UTC',activity.date_scheduled) - least(now() at time zone
+                    'UTC', activity.date_scheduled))
+                    else interval '0s'
+                end as next_diff_interval,
+                activity.rank
+            from wb_bg_ranked activity
+            left join nh_clinical_patient_observation_blood_glucose bg
+                on activity.data_id = bg.id
             where activity.rank = 1 and activity.state = 'scheduled'
 );
 
