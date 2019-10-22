@@ -121,7 +121,7 @@ class NHClinicalWardboard(orm.Model):
             'view_id': view_id
         }
 
-    @helpers.v8_refresh_materialized_views('ews0', 'ews1', 'ews2')
+    @helpers.v8_refresh_materialized_views('ews0', 'ews1', 'ews2', 'bg0')
     @api.multi
     def start_obs_stop(self, reasons, spell_id, spell_activity_id):
         """
@@ -165,7 +165,7 @@ class NHClinicalWardboard(orm.Model):
         obs_stop = activity.data_ref
         obs_stop.start(activity_id)
 
-    @helpers.v8_refresh_materialized_views('ews0', 'ews1', 'ews2')
+    @helpers.v8_refresh_materialized_views('ews0', 'ews1', 'ews2', 'bg0')
     @api.multi
     def end_obs_stop(self, cancellation=False):
         """
@@ -297,6 +297,7 @@ class NHClinicalWardboard(orm.Model):
                     ],
                     context=context)
                 rec['rapid_tranq'] = spell.get('rapid_tranq')
+                rec['next_blood_glucose_diff'] = rec['next_blood_glucose_diff'] if rec['next_blood_glucose_diff'] != '00:00' else ''
                 if spell.get('obs_stop'):
                     obs_stop_model = self.pool['nh.clinical.pme.obs_stop']
                     obs_stops = obs_stop_model.search(cr, user, [
@@ -308,9 +309,11 @@ class NHClinicalWardboard(orm.Model):
                             cr, user, obs_stop, ['reason'], context=context)
                         rec['frequency'] = reason.get('reason', [0, False])[1]
                     rec['next_diff'] = 'Observations Stopped'
+                    rec['next_blood_glucose_diff'] = 'Observations Stopped'
                 elif spell.get('refusing_obs'):
                     rec['frequency'] = 'Refused - {0}'.format(rec['frequency'])
                     rec['next_diff'] = 'Refused - {0}'.format(rec['next_diff'])
+                    rec['next_blood_glucose_diff'] = 'Refused - {0}'.format(rec['next_blood_glucose_diff'])
         if was_single_record:
             return res[0]
         return res

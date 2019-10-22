@@ -741,6 +741,24 @@ class nh_eobs_api(orm.AbstractModel):
                     ews0.date_scheduled)), 'HH24:MI') || ' hours'
                 else to_char((interval '0s'), 'HH24:MI') || ' hours'
             end as next_ews_time,
+            case
+                when bg0.date_scheduled is not null then
+                  case when greatest(now() at time zone 'UTC',
+                    bg0.date_scheduled) != bg0.date_scheduled
+                    then 'overdue: '
+                  else '' end ||
+                  case when extract(days from (greatest(now() at time zone
+                    'UTC', bg0.date_scheduled) - least(now() at time zone
+                    'UTC', bg0.date_scheduled))) > 0
+                    then extract(days from (greatest(now() at time zone 'UTC',
+                      bg0.date_scheduled) - least(now() at time zone 'UTC',
+                      bg0.date_scheduled))) || ' day(s) '
+                    else '' end ||
+                  to_char(justify_hours(greatest(now() at time zone 'UTC',
+                    bg0.date_scheduled) - least(now() at time zone 'UTC',
+                    bg0.date_scheduled)), 'HH24:MI') || ' hours'
+                else to_char((interval '0s'), 'HH24:MI') || ' hours'
+            end as next_bg_time,
             location.name as location,
             location_parent.name as parent_location,
             case
@@ -773,6 +791,7 @@ class nh_eobs_api(orm.AbstractModel):
         left join ews1 on ews1.spell_activity_id = activity.id
         left join ews2 on ews2.spell_activity_id = activity.id
         left join ews0 on ews0.spell_activity_id = activity.id
+        left join bg0 on bg0.spell_activity_id = activity.id
         where activity.state = 'started' and activity.data_model =
           'nh.clinical.spell' and patient.id in (%s)
         order by location
