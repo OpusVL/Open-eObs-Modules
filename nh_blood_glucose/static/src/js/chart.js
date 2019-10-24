@@ -53,6 +53,7 @@ function drawBlood_glucoseChart(settings, obs){
     focus.style.margin.top = settings.hideTitle ? 0 : 20;
     focus.title = settings.hideTitle ? "" : "Blood Glucose";
     bloodGlucoseEl.focus = focus;
+    bloodGlucoseEl.options.refused = true;
     bloodGlucoseEl.data.raw = processBlood_glucoseData(obs);
     bloodGlucoseEl.init();
     bloodGlucoseEl.draw();
