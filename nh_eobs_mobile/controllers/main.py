@@ -569,7 +569,8 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
         patients = self.process_patient_list(
             cr, uid, patient_api.get_patients(
                 cr, uid, [], context=context), context=context)
-        patient_api.get_patient_followers(cr, uid, patients, context=context)
+        # JC says this concept is now deprecated
+        # patient_api.get_patient_followers(cr, uid, patients, context=context)
         following_patients = self.process_patient_list(
             cr, uid, patient_api.get_followed_patients(
                 cr, uid, []), context=context)
@@ -803,7 +804,8 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
         api = request.registry['nh.eobs.api']
         api.unassign_my_activities(cr, uid)
         patients = api.get_patients(cr, uid, [], context=context)
-        api.get_patient_followers(cr, uid, patients, context=context)
+        # JC says this concept is now deprecated
+        # api.get_patient_followers(cr, uid, patients, context=context)
         api.get_invited_users(cr, uid, patients, context=context)
         follow_activities = api.get_assigned_activities(
             cr, uid,
