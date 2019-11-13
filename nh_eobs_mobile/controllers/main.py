@@ -901,10 +901,17 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
         for user_filter in user_filters:
             wardboard_records = obj_nh_clinical_wardboard.search(safe_eval(user_filter.domain))
             if wardboard_records:
-                locations = set([l.ward_id.name for l in wardboard_records])
+                locations_name_query = """
+                    SELECT w.name
+                    FROM nh_clinical_wardboard AS wb
+                    LEFT JOIN nh_clinical_location AS w ON wb.ward_id=w.id
+                    WHERE wb.id IN {}""".format(tuple(wardboard_records.ids))
+                request.env.cr.execute(locations_name_query)
+                ward_names = request.env.cr.fetchall()
+                locations = set(ward_names)
                 favourites.extend([
                     {
-                        'location': l,
+                        'location': str(l[0]),
                         'default': '{}'.format(user_filter.is_default).lower()
                     } for l in locations])
 
