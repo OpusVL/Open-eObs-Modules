@@ -699,6 +699,7 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
                         ('patient_id', '=', task.patient_id.id)
                     ], context=context)
                     nh_activity_obj.cancel(cr, uid, next_blood_glucose_activity_id, context=context)
+                    request.cr.execute("""refresh materialized view bg0;""")
             except AttributeError:
                 # task.observation does not exist
                 # The task is not an observation (probably an escalation task)
