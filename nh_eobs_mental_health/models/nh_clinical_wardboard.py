@@ -297,7 +297,13 @@ class NHClinicalWardboard(orm.Model):
                     ],
                     context=context)
                 rec['rapid_tranq'] = spell.get('rapid_tranq')
-                rec['next_blood_glucose_diff'] = rec['next_blood_glucose_diff'] if rec['next_blood_glucose_diff'] != '00:00' else ''
+
+                if rec.get('next_blood_glucose_diff') \
+                        and rec.get('next_blood_glucose_diff') == '00:00':
+                    rec['next_blood_glucose_diff'] = ''
+                elif not rec.get('next_blood_glucose_diff'):
+                    rec['next_blood_glucose_diff'] = ''
+
                 if spell.get('obs_stop'):
                     obs_stop_model = self.pool['nh.clinical.pme.obs_stop']
                     obs_stops = obs_stop_model.search(cr, user, [
