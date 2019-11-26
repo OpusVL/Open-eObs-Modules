@@ -89,6 +89,7 @@ class NHEobsSQL(orm.AbstractModel):
                 ews0.date_scheduled)), 'HH24:MI') || ' hours'
             ELSE to_char((INTERVAL '0s'), 'HH24:MI')
         END AS next_diff,
+        bg0.next_diff_polarity ||
         CASE
             WHEN bg0.date_scheduled IS NOT NULL THEN
               CASE WHEN extract(days FROM (greatest(now() AT TIME ZONE 'UTC',
