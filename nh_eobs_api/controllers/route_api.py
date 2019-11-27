@@ -403,6 +403,10 @@ class NH_API(openerp.addons.web.controllers.main.Home):
                     'respiration_rate'
                 ]:
                     del data[key]
+
+        # iPad submits a key as an empty string which converter doesn't like
+        data = {k: v for k, v in data.items() if k}
+
         converted_data = converter(data, _logger.debug)
 
         score_dict = api_pool.get_activity_score(
