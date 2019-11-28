@@ -908,7 +908,9 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
                     SELECT w.name
                     FROM nh_clinical_wardboard AS wb
                     LEFT JOIN nh_clinical_location AS w ON wb.ward_id=w.id
-                    WHERE wb.id IN {}""".format(tuple(wardboard_records.ids))
+                    WHERE wb.id IN ({})""".format(
+                    ','.join(str(r) for r in wardboard_records.ids)
+                )
                 request.env.cr.execute(locations_name_query)
                 ward_names = request.env.cr.fetchall()
                 locations = set(ward_names)
