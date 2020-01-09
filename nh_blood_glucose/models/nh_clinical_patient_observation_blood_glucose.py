@@ -2,7 +2,7 @@
 from copy import deepcopy
 from openerp import models, api
 from openerp.osv import fields
-from openerp.addons.nh_eobs.helpers import refresh_materialized_views
+# from openerp.addons.nh_eobs.helpers import refresh_materialized_views
 from openerp.addons.nh_odoo_fixes import validate
 
 
@@ -75,7 +75,7 @@ class NHClinicalPatientObservationBloodGlucose(models.Model):
             .get_formatted_obs(replace_zeros=replace_zeros,
                                convert_datetimes_to_client_timezone=convert)
 
-    @refresh_materialized_views('param')
+    # @refresh_materialized_views('param')
     def complete(self, cr, uid, activity_id, context=None):
         return super(
             NHClinicalPatientObservationBloodGlucose, self).complete(
