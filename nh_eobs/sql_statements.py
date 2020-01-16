@@ -369,7 +369,9 @@ class NHEobsSQL(orm.AbstractModel):
                 when position('notification' in activity.data_model)::bool
                   then true
                 else false
-            end as notification
+            end as notification,
+            coalesce(ews0.frequency, 0) as frequency,
+            coalesce(bg0.frequency, 0) as bg_frequency
         from nh_activity activity
         inner join nh_activity spell_activity
         on spell_activity.id = activity.parent_id
@@ -379,8 +381,10 @@ class NHEobsSQL(orm.AbstractModel):
           on location.id = spell_activity.location_id
         inner join nh_clinical_location location_parent
           on location_parent.id = location.parent_id
+          left join ews0 on ews0.spell_activity_id = spell_activity.id
         left join ews1 on ews1.spell_activity_id = spell_activity.id
         left join ews2 on ews2.spell_activity_id = spell_activity.id
+        left join bg0 on bg0.spell_activity_id = spell_activity.id
         where activity.id in ({activity_ids})
         and spell_activity.state = 'started'
         order by deadline asc, activity.id desc
@@ -459,10 +463,8 @@ class NHEobsSQL(orm.AbstractModel):
                 when ews1.id is not null and ews2.id is null then 'first'
                 when ews1.id is null and ews2.id is not null then 'no latest'
             end as ews_trend,
-            case
-                when ews0.frequency is not null then ews0.frequency
-                else 0
-            end as frequency,
+            coalesce(ews0.frequency, 0) as frequency,
+            coalesce(bg0.frequency, 0) as bg_frequency,
             spell.custom_frequency,
             spell.custom_frequency_reason
         from nh_activity activity

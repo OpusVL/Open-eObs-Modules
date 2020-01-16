@@ -575,6 +575,16 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
             cr, uid, patient_api.get_followed_patients(
                 cr, uid, []), context=context)
 
+        for patient in patients:
+            if patient.get('frequency'):
+                patient['frequency_string'] = self._convert_frequency_to_string(
+                    patient.get('frequency')
+                )
+            if patient.get('bg_frequency'):
+                patient['bg_frequency_string'] = self._convert_frequency_to_string(
+                    patient.get('bg_frequency')
+                )
+
         favourites = self.get_user_favourites(uid)
 
         return request.render(
@@ -589,6 +599,10 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
                 'username': request.session['login'],
                 'urls': URLS}
         )
+
+    @staticmethod
+    def _convert_frequency_to_string(frequency):
+        return '{:2d} hour(s) {:02d} min(s)'.format(*divmod(frequency, 60))
 
     @http.route(URLS['escalations'] + '<creator_id>', type='http', auth='user')
     def process_escalations(self, creator_id, *args, **kwargs):
@@ -620,9 +634,16 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
                     {
                         "task_name": activity_detail.display_name,
                         "task_model": str(activity_detail.data_model),
+                        "task_parent": str(activity_detail.creator_id.data_model),
+                        "frequency": self._get_ews_frequency(
+                            activity_detail.creator_id
+                        ),
+                        "bg_frequency": self._get_bg_frequency(
+                            activity_detail.creator_id
+                        ),
                         "activity_id": activity_detail.id,
                         "task_id": activity_detail.data_ref.id,
-                        "input_fields": self._get_input_field(cr, uid, str(activity_detail.data_model), context=context)
+                        "input_fields": self._get_input_field(cr, uid, str(activity_detail.data_model), context=context),
                     }
                 )
 
@@ -633,6 +654,21 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
                 'data': data,
             }
         )
+
+    def _get_ews_frequency(self, creator_activity):
+        if creator_activity.data_model == 'nh.clinical.patient.observation.ews':
+            return self._convert_frequency_to_string(
+                creator_activity.data_ref.frequency
+            )
+        return False
+
+    def _get_bg_frequency(self, creator_activity):
+        if creator_activity.data_model == \
+                'nh.clinical.patient.observation.blood_glucose':
+            return self._convert_frequency_to_string(
+                creator_activity.data_ref.frequency
+            )
+        return False
 
     def _get_input_field(self, cr, uid, obj, context=None):
         """
@@ -867,6 +903,16 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
             cr, uid, task_api.get_activities(
                 cr, uid, [], context=context),
             context=context)
+
+        for task in tasks:
+            if task.get('frequency'):
+                task['frequency_string'] = self._convert_frequency_to_string(
+                    task.get('frequency')
+                )
+            if task.get('bg_frequency'):
+                task['bg_frequency_string'] = self._convert_frequency_to_string(
+                    task.get('bg_frequency')
+                )
 
         favourites = self.get_user_favourites(uid)
 
