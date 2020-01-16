@@ -577,12 +577,12 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
 
         for patient in patients:
             if patient.get('frequency'):
-                patient['frequency_string'] = '{:2d} hour(s) {:02d} min(s)'.format(
-                    *divmod(patient.get('frequency'), 60)
+                patient['frequency_string'] = self._convert_frequency_to_string(
+                    patient.get('frequency')
                 )
             if patient.get('bg_frequency'):
-                patient['bg_frequency_string'] = '{:2d} hour(s) {:02d} min(s)'.format(
-                    *divmod(patient.get('bg_frequency'), 60)
+                patient['bg_frequency_string'] = self._convert_frequency_to_string(
+                    patient.get('bg_frequency')
                 )
 
         favourites = self.get_user_favourites(uid)
@@ -599,6 +599,10 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
                 'username': request.session['login'],
                 'urls': URLS}
         )
+
+    @staticmethod
+    def _convert_frequency_to_string(frequency):
+        return '{:2d} hour(s) {:02d} min(s)'.format(*divmod(frequency, 60))
 
     @http.route(URLS['escalations'] + '<creator_id>', type='http', auth='user')
     def process_escalations(self, creator_id, *args, **kwargs):
@@ -651,20 +655,18 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
             }
         )
 
-    @staticmethod
-    def _get_ews_frequency(creator_activity):
+    def _get_ews_frequency(self, creator_activity):
         if creator_activity.data_model == 'nh.clinical.patient.observation.ews':
-            return '{:2d} hour(s) {:02d} min(s)'.format(
-                *divmod(creator_activity.data_ref.frequency, 60)
+            return self._convert_frequency_to_string(
+                creator_activity.data_ref.frequency
             )
         return False
 
-    @staticmethod
-    def _get_bg_frequency(creator_activity):
+    def _get_bg_frequency(self, creator_activity):
         if creator_activity.data_model == \
                 'nh.clinical.patient.observation.blood_glucose':
-            return '{:2d} hour(s) {:02d} min(s)'.format(
-                *divmod(creator_activity.data_ref.frequency, 60)
+            return self._convert_frequency_to_string(
+                creator_activity.data_ref.frequency
             )
         return False
 
@@ -904,12 +906,12 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
 
         for task in tasks:
             if task.get('frequency'):
-                task['frequency_string'] = '{:2d} hour(s) {:02d} min(s)'.format(
-                    *divmod(task.get('frequency'), 60)
+                task['frequency_string'] = self._convert_frequency_to_string(
+                    task.get('frequency')
                 )
             if task.get('bg_frequency'):
-                task['bg_frequency_string'] = '{:2d} hour(s) {:02d} min(s)'.format(
-                    *divmod(task.get('bg_frequency'), 60)
+                task['bg_frequency_string'] = self._convert_frequency_to_string(
+                    task.get('bg_frequency')
                 )
 
         favourites = self.get_user_favourites(uid)
