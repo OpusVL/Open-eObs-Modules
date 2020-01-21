@@ -1302,8 +1302,6 @@ ews0 as(
                 ews.score,
                 ews.frequency,
                 ews.clinical_risk,
-                case when activity.date_scheduled < now() at time zone 'UTC'
-                    then 'overdue: ' else '' end as next_diff_polarity,
                 case activity.date_scheduled is null
                     when false then justify_hours(greatest(now() at time zone
                     'UTC',activity.date_scheduled) - least(now() at time zone
@@ -1327,8 +1325,6 @@ bg0 as(
                 activity.date_scheduled,
                 bg.id,
                 bg.frequency,
-                case when activity.date_scheduled < now() at time zone 'UTC'
-                    then 'overdue: ' else '' end as next_diff_polarity,
                 case activity.date_scheduled is null
                     when false then justify_hours(greatest(now() at time zone
                     'UTC',activity.date_scheduled) - least(now() at time zone
