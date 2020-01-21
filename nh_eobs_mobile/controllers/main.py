@@ -710,124 +710,106 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
 
         return input_fields
 
+    @staticmethod
+    def _group_escalation_data(data):
+        groups = []
+        for key, val in data.items():
+            if 'nh.clinical.notification' in key:
+                cancel = [y for x, y in data.items() if val in x and 'cancel' in x]
+                cancel = cancel and cancel[0] or None
+                value = [y for x, y in data.items() if val in x and 'value' in x]
+                value = value and value[0] or None
+                groups.append({
+                    'model': key,
+                    'id': int(val),
+                    'cancel': cancel,
+                    'value': value
+                })
+        return groups
+
     @http.route(URLS['confirm_escalations'], type='http', auth='user')
     def confirm_escalations(self, *args, **kwargs):
         """
-        The return route once the escalation tasks form has been confirmed (with extra data if applicable). Updates the
-        state for the task activity record and adds any additional data to the task record.
+        The return route once the escalation tasks form has been confirmed (with extra
+        data if applicable). Updates the state for the task activity record and adds
+        any additional data to the task record.
         :param args:
         :param kwargs: The fields and values from the escalation tasks form
         :return: the 'get_tasks()' method
         """
 
-        def _update_effective_date():
-            effective_date = record.activity_id.creator_id.effective_date_terminated
-            vals.update({'effective_date_terminated': effective_date})
-
-        def _cancel_next_blood_glucose():
-            nh_activity_obj = request.registry['nh.activity']
-            task = obj_model.browse(cr, uid, int(val), context=context)
-            try:
-                if task.observation == 'nh.clinical.patient.observation.blood_glucose':
-                    next_blood_glucose_activity_id = nh_activity_obj.search(cr, uid, [
-                        ('state', '=', 'scheduled'),
-                        ('data_model', '=', 'nh.clinical.patient.observation.blood_glucose'),
-                        ('patient_id', '=', task.patient_id.id)
-                    ], context=context)
-                    nh_activity_obj.cancel(cr, uid, next_blood_glucose_activity_id, context=context)
-                    request.cr.execute("""refresh materialized view bg0;""")
-            except AttributeError:
-                # task.observation does not exist
-                # The task is not an observation (probably an escalation task)
-                pass
-
-        def _check_if_custom_frequency():
-
-            def _find_next_ews_obs(patient_id):
-                activity_data_ids = obj_nh_activity.search(cr, uid, [
-                    ('state', 'not in', ['completed', 'cancelled']),
-                    ('data_model', '=', 'nh.clinical.patient.observation.ews'),
-                    ('patient_id', '=', patient_id)
-                ], context=context)
-                if len(activity_data_ids) == 1:
-                    return obj_nh_activity.browse(cr, uid, activity_data_ids, context=context)
-
-            for k, v in kwargs.items():
-                try:
-                    data_id = int(v)
-                    data_model = request.registry[k]
-                    activity = data_model.browse(cr, uid, data_id, context=context)
-                    patient = activity.patient_id
-                    obj_nh_clinical_spell = request.registry['nh.clinical.spell']
-                    current_spell_id = obj_nh_clinical_spell.search(cr, uid, [
-                        ('patient_id', '=', patient.id),
-                        ('state', '=', 'started')
-                    ], context=context)
-                    current_spell = obj_nh_clinical_spell.browse(cr, uid, current_spell_id, context=context)
-                    if current_spell.custom_frequency:
-                        next_ews_obs_activity = _find_next_ews_obs(patient.id)
-                        next_ews_obs_activity.data_ref.write({'frequency': current_spell.custom_frequency})
-                        request.cr.execute("""refresh materialized view ews0;""")
-                    break
-                except ValueError:
-                    pass
-                except KeyError:
-                    pass
-
         cr, uid, context = request.cr, request.session.uid, request.context
         obj_nh_activity = request.registry['nh.activity']
+        tasks = self._group_escalation_data(kwargs)
+        for task in tasks:
+            obj_model = request.registry[task['model']]
+            data_record = obj_model.browse(cr, uid, task['id'], context=context)
+            activity = data_record.activity_id
+            vals = {
+                'effective_date_terminated': activity.creator_id.effective_date_terminated,
+            }
+            if task.get('cancel'):
+                vals.update({
+                    'reason': task['cancel']
+                })
+            if 'frequency' in task['model'] and task.get('value'):
+                vals.update({
+                    'frequency': int(task['value'])
+                })
+            obj_model.submit(cr, uid, activity.id, vals, context=context)
+            obj_nh_activity.complete(cr, uid, activity.id, context=context)
 
-        for key, val in kwargs.items():
-            try:
-                int(key)
-                continue
-            except ValueError:
-                if not any(state in key for state in ["cancel", "value"]):
-                    vals = {"state": "completed", "date_terminated": datetime.now(), "terminate_uid": uid}
-                    obj_model = request.registry[key]
-                    if kwargs[kwargs[key]].encode("utf-8") == 'no':
-                        reason_id = int(kwargs[kwargs[key]+'_cancel'])
-                        obj_model.write(cr, uid, int(val), {"reason": reason_id}, context=context)
-                        _cancel_next_blood_glucose()
-                    record_id = int(kwargs[key])
-                    record = obj_model.browse(cr, uid, record_id, context=context)
+            if task.get('cancel') and activity.creator_id.data_model == 'nh.clinical.patient.observation.blood_glucose':
+                self._cancel_next_blood_glucose(cr, uid, obj_nh_activity, activity,
+                                                context)
 
-                    # All the associated escalation tasks need to be updated with the same effective date
-                    _update_effective_date()
+            cr.execute(
+                'refresh materialized view ews0;\n'
+                'refresh materialized view bg0;'
+            )
 
-                    activity_id = record.activity_id
-                    obj_nh_activity.write(cr, uid, activity_id.id, vals, context=context)
-                if "value" in key:
-                    value_detail = key.split("_")
-                    if kwargs[value_detail[0]].encode("utf-8") != 'no':
-                        record_id = int(value_detail[0])
-                        obj_model_name = next(x for x, y in kwargs.items() if y == value_detail[0])
-                        obj_model = request.registry[obj_model_name]
-                        vals = dict()
-                        if "frequency" in obj_model_name:
-                            vals.update({"frequency": int(val)})
-
-                            # As well as the activity, if the task is the notification frequency then this must also be
-                            # written to the scheduled observation activity
-                            activity_id = obj_model.browse(cr, uid, record_id, context=context).activity_id
-                            obs_activity_id = obj_nh_activity.search(
-                                cr, uid, [
-                                    ('creator_id', '=', activity_id.creator_id.id),
-                                    ('data_model', '=', activity_id.creator_id.data_model)
-                                ]
-                            )
-                            creator_data_model = request.registry[activity_id.creator_id.data_model]
-                            obs_id = creator_data_model.search(cr, uid, [
-                                ('activity_id', '=', obs_activity_id)
-                            ])
-                            if len(obs_id) == 1:
-                                creator_data_model.write(cr, uid, obs_id, vals, context=context)
-                                cr.execute('refresh materialized view ews0;\n'
-                                           'refresh materialized view bg0;')
-                        obj_model.write(cr, uid, record_id, vals)
-
-        _check_if_custom_frequency()
+        if tasks:
+            self._check_custom_frequency(tasks[0])
         return self.get_tasks()
+
+    def _check_custom_frequency(self, task_data):
+        cr, uid, context = request.cr, request.session.uid, request.context
+        obj_task_model = request.registry[task_data['model']]
+        task = obj_task_model.browse(cr, uid, task_data['id'])
+        activity = task.activity_id
+        patient, spell = activity.patient_id, activity.spell_activity_id.data_ref
+        if spell.custom_frequency:
+            obj_nh_activity = request.registry['nh.activity']
+            next_ews_activity_id = obj_nh_activity.search(cr, uid, [
+                ('state', 'not in', ['completed', 'cancelled']),
+                ('data_model', '=', 'nh.clinical.patient.observation.ews'),
+                ('patient_id', '=', patient.id)
+            ], context=context)
+            next_ews_activity = obj_nh_activity.browse(cr, uid, next_ews_activity_id, context=context)
+            next_ews_activity.data_ref.write(
+                {'frequency': spell.custom_frequency})
+            request.cr.execute("""refresh materialized view ews0;""")
+
+    @staticmethod
+    def _cancel_next_blood_glucose(cr, uid, obj_nh_activity, activity, context):
+        """
+        Finds the scheduled Blood Glucose Observation and cancels it. This is based on
+        the user selecting 'No' to the review frequency escalation task that occurs
+        after a Blood Glucose observation.
+        :param cr:
+        :param uid:
+        :param obj_nh_activity:
+        :param activity:
+        :param context:
+        :return:
+        """
+        next_blood_glucose_activity_id = obj_nh_activity.search(cr, uid, [
+            ('state', '=', 'scheduled'),
+            ('data_model', '=', 'nh.clinical.patient.observation.blood_glucose'),
+            ('patient_id', '=', activity.patient_id.id)
+        ], context=context)
+        obj_nh_activity.cancel(cr, uid, next_blood_glucose_activity_id, context=context)
+        cr.execute("""refresh materialized view bg0;""")
 
     @http.route(URLS['share_patient_list'], type='http', auth='user')
     def get_share_patients(self, *args, **kw):
