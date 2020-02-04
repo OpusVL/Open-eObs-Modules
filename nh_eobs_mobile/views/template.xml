@@ -346,6 +346,7 @@
                                                    t-att-id="task['task_id']" value="yes" onclick="yesnoCheck(this)"
                                                    t-att-checked="'checked' if task['task_model']=='nh.clinical.notification.hca' else ''"
                                                    t-att-style="'display: none;' if task['task_model']=='nh.clinical.notification.hca' else ''"
+                                                   required="required"
                                             />
                                             <label t-att-for="task['task_id']"
                                                    t-att-style="'display: none;' if task['task_model']=='nh.clinical.notification.hca' else ''"
@@ -355,6 +356,7 @@
                                             <input type="radio" t-att-name="task['task_id']"
                                                    t-att-id="task['task_id']" value="no" onclick="yesnoCheck(this)"
                                                    t-att-style="'display: none;' if task['task_model']=='nh.clinical.notification.hca' else ''"
+                                                    required="required"
                                             />
                                             <label t-att-for="task['task_id']"
                                                    t-att-style="'display: none;' if task['task_model']=='nh.clinical.notification.hca' else ''"
