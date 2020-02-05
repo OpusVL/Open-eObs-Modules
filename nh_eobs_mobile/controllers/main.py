@@ -1072,6 +1072,15 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
             if cancellable:
                 form['cancel_url'] = "{0}{1}".format(
                     URLS['cancel_clinical_notification'], task_id)
+
+            news_frequency, blood_glucose_frequency = self.get_current_frequency(
+                patient
+            )
+
+            if news_frequency or blood_glucose_frequency:
+                form['news_frequency_string'] = news_frequency
+                form['blood_glucose_frequency_string'] = blood_glucose_frequency
+
         if is_notification or is_observation or is_placement:
             return request.render(
                 'nh_eobs_mobile.data_input_screen',
@@ -1099,6 +1108,19 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
                     'urls': URLS
                 }
             )
+
+    @staticmethod
+    def get_current_frequency(patient):
+        obj_nh_clinical_wardboard = request.env['nh.clinical.wardboard']
+        wardboard_records = obj_nh_clinical_wardboard.search([
+            ('patient_id', '=', patient.get('id')),
+            ('spell_activity_id.state', '!=', 'completed')
+        ])
+        if len(wardboard_records) != 1:
+            # TODO: Not sure if this can ever be hit so here as a placeholder
+            # for now.
+            pass
+        return wardboard_records.frequency, wardboard_records.blood_glucose_frequency
 
     # TODO: eventually remove this method, it's no more used: it has
     # been replaced by method 'process_ajax_form()'

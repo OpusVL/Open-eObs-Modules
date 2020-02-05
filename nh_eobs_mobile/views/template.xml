@@ -455,6 +455,12 @@
                         <t t-raw="view_data.get('title')"/>
                     </p>
                 </t>
+                <t t-if="form.get('type') == 'frequency'">
+                    <div class="current-frequency" style="float: right;">
+                        Current Frequency<br/>
+                        <t t-esc="form.get('news_frequency_string')"/>
+                    </div>
+                </t>
                 <t t-if="not view_data.get('title')">
                     <p>Press the button below to confirm that you have completed the task
                         <t t-esc="name"/>
