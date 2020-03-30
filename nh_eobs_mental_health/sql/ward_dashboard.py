@@ -99,7 +99,7 @@ class WardDashboardSQL(orm.AbstractModel):
         SELECT  ward_beds.location_id,
                 coalesce(
                   sum(
-                    CASE WHEN spell.refusing_obs = TRUE THEN 1 ELSE 0 END),0)
+                    CASE WHEN (spell.refusing_obs = TRUE OR spell.refusing_obs_blood_glucose = TRUE) THEN 1 ELSE 0 END),0)
                 AS count
           FROM nh_clinical_spell AS spell
           LEFT JOIN ward_beds

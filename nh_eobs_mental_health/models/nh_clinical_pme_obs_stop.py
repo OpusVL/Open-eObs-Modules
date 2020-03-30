@@ -45,7 +45,8 @@ class NhClinicalObsStop(models.Model):
             )
 
         self.set_obs_stop_flag(True)
-        self.set_refusing_obs_flag(False)
+        on_blood_glucose = activity.data_model == 'nh.clinical.blood.glucose'
+        self.set_refusing_obs_flag(False, on_blood_glucose)
         return super_return
 
     def _cancel_open_food_and_fluid_review_tasks(self):
@@ -99,14 +100,18 @@ class NhClinicalObsStop(models.Model):
         self.spell.obs_stop = value
 
     @api.multi
-    def set_refusing_obs_flag(self, value):
+    def set_refusing_obs_flag(self, value, on_blood_glucose):
         """
         Set the value of the 'refusing_obs' flag on the spell object
 
         :param value: Value to change flag too
+        :param on_blood_glucose: Whether we have a data ref of nh.clinical.blood.glucose
         :return: True
         """
-        self.spell.refusing_obs = value
+        if on_blood_glucose:
+            self.spell.refusing_obs_blood_glucose = value
+        else:
+            self.spell.refusing_obs = value
 
     @api.model
     def cancel_open_ews(self, spell_activity_id, cancel_reason_id=None):

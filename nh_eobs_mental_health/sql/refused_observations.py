@@ -134,7 +134,7 @@ class RefusedObservationsSQL(orm.AbstractModel):
             'LIMIT 1'
             ') '
             'THEN \'NoScore\' '
-            'WHEN spell.refusing_obs = true '
+            'WHEN (spell.refusing_obs = TRUE OR spell.refusing_obs_blood_glucose = TRUE)'
             'THEN \'Refused\' '
         )
 
@@ -151,6 +151,7 @@ class RefusedObservationsSQL(orm.AbstractModel):
             'end as deadline_time,',
             'end as deadline_time, '
             'spell.refusing_obs AS refusal_in_effect, '
+            'spell.refusing_obs_blood_glucose AS refusal_in_effect_blood_glucose, '
         )
         return sql.format(activity_ids=activity_ids_sql)
 
@@ -167,6 +168,7 @@ class RefusedObservationsSQL(orm.AbstractModel):
             'patient.other_identifier,',
             'patient.other_identifier, '
             'spell.refusing_obs AS refusal_in_effect, '
+            'spell.refusing_obs_blood_glucose AS refusal_in_effect_blood_glucose, '
             'spell.rapid_tranq AS rapid_tranq, '
         )
         return sql.format(spell_ids=spell_ids)

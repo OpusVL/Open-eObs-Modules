@@ -84,6 +84,7 @@ class NHeObsAPI(orm.AbstractModel):
                 cr, uid, spell_id, [
                     'obs_stop',
                     'refusing_obs',
+                    'refusing_obs_blood_glucose',
                     'activity_id'
                 ], context=context)
             obs_stopped = spell.get('obs_stop')
@@ -97,6 +98,10 @@ class NHeObsAPI(orm.AbstractModel):
                 spell_model.write(
                     cr, uid, spell_id,
                     {'refusing_obs': False}, context=context)
+            if spell.get('refusing_obs_blood_glucose'):
+                spell_model.write(
+                    cr, uid, spell_id,
+                    {'refusing_obs_blood_glucose': False}, context=context)
         res = super(NHeObsAPI, self).transfer(
             cr, uid, hospital_number, data, context=None)
         return res
@@ -129,12 +134,17 @@ class NHeObsAPI(orm.AbstractModel):
             spell = spell_model.read(
                 cr, uid, spell_id, [
                     'refusing_obs',
+                    'refusing_obs_blood_glucose',
                     'activity_id'
                 ], context=context)
             if spell.get('refusing_obs'):
                 spell_model.write(
                     cr, uid, spell_id,
                     {'refusing_obs': False}, context=context)
+            if spell.get('refusing_obs_blood_glucose'):
+                spell_model.write(
+                    cr, uid, spell_id,
+                    {'refusing_obs_blood_glucose': False}, context=context)
         res = super(NHeObsAPI, self).discharge(
             cr, uid, hospital_number, data, context=None)
         return res
