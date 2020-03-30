@@ -65,18 +65,11 @@ class NHClinicalPatientObservationEWS(orm.Model):
         ews = activity.data_ref
         patient_spell = activity.spell_activity_id.data_ref
         patient_refusing = patient_spell.refusing_obs
-        patient_refusing_blood_glucose = patient_spell.refusing_obs_blood_glucose
-        on_blood_glucose = activity.data_model == 'nh.clinical.blood.glucose'
 
-        if not ews.is_partial and on_blood_glucose:
-            patient_spell.write({'refusing_obs_blood_glucose': False})
-        elif not ews.is_partial and not on_blood_glucose:
+        if not ews.is_partial:
             patient_spell.write({'refusing_obs': False})
-
-        if ews.is_partial and \
-                ews.partial_reason == 'refused' and \
-                (not on_blood_glucose and not patient_refusing) or \
-                (on_blood_glucose and not patient_refusing_blood_glucose):
+        if ews.is_partial and not patient_refusing \
+                and ews.partial_reason == 'refused':
             api_model = self.pool['nh.eobs.api']
             cron_model = self.pool['ir.cron']
             patient = api_model.get_patients(
@@ -86,10 +79,7 @@ class NHClinicalPatientObservationEWS(orm.Model):
             if patient[0].get('clinical_risk') in higher_risks:
                 days_to_schedule = 7
             schedule_date = datetime.now() + timedelta(days=days_to_schedule)
-            if on_blood_glucose:
-                patient_spell.write({'refusing_obs_blood_glucose': True})
-            else:    
-                patient_spell.write({'refusing_obs': True})
+            patient_spell.write({'refusing_obs': True})
             cron_model.create(cr, SUPERUSER_ID, {
                 'name': 'Clinical Review Task '
                         'for Activity:{0}'.format(activity_id),

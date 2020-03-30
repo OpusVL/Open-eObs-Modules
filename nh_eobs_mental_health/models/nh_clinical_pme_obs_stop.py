@@ -45,7 +45,8 @@ class NhClinicalObsStop(models.Model):
             )
 
         self.set_obs_stop_flag(True)
-        on_blood_glucose = activity.data_model == 'nh.clinical.blood.glucose'
+        on_blood_glucose = activity.data_model == 'nh.clinical.patient.observation.blood_glucose'
+        import pdb;pdb.set_trace()
         self.set_refusing_obs_flag(False, on_blood_glucose)
         return super_return
 
@@ -105,7 +106,7 @@ class NhClinicalObsStop(models.Model):
         Set the value of the 'refusing_obs' flag on the spell object
 
         :param value: Value to change flag too
-        :param on_blood_glucose: Whether we have a data ref of nh.clinical.blood.glucose
+        :param on_blood_glucose: Whether we have a data model of nh.clinical.patient.observation.blood_glucose
         :return: True
         """
         if on_blood_glucose:

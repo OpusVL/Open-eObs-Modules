@@ -77,6 +77,19 @@ class NHClinicalPatientObservationBloodGlucose(models.Model):
 
     # @refresh_materialized_views('param')
     def complete(self, cr, uid, activity_id, context=None):
-        return super(
+        res = super(
             NHClinicalPatientObservationBloodGlucose, self).complete(
             cr, uid, activity_id, context)
+
+        activity_model = self.pool['nh.activity']
+        activity = activity_model.browse(cr, uid, activity_id, context=context)
+        ews = activity.data_ref
+        patient_spell = activity.spell_activity_id.data_ref
+        patient_refusing_blood_glucose = patient_spell.refusing_obs_blood_glucose
+        if not ews.is_partial:
+            patient_spell.write({'refusing_obs_blood_glucose': False})
+        if ews.is_partial and not patient_refusing_blood_glucose \
+                and ews.partial_reason == 'refused':
+            patient_spell.write({'refusing_obs_blood_glucose': True})
+
+        return res
