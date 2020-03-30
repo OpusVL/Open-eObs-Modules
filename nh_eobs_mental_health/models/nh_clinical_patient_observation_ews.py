@@ -66,7 +66,7 @@ class NHClinicalPatientObservationEWS(orm.Model):
         patient_spell = activity.spell_activity_id.data_ref
         patient_refusing = patient_spell.refusing_obs
         patient_refusing_blood_glucose = patient_spell.refusing_obs_blood_glucose
-        on_blood_glucose = activity.data_model == 'nh.clinical.blood.glucose':
+        on_blood_glucose = activity.data_model == 'nh.clinical.blood.glucose'
 
         if not ews.is_partial and on_blood_glucose:
             patient_spell.write({'refusing_obs_blood_glucose': False})
