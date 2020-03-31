@@ -46,7 +46,6 @@ class NhClinicalObsStop(models.Model):
 
         self.set_obs_stop_flag(True)
         on_blood_glucose = activity.data_model == 'nh.clinical.patient.observation.blood_glucose'
-        import pdb;pdb.set_trace()
         self.set_refusing_obs_flag(False, on_blood_glucose)
         return super_return
 
