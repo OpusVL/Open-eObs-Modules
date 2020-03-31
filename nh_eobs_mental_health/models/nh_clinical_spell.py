@@ -13,11 +13,15 @@ class NHClinicalSpell(orm.Model):
     _columns = {
         'obs_stop': fields.boolean('Stop Observations for patient?'),
         'rapid_tranq': fields.boolean('Patient on Rapid Tranquilisation?'),
-        'refusing_obs': fields.boolean('Patient Refusing Observations?')
+        'refusing_obs': fields.boolean('Patient Refusing Observations?'),
+        # DEBT, cannot move refusing obs flag to activity model
+        # as the current data model (i.e wardboard) will not support this
+        'refusing_obs_blood_glucose': fields.boolean('Patient Refusing Blood Glucose Observations?'),
     }
 
     _defaults = {
         'obs_stop': False,
         'rapid_tranq': False,
-        'refusing_obs': False
+        'refusing_obs': False,
+        'refusing_obs_blood_glucose': False,
     }

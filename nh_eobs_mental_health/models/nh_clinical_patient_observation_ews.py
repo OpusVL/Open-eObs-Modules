@@ -65,6 +65,7 @@ class NHClinicalPatientObservationEWS(orm.Model):
         ews = activity.data_ref
         patient_spell = activity.spell_activity_id.data_ref
         patient_refusing = patient_spell.refusing_obs
+
         if not ews.is_partial:
             patient_spell.write({'refusing_obs': False})
         if ews.is_partial and not patient_refusing \

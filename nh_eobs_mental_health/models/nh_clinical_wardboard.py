@@ -293,7 +293,8 @@ class NHClinicalWardboard(orm.Model):
                     cr, user, spell_id, [
                         'obs_stop',
                         'rapid_tranq',
-                        'refusing_obs'
+                        'refusing_obs',
+                        'refusing_obs_blood_glucose',
                     ],
                     context=context)
                 rec['rapid_tranq'] = spell.get('rapid_tranq')
@@ -319,6 +320,8 @@ class NHClinicalWardboard(orm.Model):
                 elif spell.get('refusing_obs'):
                     rec['frequency'] = 'Refused - {0}'.format(rec['frequency'])
                     rec['next_diff'] = 'Refused - {0}'.format(rec['next_diff'])
+                if spell.get('refusing_obs_blood_glucose'):
+                    rec['bg_frequency'] = 'Refused - {0}'.format(rec['bg_frequency'])
                     rec['next_blood_glucose_diff'] = 'Refused - {0}'.format(rec['next_blood_glucose_diff'])
         if was_single_record:
             return res[0]
