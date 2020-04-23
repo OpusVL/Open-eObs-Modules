@@ -11,15 +11,8 @@
             <xpath expr="//t/div/ul/t/li" position="attributes">
                 <attribute name="t-att-class">'status-alert' if item.get('rapid_tranq') == True else ''</attribute>
             </xpath>
-            <xpath expr="//t/div/ul/t/li/a/div/div[@class='task-right']/p[@class='aside']" position="replace">
-                 <p class="aside">
-                     <t t-if="item.get('refusal_in_effect') == True">
-                         Refused -
-                     </t>
-                     <t t-esc="item['deadline_time']"/>
-                 </p>
-            </xpath>
         </template>
+
         <template id="nh_eobs_mental_health.patient" inherit_id="nh_eobs_mobile.patient">
             <xpath expr="//*[@id = 'obsMenu']" position="after">
                 <t t-if="'NH Clinical / NH Clinical Nurse Group' in user_groups">
