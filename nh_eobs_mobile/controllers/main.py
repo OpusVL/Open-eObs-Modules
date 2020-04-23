@@ -586,7 +586,6 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
                 )
 
         favourites = self.get_user_favourites(uid)
-
         return request.render(
             'nh_eobs_mobile.patient_task_list',
             qcontext={
@@ -897,7 +896,6 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
                 )
 
         favourites = self.get_user_favourites(uid)
-
         return request.render(
             'nh_eobs_mobile.patient_task_list',
             qcontext={
