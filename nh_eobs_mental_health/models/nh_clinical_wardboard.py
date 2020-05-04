@@ -321,8 +321,9 @@ class NHClinicalWardboard(orm.Model):
                     rec['frequency'] = 'Refused - {0}'.format(rec['frequency'])
                     rec['next_diff'] = 'Refused - {0}'.format(rec['next_diff'])
                 if not spell.get('obs_stop') and spell.get('refusing_obs_blood_glucose'):
-                    rec['bg_frequency'] = 'Refused - {0}'.format(rec['bg_frequency'])
-                    rec['next_blood_glucose_diff'] = 'Refused - {0}'.format(rec['next_blood_glucose_diff'])
+                    if rec.get('blood_glucose_frequency'):
+                        rec['blood_glucose_frequency'] = 'Refused - {0}'.format(rec['blood_glucose_frequency'])
+                        rec['next_blood_glucose_diff'] = 'Refused - {0}'.format(rec['next_blood_glucose_diff'])
         if was_single_record:
             return res[0]
         return res
