@@ -447,14 +447,16 @@
                                             <field name="next_diff"/>
                                         </t>
                                     </li>
-                                    <li>Time to next Blood Glucose observation:
-                                        <t t-if="record.next_blood_glucose_diff.raw_value &amp;&amp; record.next_blood_glucose_diff.raw_value.indexOf('overdue: ') &gt; -1">
-                                            <strong><field name="next_blood_glucose_diff"/></strong>
-                                        </t>
-                                        <t t-if="record.next_blood_glucose_diff.raw_value &amp;&amp; record.next_blood_glucose_diff.raw_value.indexOf('overdue: ') &lt; 0">
-                                            <field name="next_blood_glucose_diff"/>
-                                        </t>
-                                    </li>
+                                    <t t-if="record.next_blood_glucose_diff.raw_value">
+                                        <li>Time to next Blood Glucose observation:
+                                            <t t-if="record.next_blood_glucose_diff.raw_value &amp;&amp; record.next_blood_glucose_diff.raw_value.indexOf('overdue: ') &gt; -1">
+                                                <strong><field name="next_blood_glucose_diff"/></strong>
+                                            </t>
+                                            <t t-if="record.next_blood_glucose_diff.raw_value &amp;&amp; record.next_blood_glucose_diff.raw_value.indexOf('overdue: ') &lt; 0">
+                                                <field name="next_blood_glucose_diff"/>
+                                            </t>
+                                        </li>
+                                    </t>
                                     <t t-if="record.hospital_number.raw_value != ''">
                                         <div>Hospital Number: <field name="hospital_number"/></div>
                                     </t>
