@@ -217,6 +217,8 @@ class MentalHealthObservationReport(models.AbstractModel):
                 'date_terminated': date_terminated,
                 'user_id': user.name
             }
+        elif review_state == 'cancelled':
+            return 'Task Cancelled'
         raise ValueError(
             "Unexpected state '{}' for {} task.".format(
                 review_state, task_name.title())
