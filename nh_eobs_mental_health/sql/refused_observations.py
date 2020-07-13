@@ -134,7 +134,7 @@ class RefusedObservationsSQL(orm.AbstractModel):
             'LIMIT 1'
             ') '
             'THEN \'NoScore\' '
-            'WHEN (spell.refusing_obs = TRUE OR spell.refusing_obs_blood_glucose = TRUE)'
+            'WHEN (spell.refusing_obs = TRUE)'
             'THEN \'Refused\' '
         )
 
