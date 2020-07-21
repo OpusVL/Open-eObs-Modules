@@ -48,13 +48,14 @@
                 <thead>
                     <tr>
                         <!-- Blank space above Date column. -->
-                        <th colspan="1" class="col-xs-3"></th>
+                        <th colspan="2" class="col-xs-5"></th>
                         <th colspan="4" class="border-right col-xs-4"><h4>Coma Scale</h4></th>
                         <th colspan="4" class="col-xs-4 border-right"><h4>Pupils</h4></th>
                         <th colspan="4" class="col-xs-4 border-right"><h4>Limbs</h4></th>
                     </tr>
                     <tr>
-                        <th class="col-xs-3 neuro-table-header">Date</th>
+                        <th class="col-xs-2 neuro-table-header">Effective Date</th>
+                        <th class="col-xs-2 neuro-table-header">Submitted Date</th>
                         <th class="col-xs-1 neuro-table-header">Coma Scale Total score</th>
                         <th class="col-xs-1 neuro-table-header">Eyes</th>
                         <th class="col-xs-1 neuro-table-header">Verbal</th>
@@ -73,7 +74,8 @@
                 <tbody>
                     <t t-foreach="neurological" t-as="observation">
                         <tr>
-                            <td class="col-xs-3"><t t-esc="observation['date_terminated']"/></td>
+                            <td class="col-xs-2"><t t-esc="observation['effective_date_terminated']"/></td>
+                            <td class="col-xs-2"><t t-esc="observation['date_terminated']"/></td>
                             <td class="col-xs-1"><t t-esc="observation['values']['score']"/></td>
                             <td class="col-xs-1"><t t-esc="observation['values']['eyes']"/></td>
                             <td class="col-xs-1"><t t-esc="observation['values']['verbal']"/></td>
