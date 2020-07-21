@@ -417,7 +417,7 @@ class NhClinicalPatientObservation(orm.AbstractModel):
 
         if convert_datetimes_to_client_timezone:
             datetime_fields = ['date_terminated', 'create_date',
-                               'write_date', 'date_started']
+                               'write_date', 'date_started', 'effective_date_terminated']
             self._convert_datetime_fields_to_client_timezone(
                 obs_dict_list, datetime_fields)
 

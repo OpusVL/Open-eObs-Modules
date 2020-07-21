@@ -503,12 +503,6 @@ openerp.nh_eobs = function (instance) {
             this.set({'value': value_});
             this.render_chart();
         },
-        localise_datetime: function (datetime) {
-            var pattern = /(\d{4})\-(\d{2})\-(\d{2})\s(\d{2})\:(\d{2})\:(\d{2})/;
-            var match = pattern.exec(datetime);
-            var dt = new Date(Date.UTC(match[1], match[2] - 1, match[3], match[4], match[5], match[6]));
-            return dt.getFullYear() + "-" + (dt.getMonth() + 1) + "-" + dt.getDate() + " " + dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
-        },
         render_chart: function () {
             this.model = new instance.web.Model('nh.eobs.api');
             this.o2targetModel = new instance.web.Model('nh.clinical.patient.o2target');
@@ -533,10 +527,6 @@ openerp.nh_eobs = function (instance) {
 
                 $(svg.el).html('');
                 if (records.length > 0) {
-                    for (var i = 0; i < records.length; i++) {
-                        var ed = records[i].effective_date_terminated;
-                        records[i].effective_date_terminated = self.localise_datetime(ed)
-                    }
                     var obs = records.reverse();
 
                     obs.forEach(function (d) {

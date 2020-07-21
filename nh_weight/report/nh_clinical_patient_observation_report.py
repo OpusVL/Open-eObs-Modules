@@ -40,6 +40,7 @@ class NhClinicalPatientObservationReport(models.AbstractModel):
         super(NhClinicalPatientObservationReport, self)\
             ._localise_and_format_datetimes(report_data)
         for obs in report_data.get('weights', []):
+            self._localise_dict_time(obs['values'], 'date_terminated')
             self._localise_dict_time(obs['values'], 'effective_date_terminated')
 
     @staticmethod
