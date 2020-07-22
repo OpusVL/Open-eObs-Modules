@@ -744,8 +744,9 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
             obj_model = request.registry[task['model']]
             data_record = obj_model.browse(cr, uid, task['id'], context=context)
             activity = data_record.activity_id
+            effective_date = activity.creator_id.effective_date_terminated
             vals = {
-                'effective_date_terminated': activity.creator_id.effective_date_terminated,
+                'effective_date_terminated': effective_date,
             }
             if task.get('cancel'):
                 vals.update({
@@ -757,6 +758,9 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
                 })
             obj_model.submit(cr, uid, activity.id, vals, context=context)
             obj_nh_activity.complete(cr, uid, activity.id, context=context)
+
+            # Calling complete method on the activity resets the effective date
+            activity.effective_date_terminated = effective_date
 
             if task.get('cancel') and activity.creator_id.data_model == 'nh.clinical.patient.observation.blood_glucose':
                 self._cancel_next_blood_glucose(cr, uid, obj_nh_activity, activity,
