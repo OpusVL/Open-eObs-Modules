@@ -34,21 +34,23 @@
                         <table class="striped col-xs-12 row">
                             <thead>
                                 <tr>
-                                    <th class="col-xs-3">Date</th>
+                                    <th class="col-xs-2">Effective Date</th>
+                                    <th class="col-xs-2">Submitted Date</th>
                                     <th class="col-xs-2">Weight (kg)</th>
                                     <th class="col-xs-2">Waist Measurement (cm)</th>
                                     <th class="col-xs-2">BMI</th>
-                                    <th class="col-xs-3">User</th>
+                                    <th class="col-xs-2">User</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <t t-foreach="weights" t-as="weight">
                                     <tr>
-                                        <td class="col-xs-3"><t t-esc="weight.get('values', {}).get('date_terminated')"/></td>
+                                        <td class="col-xs-2"><t t-esc="weight.get('values', {}).get('effective_date_terminated')"/></td>
+                                        <td class="col-xs-2"><t t-esc="weight.get('values', {}).get('date_terminated')"/></td>
                                         <td class="col-xs-2"><t t-esc="weight.get('values', {}).get('weight')"/></td>
                                         <td class="col-xs-2"><t t-esc="weight.get('values', {}).get('waist_measurement')"/></td>
                                         <td class="col-xs-2"><t t-esc="weight.get('values', {}).get('score')"/></td>
-                                        <td class="col-xs-3"><t t-esc="weight.get('values', {}).get('terminate_uid', (None,None))[1]"/></td>
+                                        <td class="col-xs-2"><t t-esc="weight.get('values', {}).get('terminate_uid', (None,None))[1]"/></td>
                                     </tr>
                                 </t>
                             </tbody>

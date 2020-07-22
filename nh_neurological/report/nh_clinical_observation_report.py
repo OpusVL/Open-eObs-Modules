@@ -18,9 +18,10 @@ class NhClinicalPatientObservationReport(models.AbstractModel):
         return report_data
 
     def _localise_and_format_datetimes(self, report_data):
-        super(NhClinicalPatientObservationReport, self)\
-            ._localise_and_format_datetimes(report_data)
+        super(NhClinicalPatientObservationReport, self)._localise_and_format_datetimes(report_data)
         for obs in report_data.get('neurological', []):
+            self._localise_dict_time(obs, 'date_started')
+            self._localise_dict_time(obs, 'date_terminated')
             self._localise_dict_time(obs, 'effective_date_terminated')
 
     def get_neurological_observations(self, data):

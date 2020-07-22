@@ -47,3 +47,13 @@ class NhClinicalObservationReport(models.Model):
         food_and_fluid_model.format_many_2_many_fields(obs_list,
                                                        ['recorded_concerns',
                                                         'dietary_needs'])
+
+    def _localise_and_format_datetimes(self, report_data):
+        super(NhClinicalObservationReport, self)._localise_and_format_datetimes(report_data)
+
+        if 'food_and_fluid' in report_data:
+            for obs in report_data.get('food_and_fluid'):
+                for record in obs['observations']:
+                    self._localise_dict_time(record, 'date_started')
+                    self._localise_dict_time(record, 'date_terminated')
+                    self._localise_dict_time(record, 'effective_date_terminated')

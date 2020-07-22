@@ -25,7 +25,8 @@
             <table class="striped col-xs-12 row">
                 <thead>
                     <tr>
-                        <th class="col-xs-3">Date / Time</th>
+                        <th class="col-xs-2">Effective Date</th>
+                        <th class="col-xs-2">Submitted Date</th>
                         <th class="col-xs-1">Recorded Concern</th>
                         <th class="col-xs-1">Dietary Needs</th>
                         <th class="col-xs-1">Fluid Intake</th>
@@ -40,7 +41,8 @@
                 <tbody>
                     <t t-foreach="observation_period['observations']" t-as="observation">
                         <tr>
-                            <td class="col-xs-3"><t t-esc="observation['date_terminated']"/></td>
+                            <td class="col-xs-2"><t t-esc="observation['effective_date_terminated']"/></td>
+                            <td class="col-xs-2"><t t-esc="observation['date_terminated']"/></td>
                             <td class="col-xs-1"><t t-esc="observation['values']['recorded_concerns']"/></td>
                             <td class="col-xs-1"><t t-esc="observation['values']['dietary_needs']"/></td>
                             <td class="col-xs-1"><t t-esc="observation['values']['fluid_taken']"/></td>
