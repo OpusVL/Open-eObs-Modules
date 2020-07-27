@@ -259,74 +259,129 @@ class NHClinicalWardboard(orm.Model):
             toolbar=toolbar, submenu=submenu)
         return res
 
-    def read(self, cr, user, ids, fields=None, context=None,
-             load='_classic_read'):
-        """
-        Override of read method of wardboard to override next_diff and
-        frequency fields with obs_stop information is flag set
-        :param cr: Odoo cursor
-        :param user: User doing operation
-        :param ids: Record IDs to read
-        :param fields: Fields to read from records
-        :param context: Odoo context
-        :param load: Type of loading to do
-        :return: list of dicts or objects
-        """
-        res = super(NHClinicalWardboard, self).read(
-            cr, user, ids, fields, context=context, load=load)
-        was_single_record = False
-        if not isinstance(res, list):
-            was_single_record = True
-            res = [res]
-        for rec in res:
-            spell_model = self.pool['nh.clinical.spell']
-            patient_id = rec.get('patient_id')
-            if isinstance(patient_id, tuple):
-                patient_id = patient_id[0]
-            spell_id = spell_model.search(cr, user, [
-                ['patient_id', '=', patient_id],
-                ['state', 'not in', ['completed', 'cancelled']]
-            ], context=context)
-            if spell_id:
-                spell_id = spell_id[0]
-                spell = spell_model.read(
-                    cr, user, spell_id, [
-                        'obs_stop',
-                        'rapid_tranq',
-                        'refusing_obs',
-                        'refusing_obs_blood_glucose',
-                    ],
-                    context=context)
-                rec['rapid_tranq'] = spell.get('rapid_tranq')
+    def read(self, cr, user, ids, fields=None, context=None, load='_classic_read'):
+        res = super(NHClinicalWardboard, self).read(cr, user, ids, fields=fields, context=context, load=load)
 
-                if rec.get('next_blood_glucose_diff') \
-                        and rec.get('next_blood_glucose_diff') == '00:00':
-                    rec['next_blood_glucose_diff'] = ''
-                elif not rec.get('next_blood_glucose_diff'):
-                    rec['next_blood_glucose_diff'] = ''
+        patient_ids = [self._get_patient_id(record) for record in res]
+        obj_nh_clinical_spell = self.pool['nh.clinical.spell']
+        spell_ids = obj_nh_clinical_spell.search(cr, user, [
+                ('patient_id', 'in', patient_ids),
+                ('state', 'not in', ['completed', 'cancelled']),
+            ],
+            context=context
+        )
+        spells = obj_nh_clinical_spell.browse(cr, user, spell_ids, context=context)
+        for record in res:
+            spell = spells.filtered(
+                lambda _spell: _spell.patient_id.id == self._get_patient_id(record)
+            )
+            if spell:
+                if record.get('next_blood_glucose_diff', '00:00') == '00:00':
+                    record['next_blood_glucose_diff'] = ''
+                record['rapid_tranq'] = spell.rapid_tranq
 
-                if spell.get('obs_stop'):
-                    obs_stop_model = self.pool['nh.clinical.pme.obs_stop']
-                    obs_stops = obs_stop_model.search(cr, user, [
-                        ['spell', '=', spell_id]
-                    ], context=context)
-                    if obs_stops:
-                        obs_stop = obs_stops[0]
-                        reason = obs_stop_model.read(
-                            cr, user, obs_stop, ['reason'], context=context)
-                        rec['frequency'] = reason.get('reason', [0, False])[1]
-                    rec['next_diff'] = 'Observations Stopped'
-                    rec['next_blood_glucose_diff'] = 'Observations Stopped'
-                elif spell.get('refusing_obs'):
-                    rec['frequency'] = 'Refused - {0}'.format(rec['frequency'])
-                    rec['next_diff'] = 'Refused - {0}'.format(rec['next_diff'])
-                if not spell.get('obs_stop') and spell.get('refusing_obs_blood_glucose'):
-                    if rec.get('blood_glucose_frequency'):
-                        rec['blood_glucose_frequency'] = 'Refused - {0}'.format(rec['blood_glucose_frequency'])
-                        rec['next_blood_glucose_diff'] = 'Refused - {0}'.format(rec['next_blood_glucose_diff'])
-        if was_single_record:
-            return res[0]
+                if spell.obs_stop:
+                    record['frequency'] = self._get_stopped_obs_reason(
+                        cr, user, spell.id, context=context
+                    )
+                    record['next_diff'] = 'Observations Stopped'
+                    record['next_blood_glucose_diff'] = 'Observations Stopped'
+                elif spell.refusing_obs:
+                    record['frequency'] = 'Refused - {0}'.format(record['frequency'])
+                    record['next_diff'] = 'Refused - {0}'.format(record['next_diff'])
+
+                if not spell.obs_stop and spell.refusing_obs_blood_glucose:
+                    record['blood_glucose_frequency'] = 'Refused - {0}'.format(
+                        record['blood_glucose_frequency']
+                    )
+                    record['next_blood_glucose_diff'] = 'Refused - {0}'.format(
+                        record['next_blood_glucose_diff']
+                    )
+
         return res
+
+    @staticmethod
+    def _get_patient_id(patient):
+        if isinstance(patient.get('patient_id'), tuple):
+            return patient['patient_id'][0]
+        return patient.get('patient_id')
+
+    def _get_stopped_obs_reason(self, cr, user, spell_id, context=None):
+        obj_nh_clinical_pme_obs_stop = self.pool['nh.clinical.pme.obs_stop']
+        record_ids = obj_nh_clinical_pme_obs_stop.search(cr, user, [
+            ('spell', '=', spell_id)
+        ], context=context, limit=1)
+        record = obj_nh_clinical_pme_obs_stop.browse(cr, user, record_ids, context=context)
+        return record.reason.id
+
+    # def read(self, cr, user, ids, fields=None, context=None,
+    #          load='_classic_read'):
+    #     """
+    #     Override of read method of wardboard to override next_diff and
+    #     frequency fields with obs_stop information is flag set
+    #     :param cr: Odoo cursor
+    #     :param user: User doing operation
+    #     :param ids: Record IDs to read
+    #     :param fields: Fields to read from records
+    #     :param context: Odoo context
+    #     :param load: Type of loading to do
+    #     :return: list of dicts or objects
+    #     """
+    #     res = super(NHClinicalWardboard, self).read(
+    #         cr, user, ids, fields, context=context, load=load)
+    #     was_single_record = False
+    #     if not isinstance(res, list):
+    #         was_single_record = True
+    #         res = [res]
+    #     for rec in res:
+    #         spell_model = self.pool['nh.clinical.spell']
+    #         patient_id = rec.get('patient_id')
+    #         if isinstance(patient_id, tuple):
+    #             patient_id = patient_id[0]
+    #         spell_id = spell_model.search(cr, user, [
+    #             ['patient_id', '=', patient_id],
+    #             ['state', 'not in', ['completed', 'cancelled']]
+    #         ], context=context)
+    #         if spell_id:
+    #             spell_id = spell_id[0]
+    #             spell = spell_model.read(
+    #                 cr, user, spell_id, [
+    #                     'obs_stop',
+    #                     'rapid_tranq',
+    #                     'refusing_obs',
+    #                     'refusing_obs_blood_glucose',
+    #                 ],
+    #                 context=context)
+    #             rec['rapid_tranq'] = spell.get('rapid_tranq')
+    #
+    #             if rec.get('next_blood_glucose_diff') \
+    #                     and rec.get('next_blood_glucose_diff') == '00:00':
+    #                 rec['next_blood_glucose_diff'] = ''
+    #             elif not rec.get('next_blood_glucose_diff'):
+    #                 rec['next_blood_glucose_diff'] = ''
+    #
+    #             if spell.get('obs_stop'):
+    #                 obs_stop_model = self.pool['nh.clinical.pme.obs_stop']
+    #                 obs_stops = obs_stop_model.search(cr, user, [
+    #                     ['spell', '=', spell_id]
+    #                 ], context=context)
+    #                 if obs_stops:
+    #                     obs_stop = obs_stops[0]
+    #                     reason = obs_stop_model.read(
+    #                         cr, user, obs_stop, ['reason'], context=context)
+    #                     rec['frequency'] = reason.get('reason', [0, False])[1]
+    #                 rec['next_diff'] = 'Observations Stopped'
+    #                 rec['next_blood_glucose_diff'] = 'Observations Stopped'
+    #             elif spell.get('refusing_obs'):
+    #                 rec['frequency'] = 'Refused - {0}'.format(rec['frequency'])
+    #                 rec['next_diff'] = 'Refused - {0}'.format(rec['next_diff'])
+    #             if not spell.get('obs_stop') and spell.get('refusing_obs_blood_glucose'):
+    #                 if rec.get('blood_glucose_frequency'):
+    #                     rec['blood_glucose_frequency'] = 'Refused - {0}'.format(rec['blood_glucose_frequency'])
+    #                     rec['next_blood_glucose_diff'] = 'Refused - {0}'.format(rec['next_blood_glucose_diff'])
+    #     if was_single_record:
+    #         return res[0]
+    #     return res
 
     # Acuity Board grouping
     @api.model
