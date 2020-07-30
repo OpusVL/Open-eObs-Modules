@@ -389,8 +389,8 @@ class NHClinicalFoodAndFluid(models.Model):
         period_start_datetime_str = self.get_period_start_datetime(date_time)
         period_end_datetime_str = self.get_period_end_datetime(date_time)
         domain = [
-            ('date_terminated', '>=', period_start_datetime_str),
-            ('date_terminated', '<', period_end_datetime_str)
+            ('effective_date_terminated', '>=', period_start_datetime_str),
+            ('effective_date_terminated', '<', period_end_datetime_str)
         ]
         return domain
 
@@ -508,7 +508,7 @@ class NHClinicalFoodAndFluid(models.Model):
             ('spell_activity_id', '=', spell_activity_id)
         ]
         obs_activities = activity_model.search(domain,
-                                               order='date_terminated asc')
+                                               order='effective_date_terminated asc')
         return obs_activities
 
     @api.multi
@@ -566,8 +566,9 @@ class NHClinicalFoodAndFluid(models.Model):
         # periods containing their observations.
         for obs in food_and_fluid_observations:
             date_terminated = obs['date_terminated']
+            effective_date_terminated = obs['effective_date_terminated']
             period_start_datetime = \
-                food_and_fluid_model.get_period_start_datetime(date_terminated)
+                food_and_fluid_model.get_period_start_datetime(effective_date_terminated)
             # If this observation is the first in a new period,
             # add the new period to the list.
             if period_start_datetime != period_start_datetime_current:
@@ -605,15 +606,16 @@ class NHClinicalFoodAndFluid(models.Model):
 
         # Set period start and end datetimes.
         date_terminated = obs['date_terminated']
+        effective_date_terminated = obs['effective_date_terminated']
         period['period_start_datetime'] = \
-            food_and_fluid_model.get_period_start_datetime(date_terminated)
+            food_and_fluid_model.get_period_start_datetime(effective_date_terminated)
         period['period_end_datetime'] = \
-            food_and_fluid_model.get_period_end_datetime(date_terminated)
+            food_and_fluid_model.get_period_end_datetime(effective_date_terminated)
 
         # Set fluid intake.
         total_fluid_intake = \
             food_and_fluid_model.calculate_total_fluid_intake(
-                spell_activity_id, date_terminated
+                spell_activity_id, effective_date_terminated
             )
         if include_units:
             total_fluid_intake = "{}ml".format(total_fluid_intake)
@@ -621,7 +623,7 @@ class NHClinicalFoodAndFluid(models.Model):
 
         # Set fluid balance.
         fluid_balance = self.calculate_fluid_balance(spell_activity_id,
-                                                     date_terminated)
+                                                     effective_date_terminated)
         if include_units:
             fluid_balance = \
                 self.format_fluid_balance_for_frontend(fluid_balance)
