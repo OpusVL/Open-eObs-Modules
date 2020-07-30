@@ -291,12 +291,13 @@ class NHClinicalWardboard(orm.Model):
                     record['next_diff'] = 'Refused - {0}'.format(record['next_diff'])
 
                 if not spell.obs_stop and spell.refusing_obs_blood_glucose:
-                    record['blood_glucose_frequency'] = 'Refused - {0}'.format(
-                        record['blood_glucose_frequency']
-                    )
-                    record['next_blood_glucose_diff'] = 'Refused - {0}'.format(
-                        record['next_blood_glucose_diff']
-                    )
+                    if record.get('blood_glucose_frequency'):
+                        record['blood_glucose_frequency'] = 'Refused - {0}'.format(
+                            record['blood_glucose_frequency']
+                        )
+                        record['next_blood_glucose_diff'] = 'Refused - {0}'.format(
+                            record['next_blood_glucose_diff']
+                        )
 
         return res
 
