@@ -143,10 +143,13 @@ var fluidTableDescription = {
 };
 
 function drawFood_fluidTable(settings, serverData){
-    serverData.sort(function (a, b) {
-        var dateA = new Date(a.effective_date_terminated).getTime(), dateB = new Date(b.effective_date_terminated).getTime();
-        return dateA - dateB;
-    });
+    for ( var idx = 0; idx < serverData.length; idx++ ) {
+        var data = serverData[idx];
+        data.observations.sort( function (a, b) {
+            var dateA = new Date(a.effective_date_terminated).getTime(), dateB = new Date(b.effective_date_terminated).getTime();
+            return dateB - dateA;
+        })
+    }
     setUpControls();
     var processedData = processFoodFluidData(serverData);
     if(!settings.desktop){
