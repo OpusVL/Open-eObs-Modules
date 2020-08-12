@@ -24,7 +24,10 @@ class NHClinicalLDAPExtension(orm.Model):
         :rtype: dict
         """
 
-        category_pool = self.pool['res.partner.category']
+        def ref(xml_id):
+            mod, xml = xml_id.split('.', 1)
+            return self.pool['ir.model.data'].get_object(cr, uid, mod, xml, context)
+
         location_pool = self.pool['nh.clinical.location']
         pos_pool = self.pool['nh.clinical.pos']
 
@@ -32,8 +35,7 @@ class NHClinicalLDAPExtension(orm.Model):
                                         context=context)
         pos = pos_pool.search(cr, uid, [['location_id', 'in', hospital]],
                               context=context)
-        hca_group = category_pool.search(cr, uid, [['name', '=', 'HCA']],
-                                         context=context)
+        hca_group = ref('nh_clinical.role_nhc_hca')
 
         if len(ldap_entry) < 2:
             raise ValueError('LDAP Entry does not contain second element')
@@ -45,6 +47,6 @@ class NHClinicalLDAPExtension(orm.Model):
                   'company_id': conf.get('company'),
                   'ward_ids': [[6, 0, []]],
                   'pos_ids': [[6, 0, pos]],
-                  'category_id': [[6, 0, hca_group]]
+                  'category_id': [[6, 0, hca_group.ids]]
                   }
         return values
