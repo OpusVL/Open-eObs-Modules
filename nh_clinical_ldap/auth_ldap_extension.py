@@ -47,6 +47,7 @@ class NHClinicalLDAPExtension(orm.Model):
                   'company_id': conf.get('company'),
                   'ward_ids': [[6, 0, []]],
                   'pos_ids': [[6, 0, pos]],
-                  'category_id': [[6, 0, hca_group.ids]]
+                  'category_id': [[6, 0, hca_group.ids]],
+                  'role_id': hca_group.id,
                   }
         return values
