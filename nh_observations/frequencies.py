@@ -89,17 +89,39 @@ FREQUENCIES_BY_RISK = {
     'Obs Restart': EVERY_HOUR
 }
 
-# To summarise the mappings below, frequencies after refusals are capped at
-# 24 hours.
-#
-# Could have just made a simple function but decided to write them out long
-# hand as they may change in the future. Return the tuple with the label rather
-# than just the time so it can be useful in more scenarios.
-PATIENT_REFUSAL_ADJUSTMENTS = copy.deepcopy(FREQUENCIES_BY_RISK)
-PATIENT_REFUSAL_ADJUSTMENTS['None'][EVERY_3_DAYS[0]] = EVERY_DAY
-PATIENT_REFUSAL_ADJUSTMENTS['None'][EVERY_WEEK[0]] = EVERY_DAY
-PATIENT_REFUSAL_ADJUSTMENTS['Low'][EVERY_3_DAYS[0]] = EVERY_DAY
-PATIENT_REFUSAL_ADJUSTMENTS['Low'][EVERY_WEEK[0]] = EVERY_DAY
+# A patient on custom frequency means that any frequency is possible
+# for all risk ratings. So if the observation is refused, regardless of
+# what the normal frequency might be for that risk rating all options
+# must be available
+
+def get_refusal_adjustments():
+    frequencies = {
+        EVERY_5_MINUTES[0]: EVERY_5_MINUTES,
+        EVERY_10_MINUTES[0]: EVERY_10_MINUTES,
+        EVERY_15_MINUTES[0]: EVERY_15_MINUTES,
+        EVERY_30_MINUTES[0]: EVERY_30_MINUTES,
+        EVERY_HOUR[0]: EVERY_HOUR,
+        EVERY_2_HOURS[0]: EVERY_2_HOURS,
+        EVERY_4_HOURS[0]: EVERY_4_HOURS,
+        EVERY_6_HOURS[0]: EVERY_6_HOURS,
+        EVERY_8_HOURS[0]: EVERY_8_HOURS,
+        EVERY_12_HOURS[0]: EVERY_12_HOURS,
+        EVERY_DAY[0]: EVERY_DAY,
+        EVERY_3_DAYS[0]: EVERY_3_DAYS,
+        EVERY_WEEK[0]: EVERY_WEEK
+    }
+    frequencies_by_risk = {
+        'None': frequencies,
+        'Low': frequencies,
+        'Medium': frequencies,
+        'High': frequencies,
+        'Unknown': frequencies,
+        'Transfer': frequencies,
+        'Obs Restart': frequencies,
+    }
+    return frequencies_by_risk
+
+PATIENT_REFUSAL_ADJUSTMENTS = get_refusal_adjustments()
 
 
 def as_list(max=None):
