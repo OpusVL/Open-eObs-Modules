@@ -896,7 +896,7 @@ class nh_clinical_patient_observation_ews(orm.Model):
         :return:
         """
         if type(case) is str:
-            return frequencies.PATIENT_REFUSAL_ADJUSTMENTS[case][0]
+            return frequencies.PATIENT_REFUSAL_ADJUSTMENTS[case][frequency][0]
         else:
             risk = self.convert_case_to_risk(case)
             return frequencies.PATIENT_REFUSAL_ADJUSTMENTS[risk][frequency][0]
