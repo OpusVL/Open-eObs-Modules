@@ -615,9 +615,13 @@ class nh_activity_data(orm.AbstractModel):
         activity_pool = self.pool['nh.activity']
         activity = activity_pool.browse(cr, uid, activity_id, context)
         self.check_action(activity.state, 'cancel')
+        now = datetime.now().strftime(DTF)
         activity_pool.write(cr, uid, activity_id, {
-            'state': 'cancelled', 'terminate_uid': uid,
-            'date_terminated': datetime.now().strftime(DTF)}, context=context)
+            'state': 'cancelled',
+            'terminate_uid': uid,
+            'date_terminated': now,
+            'effective_date_terminated': now,
+        }, context=context)
         _logger.debug("activity '%s', activity.id=%s cancelled",
                       activity.data_model, activity.id)
         return True
