@@ -354,7 +354,7 @@ class nh_clinical_patient_placement(orm.Model):
         if vals.get('location_id'):
             location_pool = self.pool['nh.clinical.location']
             available_ids = location_pool.get_available_location_ids(
-                cr, uid, ['bed'], context=context)
+                cr, uid, ['ward', 'bed'], context=context)
             if vals['location_id'] not in available_ids:
                 raise osv.except_osv(
                     "Patient Placement Error!",
