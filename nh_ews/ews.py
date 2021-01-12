@@ -428,6 +428,7 @@ class nh_clinical_patient_observation_ews(orm.Model):
             'selection_type': 'text',
             'label': 'AVPU',
             'initially_hidden': False,
+            'required': True,
         },
         {
             'name': 'oxygen_administration_flag',
@@ -436,6 +437,7 @@ class nh_clinical_patient_observation_ews(orm.Model):
             'selection': [[False, 'No'], [True, 'Yes']],
             'selection_type': 'boolean',
             'initially_hidden': False,
+            'required': True,
             'on_change': [
                 {
                     'fields': ['device_id'],
