@@ -66,7 +66,8 @@ function processEwsData(obs){
         ob["table_blood_pressure_systolic"] = convertValue(ob["blood_pressure_systolic"], null, "");
         ob["table_blood_pressure_diastolic"] = convertValue(ob["blood_pressure_diastolic"], null, "");
         ob["table_pulse_rate"] = convertValue(ob["pulse_rate"], null, "");
-        ob["table_avpu"] = convertValue(ob["avpu"], null, "");
+        ob["table_avpu_text"] = convertValue(ob["avpu_text"], null, "");
+        ob["oxygen_administration_flag"] = convertValue(ob["oxygen_administration_flag"], null, "No")
     }
     return obs;
 }
