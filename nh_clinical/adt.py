@@ -745,6 +745,10 @@ class nh_clinical_adt_patient_cancel_transfer(orm.Model):
         :returns: ``True``
         :rtype: bool
         """
+        # Add logger to assist in debugging of Issue 16992
+        _logger.info("MERGE VALS: {vals}".format(
+            vals=vals
+        ))
         if not vals.get('other_identifier'):
             raise osv.except_osv('Cancel Transfer Error!',
                                  'Patient must be set!')
