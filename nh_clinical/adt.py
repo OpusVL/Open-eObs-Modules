@@ -962,6 +962,10 @@ class nh_clinical_adt_patient_merge(orm.Model):
         :returns: ``True``
         :rtype: bool
         """
+        # Add logger to assist in debugging of Issue 16992
+        _logger.info("MERGE VALS: {vals}".format(
+            vals=vals
+        ))
         patient_pool = self.pool['nh.clinical.patient']
         data = vals.copy()
         if data.get('from_identifier'):
