@@ -1,6 +1,9 @@
 Copyright (C) Neova Health LLP
 Copyright (C) BJSS Limited
-Copyright (C) Opus Vision Limited
+
+This is a modified work based on Open-eObs (https://github.com/openeobs/openeobs). 
+OpusVL modifications start from commit 224f08b960bbcee9c0206bc438c6b444b4dae0ad on 16 Nov 2017
+OpusVL modifications are Copyright (C) Opus Vision Limited
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as published
