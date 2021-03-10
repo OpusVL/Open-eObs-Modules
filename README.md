@@ -1,6 +1,6 @@
-# Open-eObs-Modules
+# Open eReact v1
 
-## Open-eObs modules (for Odoo)
+## Open eReact v1 modules (for Odoo)
 
 This is a modified work based on open-eObs (https://github.com/openeobs/openeobs). 
 
