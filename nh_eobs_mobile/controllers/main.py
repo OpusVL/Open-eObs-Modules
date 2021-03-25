@@ -768,7 +768,17 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
 
         if tasks:
             self._check_custom_frequency(tasks[0])
-        return self.get_tasks()
+
+        request.registry["nh.clinical.materialized.queue"].create(cr, uid, {
+            "name": "Refresh ews0",
+            "view_name": "ews0"
+        }, context=context)
+        request.registry["nh.clinical.materialized.queue"].create(cr, uid, {
+            "name": "Refresh ews0",
+            "view_name": "bg0"
+        }, context=context)
+
+        return self.get_patients()
 
     def _check_custom_frequency(self, task_data):
         cr, uid, context = request.cr, request.session.uid, request.context
@@ -806,6 +816,10 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
             ('patient_id', '=', activity.patient_id.id)
         ], context=context)
         obj_nh_activity.cancel(cr, uid, next_blood_glucose_activity_id, context=context)
+        request.registry["nh.clinical.materialized.queue"].create(cr, uid, {
+            "name": "Refresh ews0",
+            "view_name": "bg0"
+        }, context=context)
 
     @http.route(URLS['share_patient_list'], type='http', auth='user')
     def get_share_patients(self, *args, **kw):

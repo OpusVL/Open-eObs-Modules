@@ -121,6 +121,7 @@ class NHClinicalWardboard(orm.Model):
             'view_id': view_id
         }
 
+    @helpers.v8_materialized_queue('ews0', 'ews1', 'ews2', 'bg0')
     @api.multi
     def start_obs_stop(self, reasons, spell_id, spell_activity_id):
         """
@@ -164,6 +165,7 @@ class NHClinicalWardboard(orm.Model):
         obs_stop = activity.data_ref
         obs_stop.start(activity_id)
 
+    @helpers.v8_materialized_queue('ews0', 'ews1', 'ews2', 'bg0')
     @api.multi
     def end_obs_stop(self, cancellation=False):
         """

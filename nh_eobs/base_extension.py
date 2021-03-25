@@ -100,3 +100,20 @@ class nh_ui_location(orm.Model):
         return super(nh_ui_location, self).search(
             cr, uid, domain, offset=offset, limit=limit, order=order,
             context=context, count=count)
+
+    def create(self, cr, uid, vals, context=None):
+        """
+        Adds 'ward_locations' to the nh.clinical.materialized.queue
+        :param cr: Database cursor
+        :param uid: User ID
+        :param vals: <dict>
+        :param context: <dict>
+        :return:
+        """
+        res = super(nh_ui_location, self).create(cr, uid, vals, context=context)
+        vals = {
+            "name": "Refresh Ward Locations",
+            "view_name": "ward_locations"
+        }
+        self.pool.get("nh.clinical.materialized.queue").create(cr, uid, vals, context=context)
+        return res

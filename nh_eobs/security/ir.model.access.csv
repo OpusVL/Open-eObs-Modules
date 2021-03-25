@@ -101,3 +101,5 @@ doctor_access_monitoring_exception_reason,doctor:access_monitoring_exception_rea
 ,,,,,,,
 access_nh_clinical_settings,access_nh_clinical_settings,model_nh_clinical_settings,,1,1,1,1
 access_nh_clinical_settings_workload,access_nh_clinical_settings_workload,model_nh_clinical_settings_workload,,1,1,1,1
+,,,,,,,
+access_materialized_queue,"Access NH Clinical Materialized Queue",model_nh_clinical_materialized_queue,,1,1,1,0
