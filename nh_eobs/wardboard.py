@@ -1411,37 +1411,20 @@ param as(
         select
             activity.spell_id,
             height.height,
-            diabetes.status as diabetes,
-            mrsa.status as mrsa,
-            pc.status,
-            o2target_level.id as o2target_level_id,
-            ps.status as post_surgery,
-            psactivity.date_terminated as post_surgery_date,
-            cc.status as critical_care,
-            ccactivity.date_terminated as critical_care_date,
+            false as diabetes,
+            false as mrsa,
+            false as status,
+            false as post_surgery,
+            null as post_surgery_date,
+            false as critical_care,
+            null as critical_care_date,
             uotarget.volume as uotarget_vol,
             uotarget.unit as uotarget_unit
         from wb_activity_latest activity
         left join nh_clinical_patient_observation_height height
             on activity.ids && array[height.activity_id]
-        left join nh_clinical_patient_diabetes diabetes
-            on activity.ids && array[diabetes.activity_id]
-        left join nh_clinical_patient_o2target o2target
-            on activity.ids && array[o2target.activity_id]
-        left join nh_clinical_o2level o2target_level
-            on o2target_level.id = o2target.level_id
-        left join nh_clinical_patient_mrsa mrsa
-            on activity.ids && array[mrsa.activity_id]
-        left join nh_clinical_patient_palliative_care pc
-            on activity.ids && array[pc.activity_id]
-        left join nh_clinical_patient_post_surgery ps
-            on activity.ids && array[ps.activity_id]
         left join nh_clinical_patient_uotarget uotarget
             on activity.ids && array[uotarget.activity_id]
-        left join nh_activity psactivity on psactivity.id = ps.activity_id
-        left join nh_clinical_patient_critical_care cc
-            on activity.ids && array[cc.activity_id]
-        left join nh_activity ccactivity on ccactivity.id = cc.activity_id
         where activity.state = 'completed'
 );
 

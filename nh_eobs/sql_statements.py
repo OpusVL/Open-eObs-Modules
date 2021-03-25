@@ -135,21 +135,13 @@ class NHEobsSQL(orm.AbstractModel):
             AS clinical_risk,
         ews1.score - ews2.score AS ews_trend,
         param.height,
-        param.o2target_level_id AS o2target,
+        NULL AS o2target,
         CASE WHEN param.mrsa THEN 'yes' ELSE 'no' END AS mrsa,
         CASE WHEN param.diabetes THEN 'yes' ELSE 'no' END AS diabetes,
         CASE WHEN pbp.status THEN 'yes' ELSE 'no' END AS pbp_monitoring,
         CASE WHEN param.status THEN 'yes' ELSE 'no' END AS palliative_care,
-        CASE
-            WHEN param.post_surgery AND param.post_surgery_date > now() -
-                INTERVAL '4h' THEN 'yes'
-            ELSE 'no'
-        END AS post_surgery,
-        CASE
-            WHEN param.critical_care AND param.critical_care_date > now() -
-                INTERVAL '24h' THEN 'yes'
-            ELSE 'no'
-        END AS critical_care,
+        'no' AS post_surgery,
+        'no' AS critical_care,
         param.uotarget_vol,
         param.uotarget_unit,
         consulting_doctors.names AS consultant_names,
