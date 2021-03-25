@@ -100,3 +100,17 @@ class nh_ui_location(orm.Model):
         return super(nh_ui_location, self).search(
             cr, uid, domain, offset=offset, limit=limit, order=order,
             context=context, count=count)
+
+    def create(self, cr, uid, vals, context=None):
+        """
+        Extends Odoo's :meth:`create()<openerp.models.Model.create>`,
+        refreshing the materialized view `ward_locations`.
+        """
+
+        res = super(nh_ui_location, self).create(
+            cr, uid, vals, context=context)
+        sql = """
+                refresh materialized view ward_locations;
+        """
+        cr.execute(sql)
+        return res

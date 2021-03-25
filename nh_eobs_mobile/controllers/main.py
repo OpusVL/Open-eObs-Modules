@@ -766,6 +766,11 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
                 self._cancel_next_blood_glucose(cr, uid, obj_nh_activity, activity,
                                                 context)
 
+            cr.execute(
+                'refresh materialized view ews0;\n'
+                'refresh materialized view bg0;'
+            )
+
         if tasks:
             self._check_custom_frequency(tasks[0])
         return self.get_tasks()
@@ -786,6 +791,7 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
             next_ews_activity = obj_nh_activity.browse(cr, uid, next_ews_activity_id, context=context)
             next_ews_activity.data_ref.write(
                 {'frequency': spell.custom_frequency})
+            request.cr.execute("""refresh materialized view ews0;""")
 
     @staticmethod
     def _cancel_next_blood_glucose(cr, uid, obj_nh_activity, activity, context):
@@ -806,6 +812,7 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
             ('patient_id', '=', activity.patient_id.id)
         ], context=context)
         obj_nh_activity.cancel(cr, uid, next_blood_glucose_activity_id, context=context)
+        cr.execute("""refresh materialized view bg0;""")
 
     @http.route(URLS['share_patient_list'], type='http', auth='user')
     def get_share_patients(self, *args, **kw):
