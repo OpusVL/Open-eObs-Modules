@@ -778,7 +778,7 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
             "view_name": "bg0"
         }, context=context)
 
-        return self.get_patients()
+        return utils.redirect(URLS['task_list'], 303)
 
     def _check_custom_frequency(self, task_data):
         cr, uid, context = request.cr, request.session.uid, request.context
