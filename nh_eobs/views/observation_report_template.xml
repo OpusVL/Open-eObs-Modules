@@ -351,7 +351,7 @@
                                                         <t t-if="ew.get('flow_rate')">
                                                             <tr>
                                                                 <td class="col-xs-6"><strong>Flow Rate:</strong></td>
-                                                                <td class="col-xs-6"><t t-esc="ew.get('flow_rate', '')"/></td>
+                                                                <td class="col-xs-6"><t t-esc="ew.get('flow_rate', '')"/> L/min</td>
                                                             </tr>
                                                         </t>
                                                         <t t-if="ew.get('concentration')">

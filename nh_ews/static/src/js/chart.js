@@ -20,7 +20,7 @@ function processInspiredOxygen(ob){
     }
     if (fr) {
         ob.inspired_oxygen += "<strong>Flow:</strong> " +
-            ob.flow_rate + "l/hr<br>";
+            ob.flow_rate + "L/min<br>";
     }
     if (c) {
         ob.inspired_oxygen += "<strong>Concentration:</strong> " +
@@ -272,7 +272,7 @@ function drawEwsTable(settings, serverData){
                 title: "Inspired Oxygen",
                 keys: [
                     {
-                        title: "Flow Rate",
+                        title: "Flow Rate (L/min)",
                         keys: ["flow_rate"]
                     },
                     {
