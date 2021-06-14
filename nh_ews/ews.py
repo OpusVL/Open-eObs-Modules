@@ -260,7 +260,7 @@ class nh_clinical_patient_observation_ews(orm.Model):
             else:
                 display = ''
                 if ews.flow_rate:
-                    display += str(ews.flow_rate) + ' l/m '
+                    display += str(ews.flow_rate) + ' L/min '
                 elif ews.concentration:
                     display += str(ews.concentration) + '% '
                 if ews.device_id:
@@ -318,7 +318,7 @@ class nh_clinical_patient_observation_ews(orm.Model):
         'pulse_rate': fields.integer('Pulse Rate'),
         'avpu_text': fields.selection(_avpu_values, 'AVPU'),
         'mews_score': fields.integer('Mews Score'),
-        'flow_rate': fields.float('Flow rate (l/min)', digits=(3, 1)),
+        'flow_rate': fields.float('Flow rate (L/min)', digits=(3, 1)),
         'concentration': fields.integer('Concentration (%)'),
         'cpap_peep': fields.integer('CPAP: PEEP (cmH2O)'),
         'niv_backup': fields.integer('NIV: Back-up rate (br/min)'),
@@ -505,7 +505,7 @@ class nh_clinical_patient_observation_ews(orm.Model):
         {
             'name': 'flow_rate',
             'type': 'float',
-            'label': 'Flow Rate (l/min)',
+            'label': 'Flow Rate (L/min)',
             'min': 0,
             'max': 100.0,
             'digits': [3, 1],

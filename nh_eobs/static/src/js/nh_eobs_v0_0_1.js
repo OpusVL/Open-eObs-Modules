@@ -545,7 +545,7 @@ openerp.nh_eobs = function (instance) {
                                 d.inspired_oxygen += "Device: " + d.device_id[1] + "<br>";
                             }
                             if (d.flow_rate && d.flow_rate > -1) {
-                                d.inspired_oxygen += "Flow: " + d.flow_rate + " l/m<br>";
+                                d.inspired_oxygen += "Flow: " + d.flow_rate + " L/min<br>";
                             }
                             if (d.concentration && d.concentration > -1) {
                                 d.inspired_oxygen += "Concentration: " + d.concentration + "%<br>";
