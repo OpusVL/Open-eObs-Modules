@@ -45,7 +45,7 @@ class NHClinicalFoodAndFluid(models.Model):
         relation="dietary_need_rel",
         string='Consider Special Dietary Needs', necessary=False
     )
-    fluid_taken = obs_fields.Integer('Fluid Taken (ml) - Include IV / NG',
+    fluid_taken = obs_fields.Integer('Fluid Amount Taken (ml) - Include Oral / IV / NG',
                                      necessary=False)
     fluid_description = obs_fields.Text('Fluid Description')
     food_taken = obs_fields.Text('Food Taken')
@@ -136,7 +136,7 @@ class NHClinicalFoodAndFluid(models.Model):
             'type': 'integer',
             'min': 1,
             'max': 5000,
-            'label': 'Fluid Taken (ml) - Include IV / NG',
+            'label': 'Fluid Amount Taken (ml) - Include Oral / IV / NG',
             'initially_hidden': False,
             'reference': {
                 'type': 'iframe',

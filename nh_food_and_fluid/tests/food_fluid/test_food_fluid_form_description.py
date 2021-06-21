@@ -62,7 +62,7 @@ class TestFoodFluidFormDescription(TransactionCase):
         self.assertEqual(entry.get('min'), 1)
         self.assertEqual(entry.get('max'), 5000)
         self.assertEqual(
-            entry.get('label'), 'Fluid Taken (ml) - Include IV / NG')
+            entry.get('label'), 'Fluid Amount Taken (ml) - Include Oral / IV / NG')
         reference = entry.get('reference')
         self.assertIsNotNone(reference)
         self.assertEqual(reference.get('type'), 'iframe')
