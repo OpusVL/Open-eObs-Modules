@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+        <record id="nh_clinical_patient_merge_wizard_form_view" model="ir.ui.view">
+            <field name="name">nh.clinical.patient.merge.form.view</field>
+            <field name="model">nh.clinical.patient.merge.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Merge Patient">
+                    <sheet>
+                        <group>
+                            <field name="patient_id"/>
+                            <field name="other_identifier" />
+                            <field name="dest_patient_id" />
+                            <field name="dest_other_identifier" />
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="merge" type="object" class="oe_highlight" string="Merge" />
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+        
+        <record id="nh_clinical_patient_merge_action" model="ir.actions.act_window">
+            <field name="name">NH Clinical Patient Merge Wizard</field>
+            <field name="res_model">nh.clinical.patient.merge.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="nh_clinical_patient_merge_wizard_form_view" />
+            <field name="target">new</field>
+        </record>
+    </data>
+</openerp>

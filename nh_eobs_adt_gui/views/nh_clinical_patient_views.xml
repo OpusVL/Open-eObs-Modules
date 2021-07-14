@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+        <record id="nh_clinical_patient_form_view" model="ir.ui.view">
+            <field name="name">nh.clinical.patient.form.view</field>
+            <field name="model">nh.clinical.patient</field>
+            <field name="inherit_id" ref="nh_clinical.view_patient_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet" position="before">
+                    <header>
+                        <button
+                            name="%(nh_clinical_patient_merge_action)d"
+                            string="Merge"
+                            type="action"
+                            class="oe_highlight"
+                            groups="base.group_user"
+                        />
+                    </header>
+
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>
