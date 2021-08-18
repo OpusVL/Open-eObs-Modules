@@ -253,6 +253,12 @@ class nh_clinical_api(orm.AbstractModel):
         :returns: ``True``
         :rtype: bool
         """
+        _logger.info(
+            "MERGE PATIENT DATA:\n hospital_number: {hospital_number}\n data: {data}".format(
+                hospital_number=hospital_number,
+                data=data
+            )
+        )
 
         patient_pool = self.pool['nh.clinical.patient']
         patient_pool.check_hospital_number(cr, uid, hospital_number,

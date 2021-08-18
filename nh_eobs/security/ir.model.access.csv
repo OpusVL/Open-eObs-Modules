@@ -29,7 +29,7 @@ dev_access_bed_dashboard,dev:access_bed_dashboard,model_nh_eobs_bed_dashboard,nh
 dev_access_monitoring_exception,dev:access_monitoring_exception,model_nh_clinical_patient_monitoring_exception,nh_clinical.group_nhc_dev,1,1,1,0
 dev_access_monitoring_exception_reason,dev:access_monitoring_exception_reason,model_nh_clinical_patient_monitoring_exception_reason,nh_clinical.group_nhc_dev,1,1,1,0
 ,,,,,,,
-wm_access_wardboard,manager:access_wardboard,model_nh_clinical_wardboard,nh_clinical.group_nhc_ward_manager,1,1,1,0
+wm_access_wardboard,manager:access_wardboard,model_nh_clinical_wardboard,nh_clinical.group_nhc_ward_manager,1,0,0,0
 wm_access_workload,manager:access_workload,model_nh_activity_workload,nh_clinical.group_nhc_ward_manager,1,1,1,0
 wm_access_placement,manager:access_placement,model_nh_clinical_placement,nh_clinical.group_nhc_ward_manager,1,1,1,0
 wm_access_overdue,manager:access_overdue,model_nh_clinical_overdue,nh_clinical.group_nhc_ward_manager,1,1,1,0
@@ -49,7 +49,7 @@ senior_manager_access_bed_dashboard,senior_manager:access_bed_dashboard,model_nh
 senior_manager_access_monitoring_exception,senior_manager:access_monitoring_exception,model_nh_clinical_patient_monitoring_exception,nh_clinical.group_nhc_senior_manager,1,1,1,0
 senior_manager_access_monitoring_exception_reason,senior_manager:access_monitoring_exception_reason,model_nh_clinical_patient_monitoring_exception_reason,nh_clinical.group_nhc_senior_manager,1,1,1,0
 ,,,,,,,
-adt_access_wardboard,manager:access_wardboard,model_nh_clinical_wardboard,nh_clinical.group_nhc_adt,1,1,1,0
+adt_access_wardboard,manager:access_wardboard,model_nh_clinical_wardboard,nh_clinical.group_nhc_adt,1,0,0,0
 adt_access_workload,manager:access_workload,model_nh_activity_workload,nh_clinical.group_nhc_adt,1,1,1,0
 adt_access_placement,manager:access_placement,model_nh_clinical_placement,nh_clinical.group_nhc_adt,1,1,1,0
 adt_access_overdue,manager:access_overdue,model_nh_clinical_overdue,nh_clinical.group_nhc_adt,1,1,1,0
@@ -79,7 +79,7 @@ hca_access_bed_dashboard,hca:access_bed_dashboard,model_nh_eobs_bed_dashboard,nh
 hca_access_monitoring_exception,hca:access_monitoring_exception,model_nh_clinical_patient_monitoring_exception,nh_clinical.group_nhc_hca,1,1,1,0
 hca_access_monitoring_exception_reason,hca:access_monitoring_exception_reason,model_nh_clinical_patient_monitoring_exception_reason,nh_clinical.group_nhc_hca,1,1,1,0
 ,,,,,,,
-nurse_access_wardboard,nurse:access_wardboard,model_nh_clinical_wardboard,nh_clinical.group_nhc_nurse,1,1,1,0
+nurse_access_wardboard,nurse:access_wardboard,model_nh_clinical_wardboard,nh_clinical.group_nhc_nurse,1,0,0,0
 nurse_access_workload,nurse:access_workload,model_nh_activity_workload,nh_clinical.group_nhc_nurse,0,0,0,0
 nurse_access_placement,nurse:access_placement,model_nh_clinical_placement,nh_clinical.group_nhc_nurse,0,0,0,0
 nurse_access_overdue,nurse:access_overdue,model_nh_clinical_overdue,nh_clinical.group_nhc_nurse,0,0,0,0
@@ -89,7 +89,7 @@ nurse_access_bed_dashboard,nurse:access_bed_dashboard,model_nh_eobs_bed_dashboar
 nurse_access_monitoring_exception,nurse:access_monitoring_exception,model_nh_clinical_patient_monitoring_exception,nh_clinical.group_nhc_nurse,1,1,1,0
 nurse_access_monitoring_exception_reason,nurse:access_monitoring_exception_reason,model_nh_clinical_patient_monitoring_exception_reason,nh_clinical.group_nhc_nurse,1,1,1,0
 ,,,,,,,
-doctor_access_wardboard,doctor:access_wardboard,model_nh_clinical_wardboard,nh_clinical.group_nhc_doctor,1,1,1,0
+doctor_access_wardboard,doctor:access_wardboard,model_nh_clinical_wardboard,nh_clinical.group_nhc_doctor,1,0,0,0
 doctor_access_workload,doctor:access_workload,model_nh_activity_workload,nh_clinical.group_nhc_doctor,0,0,0,0
 doctor_access_placement,doctor:access_placement,model_nh_clinical_placement,nh_clinical.group_nhc_doctor,0,0,0,0
 doctor_access_overdue,doctor:access_overdue,model_nh_clinical_overdue,nh_clinical.group_nhc_doctor,0,0,0,0
