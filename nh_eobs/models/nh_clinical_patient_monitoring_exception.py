@@ -33,6 +33,7 @@ class PatientMonitoringException(models.Model):
     def complete(self, activity_id):
         return super(PatientMonitoringException, self).complete(activity_id)
 
+    @api.model
     def cancel(self, activity_id):
         return super(PatientMonitoringException, self).cancel(activity_id)
 
