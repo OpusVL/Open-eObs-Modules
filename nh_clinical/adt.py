@@ -1014,6 +1014,17 @@ class nh_clinical_adt_patient_merge(orm.Model):
         from_id = merge_activity.data_ref.source_patient_id.id
         into_id = merge_activity.data_ref.dest_patient_id.id
 
+        from_id_open_spell_activity_id = activity_pool.search(
+            cr,
+            uid,
+            [
+                ("data_model", "=", "nh.clinical.spell"),
+                ("state", "=", "started"),
+                ("patient_id", "=", from_id)
+            ],
+            context=context
+        )
+
         for model_name in self.pool.models.keys():
             model_pool = self.pool[model_name]
             if model_name.startswith("nh.clinical") and model_pool._auto and \
@@ -1049,4 +1060,10 @@ class nh_clinical_adt_patient_merge(orm.Model):
             cr, uid, from_id, {'active': False}, context=context)
         activity_pool.write(cr, uid, activity_id, {'patient_id': into_id},
                             context=context)
+
+        # Complete the open spell for the from_id patient
+        if from_id_open_spell_activity_id:
+            spell_activity = activity_pool.browse(cr, uid, from_id_open_spell_activity_id, context=context)
+            spell = spell_activity.data_ref
+            spell.complete(spell_activity.id)
         return res
