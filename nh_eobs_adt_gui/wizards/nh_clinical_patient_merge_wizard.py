@@ -19,6 +19,7 @@ class NhClinicalPatientMergeWizard(models.TransientModel):
     dest_patient_id = fields.Many2one(
         comodel_name="nh.clinical.patient",
         default=11352,
+        # ^ Static value because permissions restrict m2o domain. For developer to change when required.
         string="Destination Patient",
     )
     dest_other_identifier = fields.Char(
@@ -40,7 +41,3 @@ class NhClinicalPatientMergeWizard(models.TransientModel):
                 "into_identifier": self.dest_other_identifier,
             }
         )
-
-    # 7697 24-72-01
-    # 11352 41-75-73
-

@@ -10,7 +10,7 @@
                         <group>
                             <field name="patient_id"/>
                             <field name="other_identifier" />
-                            <field name="dest_patient_id" />
+                            <field name="dest_patient_id" options="{'no_create': True}" />
                             <field name="dest_other_identifier" />
                         </group>
                     </sheet>
