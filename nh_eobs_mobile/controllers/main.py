@@ -922,14 +922,6 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
     @staticmethod
     def get_user_favourites(uid):
 
-        def _remove_duplicates():
-            cleaned = []
-            for fav in sorted(favourites, key=lambda f: f['default'], reverse=True):
-                if fav['location'] not in [loc['location'] for loc in cleaned]:
-                    cleaned.append(fav)
-            return cleaned
-
-        obj_nh_clinical_wardboard = request.env['nh.clinical.wardboard']
         user_filters = request.env['ir.filters'].search([
             ('user_id', '=', uid),
             ('model_id', '=', 'nh.clinical.wardboard'),
@@ -937,28 +929,19 @@ class MobileFrontend(openerp.addons.web.controllers.main.Home):
                 'nh_eobs', 'action_wardboard'
             )[1])
         ])
-        favourites = list()
+        ward_names = []
         for user_filter in user_filters:
-            wardboard_records = obj_nh_clinical_wardboard.search(safe_eval(user_filter.domain))
-            if wardboard_records:
-                locations_name_query = """
-                    SELECT w.name
-                    FROM nh_clinical_wardboard AS wb
-                    LEFT JOIN nh_clinical_location AS w ON wb.ward_id=w.id
-                    WHERE wb.id IN ({})""".format(
-                    ','.join(str(r) for r in wardboard_records.ids)
-                )
-                request.env.cr.execute(locations_name_query)
-                ward_names = request.env.cr.fetchall()
-                locations = set(ward_names)
-                favourites.extend([
-                    {
-                        'location': str(l[0]),
-                        'default': '{}'.format(user_filter.is_default).lower()
-                    } for l in locations])
+            domain = safe_eval(user_filter.domain)
+            for elem in domain:
+                if isinstance(elem, list) and elem[2] not in [ward["location"] for ward in ward_names]:
+                    ward_names.append({
+                        "location": str(elem[2]),
+                        "default": "{is_default}".format(
+                            is_default=user_filter.is_default
+                        ).lower()
+                    })
 
-        favourites = _remove_duplicates()
-        return favourites
+        return ward_names
 
     def get_task_form(self, cr, uid, task, patient, request, context=None):
         """
