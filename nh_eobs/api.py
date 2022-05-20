@@ -1010,7 +1010,7 @@ class nh_eobs_api(orm.AbstractModel):
         spell = spell_model.search(
             [
                 ('patient_id', '=', patient.id),
-                ('activity_id.state', '!=', 'completed')
+                ('activity_id.state', 'not in', ['completed', 'cancelled'])
             ]
         )
         # There may be no open spells, so the ensure_one is disabled for now
