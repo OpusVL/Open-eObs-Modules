@@ -844,21 +844,21 @@ class nh_clinical_patient_transfer(orm.Model):
             }, context=context)
             location_pool = self.pool['nh.clinical.location']
             # check if the previous bed is still available
-            if transfer.origin_loc_id.usage == 'bed' and \
-               transfer.origin_loc_id.is_available:
-                activity_pool.complete(cr, uid, move_activity_id,
+            # if transfer.origin_loc_id.usage == 'bed' and \
+            #    transfer.origin_loc_id.is_available:
+            activity_pool.complete(cr, uid, move_activity_id,
                                        context=context)
-                return res
+                # return res
 
-            ward_id = location_pool.get_closest_parent_id(
-                cr, uid, transfer.origin_loc_id.id, 'ward', context=context) \
-                if transfer.origin_loc_id.usage != 'ward' \
-                else transfer.origin_loc_id.id
-            activity_pool.submit(cr, uid, move_activity_id,
-                                 {'location_id': ward_id}, context=context)
-            activity_pool.complete(cr, uid, move_activity_id, context=context)
-            self.trigger_policy(cr, uid, activity_id, location_id=ward_id,
-                                case=2, context=context)
+            # ward_id = location_pool.get_closest_parent_id(
+            #     cr, uid, transfer.origin_loc_id.id, 'ward', context=context) \
+            #     if transfer.origin_loc_id.usage != 'ward' \
+            #     else transfer.origin_loc_id.id
+            # activity_pool.submit(cr, uid, move_activity_id,
+            #                      {'location_id': ward_id}, context=context)
+            # activity_pool.complete(cr, uid, move_activity_id, context=context)
+            # self.trigger_policy(cr, uid, activity_id, location_id=ward_id,
+            #                     case=2, context=context)
         return res
 
     def get_last(self, cr, uid, patient_id, exception=False, context=None):
